@@ -19,7 +19,7 @@ If there is time after explaining your machine learning project, or the intervie
 For every question, answer your question concisely with four lines, so that this invites the interviewer to probe what they are interested in. This means that you need to consolidate your knowledge on the topic, even if you are an expert in the topic.
 
 
-
+The following is the table of contents.
 
 * auto-gen TOC:
 {:toc}
@@ -75,10 +75,15 @@ How do you define the loss for a regression task and a classification task?
 
 
 
-Describe how a linear regression or Logistic regression model is trained.
+Describe how a linear regression or logistic regression model is trained.
 
 - TBC
 
+
+
+What is the difference between supervised and unsupervised learning?
+
+- TBC (might feel too basic)
 
 
 
@@ -318,7 +323,7 @@ What are some applications of Graph Neural Networks?
 
 # Recommendation Systems
 
-From a Github [pull request](https://github.com/chiphuyen/ml-interviews-book/pull/37/files).
+From a Github [pull request](https://github.com/chiphuyen/ml-interviews-book/pull/37/files). I actually work in recommendation systems.
 
 
 1. Overall
@@ -367,3 +372,14 @@ What are the main innovations behind these recent machine learning advances?
 - AlphaFold
 - AlphaCode
 
+
+Should be included, still trying to find a way to categorize it
+- Finetuning and pretraining
+- Encoder and decoder
+- Masked Language Modeling (MLM) and Causal Language Modeling (CLM)
+- Information retrieval concepts
+- Timeseries modelling
+- Tabular ML
+- MLOps
+- Entity recognition, image segmentation
+- Comment on how the questions are collected and organized
