@@ -10,6 +10,7 @@ The interviewer will probe your project with the following questions. Make sure 
 
 - What problem does it try to solve?
 - Evaluate the performance of your solution
+- Compare your solution to the state of the art
 - Justify the decisions that you have made
 - Explain the machine concepts that you have used in the project
 
@@ -28,6 +29,7 @@ The following is the table of contents.
 
 
 # Useful Resources
+
 
 - Patrick Halina's ML Systems Design Interview [Guide](http://patrickhalina.com/posts/ml-systems-design-interview-guide/)
 - Shusen Wang's [English](https://www.youtube.com/channel/UCvGjdt8iWN5P9I6LYeIHN8A) and [Chinese](https://www.youtube.com/c/ShusenWang) Youtube channel
@@ -64,7 +66,8 @@ Explain the bias-variance tradeoff
 
 What is precision and recall?
 
-- Recall is the ratio of true positive over the total number of ground
+- Precision is the fraction of relevant instances among the retrieved instances.
+- Recall is the fraction of relevant instances that were retrieved.
 - Increasing the threshold always decreases recall, but may increase precision.
 
 
@@ -84,6 +87,12 @@ Describe how a linear regression or logistic regression model is trained.
 What is the difference between supervised and unsupervised learning?
 
 - TBC (might feel too basic)
+
+
+
+What is meant by finetuning and pretraining a model?
+
+- TBC
 
 
 
@@ -136,7 +145,7 @@ Describe the components of a simple neural network
 
 
 
-Describe how backpropagation works.
+Describe how backpropagation works
 
 - Compute the gradient of last layer w.r.t. to the loss, compute the gradient of the next last later w.r.t. last layer, and so on.
 
@@ -160,6 +169,13 @@ What are residual connections and what problem does it solve?
 
 - Residual connections allow gradients to flow through a network directly, without passing through non-linear activation functions.
 - Addresses the vanishing gradient problem.
+
+
+
+What is dropout and what problem does it solve?
+
+- Residual connections
+- LSTM
 
 
 
@@ -195,7 +211,7 @@ Describe the various optimizers and their differences
 
 
 
-What are some ways to analyze feature importance in a neural network?
+What are some ways to analyze the feature importance in a neural network?
 
 - TBC
 
@@ -203,7 +219,7 @@ What are some ways to analyze feature importance in a neural network?
 
 How do you fool a neural network?
 
-- See [slides](https://github.com/matthieudemari/SUTD_DL_50_039/tree/main/W8S1-2-3%20-%20Attacks%20and%20Defense%20on%20Neural%20Networks)
+- See [course notes](https://github.com/matthieudemari/SUTD_DL_50_039/tree/main/W8S1-2-3%20-%20Attacks%20and%20Defense%20on%20Neural%20Networks)
 
 
 
@@ -211,7 +227,7 @@ How do you fool a neural network?
 # Natural Langauge Processing (NLP) Fundamentals
 
 
-Describe the preprocessing methods for Natural Langauge Processing
+Describe the preprocessing methods for processing text input
 
 - Tokenization
 
@@ -221,6 +237,12 @@ What are some traditional ways to generate word embeddings?
 
 - SkipGram, Continuous Bag-of-Words, Word2Vec, GloVe
 - See [course notes](https://github.com/matthieudemari/SUTD_DL_50_039/blob/main/W9S1-2-3%20-%20The%20Embedding%20Problem%2C%20Attention%20and%20Transformers/2.%20W9S2%20final/W9S2.pdf)
+
+
+
+What are some ways to perform named entity recognition for text?
+
+- Conditional Random Field
 
 
 
@@ -242,9 +264,16 @@ What are transformers?
 
 What are the main innovations behind some recent large language models?
 
-- BERT
-- GPT
+- BERT / RoBERTa (MLM)
+- GPT-2 / GPT-3 (CLM)
+- XLNet (permutation technique)
 - LaMDA
+
+- A Masked Language Modeling (MLM) predicts a masked word based on other words in a sentence.
+- A Causal Language Modeling (CLM) predicts the next word in a sentence with only words on its left.
+- MLM loss is preferred when the goal is to learn a good representation of the input document, whereas, Causal Language Modeling (CLM) is mostly preferred when we wish to learn a system that generates fluent text.
+- XLNet uses a permutation technique to make use of the best of both worlds.
+- [Reference](https://towardsdatascience.com/understanding-masked-language-models-mlm-and-causal-language-models-clm-in-nlp-194c15f56a5)
 
 
 
@@ -261,8 +290,15 @@ What is the difference between the various historically significant computer vis
 
 What is a Variational Autoencoder (VAE)?
 
+
 - Convolution, bottleneck layer, deconvolution
-- Probabilities latent representation in the bottleneck layer
+- Probability latent representation in the bottleneck layer
+
+
+
+How do you set up and train a model to perform the following downstream image tasks
+
+- Image segmentation
 
 
 
@@ -277,11 +313,11 @@ What are the main innovations behind these recent advances in image models?
 # Image Generation Methods
 
 
-How is a Generative Adversarial Network trained? What are the challenges of training a Generative Adversarial Network?
+How is a Generative Adversarial Network trained, what are the challenges of training one?
 
+- Critic and generator, interleaved training
 - Nash equilibrium where either the generator or critic is interested to change its own strategy.
-- TBC
-
+- See [course notes](https://github.com/matthieudemari/SUTD_DL_50_039/tree/main/W11S1-2-3%20-%20Generative%20Deep%20Learning)
 
 
 
@@ -290,6 +326,7 @@ What are the main innovations behind these recent advances in image generation m
 - OpenAI DALLE
 - Google Imagen
 - Stable Diffusion
+
 
 
 
@@ -310,13 +347,13 @@ What are the main innovations behind these recent advances in reinforcement lear
 
 What is a Graph Neural Network does, and how is it trained?
 
-- See [course slides](https://github.com/matthieudemari/SUTD_DL_50_039/tree/main/W10S1-2-3%20-%20GCNs)
+- See [course notes](https://github.com/matthieudemari/SUTD_DL_50_039/tree/main/W10S1-2-3%20-%20GCNs)
 
 
 
 What are some applications of Graph Neural Networks?
 
-- Traffic prediction at [Google](https://deepmind.com/blog/article/traffic-prediction-with-advanced-graph-neural-networks)
+- Traffic prediction in [Google Maps](https://deepmind.com/blog/article/traffic-prediction-with-advanced-graph-neural-networks)
 
 
 
@@ -374,12 +411,14 @@ What are the main innovations behind these recent machine learning advances?
 
 
 Should be included, still trying to find a way to categorize it
-- Finetuning and pretraining
-- Encoder and decoder
-- Masked Language Modeling (MLM) and Causal Language Modeling (CLM)
+
 - Information retrieval concepts
-- Timeseries modelling
-- Tabular ML
 - MLOps
-- Entity recognition, image segmentation
-- Comment on how the questions are collected and organized
+
+
+Todo
+
+- Think of a way to organize the questions so that it makes sense
+- Cite original arXiv papers
+- Explain how these questions are chosen and organized
+- Highlight questions that are more likely to be asked
