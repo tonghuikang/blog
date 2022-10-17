@@ -211,7 +211,9 @@ I do not have a driving license in Singapore. You need to know how to drive to g
 
 Public transport is very rudimentary. Buses, trams and trains are infrequent, but usually on time. You can find the transport map and bike map online for [various](https://www.vta.org/go/maps) [regions](https://www.samtrans.com/schedulesandmaps/maps.html) of the Bay Area.
 
-It is easier to learn how to drive in the US than in Singapore. To learn driving in California you first need to pass a California permit test. With the permit, you may drive in the presence of a fully licensed driver, who might a driving instructor. After passing the practical test at the DMV, you have the full license. The process in Singapore is more complicated.
+It is easier to learn how to drive in the US than in Singapore. To learn driving in California you first need to pass a California permit test. This is my [advice](https://www.quora.com/How-do-I-prepare-for-California-DMV-written-exam/answer/Tong-Hui-Kang-1) on how to study for the permit test.
+
+With the permit, you may drive in the presence of a fully licensed driver, who might a driving instructor. After passing the practical test at the DMV, you have the full license. The process in Singapore is more complicated.
 
 If you already have a driving license from Singapore, I think you may be exempted from obtaining a license for a few months (citation needed).
 
