@@ -316,7 +316,7 @@ What are some applications of Graph Neural Networks?
 
 
 
-###### Recommendation Systems
+# Recommendation Systems
 
 From a Github [pull request](https://github.com/chiphuyen/ml-interviews-book/pull/37/files).
 
@@ -359,7 +359,7 @@ From a Github [pull request](https://github.com/chiphuyen/ml-interviews-book/pul
 
 
 
-## Unclassified
+# Unclassified
 
 
 What are the main innovations behind these recent machine learning advances?
