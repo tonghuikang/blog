@@ -30,6 +30,8 @@ Common formatting errors
 
 You can easily check these mistakes if you use a template. Generally, if there is a glaring formatting error, I would not comment on the contents of the resume.
 
+Some time ago I advised someone that formatting, grammar and spelling is like body language. Body language is very important in communication. I do not trust that you know the technology if you cannot even detect suspicious capitalization and nomenclature. If you cannot even follow the style of the template, I do not think you can follow the style of our codebase either. 
+
 
 Borderline formatting annoyances
 
