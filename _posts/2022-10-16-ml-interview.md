@@ -247,18 +247,43 @@ What are some ways to perform named entity recognition for text?
 
 
 
-# Attention Mechanism and Transformers
+# Attention Mechanism and Transformer Architecture
 
 
-What is the attention mechanism?
+What is the attention mechanism, and what is the transformer architecture?
 
-- TBC
-
-
-
-What are transformers?
-
-- TBC
+- Previously, a sequence to sequence task (like machine translation) uses an RNN (could also be LSTM, GRU) - one RNN for an encoder, and another RNN for a decoder.
+- The attention mechanism was first used to improve a sequence to sequence task. Instead of only depending on the previous state for context, we take a weighted average of all previous states of the encoder for context. The weights are learned (see Scaled Dot-Product Attention). The downside of using attention is that it increases the time complexity is O(mn). [Paper](https://arxiv.org/pdf/1409.0473.pdf)
+- Self-attention applies the attention mechanism on non sequence to sequence tasks. [Paper](https://arxiv.org/abs/1601.06733) The difference is that both the inputs to the self-attention layer are the same.
+- The [paper](https://arxiv.org/pdf/1706.03762.pdf) "Attention is all you need" removes the RNN part and uses attention only, and shows that it works for a sequence to sequence task. This introduces the transformer architecture.
+The transformer architecture
+    - Scaled Dot-Product Attention
+        - $C = Attn(X, X')$
+        - Query: $q_j = W_Q x_j'$
+        - Key: $k_i = W_K x_i$
+        - Value: $v_i = W_V x_i$
+        - Output: $c_j = V \cdot \hat{\alpha} = V \cdot \text{Softmax}(K^T q_j)$
+        - Each input is mapped to query, key and value vectors.
+        - We compute the $\alpha$ weights with a product of query and key value vectors, and take a softmax.
+        - The context vector is a weighted average of value vectors.
+    - Multi-head attention. Instead of one attention mechanism, we have multiple duplicate mechanisms that does not share weights. The output vector is concatenated.
+    - Stacked attention layers. After each self-attention layer, we apply a dense layer and add a residual connection. This forms one block. The encoder network is made up of six blocks.
+    - Decoder block. Each decoder block is made of one masked multi-head attention layer, and one multi-head attention. The decoder network is made up of six blocks.
+- BERT is a way to pretrain a transformers' encoder. [Paper](https://arxiv.org/pdf/1810.04805.pdf)
+    - Predicting a missing word
+        - Mask a token in the sentence.
+        - The [MASK] sat on the mat.
+        - Pass the sentence through the encoder network.
+        - Apply a softmax classifier on the context vector of the [MASK] token and predict. 
+        - Train with crossentropy loss.
+    - Predicting the whether two sentence are consecutive
+        - [CLS] First sentence. [SEP] Second sentence.
+        - Pass the sentences through the encoder network.
+        - Apply a binary classifier on the context vector of [CLS] token.
+        - Train with crossentropy loss.
+    - Train with both methods
+        - There are three tasks in each sample - predict whether the sentences are consecutive, one missing word from each sentence.
+        - No manually labelled data is needed.
 
 
 
