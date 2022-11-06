@@ -9,13 +9,17 @@ I have been giving comments on technical resumes in Discord channels by the Tech
 I would summarize the objective of your resume with the following
 - The first objective of the resume is to give the reader a reason to even read your resume. Recruiters have a lot of resumes to read. If your resume is badly formatted, the recruiter would simply skip your resume.
 - The next objective of your resume is to show that you are worth interviewing. Interviewing takes up precious engineering time from engineers. You want to show that you are someone that has a good chance of receiving an offer.
-- The final objective of your resume is for behavioral interviews. The hiring manager usually would go through your resume in detail with you. You want your resume to support the process.
+- The final objective of your resume is to assist behavioral interviews. The hiring manager usually would go through your resume in detail with you. You want your resume to support the process.
 
 
 
 # Ensure your formatting is faultless
 
-Common formatting errors
+Generally, if there is a glaring formatting error, I would not comment the text you wrote.
+
+Some time ago I advised someone that formatting, grammar and spelling is like body language. Body language is very important in communication. I do not trust that you know the technology if you cannot even detect suspicious capitalization and nomenclature. If you cannot even follow the style of the template, I do not think you can follow the style of our codebase either. 
+
+These are the common formatting errors
 
 - Inconsistent indentation
 - Inconsistent line spacing
@@ -27,10 +31,9 @@ Common formatting errors
 - Excessive use of emphasis
 - Wrong use of capitalization for technical terminologies
 - Incorrect usage of whitespace within text (e.g. space before full stop)
+- Excessive space
 
-You can easily check these mistakes if you use a template. Generally, if there is a glaring formatting error, I would not comment on the contents of the resume.
-
-Some time ago I advised someone that formatting, grammar and spelling is like body language. Body language is very important in communication. I do not trust that you know the technology if you cannot even detect suspicious capitalization and nomenclature. If you cannot even follow the style of the template, I do not think you can follow the style of our codebase either. 
+You can easily check and fix these mistakes if you use a template. I recommend using [Jake's Overleaf template](https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs).
 
 
 Borderline formatting annoyances
