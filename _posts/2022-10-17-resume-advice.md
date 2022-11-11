@@ -72,10 +72,10 @@ Time spent getting confused should have been spent understanding your merits.
 
 
 
-#### If you want to find an internship or new grad role, brand yourself as one.
+#### Brand yourself accordingly if you want an internship or a new grad role
 
-- Your job title should be "software engineer intern".
-- Claiming to be a full-timer or even a "lead" or "senior" confuses readers, and may land your resume in the reject pile.
+- Your previous job titles should be "software engineer intern".
+- Claiming to be a full-timer or even a "lead" or "senior" confuses readers thinking you are overqualified.
 - If "intern" is not an accurate description of your employment, try "consultant" or "freelance developer".
 
 
@@ -101,7 +101,8 @@ Time spent getting confused should have been spent understanding your merits.
 
 #### Should I use a one-column or a two-column template?
 
-A popular two-column template is [Deedy's Resume].
+A popular two-column template is [Deedy's Resume](https://www.overleaf.com/latex/templates/deedy-cv/bjryvfsjdyxz).
+I would advice not to use a two-column template. TBC.
 
 
 
@@ -138,12 +139,6 @@ One option is to bold all the technologies used, another option is to bold the m
 
 
 
-#### Should I include my certifications?
-
-If you are already in a relevant degree program, I suggest you put your certifications in the skills section.
-
-
-
 #### How should I include Agile or Scrum methodologies used?
 
 I will advise that you do not do that.
@@ -164,3 +159,8 @@ For past work, you should be using the simple past tense (e.g. "implemented").
 Present continuous tense (e.g. "implementing") is fine for ongoing work.
 However, I suggest using simple past tense for ongoing work for consistency. You should also consider your resume will be read in the future.
 
+
+
+#### How should I include my certifications?
+
+If you are already in a relevant degree program, I suggest you put your certifications in the skills section.
