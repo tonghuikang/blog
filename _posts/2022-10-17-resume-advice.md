@@ -1,31 +1,26 @@
 ---
 layout: post
-title: "Brutal Tech Resume Advice"
+title: "Tech Resume Advice"
 categories: career
 ---
 
 I have been giving comments on technical resumes in Discord channels by the Tech Interview Handbook and cscareers.dev.
 
 
-# Use Jake's Resume Overleaf Template
+# Use Jake's Resume Overleaf template
 
-Generally, if there is a glaring formatting error, I would not even comment on the text you wrote.
-Fixing the formatting is far more useful than any text optimizations advice I can give.
+The first impression of the resume is important. The reader gets the first impression without reading any text.
 
-Some time ago I advised someone that formatting, grammar and spelling is like body language.
-Body language is very important in communication.
-I do not trust that you know the technology if you cannot even detect suspicious capitalization and nomenclature.
-If you cannot even follow the style of the template, I do not think you can follow the style of our codebase either. 
-
-These are the common glaring formatting errors
+These are the common glaring formatting errors that would provide a bad first impression
 
 - Inconsistent indentation
-- Inconsistent line spacing
+- Inconsistent newline spacing
 - Inconsistent date formats
 - Inconsistent use of separators (e.g. between company and job title)
 - Inconsistent chronological order
+- Inconsistent font
 - Inconsistent font size
-- Inconsistent use of emphasis (underline, bold)
+- Inconsistent use of emphasis (underline, bold, italics)
 - Excessive use of emphasis
 - Wrong use of capitalization for technical terminologies
 - Incorrect usage of whitespace within the text (e.g. space before full stop)
@@ -39,9 +34,9 @@ You need to be able to figure out how to use LaTeX, and even make edits to the t
 ![jake_resume_top](/assets/jake_resume_top.png)
 
 
-Borderline formatting annoyances
+These are some borderline formatting annoyances
 
-- Having more than one page for your resume. You should make your resume one full page. I suggest that you conform to the current standards so that it is easier for the reader to process your resume cognitively.
+- Having more than one page for your resume. You should make your resume just one full page, as recommended by [Y Combinator](https://www.ycombinator.com/library/FB-writing-a-great-resume). I suggest that you conform to the current standards so that it is easier for the reader to process your resume cognitively.
 - Make sure every bullet point of yours looks full. Your bullet points should not end with one word on the next line. Aim to have the last line of the bullet point occupy at least 60% of the line. You might need to summarize or elaborate on your bullet points to achieve this.
 - Do not hyperlink entire sentences, especially with underline, bold and blue font. You might still want to make the hyperlink known it is a hyperlink. I recommended having [Github \| Demo] or [link] at the end of the line to direct interested readers.
 - Inconsistent spaces between words. I understand there is a tradeoff between aligning the end of line by justifying text, and having consistent space between words. I would choose the latter. The latter is also not that visible if you are using a one-column resume template.
@@ -63,10 +58,109 @@ The best advice on how to write your bullet point is Google's [XYZ formula](http
 
 I would like to elaborate on this advice further
 
-- "Accomplished" is a power verb. Bullet points should start with a power verb. Also, avoid having two power verbs that are the same in your resume. You can refer to a list of power verbs [here](https://www.faangtechleads.com/resume/general-guidelines).
+- The statement is self-contained and tells a complete story. The reader is able to understand each bullet point independently.
+- The statement starts with a power verb, in this case, "accomplished". Bullet points should start with a power verb. Also, avoid having two power verbs that are the same in your resume. You can refer to a list of power verbs [here](https://www.faangtechleads.com/resume/general-guidelines).
 - The statement is modular. You can just read the first part (i.e. accomplished X) or the first two parts (accomplished X, as measured by Y) and get something out of it. If you reverse the order, you will delay your actual accomplishments to the end, and the reader may not get your point.
 - I notice that "measured by Y" is placed before "by doing Z". It reflects that the results and their measurements are more important than whatever fancy methods you used to achieve your accomplishments.
-- Metrics are important in tech companies. Startups secure funding with their metrics. Established tech companies make decisions on products and promotions with their metrics. You should try to shape your work so that it has an impact and it is measurable. If none of your work made it into production and there is no business metric to speak of, you might want to estimate the number of hours saved with that you "derisked", or describe the features you "experimented" or "prototyped".
+- Metrics are important in tech companies. Startups secure funding with their metrics. Established tech companies make decisions on products and promotions with their metrics. You should try to shape your work so that it has an impact and it is measurable.
 
 
-This post describes the pattern of how I have been commenting on your resumes. I hope it helps!
+# Do not confuse the reader
+
+The recruiter or the hiring manager will have a limited time understanding your resume.
+Time spent getting confused should have been spent understanding your merits.
+
+
+
+#### If you want to find an internship or new grad role, brand yourself as one.
+
+- Your job title should be "software engineer intern".
+- Claiming to be a full-timer or even a "lead" or "senior" confuses readers, and may land your resume in the reject pile.
+- If "intern" is not an accurate description of your employment, try "consultant" or "freelance developer".
+
+
+
+#### Limit the experience section to work experience
+
+- I do not think teaching experience, personal projects, or academic projects with industry partners belong under experience.
+- You do not want to dilute the message that you have solid industrial experience.
+- The only time you might want to consider branding non-industrial experience as experience is when you have absolutely no industrial experience.
+
+
+
+#### Do not have multiple ongoing work experience
+
+- This might happen if you include other things in your work experience.
+- Even if you consider both roles as industrial experience, you might want to keep their time intervals disjoint.
+- Confusing the reader may reduce the credibility of your achievements.
+
+
+
+# Frequently asked questions
+
+
+#### Should I use a one-column or a two-column template?
+
+A popular two-column template is [Deedy's Resume].
+
+
+
+#### Which resume template should I use?
+
+As with many others in cscareers.dev Discord, I recommend Jake's Resume Overleaf template.
+
+An alternative I suggest is to use Google docs, so that your friends can easily comment on your resume.
+A Y Combinator [blogpost](https://www.ycombinator.com/library/FB-writing-a-great-resume) feature such a [Google docs](https://docs.google.com/document/d/1WliF2pvgQBCR3h96L3eExQjrlfX4OkXe01f-2XQ8vEE/edit) resume template.
+The issue with Google docs is that it is a WYSIWYG editor, so it may not be easy to keep track of formatting problems. You can see that there is some issue in the template with the last bullet point.
+
+
+
+#### Should I use a template even if everyone else is using the same template?
+
+Unless you are a designer, I recommend that you conform and use the standard template.
+You can still make your resume stand out with the content.
+
+
+
+#### Should I include a summary or an objective?
+
+The Tech Interview Handbook recommends writing [one](https://www.techinterviewhandbook.org/resume/#write-a-headline-for-your-resume-summary).
+Personally, I have never seen a summary that adds value to the resume.
+An organized and well-written resume should already be easily summarizable.
+
+
+
+#### Should I bold text within bullet points, and how should I do it?
+
+I would rather you emphasize your achievements early in the bullet point, which you will be doing in the Google XYZ formula anyway.
+If you really want to apply boldface, you might want to use a consistent strategy.
+One option is to bold all the technologies used, another option is to bold the metrics. Avoid doing both.
+
+
+
+#### Should I include my certifications?
+
+If you are already in a relevant degree program, I suggest you put your certifications in the skills section.
+
+
+
+#### How should I include Agile or Scrum methodologies used?
+
+I will advise that you do not do that.
+TBC.
+
+
+
+#### How do I cook up some metrics if my work has never been deployed to production?
+
+It might be possible that none of your work made it into production and there is no business metric to speak of.
+You might want to estimate the number of hours saved with that you "derisked", or describe the features you "experimented" or "prototyped".
+
+
+
+#### What tense should I use for the verb for the current work experience?
+
+For past work, you should be using the simple past tense (e.g. "implemented").
+Present continuous tense (e.g. "implementing") is fine for ongoing work.
+However, I suggest using simple past tense for ongoing work for consistency. You should also consider your resume will be read in the future.
+
