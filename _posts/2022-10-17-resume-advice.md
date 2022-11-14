@@ -14,6 +14,7 @@ The first impression of the resume is important. The reader gets the first impre
 These are the common glaring formatting errors that would provide a bad first impression
 
 - Inconsistent indentation
+- Inconsistent alignment
 - Inconsistent newline spacing
 - Inconsistent date formats
 - Inconsistent use of separators (e.g. between company and job title)
@@ -24,7 +25,7 @@ These are the common glaring formatting errors that would provide a bad first im
 - Excessive use of emphasis
 - Wrong use of capitalization for technical terminologies
 - Incorrect usage of whitespace within the text (e.g. space before full stop)
-- Excessive space
+- Large empty space
 
 You can easily check and fix these mistakes if you use a template.
 I recommend using [Jake's Overleaf template](https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs).
@@ -58,41 +59,12 @@ The best advice on how to write your bullet point is Google's [XYZ formula](http
 
 I would like to elaborate on this advice further
 
+- The statement directly answers the question "What did you achieve as a <role> at <place>?"
 - The statement is self-contained and tells a complete story. The reader is able to understand each bullet point independently.
 - The statement starts with a power verb, in this case, "accomplished". Bullet points should start with a power verb. Also, avoid having two power verbs that are the same in your resume. You can refer to a list of power verbs [here](https://www.faangtechleads.com/resume/general-guidelines).
 - The statement is modular. You can just read the first part (i.e. accomplished X) or the first two parts (accomplished X, as measured by Y) and get something out of it. If you reverse the order, you will delay your actual accomplishments to the end, and the reader may not get your point.
 - I notice that "measured by Y" is placed before "by doing Z". It reflects that the results and their measurements are more important than whatever fancy methods you used to achieve your accomplishments.
 - Metrics are important in tech companies. Startups secure funding with their metrics. Established tech companies make decisions on products and promotions with their metrics. You should try to shape your work so that it has an impact and it is measurable.
-
-
-# Do not confuse the reader
-
-The recruiter or the hiring manager will have a limited time understanding your resume.
-Time spent getting confused should have been spent understanding your merits.
-
-
-
-#### Brand yourself accordingly if you want an internship or a new grad role
-
-- Your previous job titles should be "software engineer intern".
-- Claiming to be a full-timer or even a "lead" or "senior" confuses readers thinking you are overqualified.
-- If "intern" is not an accurate description of your employment, try "consultant" or "freelance developer".
-
-
-
-#### Limit the experience section to work experience
-
-- I do not think teaching experience, personal projects, or academic projects with industry partners belong under experience.
-- You do not want to dilute the message that you have solid industrial experience.
-- The only time you might want to consider branding non-industrial experience as experience is when you have absolutely no industrial experience.
-
-
-
-#### Do not have multiple ongoing work experience
-
-- This might happen if you include other things in your work experience.
-- Even if you consider both roles as industrial experience, you might want to keep their time intervals disjoint.
-- Confusing the reader may reduce the credibility of your achievements.
 
 
 
@@ -125,31 +97,46 @@ You can still make your resume stand out with the content.
 
 #### Should I include a summary or an objective?
 
-The Tech Interview Handbook recommends writing [one](https://www.techinterviewhandbook.org/resume/#write-a-headline-for-your-resume-summary).
-Personally, I have never seen a summary that adds value to the resume.
-An organized and well-written resume should already be easily summarizable.
+An organized and well-written resume should already be easily summarizable and should not need a summary.
 
+The Tech Interview Handbook recommends writing [one](https://www.techinterviewhandbook.org/resume/#write-a-headline-for-your-resume-summary).
+
+However, I only recommend writing a summary if you are from a non-traditional background.
+
+Examples of non-traditional background include
+- You are changing careers.
+- You are applying for the position from a market where the company do not usually hire from.
+- The major you are graduating with is not typical of software engineers (e.g. business).
+- You had a noticeable disruption in your studies or career (e.g. conscription).
+
+A summary will help the reader better context before starting to understand your resume.
+That said, your resume should still be well-organized regardless.
 
 
 #### Should I bold text within bullet points, and how should I do it?
 
 I would rather you emphasize your achievements early in the bullet point, which you will be doing in the Google XYZ formula anyway.
 If you really want to apply boldface, you might want to use a consistent strategy.
-One option is to bold all the technologies used, another option is to bold the metrics. Avoid doing both.
+There are a few stragies I suggest (choose only one of them)
+- Apply boldface the technologies used.
+- Apply boldface on the metrics.
+- Apply boldface on the keywords to found in the job description.
 
 
 
 #### How should I include Agile or Scrum methodologies used?
 
-I will advise that you do not do that.
-TBC.
+I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absense of named methodologies in Big Tech.
+Therefore, I suggest not mentioning these methodologies in the bullet points.
 
 
 
 #### How do I cook up some metrics if my work has never been deployed to production?
 
 It might be possible that none of your work made it into production and there is no business metric to speak of.
-You might want to estimate the number of hours saved with that you "derisked", or describe the features you "experimented" or "prototyped".
+You might want to estimate the number of hours saved with that you "derisked".
+You can also describe the features you "experimented" or "prototyped".
+Some features can be paraphrased to look like metrics (Prototyped a feature where a user can schedule a meeting within 3 clicks).
 
 
 
