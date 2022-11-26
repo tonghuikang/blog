@@ -41,7 +41,7 @@ Please fix the following formatting errors
 - Inconsistent chronological order
 - Inconsistent font
 - Inconsistent font size
-- Inconsistent use of emphasis (underline, bold, italics)
+- Inconsistent use of emphasis (underline, bold, italics, allcaps)
 - Excessive use of emphasis
 - Wrong use of capitalization for technical terminologies
 - Incorrect usage of whitespace within the text (e.g. space before full stop)
@@ -65,8 +65,8 @@ Brand yourself accordingly if you want an internship or a new grad role.
 Candidates should not dilute the message that they have solid industrial experience with other items.
 
 ```
-Consider having only industrial work experience in the experience section.
-(Move <item> to the <project> section)
+Given that you have three strong internships, I suggest you move your teaching assistant / research assistant roles to a "Teaching and Research" section.
+Consider having only industry work experience in the experience section. (Move <item> to the <project> section)
 ```
 
 The reader wants to know a sequence of companies you worked at.
@@ -164,5 +164,11 @@ If there is something is written not in a tactful manner, I think it is importan
 
 ```
 You might want to review how this is written - <cite statement>
+```
+
+You want to make sure that your content is understood by an international audience.
+
+```
+You mentioned that your improvements saved Rs 6 per order. I would prefer you denote the amount in US dollars.
 ```
 

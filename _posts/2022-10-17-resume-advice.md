@@ -6,6 +6,8 @@ categories: career
 
 I have been giving comments on technical resumes in Discord channels by the Tech Interview Handbook and cscareers.dev.
 
+This is my general resume advice for anyone who asks for it.
+
 
 # Use Jake's Resume Overleaf template
 
@@ -21,7 +23,7 @@ These are the common glaring formatting errors that would provide a bad first im
 - Inconsistent chronological order
 - Inconsistent font
 - Inconsistent font size
-- Inconsistent use of emphasis (underline, bold, italics)
+- Inconsistent use of emphasis (underline, bold, italics, allcaps)
 - Excessive use of emphasis
 - Wrong use of capitalization for technical terminologies
 - Incorrect usage of whitespace within the text (e.g. space before full stop)
@@ -41,7 +43,7 @@ These are some borderline formatting annoyances
 - Make sure every bullet point of yours looks full. Your bullet points should not end with one word on the next line. Aim to have the last line of the bullet point occupy at least 60% of the line. You might need to summarize or elaborate on your bullet points to achieve this.
 - Do not hyperlink entire sentences, especially with underline, bold and blue font. You might still want to make the hyperlink known it is a hyperlink. I recommended having [Github \| Demo] or [link] at the end of the line to direct interested readers.
 - Inconsistent spaces between words. I understand there is a tradeoff between aligning the end of line by justifying text, and having consistent space between words. I would choose the latter. The latter is also not that visible if you are using a one-column resume template.
-- Use of italics and underlining. (This is my opinion, I understand that Jake's resume uses italics.) Italics and underlining emphasize the words by making them hard to read. I do not like text that is hard to read. I would only use bold for emphasis and headers.
+- Use of italics and underlining. (This is my opinion, I understand that Jake's resume uses italics.) Italics and underlining emphasize the words by making them hard to read. I do not like text that is hard to read. I would only use bold for emphasis and allcaps for headers.
 
 You can fix these formatting issues easily.
 
@@ -74,7 +76,11 @@ I would like to elaborate on this advice further
 #### Should I use a one-column or a two-column template?
 
 A popular two-column template is [Deedy's Resume](https://www.overleaf.com/latex/templates/deedy-cv/bjryvfsjdyxz).
-I would advice not to use a two-column template. TBC.
+
+I would advice not to use a two-column template for the following reasons
+- It is extra work to get familiar with the template.
+- Whenever after you edit the text of the resume, there are more things to finetune (now you need to finetune vertical delimiters as well).
+- The use of the space may not be optimal, it is common to see candidates filling up blank space with low value content (for example rating their own skills).
 
 
 
@@ -109,14 +115,42 @@ Examples of non-traditional background include
 - The major you are graduating with is not typical of software engineers (e.g. business).
 - You had a noticeable disruption in your studies or career (e.g. conscription).
 
-A summary will help the reader better context before starting to understand your resume.
+In these cases, a summary will help the reader better context before starting to understand your resume.
+Please keep your summary short. Limit your summary to two lines.
+Keep your summary factual as well. It is common to see people describe themselves as "motivated", it is better to see how motivated they are from the resume content.
 That said, your resume should still be well-organized regardless.
+
+
+
+### Is the STAR format a good alternative to Google XYZ formula?
+
+The STAR format consists for four parts - Situation, Task, Action, Results.
+These [two](https://www.indeed.com/career-advice/resumes-cover-letters/star-method-resume) [resources](https://resumegenius.com/blog/resume-help/star-method-resume) describes the STAR format, however not in the tech resume context.
+
+This is how a STAR format bullet point in a tech resume would look like
+
+- "Worked with three other engineers in the mobile team (situation) to fix slow loading issues (task). Optimized GraphQL request waterfalls (action) and reduced page loading time by 10% (result)."
+
+This could have been summarized in Google XYZ formula as
+
+- "Reduced mobile page loading time (X) by 10% (Y) from optimizing GraphQL request waterfalls (Z)"
+
+The advantage of Google XYZ formula is that you put your achievement in front, where it is most likely read.
+The situation and task is not the most important information in the story (though you might want to postface your bullet point that you worked "with three other engineers").
+
+However, in interviews, STAR format provide a structure for you to build your story.
+It is also easier to insert additional detail into the story - for example how did you triage the cause of the slow loading times.
+
+The setting of the resume screen and the interview session is different.
+In resume screen time is limited and hiring managers are trying to find a reason to accept or reject your resume, whereas in interviews you should have their full attention.
+
 
 
 #### Should I bold text within bullet points, and how should I do it?
 
 I would rather you emphasize your achievements early in the bullet point, which you will be doing in the Google XYZ formula anyway.
 If you really want to apply boldface, you might want to use a consistent strategy.
+
 There are a few stragies I suggest (choose only one of them)
 - Apply boldface the technologies used.
 - Apply boldface on the metrics.
@@ -126,7 +160,7 @@ There are a few stragies I suggest (choose only one of them)
 
 #### How should I include Agile or Scrum methodologies used?
 
-I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absense of named methodologies in Big Tech.
+I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absence of named methodologies in Big Tech.
 Therefore, I suggest not mentioning these methodologies in the bullet points.
 
 
