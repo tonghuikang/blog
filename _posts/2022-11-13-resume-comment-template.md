@@ -28,20 +28,20 @@ It is also possible that my recommendations are disagreed by many.
 
 
 These are some ways that I preface my comments, in varying degrees of forcefulness
-- Consider <verb> / <noun> ...
-- You might want to consider <verb> / <noun>...
-- Would recommend <verb> / <noun> ...
-- Please <verb> ...
-- Would prefer <verb> / <noun> ...
-- You should <verb> / <noun> ...
-- Try to <verb>
-- It would be great if you could <verb>
+- Consider [verb] / [noun] ...
+- You might want to consider [verb] / [noun]...
+- Would recommend [verb] / [noun] ...
+- Please [verb] ...
+- Would prefer [verb] / [noun] ...
+- You should [verb] / [noun] ...
+- Try to [verb]
+- It would be great if you could [verb]
 
 
 I can also add context to the comment
-- Given that <context>, consider ...
-- <Praise>. Consider ...
-- You mentioned that <quote>. Consider ...
+- Given that [context], consider ...
+- [Praise]. Consider ...
+- You mentioned that [quote]. Consider ...
 
 
 
@@ -65,7 +65,7 @@ This is the list of formatting issues, copied here for reference
 - Incorrect usage of whitespace within the text (e.g. space before full stop)
 - Large empty space
 
-> I see multiple <formatting> issues.
+> I see multiple [formatting] issues.
 > Would recommend use of Jake's Resume Overleaf Template (https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs).
 
 
@@ -73,7 +73,7 @@ I strongly recommend resumes take up exactly one full page.
 I will definitely make this recommendation if the candidate did not manage to fill up the second page, or the resume feels bloated.
 
 > I would suggest limiting your resume to one full page.
-> You can summarize/remove <sections>/<entries>.
+> You can summarize/remove [sections]/[entries].
 
 
 
@@ -83,14 +83,17 @@ Job titles used should be conventional, even if they may differ from your actual
 In big tech companies, "senior", "staff", "principal", "manager" and "lead" means something.
 
 > Would prefer that you do not brand your previous role as "senior" or "lead" as they mean something specific in the industry you are applying to.
+>
 > If "intern" is not an accurate description, you might want to consider "freelance developer" or "consultant" to describe your role.
+>
 > Brand yourself accordingly if you want an internship or a new grad role.
 
 
 Candidates should not dilute the message that they have solid industrial experience.
 
 > Given that you have three strong internships, I suggest you move your teaching assistant / research assistant roles to a "Teaching and Research" section.
-> Consider keeping the "experience" section in the experience section. Move <item> to the "Project" section.
+>
+> Consider keeping the "experience" section in the experience section. Move [item] to the "Project" section.
 
 
 The reader wants to know the sequence of companies you worked at.
@@ -121,6 +124,7 @@ I propose accomplishments provide a much better signal of their impact at work.
 If they want to emphasize the technologies they employ, they can use boldface.
 
 > Would prefer that you state your accomplishments before your methods (e.g. prefer "Analyzed data with Python" over "Employed Python to analyze data").
+>
 > Would prefer that you state your accomplishments before the context (e.g. prefer "Built the app with 5 people" over "Worked with 5 people to build the app")
 
 
@@ -132,20 +136,25 @@ Some resumes use terminologies that require Googling, or are not even Google-abl
 Readers should not be required to query external sources to understand the resume.
 
 > It is not clear exactly which feature or system you worked on. (e.g. What is "solve and remediate privacy problems"?)
-> You mentioned that you implemented a chatbot for <company>. What does the chatbot do?
+>
+> You mentioned that you implemented a chatbot for [company]. What does the chatbot do?
+>
 > You mentioned that you "created a new web application with React". What is a web application?
-> You mentioned you worked on <product name>. It is not clear what <product name> is.
+>
+> You mentioned you worked on [product name]. It is not clear what [product name] is.
 
 
 Even if the function of the product of the system they are working on is clear, the bullet point should be clear on the exact contribution.
 
-> You mentioned that you are a research assistant for <project>. Could you specify exactly what did you contribute (e.g. collected dataset)?
+> You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute (e.g. collected dataset)?
+>
 > For projects you worked with a team, mention the specific parts you built.
 
 
 The candidate should not appear to claim to be doing work that needs an entire team to do.
 
-> <Accomplishment> does not seem to be the sole work done by one person.
+> [Accomplishment] does not seem to be the sole work done by one person.
+>
 > Consider specifying how many people you worked with, or what exactly was your contribution.
 
 
@@ -163,6 +172,7 @@ This gives an appearance of varied experience.
 If the bullet point is verbose (using more words than necessary), call that out.
 
 > Would prefer that you write more concisely. (e.g. "Developed and managed" over “Led feature development and project management”)
+>
 > Please write in active language.
 
 
@@ -181,7 +191,9 @@ I can comment on Machine Learning projects and achievements.
 I am unfamiliar with frontend or backend technologies, however.
 
 > You mentioned that you "Improved model training time by 10%". What was done? What is the benefit?
+>
 > You mentioned accuracy as your metric. The accuracy metric does not account for data imbalance.
+>
 > When reporting performances in your ML model, please compare with a benchmark (e.g. the performance of a human, a baseline solution, the state-of-the-art, a publicly available solution).
 
 
@@ -192,13 +204,15 @@ Some bullet points clearly could have a measurable impact.
 However, its metrics are missing.
 For some projects like internal tools, it is difficult to obtain metrics.
 
-> You implemented <solution> to speed up <system>. Have you measured its impact?
+> You implemented [solution] to speed up [system]. Have you measured its impact?
 
 
 The metrics described should be specific as well.
 
 > You mentioned that your work increased the number of users by 10%.
+>
 > Could you specify how the metric is measured?
+>
 > (Daily active users? The number of unique browser visits? Is it A/B tested or an observed increase after implementation?)
 
 
@@ -207,7 +221,7 @@ The metrics described should be specific as well.
 
 If there is something is written not in a tactful manner, I think it is important to call it out.
 
-> You might want to review how this is written - <cite statement>
+> You might want to review how this is written - [cite statement]
 
 
 I want to make sure that their content is understood by an international audience.
@@ -238,4 +252,5 @@ It is common to see resumes rating or quantifying their own skills.
 Certifications are an acceptable display of skills, but candidates should be aware they do not mean everything.
 
 > Please do not rate your own skills. Let the reader infer that from your bullet points.
+>
 > I think you are placing too much emphasis on the lines of codes written which is not a good measure of proficiency.
