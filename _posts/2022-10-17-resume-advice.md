@@ -9,6 +9,7 @@ I have been giving comments on technical resumes in Discord channels by the Tech
 This is my general resume advice for anyone who asks for it.
 
 
+
 # Use Jake's Resume Overleaf template
 
 The first impression of the resume is important. The reader gets the first impression without reading any text.
@@ -48,6 +49,7 @@ These are some borderline formatting annoyances
 You can fix these formatting issues easily.
 
 
+
 # Use Google XYZ formula
 
 Where are you studying, where did you intern, are facts that cannot be changed. Formatting is just something you should not fault on.
@@ -68,7 +70,7 @@ I would like to elaborate on this advice further
 - I notice that "measured by Y" is placed before "by doing Z". It reflects that the results and their measurements are more important than whatever fancy methods you used to achieve your accomplishments.
 - Metrics are important in tech companies. Startups secure funding with their metrics. Established tech companies make decisions on products and promotions with their metrics. You should try to shape your work so that it has an impact and it is measurable.
 
-You would also want put in extra effort in your first bullet point.
+You would also want put in extra effort in your first bullet point in your first experience entry.
 I expect recruiters and hiring managers who look beyond brand name of companies will read the first bullet point.
 However, I do not expect them to read any more if they are not clear of your achievements in your first bullet point.
 
@@ -166,17 +168,17 @@ There are a few stragies I suggest (choose only one of them)
 
 
 
-#### How should I include methodologies (Agile, Scrum) used?
+#### How should I include methodologies (Agile, Scrum) and tools used?
 
 I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absence of named methodologies in Big Tech.
 Therefore, I suggest not mentioning these methodologies in the bullet points.
 
-Some resumes write they work with trunk-based development, or enumerate the tools that they used, for example
-- TBC
+Similarly, documenting the tools you use does not help to show the impact you have made in the company, for example
+- Used GitLab for version control and JIRA for task tracking.
 
-I do not think this bullet point feature any of your accomplishments.
-
-My guess of the motivation behind these bullet points is to suggest a methodology fit between the candidate and the company.
+My guess of the motivation behind these bullet points is to suggest some fit between the candidate and the company.
+A good company should look beyond the tools when accessing skills and culture fit.
+The company should also have an effective onboarding process to get the new hire familiar with the current tools.
 
 
 
@@ -192,8 +194,9 @@ Some features can be paraphrased to look like metrics (Prototyped a feature wher
 #### What tense should I use for the verb for the current work experience?
 
 For past work, you should be using the simple past tense (e.g. "implemented").
-Present continuous tense (e.g. "implementing") is fine for ongoing work.
-However, I suggest using simple past tense for ongoing work for consistency. You should also consider your resume will be read in the future.
+Present continuous tense (e.g. "implementing") for ongoing work is fine.
+However, I suggest using simple past tense for ongoing work for consistency.
+You should also consider that your resume is being read in the future.
 
 
 
