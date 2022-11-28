@@ -39,10 +39,10 @@ You need to be able to figure out how to use LaTeX, and even make edits to the t
 
 These are some borderline formatting annoyances
 
-- Having more than one page for your resume. You should make your resume just one full page, as recommended by [Y Combinator](https://www.ycombinator.com/library/FB-writing-a-great-resume). I suggest that you conform to the current standards so that it is easier for the reader to process your resume cognitively.
+- Having more than one page for your resume. You should make your resume just one full page, as recommended by [Y Combinator](https://www.ycombinator.com/library/FB-writing-a-great-resume).
 - Make sure every bullet point of yours looks full. Your bullet points should not end with one word on the next line. Aim to have the last line of the bullet point occupy at least 60% of the line. You might need to summarize or elaborate on your bullet points to achieve this.
-- Do not hyperlink entire sentences, especially with underline, bold and blue font. You might still want to make the hyperlink known it is a hyperlink. I recommended having [Github \| Demo] or [link] at the end of the line to direct interested readers.
-- Inconsistent spaces between words. I understand there is a tradeoff between aligning the end of line by justifying text, and having consistent space between words. I would choose the latter. The latter is also not that visible if you are using a one-column resume template.
+- Do not hyperlink entire sentences, especially with underline, bold and blue font. You might still want to make the hyperlink known it is a hyperlink. I recommended having [Github \| Demo] or [link] with no emphasis formatting at the end of the line to direct interested readers.
+- Inconsistent spaces between words. I understand there is a tradeoff between aligning the end of line by justifying text, and having consistent space between words. I would choose the latter. You will be having many bullet points anyway, I do not think justifying text is going to make the resume neater.
 - Use of italics and underlining. (This is my opinion, I understand that Jake's resume uses italics.) Italics and underlining emphasize the words by making them hard to read. I do not like text that is hard to read. I would only use bold for emphasis and allcaps for headers.
 
 You can fix these formatting issues easily.
@@ -68,6 +68,10 @@ I would like to elaborate on this advice further
 - I notice that "measured by Y" is placed before "by doing Z". It reflects that the results and their measurements are more important than whatever fancy methods you used to achieve your accomplishments.
 - Metrics are important in tech companies. Startups secure funding with their metrics. Established tech companies make decisions on products and promotions with their metrics. You should try to shape your work so that it has an impact and it is measurable.
 
+You would also want put in extra effort in your first bullet point.
+I expect recruiters and hiring managers who look beyond brand name of companies will read the first bullet point.
+However, I do not expect them to read any more if they are not clear of your achievements in your first bullet point.
+
 
 
 # Frequently asked questions
@@ -89,7 +93,7 @@ I would advice not to use a two-column template for the following reasons
 As with many others in cscareers.dev Discord, I recommend Jake's Resume Overleaf template.
 
 An alternative I suggest is to use Google docs, so that your friends can easily comment on your resume.
-A Y Combinator [blogpost](https://www.ycombinator.com/library/FB-writing-a-great-resume) feature such a [Google docs](https://docs.google.com/document/d/1WliF2pvgQBCR3h96L3eExQjrlfX4OkXe01f-2XQ8vEE/edit) resume template.
+A Y Combinator [blogpost](https://www.ycombinator.com/library/FB-writing-a-great-resume) features such a [Google docs](https://docs.google.com/document/d/1WliF2pvgQBCR3h96L3eExQjrlfX4OkXe01f-2XQ8vEE/edit) resume template.
 The issue with Google docs is that it is a WYSIWYG editor, so it may not be easy to keep track of formatting problems. You can see that there is some issue in the template with the last bullet point.
 
 
@@ -118,7 +122,11 @@ Examples of non-traditional background include
 In these cases, a summary will help the reader better context before starting to understand your resume.
 Please keep your summary short. Limit your summary to two lines.
 Keep your summary factual as well. It is common to see people describe themselves as "motivated", it is better to see how motivated they are from the resume content.
-That said, your resume should still be well-organized regardless.
+
+Some resumes uses the "Objective" as the header.
+Some resumes also state the things the candidate wants to learn.
+My view is that resumes should present your value to the prospective employer, not the other way round.
+Therefore, I suggest you keep your resume based on past and current factual accomplishments.
 
 
 
@@ -129,20 +137,20 @@ These [two](https://www.indeed.com/career-advice/resumes-cover-letters/star-meth
 
 This is how a STAR format bullet point in a tech resume would look like
 
-- "Worked with three other engineers in the mobile team (situation) to fix slow loading issues (task). Optimized GraphQL request waterfalls (action) and reduced page loading time by 10% (result)."
+- Worked with three other engineers in the mobile team (situation) to fix slow loading issues (task). Optimized GraphQL request waterfalls (action) and reduced page loading time by 10% (result).
 
 This could have been summarized in Google XYZ formula as
 
-- "Reduced mobile page loading time (X) by 10% (Y) from optimizing GraphQL request waterfalls (Z)"
+- Reduced mobile page loading time (X) by 10% (Y) from optimizing GraphQL request waterfalls (Z)
 
 The advantage of Google XYZ formula is that you put your achievement in front, where it is most likely read.
 The situation and task is not the most important information in the story (though you might want to postface your bullet point that you worked "with three other engineers").
 
 However, in interviews, STAR format provide a structure for you to build your story.
-It is also easier to insert additional detail into the story - for example how did you triage the cause of the slow loading times.
+It is also easier to insert additional detail into the story - for example how did you triage the cause of the slow loading times, the challenges that you have faced.
 
-The setting of the resume screen and the interview session is different.
-In resume screen time is limited and hiring managers are trying to find a reason to accept or reject your resume, whereas in interviews you should have their full attention.
+The recommendations here is different because the setting of the resume screen and the interview session is different.
+In resume screen, time is limited and hiring managers are trying to find a reason to accept or reject your resume, whereas in interviews you should have their full attention.
 
 
 
@@ -154,14 +162,21 @@ If you really want to apply boldface, you might want to use a consistent strateg
 There are a few stragies I suggest (choose only one of them)
 - Apply boldface the technologies used.
 - Apply boldface on the metrics.
-- Apply boldface on the keywords to found in the job description.
+- Apply boldface on the keywords found in the job description.
 
 
 
-#### How should I include Agile or Scrum methodologies used?
+#### How should I include methodologies (Agile, Scrum) used?
 
 I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absence of named methodologies in Big Tech.
 Therefore, I suggest not mentioning these methodologies in the bullet points.
+
+Some resumes write they work with trunk-based development, or enumerate the tools that they used, for example
+- TBC
+
+I do not think this bullet point feature any of your accomplishments.
+
+My guess of the motivation behind these bullet points is to suggest a methodology fit between the candidate and the company.
 
 
 
