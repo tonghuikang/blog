@@ -64,6 +64,7 @@ The best advice on how to write your bullet point is Google's [XYZ formula](http
 I would like to elaborate on this advice further
 
 - The statement directly answers the question "What did you achieve as a <role> at <place>?"
+- The statement is unique to you. Not many people in the market can simply copy your accomplishments for their resume.
 - The statement is self-contained and tells a complete story. The reader is able to understand each bullet point independently.
 - The statement starts with a power verb, in this case, "accomplished". Bullet points should start with a power verb. Also, avoid having two power verbs that are the same in your resume. You can refer to a list of power verbs [here](https://www.faangtechleads.com/resume/general-guidelines).
 - The statement is modular. You can just read the first part (i.e. accomplished X) or the first two parts (accomplished X, as measured by Y) and get something out of it. If you reverse the order, you will delay your actual accomplishments to the end, and the reader may not get your point.
@@ -132,6 +133,18 @@ Therefore, I suggest you keep your resume based on past and current factual acco
 
 
 
+#### Should I include my teaching assistant or research assistant role under experience?
+
+My advice is dependent on whether you already have industrial experience.
+
+If you have absolutely zero industrial experience, I think you might need to brand your teaching assistant or research assistant roles as experience.
+
+If you have already interned at least once, I suggest putting your teaching assistant or research assistant roles under "Teaching and Research".
+For example, you had a fruitful internship, but because of the reverse chronological order of entries in the experience section, the reader might miss your internship entry entirely and land your resume in the reject pile.
+Generally, I feel that teaching assistant or research assistant roles under experience is confusing, and confusions do not help the reader to understand the merits of your resume.
+
+
+
 ### Is the STAR format a good alternative to Google XYZ formula?
 
 The STAR format consists for four parts - Situation, Task, Action, Results.
@@ -174,7 +187,10 @@ I would like you to consider this [article](https://blog.pragmaticengineer.com/p
 Therefore, I suggest not mentioning these methodologies in the bullet points.
 
 Similarly, documenting the tools you use does not help to show the impact you have made in the company, for example
+- Participated in daily standups and iterated on the project with the Agile methodology.
 - Used GitLab for version control and JIRA for task tracking.
+
+Moreover, bullet points that focus on the methodologies is usually reusable by any resumes, which makes the experience look mediocre.
 
 My guess of the motivation behind these bullet points is to suggest some fit between the candidate and the company.
 A good company should look beyond the tools when accessing skills and culture fit.

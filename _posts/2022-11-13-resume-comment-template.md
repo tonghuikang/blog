@@ -5,7 +5,7 @@ categories: career
 ---
 
 I have been commenting on technical resumes in Discord channels by the Tech Interview Handbook and cscareers.dev.
-I want to compile a set of commonly given comments, so that I can copy and paste.
+I want to compile a set of commonly given comments, so that I can copy and paste them.
 This also helps me retrieve how I have exactly written similar comments for clarity and thoughtfulness.
 I also document some thoughts behind the comment as well.
 
@@ -113,7 +113,9 @@ I strongly suggest that candidates use the Google XYZ formula to write their res
 
 Do give praise if the Google XYZ formula is well applied.
 
-> Bullet points are well-written with clear metrics.
+> Bullet points are well-written.
+> It is easy to understand what exactly you worked on in [company].
+> They illustrate your impact with clear metrics.
 
 
 I think that STAR (Situation, Task, Action, Result) method is bad for resumes.
@@ -131,16 +133,22 @@ If they want to emphasize the technologies they employ, they can use boldface.
 
 # Completeness of Context
 
-The bullet point should be clear on which system or product are they working on.
-Some resumes use terminologies that require Googling, or are not even Google-able.
-Readers should not be required to query external sources to understand the resume.
+The bullet point should not be generic that anyone in the field can simply use.
+The bullet point should be clear on exactly which system or product are they working on.
 
 > It is not clear exactly which feature or system you worked on. (e.g. What is "solve and remediate privacy problems"?)
 >
 > You mentioned that you implemented a chatbot for [company]. What does the chatbot do?
 >
-> You mentioned that you "created a new web application with React". What is a web application?
+> You mentioned that you "created a new web application with React".
+> Give some details by explaining the features you created, and what the websites were for.
 >
+> Consider writing bullet point that does not apply to any role.
+
+
+Some resumes use terminologies that require Googling, or are not even Google-able.
+Readers should not be required to query external sources to understand the resume.
+
 > You mentioned you worked on [product name]. It is not clear what [product name] is.
 
 
@@ -148,7 +156,7 @@ Even if the function of the product of the system they are working on is clear, 
 
 > You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute (e.g. collected dataset)?
 >
-> For projects you worked with a team, mention the specific parts you built.
+> For the projects you worked with a team, mention the specific parts that you contributed to.
 
 
 The candidate should not appear to claim to be doing work that needs an entire team to do.
@@ -158,8 +166,15 @@ The candidate should not appear to claim to be doing work that needs an entire t
 > Consider specifying how many people you worked with, or what exactly was your contribution.
 
 
+The candidate should not claim to be doing work that is likely already done by the company years ago.
 
-# Writing Style
+> You mentioned you [created models to detect fraud].
+> I am sure [company] has such models already.
+> Was yours actually the first, or how it is different from previous methods?
+
+
+
+# Language
 
 Bullet points should start with a power verb.
 This gives an appearance of varied experience.
@@ -183,18 +198,14 @@ Fulling up the last line makes the resume looks fuller, and provides you a bette
 > Try to fill up at least half of the line in the last line.
 
 
+If there is something is written not in a tactful manner, I think it is important to call it out.
 
-# Content
+> You might want to review how this is written - [cite statement]
 
-Bullet points should make sense to domain experts as well.
-I can comment on Machine Learning projects and achievements.
-I am unfamiliar with frontend or backend technologies, however.
 
-> You mentioned that you "Improved model training time by 10%". What was done? What is the benefit?
->
-> You mentioned accuracy as your metric. The accuracy metric does not account for data imbalance.
->
-> When reporting performances in your ML model, please compare with a benchmark (e.g. the performance of a human, a baseline solution, the state-of-the-art, a publicly available solution).
+I want to make sure that their content is understood by an international audience.
+
+> You mentioned that your improvements saved Rs 6 per order. I would prefer you denote the amount in US dollars.
 
 
 
@@ -209,28 +220,24 @@ For some projects like internal tools, it is difficult to obtain metrics.
 
 The metrics described should be specific as well.
 
-> You mentioned that your work increased the number of users by 10%.
->
+> You mentioned that your work [increased the number of users by 10%].
 > Could you specify how the metric is measured?
->
 > (Daily active users? The number of unique browser visits? Is it A/B tested or an observed increase after implementation?)
 
 
+Metrics should make sense to domain experts as well.
+I can comment on Machine Learning projects and achievements.
+I am unfamiliar with frontend or backend technologies, however.
 
-# Language
-
-If there is something is written not in a tactful manner, I think it is important to call it out.
-
-> You might want to review how this is written - [cite statement]
-
-
-I want to make sure that their content is understood by an international audience.
-
-> You mentioned that your improvements saved Rs 6 per order. I would prefer you denote the amount in US dollars.
+> You mentioned that you "Improved model training time by 10%". What was done? What is the benefit?
+>
+> You mentioned accuracy as your metric. The accuracy metric does not account for data imbalance.
+>
+> When reporting performances in your ML model, please compare with a benchmark (e.g. the performance of a human, a baseline solution, the state-of-the-art, a publicly available solution).
 
 
 
-# Skills Section
+# Skills
 
 I suspect that it is common to see recruiters scanning the skills section to determine a skill fit.
 
