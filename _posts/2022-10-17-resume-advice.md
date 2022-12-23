@@ -51,7 +51,7 @@ You can fix these formatting issues easily.
 
 
 
-# Refer to the Google XYZ formula for bullet points
+# Refer to the Google XYZ formula
 
 Where are you studying, where did you intern, are facts that cannot be changed. Formatting is just something you should not fault on.
 
@@ -95,8 +95,8 @@ These are examples of vague bullet points I read from Discord channels (and thes
 > Developed a novel summarization framework that increased summary production by 20x
 > (What is the business use case of your summarization model?, What is meant by increasing summarization production?)
 >
-> "Essentially it took 1/20th the amount of time the old framework took to generate 100 summaries"
-> "It was used for Pharma companies to summarize research papers, the company I interned at basically created software for them to improve efficiency"
+> "Essentially it took 1/20th the amount of time the old framework took to generate 100 summaries.
+> It was used for Pharma companies to summarize research papers, the company I interned at basically created software for them to improve efficiency"
 
 > Streamlined data collection by 40% by creating an analytics tool using Swift Package Manager for faster load times
 > (How is the metric measured? What did you actually do?)
@@ -108,18 +108,20 @@ You can see that if the bullet point had been clearer, it would be been a good r
 
 This is a checklist to avoid the reader from guessing, with an example of some comments given to other resumes
 
-- What exactly is the feature or system you worked on?
-    - What is “solve and remediate privacy problems”?
-    - You mentioned that you implemented a chatbot for [company]. What does the chatbot do?
-    - You mentioned that you “created a new web application with React”. Give some details by explaining the features you created, and what the websites were for.
-- Is the product or system known by a typical software engineer?
-    - You mentioned you worked on [product name]. It is not clear what [product name] is.
-- Is the exact contribution clear?
-    - You mentioned that you worked on the recommendation system for [use case]. Could you specify whether are you the person building ML models, or building real-time systems, or building offline pipelines, or firefighting/maintaining pieces built by others?
-    - You mentioned that you are a teaching assistant for [course]. Could you specify exactly what did you help? (e.g. Created the problem set? Consulted for project ideas?)
-    - You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute? (e.g. Collected dataset? Wrote half the paper?)
-- Are you claiming to have done something that the company should already have done years ago? How is your work different?
-    - You mentioned you [created models to detect fraud]. I am sure [company] has such models already. Was yours actually the first, or how it is different from previous methods?
+What exactly is the feature or system you worked on?
+- What is “solve and remediate privacy problems”?
+- You mentioned that you implemented a chatbot for [company]. What does the chatbot do?
+- You mentioned that you “created a new web application with React”. Give some details by explaining the features you created, and what the websites were for.
+
+Is the product or system known by a typical software engineer?
+- You mentioned you worked on [product name]. It is not clear what [product name] is.
+
+Is the exact contribution clear?
+- You mentioned that you worked on the recommendation system for [use case]. Could you specify whether are you the person building ML models, or building real-time systems, or building offline pipelines, or firefighting/maintaining pieces built by others?  - You mentioned that you are a teaching assistant for [course]. Could you specify exactly what did you help? (e.g. Created the problem set? Consulted for project ideas?)
+- You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute? (e.g. Collected dataset? Wrote half the paper?)
+
+Are you claiming to have done something that the company should already have done years ago? How is your work different?
+- You mentioned you [created models to detect fraud]. I am sure [company] has such models already. Was yours actually the first, or how it is different from previous methods?
 
 
 
