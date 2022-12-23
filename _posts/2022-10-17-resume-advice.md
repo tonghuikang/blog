@@ -106,22 +106,30 @@ These are examples of vague bullet points I read from Discord channels (and thes
 You can see that if the bullet point had been clearer, it would be been a good reason for the candidate to be interviewed.
 
 
-This is a checklist to avoid the reader from guessing, with an example of some comments given to other resumes
+Please go through this checklist to ensure that you are not making your reader guess.
+In the quotes I have included some comments I gave to other resumes.
 
 What exactly is the feature or system you worked on?
-- What is “solve and remediate privacy problems”?
-- You mentioned that you implemented a chatbot for [company]. What does the chatbot do?
-- You mentioned that you “created a new web application with React”. Give some details by explaining the features you created, and what the websites were for.
+> What is “solve and remediate privacy problems”?
+>
+> You mentioned that you implemented a chatbot for [company]. What does the chatbot do?
+>
+> You mentioned that you “created a new web application with React”. Give some details by explaining the features you created, and what the websites were for.
 
 Is the product or system known by a typical software engineer?
-- You mentioned you worked on [product name]. It is not clear what [product name] is.
+> You mentioned you worked on [product name]. It is not clear what [product name] is.
 
 Is the exact contribution clear?
-- You mentioned that you worked on the recommendation system for [use case]. Could you specify whether are you the person building ML models, or building real-time systems, or building offline pipelines, or firefighting/maintaining pieces built by others?  - You mentioned that you are a teaching assistant for [course]. Could you specify exactly what did you help? (e.g. Created the problem set? Consulted for project ideas?)
-- You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute? (e.g. Collected dataset? Wrote half the paper?)
+> You mentioned that you worked on the recommendation system for [use case]. Could you specify whether are you the person building ML models, or building real-time systems, or building offline pipelines, or firefighting/maintaining pieces built by others?
+>
+> You mentioned that you are a teaching assistant for [course]. Could you specify exactly what did you help?
+> (e.g. Created the problem set? Consulted for project ideas?)
+>
+> You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute?
+> (e.g. Collected dataset? Wrote half the paper?)
 
 Are you claiming to have done something that the company should already have done years ago? How is your work different?
-- You mentioned you [created models to detect fraud]. I am sure [company] has such models already. Was yours actually the first, or how it is different from previous methods?
+> You mentioned you [created models to detect fraud]. I am sure [company] has such models already. Was yours actually the first, or how it is different from previous methods?
 
 
 
@@ -129,7 +137,7 @@ Are you claiming to have done something that the company should already have don
 # Frequently asked questions
 
 
-#### Should I use a one-column or a two-column template?
+### Should I use a one-column or a two-column template?
 
 A popular two-column template is [Deedy's Resume](https://www.overleaf.com/latex/templates/deedy-cv/bjryvfsjdyxz).
 
@@ -140,7 +148,7 @@ I would advise not to use a two-column template for the following reasons
 
 
 
-#### Which resume template should I use?
+### Which resume template should I use?
 
 As with many others in cscareers.dev Discord, I recommend Jake's Resume Overleaf template.
 
@@ -150,14 +158,14 @@ The issue with Google docs is that it is a WYSIWYG editor, so it may not be easy
 
 
 
-#### Should I use a template even if everyone else is using the same template?
+### Should I use a template even if everyone else is using the same template?
 
 Unless you are a designer, I recommend that you conform and use the standard template.
 You can still make your resume stand out with the content.
 
 
 
-#### Should I include a summary or an objective?
+### Should I include a summary or an objective?
 
 An organized and well-written resume should already be easily summarizable and should not need a summary.
 
@@ -182,7 +190,7 @@ Therefore, I suggest you keep your resume based on past and current factual acco
 
 
 
-#### Should I include my teaching assistant or research assistant role under experience?
+### Should I include my teaching assistant or research assistant role under experience?
 
 My advice is dependent on whether you already have industrial experience.
 
@@ -221,7 +229,7 @@ In the resume screen, time is limited and hiring managers are trying to find a r
 
 
 
-#### Should I bold text within bullet points, and how should I do it?
+### Should I bold text within bullet points, and how should I do it?
 
 I would rather you emphasize your achievements early in the bullet point, which you will be doing in the Google XYZ formula anyway.
 If you really want to apply boldface, you might want to use a consistent strategy.
@@ -233,7 +241,7 @@ There are a few strategies I suggest (choose only one of them)
 
 
 
-#### How should I include methodologies (Agile, Scrum) and tools used?
+### How should I include methodologies (Agile, Scrum) and tools used?
 
 I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absence of named methodologies in Big Tech.
 Therefore, I suggest not mentioning these methodologies in the bullet points.
@@ -250,7 +258,7 @@ The company should also have an effective onboarding process to get the new hire
 
 
 
-#### How do I cook up some impact if my work has never been deployed to production?
+### How do I cook up some impact if my work has never been deployed to production?
 
 It might be possible that none of your work made it into production and there is no business metric to speak of.
 You might want to estimate the number of hours saved with that you "derisked".
@@ -259,7 +267,7 @@ Some features can be paraphrased to look like metrics (Prototyped a feature wher
 
 
 
-#### What tense should I use for the verb for the current work experience?
+### What tense should I use for the verb for the current work experience?
 
 For past work, you should already be using the simple past tense (e.g. "implemented").
 Present continuous tense (e.g. "implementing") for ongoing work is fine.
@@ -268,6 +276,6 @@ You should also consider that your resume is being read in the future.
 
 
 
-#### How should I include my certifications?
+### How should I include my certifications?
 
 If you are already in a relevant degree program, I suggest you put your certifications in the skills section.
