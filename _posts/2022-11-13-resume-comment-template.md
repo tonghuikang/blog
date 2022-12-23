@@ -10,7 +10,7 @@ This also helps me retrieve how I have exactly written similar comments for clar
 I also document some thoughts behind the comment as well.
 
 This blogpost is for my own reference.
-Please refer to another [blogpost](https://blog.huikang.dev/career/2022/10/17/resume-advice.html) if you want advice.
+Please refer to the other [blogpost](https://blog.huikang.dev/career/2022/10/17/resume-advice.html) if you want advice.
 
 
 
@@ -83,15 +83,14 @@ Job titles used should be conventional, even if they may differ from your actual
 In big tech companies, "senior", "staff", "principal", "manager" and "lead" means something.
 
 > Would prefer that you do not brand your previous role as "senior" or "lead" as they mean something specific in the industry you are applying to.
+> Brand yourself accordingly if you want an internship or a new grad role.
 >
 > If "intern" is not an accurate description, you might want to consider "freelance developer" or "consultant" to describe your role.
->
-> Brand yourself accordingly if you want an internship or a new grad role.
 
 
 Candidates should not dilute the message that they have solid industrial experience.
 
-> Given that you have three strong internships, I suggest you move your teaching assistant / research assistant roles to a "Teaching and Research" section.
+> Given that you have at least one strong internship, I suggest you move your teaching assistant / research assistant roles to a "Teaching and Research" section.
 >
 > Consider keeping the "experience" section in the experience section. Move [item] to the "Project" section.
 
@@ -154,16 +153,24 @@ Readers should not be required to query external sources to understand the resum
 
 Even if the function of the product of the system they are working on is clear, the bullet point should be clear on the exact contribution.
 
-> You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute (e.g. collected dataset)?
+> You mentioned that you are a teaching assistant for [course]. Could you specify exactly what did you helped?
+> (e.g. Created the problem set? Consulted for project ideas?)
 >
-> For the projects you worked with a team, mention the specific parts that you contributed to.
+> You mentioned that you are a research assistant for [project]. Could you specify exactly what did you contribute?
+> (e.g. Collected dataset? Wrote half the paper?)
+>
+> You mentioned that you worked on the recommendation system for [use case].
+> Could you specify whether are you the person building ML models, or building real time systems, or building offline pipelines, or firefighting/maintaining pieces built by others?
+> 
+> For the projects you worked with a team, specify the specific parts that you contributed to.
+
 
 
 The candidate should not appear to claim to be doing work that needs an entire team to do.
 
 > [Accomplishment] does not seem to be the sole work done by one person.
 >
-> Consider specifying how many people you worked with, or what exactly was your contribution.
+> Consider specifying how many people you worked with, or what exactly was your contribution, or specify that you "single-handedly" did it.
 
 
 The candidate should not claim to be doing work that is likely already done by the company years ago.
