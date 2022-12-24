@@ -51,7 +51,7 @@ You can fix these formatting issues easily.
 
 
 
-# Refer to the Google XYZ formula
+# Apply the Google XYZ formula
 
 Where are you studying, where did you intern, are facts that cannot be changed. Formatting is just something you should not fault on.
 
@@ -66,15 +66,16 @@ The best advice on how to write your bullet point is Google's [XYZ formula](http
 
 > Accomplished X, as measured by Y, by doing Z
 
-The Google XYZ formula is a reference, and you should apply the formula whenever possible.
-If you could not force the XYZ formula on your achievements, make sure your bullet point is as impactful as something written with the formula.
-The following is my analysis of the merits of the XYZ formula.
+This is my analysis on why I think this formula, when applied appropriately, is so powerful
 
-- The bullet point directly answers the question "What did you achieve as a [role] at [place]www?"
+- The bullet point directly answers the question "What did you achieve as a [role] at [place]?"
 - The bullet point is unique to you. Not many people in the market can simply copy your accomplishments for their resume.
 - The bullet point is self-contained and tells a complete story. The reader is able to understand each bullet point independently.
 - The bullet point starts with a power verb, in this case, "accomplished". Bullet points should start with a power verb. Also, avoid having two power verbs that are the same in your resume. You can refer to a list of power verbs [here](https://www.faangtechleads.com/resume/general-guidelines).
 - The bullet point is modular. You can just read the first part (i.e. accomplished X) or the first two parts (accomplished X, as measured by Y) and get something out of it. If you reverse the order, you will delay your actual accomplishments to the end, and the reader may not get your point.
+
+The Google XYZ formula is a reference, and you should apply the formula whenever possible.
+If you could not force the XYZ formula on your achievements, make sure your bullet point is as impactful as something written with the formula.
 
 
 
