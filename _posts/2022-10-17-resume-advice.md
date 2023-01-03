@@ -11,6 +11,7 @@ If you want to read more, I have also written another post to describe [how](htt
 
 
 
+
 # Use Jake's Resume Overleaf template
 
 The first impression of the resume is important. The reader gets the first impression without reading any text.
@@ -51,6 +52,7 @@ You can fix these formatting issues easily.
 
 
 
+
 # Apply the Google XYZ formula
 
 Where are you studying, where did you intern, are facts that cannot be changed. Formatting is just something you should not fault on.
@@ -59,8 +61,8 @@ What you can optimize is how you describe your experience and projects with bull
 Between candidates of similar backgrounds, the better-written set of bullet points will decide who will get the interview.
 
 You should put in extra effort in the first bullet point in your first entry.
-The bullet point is the first thing I would pay conscious attention to.
-There is little reason to read further if the bullet point to hard to find, parse and understand.
+This bullet point is the first thing I would pay conscious attention to.
+There is little reason to read further if the bullet point is hard to find, parse and understand.
 
 The best advice on how to write your bullet point is Google's [XYZ formula](https://youtu.be/S_Macvy5CQE?t=83).
 
@@ -75,7 +77,13 @@ This is my analysis on why I think this formula, when applied appropriately, is 
 - The bullet point is modular. You can just read the first part (i.e. accomplished X) or the first two parts (accomplished X, as measured by Y) and get something out of it. If you reverse the order, you will delay your actual accomplishments to the end, and the reader may not get your point.
 
 The Google XYZ formula is a reference, and you should apply the formula whenever possible.
-If you could not force the XYZ formula on your achievements, make sure your bullet point is as impactful as something written with the formula.
+If you could not force the XYZ formula on your achievements, try to take some learnings from it, and make your bullet points as effective as something written with the formula.
+
+These are comments I have given to some resumes to improve their bullet points with the formula.
+
+> Instead of writing "Used Go (Z) to design and implement a system (X) which improved metrics (Y)", write "Designed and implemented a system (X) which improved metrics (Y) with Go (Z)"
+> 
+> Instead of writing "Worked with 5 people (Z) to build the app (X) that improved metrics (Y)", write "Built the app (X) that improved metrics (Y) with 5 people (Z)".
 
 
 
@@ -138,7 +146,7 @@ Are you claiming to have done something that the company should already have don
 # Frequently asked questions
 
 
-### Should I use a one-column or a two-column template?
+#### Should I use a one-column or a two-column template?
 
 A popular two-column template is [Deedy's Resume](https://www.overleaf.com/latex/templates/deedy-cv/bjryvfsjdyxz).
 
@@ -149,7 +157,7 @@ I would advise not to use a two-column template for the following reasons
 
 
 
-### Which resume template should I use?
+#### Which resume template should I use?
 
 As with many others in cscareers.dev Discord, I recommend Jake's Resume Overleaf template.
 
@@ -159,14 +167,14 @@ The issue with Google docs is that it is a WYSIWYG editor, so it may not be easy
 
 
 
-### Should I use a template even if everyone else is using the same template?
+#### Should I use a template even if everyone else is using the same template?
 
 Unless you are a designer, I recommend that you conform and use the standard template.
 You can still make your resume stand out with the content.
 
 
 
-### Should I include a summary or an objective?
+#### Should I include a summary or an objective?
 
 An organized and well-written resume should already be easily summarizable and should not need a summary.
 
@@ -191,7 +199,7 @@ Therefore, I suggest you keep your resume based on past and current factual acco
 
 
 
-### Should I include my teaching assistant or research assistant role under experience?
+#### Should I include my teaching assistant or research assistant role under experience?
 
 My advice is dependent on whether you already have industrial experience.
 
@@ -206,7 +214,21 @@ Regardless of where are you including the role, please be reminded to elaborate 
 
 
 
-### Is the STAR format a good alternative to Google XYZ formula?
+#### Are job descriptions good bullet points?
+
+Consider a job description for a Google university graduate role
+
+> - Build our platforms, systems, and networking infrastructure using experience with distributed systems, OS/kernel, network system design, and large-scale storage systems.
+> - Build internal systems used by Googlers globally.
+> - Mitigate reliability failures in a component or system.
+> - Create and support a productive and innovative team, including working with peers, managers, and teams.
+
+The job description lists your responsibilities, not your achievements.
+An achievement would be more specific (exactly what internal systems did you build), and would have a measure of success if applicable.
+
+
+
+#### Is the STAR format a good alternative to Google XYZ formula?
 
 The STAR format consists for four parts - Situation, Task, Action, Results.
 These [two](https://www.indeed.com/career-advice/resumes-cover-letters/star-method-resume) [resources](https://resumegenius.com/blog/resume-help/star-method-resume) describes the STAR format, however not in the tech resume context.
@@ -230,7 +252,7 @@ In the resume screen, time is limited and hiring managers are trying to find a r
 
 
 
-### Should I bold text within bullet points, and how should I do it?
+#### Should I bold text within bullet points, and how should I do it?
 
 I would rather you emphasize your achievements early in the bullet point, which you will be doing in the Google XYZ formula anyway.
 If you really want to apply boldface, you might want to use a consistent strategy.
@@ -242,7 +264,7 @@ There are a few strategies I suggest (choose only one of them)
 
 
 
-### How should I include methodologies (Agile, Scrum) and tools used?
+#### How should I include methodologies (Agile, Scrum) and tools used?
 
 I would like you to consider this [article](https://blog.pragmaticengineer.com/project-management-at-big-tech/) on the absence of named methodologies in Big Tech.
 Therefore, I suggest not mentioning these methodologies in the bullet points.
@@ -259,7 +281,7 @@ The company should also have an effective onboarding process to get the new hire
 
 
 
-### How do I cook up some impact if my work has never been deployed to production?
+#### How do I cook up some impact if my work has never been deployed to production?
 
 It might be possible that none of your work made it into production and there is no business metric to speak of.
 You might want to estimate the number of hours saved with that you "derisked".
@@ -268,7 +290,7 @@ Some features can be paraphrased to look like metrics (Prototyped a feature wher
 
 
 
-### What tense should I use for the verb for the current work experience?
+#### What tense should I use for the verb for the current work experience?
 
 For past work, you should already be using the simple past tense (e.g. "implemented").
 Present continuous tense (e.g. "implementing") for ongoing work is fine.
@@ -277,6 +299,6 @@ You should also consider that your resume is being read in the future.
 
 
 
-### How should I include my certifications?
+#### How should I include my certifications?
 
 If you are already in a relevant degree program, I suggest you put your certifications in the skills section.
