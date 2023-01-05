@@ -11,6 +11,7 @@ In summary, this is my US immigration background
 - I am starting my role as a software engineer at Quora in November 2021.
 
 Pieces of information here may be useful to you, however shortlived and incomplete.
+Please also refer to other resources such as [this](https://theh1b1.blogspot.com/).
 
 
 
@@ -26,7 +27,7 @@ The company would hire immigration lawyers to help the company's share of requir
 
 ## Obtaining an H-1B1
 
-Ashley has written [a very comprehensive guide](https://ashleylim.medium.com/navigating-the-h1b1-visa-process-4c8e459c4b96) on the process of obtain an H-1B1
+Ashley has written [a very comprehensive guide](https://ashleylim.medium.com/navigating-the-h1b1-visa-process-4c8e459c4b96) on the adminstrative process to obtain a H-1B1
 
 There are a few things from the article I want to highlight
 - I paid my MRV application fee with SAM. However, I learnt that this option has since been [unavailable](https://www.ustraveldocs.com/sg/sg-niv-paymentinfo.asp).
