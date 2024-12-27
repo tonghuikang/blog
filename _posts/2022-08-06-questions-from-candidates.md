@@ -24,4 +24,17 @@ How is the work-life balance like at Quora?
 - Outside of this time, you are free to decide when to work.
 - You are not expected to work overtime at night or during weekends. Sometimes it might be more convenient for me to deploy at night for easier code reversal.
 - I would say that I work for 7 hours a day on average.
-- After some time in the company, you are expected to do oncall rotations. I have not started my oncall rotations.
+- After some time in the company, you are expected to do oncall rotations. You are awarded half a day of replenishment for one week of oncall.
+
+
+Is Quora growing?
+- Quora currently has two products - Quora and Poe.
+- Quora product alone [profitable](https://quorablog.quora.com/New-Funding-from-Andreessen-Horowitz) (including salaries for employees working on Quora). Admittedly, Quora usage is currently not going to the moon.
+- Poe is now margin neutral. The LLMs is now fully covered by subscription revenue and we intend to keep it that way.
+- Poe has establish itself as an aggregator of LLM services. However, we still want to do more than just bundle LLM services. Whether Poe will grow depends on how successful we are here.
+
+
+[Edit: 2024-12-26] Added more questions
+
+
+
