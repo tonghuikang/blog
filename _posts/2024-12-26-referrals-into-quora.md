@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "If you want me to refer you to Quora"
-categories: quora, referrals
+title: If you want me to refer you to Quora
+categories: quora referrals
 ---
 Thank you for finding this post. I hope to share what I would like to see before I refer someone to Quora.
 

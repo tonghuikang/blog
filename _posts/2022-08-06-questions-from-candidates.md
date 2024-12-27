@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Common questions from candidates during Quora interviews"
-categories: quora, interview
+categories: quora interview
 ---
 
 
