@@ -85,11 +85,14 @@ I need to identify something which I think recruiters might not be able to easil
 
 Please include your resume and share at least one of the following. Note that you do not need to do ALL of these, you just need ONE.
 
-- A demo that I can try out, with the url that I can access
-- Github [profile]() with a [repository](https://github.com/tonghuikang/automatic-prompt-engineer) you think represents your work
-- Kaggle [profile](https://www.kaggle.com/huikang) and a useful [resource](https://www.kaggle.com/competitions/konwinski-prize/discussion/553294) that you have shared
-- Knowledge-related social media profile on one of these platforms - [Quora](https://www.quora.com/profile/Tong-Hui-Kang-1), YouTube, TikTok, Zhihu, LinkedIn, Facebook, Instagram. Share a piece of content that you have [published](https://www.quora.com/How-do-you-think-reinforcement-fine-tuning-was-implemented/answer/Tong-Hui-Kang-1) that you think is great
-- [Poe](https://poe.com/huikang) profile with non-trivial bots (specify which [one](https://poe.com/ChineseStatement))
+- A product feature you shipped that I can access. Please specify exactly what did you contribute to the feature.
+- A demo that I can try out, with the url that I can access. I should not be required to install anything.
+- Github [profile]() with a [repository](https://github.com/tonghuikang/automatic-prompt-engineer) you think represents your work.
+- Kaggle [profile](https://www.kaggle.com/huikang) and a useful [resource](https://www.kaggle.com/competitions/konwinski-prize/discussion/553294) that you have shared.
+- Knowledge-related social media profile on one of these platforms - [Quora](https://www.quora.com/profile/Tong-Hui-Kang-1), YouTube, TikTok, Zhihu, LinkedIn, Facebook, Instagram. Share a piece of content that you have [published](https://www.quora.com/How-do-you-think-reinforcement-fine-tuning-was-implemented/answer/Tong-Hui-Kang-1) that you think is great.
+- [Poe](https://poe.com/huikang) profile with a [bot](https://poe.com/ChineseStatement) you think is non-trivial.
+
+In case you are planning to work one of these before you ask a referral from me, please keep in mind that your work does NOT guarantee a referral from me. In any case, work done here should also help your application, even for roles outside of Quora.
 
 
 ## What to write when reaching out
