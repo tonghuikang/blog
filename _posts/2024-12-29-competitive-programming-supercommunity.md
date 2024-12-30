@@ -1,12 +1,12 @@
 ---
 layout: post
-title: My predictions for AI in 2025
-categories: ai
+title: Competitive Programming Supercommunity
+categories: ai competitive-programming
 ---
 The competitive programming community would be the first scientific community that we will automate.
 
 
-# Superhuman competitive programmer by mid-2025
+## Superhuman competitive programmer by mid-2025
 
 By mid-2025, there will be an AI system that is able to solve all current and future competitive programming problems.
 
@@ -29,7 +29,7 @@ I believe OpenAI already has the ingredients to solve this.
 
 
 
-# Competitive programming supercommunity by mid-2026
+## Competitive programming supercommunity by mid-2026
 
 By the middle of 2026, there will be an AI system trained from scratch that is able to solve all current and future competitive programming problems.
 

@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "How I got started in Competitive Programming"
+title: How I got started in Competitive Programming
+categories: competitive-programming
 ---
 
 Competitive programming is essentially about writing code to solve a well-defined problem. Willam Lin summarises what is competitive programming in a [video](https://www.youtube.com/watch?v=ueNT-w7Oluw).

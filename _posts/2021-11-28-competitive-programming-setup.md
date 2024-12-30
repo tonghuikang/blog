@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "Competitive Programming Setup"
+title: Competitive Programming Setup
+categories: competitive-programming
 ---
 
 In this post, I describe my competitive programming setup. I use this set-up for the following competition platforms.
