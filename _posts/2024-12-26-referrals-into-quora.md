@@ -3,16 +3,16 @@ layout: post
 title: If you want me to refer you to Quora
 categories: quora referrals
 ---
-Thank you for finding this post. I hope to share what I would like to see before I refer someone to Quora.
+Thank you for finding this post. I will send them this post when someone reaches out to me with an intention of a getting a role at Quora.
 
-I do not think I would have received an interview opportunity with Quora based on my resume alone. I happened to get lucky in a programming contest held by Quora.
+I do not think I would have received an interview opportunity with Quora based on my undergraduate resume alone. I happened to get lucky in a programming contest held by Quora.
 
-I hope to extend the opportunity to candidates, especially without the most well-known organizations or institutions in their resume.
+Generally, I am not expect to refer people who I have not worked with. However, I still hope to extend this opportunity to candidates which I think is of great fit.
 
 
 ## What is the purpose of referrals
 
-My company has set up a referral process to find people who are a good fit for Quora. Statistics show that employees hired through referrals have longer retention and better performance.
+My company has set up a referral process to find people who are a great fit for Quora. Statistics show that employees hired through referrals have longer retention and better performance.
 
 This is how employee referrals has helped
 
@@ -74,9 +74,9 @@ Referrals are also effective when someone I closely work with (one of the closes
 
 If you are asking for referrals out of the cold, it does not belong to the above two categories.
 
-Referrals are also effective when you don't need the referral. In this case, I am still willing the give a referral so that I can serve to provide an alternative point of view. Of course, my observations may still be reported to the hiring manager.
+Referrals are also effective when you don't need the referral (your profile is similar to the profiles that we usually interview). In this case, I am still willing the give a referral so that I can serve as an alternative point of view. Of course, my observations may still be reported to the hiring manager.
 
-I decline to give a referral when I could not easily identify something that recruiters might not be able to appreciate. You are still free to apply through the typical application process.
+I will decline to give a referral when I could not easily identify something that recruiters might not be able to appreciate. You are still free to apply through the typical application process, and you should.
 
 
 ## What to include in your reach-out
@@ -92,7 +92,9 @@ Please include your resume and share at least one of the following. Note that yo
 - Knowledge-related social media profile on one of these platforms - [Quora](https://www.quora.com/profile/Tong-Hui-Kang-1), YouTube, TikTok, Zhihu, LinkedIn, Facebook, Instagram. Share a piece of content that you have [published](https://www.quora.com/How-do-you-think-reinforcement-fine-tuning-was-implemented/answer/Tong-Hui-Kang-1) that you think is great.
 - [Poe](https://poe.com/huikang) profile with a [bot](https://poe.com/ChineseStatement) you think is non-trivial.
 
-In case you are planning to work one of these before you ask a referral from me, please keep in mind that your work does NOT guarantee a referral from me. In any case, work done here should also help your application, even for roles outside of Quora.
+IF YOU DO NOT HAVE ONE OF THESE ALREADY, PLEASE DIRECTLY APPLY FOR THE ROLE. If you spend time working on one of these, it is very likely that we have already sourced sufficient candidates to interview when you are ready.
+
+Please keep in mind that sharing your work with me does NOT guarantee a referral from me. In any case, work done here should also help your application, even for roles outside of Quora.
 
 
 ## What to write when reaching out
