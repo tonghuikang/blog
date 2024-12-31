@@ -8,7 +8,7 @@ The competitive programming community would be the first scientific community th
 
 ## Superhuman competitive programmer by mid-2025
 
-By mid-2025, there will be an AI system that is able to solve all current and future competitive programming problems.
+By the middle of 2025, there will be an AI system that is able to solve all current and future competitive programming problems.
 
 These are the specifications of the set up
 - The AI system will only be allowed one submission attempt.
@@ -19,7 +19,7 @@ These are the specifications of the set up
 There are likely some problems where the AI system fails, but that will be the fault of the [problem statement](https://x.com/giffmana/status/1870589383562477880) rather than the AI system.
 
 This is my prediction how this is done
-- Get access to all the competitive programming problems available in the world, along with their full test cases, and some correct submissions, and editorials.
+- Get access to all the competitive programming problems available in the world, along with their full test cases, some correct submissions, and editorials.
 - Improve the current reasoning models with reinforcement fine-tuning. This is my [speculation](https://www.quora.com/How-do-you-think-reinforcement-fine-tuning-was-implemented/answer/Tong-Hui-Kang-1) on how reinforcement fine-tuning was implemented.
 - There will be problems that could not be solved. External resources (editorial, reference code, failing test case example) will be used to guide the chain of thought.
 - Repeat until success.
@@ -63,7 +63,7 @@ Note that these still require human input (but only at the start)
 - Rigorous instructions of what is considered progress in solutions.
 
 
-The supercommunity will need to work on problems where the solvability is unknown. They supercommunity will not have access to external resources (editorial, reference code, failing test case example). They need to create the resources themselves. I believe this is possible with the existing LLM architecture.
+The supercommunity will need to attempt to solve problems where the solvability is unknown. They supercommunity will not have access to external resources (editorial, reference code, failing test case example). They need to create the resources themselves. I believe this is possible with the existing LLM architecture.
 
 
 I expect the following challenges for such a system, which I don't think are insurmountable
@@ -82,9 +82,10 @@ The community input restrictions can be relaxed first, and tightened later
 - Maybe the leaderboard would already be populated with problems that they need to solve, but without the solutions.
 - Maybe the models will start with using OpenAI o3, which probably has some knowledge of the solutions to the hardest competitive programming problems.
 - Maybe we can intervene in the training process when we discover that the community is going off-course.
+- Maybe the initial model can have some theoretical computer science knowledge (the P=NP problem) which helps to inform which problems are worth solving
 
 
-If we successfully develop this supercommunity, we are likely to discover elegant problems that we have not discovered. We might also invent algorithms that have not been invented. We will also irrefutably demonstrate the ability of LLMs to create new knowledge.
+If we successfully develop this supercommunity, we are likely to invent elegant problems that we have not invented. We might also discover algorithms that have not been discovered. We will also irrefutably demonstrate the ability of LLMs to create new knowledge.
 
 
 This would be the first superhuman system that reproduces and advances scientific knowledge.
