@@ -37,8 +37,8 @@ By the middle of 2026, there will be an AI system trained from scratch that is a
 In AlphaZero, the training system is only given the rules of Go. In the supercommunity, the training system is only allowed knowledge up to what is covered in the course to the introduction to algorithms.
 
 
-This is how I expect this to be done
-- Start by solving the simplest problem
+How I expect this is done
+- Start by solving the easiest problems
 - Maintain a [leaderboard](https://judge.yosupo.jp/) of best solutions to equivalent problems
 	- The leaderboard is updated when a significantly better solution is achieved
 - Maintain a [Wikipedia](https://cp-algorithms.com/) of algorithms
@@ -63,7 +63,7 @@ Note that these still require human input (but only at the start)
 - Rigorous instructions of what is considered progress in solutions.
 
 
-The supercommunity will need to work on problems that they don't have knowledge that whether could it be solved. They do not have access to external resources (editorial, reference code, failing test case example). They need to create the resources themselves. I believe this is possible with the existing LLM architecture.
+The supercommunity will need to work on problems where the solvability is unknown. They supercommunity will not have access to external resources (editorial, reference code, failing test case example). They need to create the resources themselves. I believe this is possible with the existing LLM architecture.
 
 
 I expect the following challenges for such a system, which I don't think are insurmountable
@@ -77,7 +77,7 @@ I expect the following challenges for such a system, which I don't think are ins
 - The community may not be able to learn from the collective knowledge
 
 
-We can relax the community input restrictions and then tighten it as we 
+The community input restrictions can be relaxed first, and tightened later
 - Maybe we can start with the superhuman competitive programmer first.
 - Maybe the leaderboard would already be populated with problems that they need to solve, but without the solutions.
 - Maybe the models will start with using OpenAI o3, which probably has some knowledge of the solutions to the hardest competitive programming problems.

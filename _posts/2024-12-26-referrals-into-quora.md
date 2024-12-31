@@ -7,7 +7,7 @@ Thank you for finding this post. I will send them this post when someone reaches
 
 I do not think I would have received an interview opportunity with Quora based on my undergraduate resume alone. I happened to get lucky in a programming contest held by Quora.
 
-Generally, I am not expect to refer people who I have not worked with. However, I still hope to extend this opportunity to candidates which I think is of great fit.
+Generally, I am not expected to refer people who I have not worked with. However, I still hope to extend this opportunity to candidates which I think is of great fit.
 
 
 ## What is the purpose of referrals
