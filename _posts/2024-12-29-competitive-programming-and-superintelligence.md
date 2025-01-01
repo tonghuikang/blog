@@ -1,9 +1,11 @@
 ---
 layout: post
-title: Competitive Programming Supercommunity
+title: Competitive Programming and Superintelligence
 categories: ai competitive-programming
+tags:
+  - ai
 ---
-The competitive programming community would be the first scientific community that we will automate.
+The competitive programming community would be the first scientific community that we will automate. This will be our first step to superintelligence.
 
 
 ## Superhuman competitive programmer by mid-2025
@@ -88,6 +90,13 @@ The community input restrictions can be relaxed first, and tightened later
 If we successfully develop this supercommunity, we are likely to invent elegant problems that we have not invented. We might also discover algorithms that have not been discovered. We will also irrefutably demonstrate the ability of LLMs to create new knowledge.
 
 
+Ilya promised to pursue safe superintelligence in a straight shot in SSI.inc that he cofounded. I would expect something like the competitive programming supercommunity to be their first release.
+
+
 This would be the first superhuman system that reproduces and advances scientific knowledge.
+
+
+
+
 
 
