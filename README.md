@@ -1,3 +1,14 @@
+# Foreword
+
+The main purpose of this blog make my interactions more efficient.
+
+For example, if someone asks me for my internship experience, I would share my blog entry on my internships. This way I can give the same preliminary introduction to anyone who is interested - and I can improve on this introduction with feedback. If we exchange messages or meet up, we can have a more meaningful and productive conversations.
+
+These blogposts serve as living documents - they will continue to be published beyond the date that is annotated on the article.
+
+The following continues with the README from the original repository. 
+
+
 <div align="center">
   <p><em><strong>Disclaimer:</strong> The information here may vary depending on the version you're using.<br/>
   Please refer to the <code>README.md</code> bundled within the theme-gem for information specific to your version or by pointing
@@ -8,6 +19,7 @@
   <p><a href="https://jekyll.github.io/minima/">Theme preview</a></p>
   <p><img src="/screenshot.png"/></p>
 </div>
+
 
 ## Installation
 
