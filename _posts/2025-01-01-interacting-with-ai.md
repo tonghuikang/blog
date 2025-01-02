@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Prompting in 2025
+title: Interacting with AI
 categories: ai
 ---
 I write what I think the principles of how AI should interact with us.
 
 
-## You should get what you want by specifying the outcome
+## AI should respect the outcome you specified
 
 
 You should not need to tell a good employee how to think. You state what needs to be done, they do it for you with the resources available to them. We should hold the same standard for AI.
