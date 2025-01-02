@@ -9,19 +9,17 @@ These blogposts serve as living documents - they will continue to be published b
 The following continues with the README from the original repository. 
 
 
-# minima
+<div align="center">
+  <p><em><strong>Disclaimer:</strong> The information here may vary depending on the version you're using.<br/>
+  Please refer to the <code>README.md</code> bundled within the theme-gem for information specific to your version or by pointing
+  your browser to the Git tag corresponding to your version. e.g. https://github.com/jekyll/minima/blob/v2.5.0/README.md.<br/>
+  Running <code>bundle show minima</code> will provide you with the local path to your current theme version.</em></p>
+  <img src="/readme_banner.svg"/>
+  <p>It's Jekyll's default (and first) theme. It's what you get when you run <code>jekyll new</code>.</p>
+  <p><a href="https://jekyll.github.io/minima/">Theme preview</a></p>
+  <p><img src="/screenshot.png"/></p>
+</div>
 
-*Minima is a one-size-fits-all Jekyll theme for writers*. It's Jekyll's default (and first) theme. It's what you get when you run `jekyll new`.
-
-***Disclaimer:** The information here may vary depending on the version you're using. Please refer to the `README.md` bundled
-within the theme-gem for information specific to your version or by pointing your browser to the Git tag corresponding to your
-version. e.g. https://github.com/jekyll/minima/blob/v2.5.0/README.md*
-*Running `bundle show minima` will provide you with the local path to your current theme version.*
-
-
-[Theme preview](https://jekyll.github.io/minima/)
-
-![minima theme preview](/screenshot.png)
 
 ## Installation
 
@@ -44,10 +42,33 @@ Minima has been scaffolded by the `jekyll new-theme` command and therefore has a
 
 Refers to files within the `_layouts` directory, that define the markup for your theme.
 
-  - `default.html` &mdash; The base layout that lays the foundation for subsequent layouts. The derived layouts inject their contents into this file at the line that says ` {{ content }} ` and are linked to this file via [FrontMatter](https://jekyllrb.com/docs/frontmatter/) declaration `layout: default`.
+  - `base.html` &mdash; The base layout that lays the foundation for subsequent layouts. The derived layouts inject their
+    contents into this file at the line that says ` {{ content }} ` and are linked to this file via
+    [FrontMatter](https://jekyllrb.com/docs/frontmatter/) declaration `layout: base`.
   - `home.html` &mdash; The layout for your landing-page / home-page / index-page. [[More Info.](#home-layout)]
   - `page.html` &mdash; The layout for your documents that contain FrontMatter, but are not posts.
   - `post.html` &mdash; The layout for your posts.
+
+#### Base Layout
+
+From Minima v3 onwards, the base layout is named **`base.html`** instead of `default.html` to avoid confusing new users into
+assuming that name holds special status.
+
+Users migrating from older versions with customized `_layouts/default.html` are advised to rename their copy to
+`_layouts/base.html`. Migrating users with additional customized layouts may either update front matter references to former
+`default.html` layout or create a new `default.html` layout referencing the current `base.html`, whichever route being the
+easiest:
+
+```
+---
+# new `_layouts/default.html` for backwards-compatibility when multiple
+# layouts have been customized.
+
+layout: base
+---
+
+{{ content }}
+```
 
 #### Home Layout
 
@@ -274,7 +295,7 @@ Minima 2.x    | Minima 3.0
 
 You can add links to the accounts you have on other sites, with respective icon as an SVG graphic, via the config file.
 From `Minima-3.0` onwards, the social media data is sourced from config key `minima.social_links`. It is a list of key-value pairs, each entry
-corresponding to a link rendered in the footer. For example, to render links to Jekyll GitHub repository and twitter account, one should have:
+corresponding to a link rendered in the footer. For example, to render links to Jekyll GitHub repository and Twitter account, one should have:
 
 ```yaml
 minima:
@@ -288,20 +309,26 @@ as `platform`. The `platform` key corresponds to the SVG id of the sprite in the
 
 The theme ships with an icon for `rss` and icons of select social-media platforms:
 
+- `bluesky`
+- `codeberg`
 - `devto`
 - `dribbble`
 - `facebook`
 - `flickr`
 - `github`
+- `gitlab`
 - `google_scholar`
 - `instagram`
 - `keybase`
 - `linkedin`
+- `mastodon`
 - `microdotblog`
 - `pinterest`
 - `stackoverflow`
 - `telegram`
 - `twitter`
+- `whatsapp`
+- `x`
 - `youtube`
 
 To render a link to a platform not listed above, one should first create a file at path `_includes/social-icons/<PLATFORM>.svg` comprised of
