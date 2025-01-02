@@ -3,158 +3,35 @@ layout: post
 title: My predictions for AI in 2025
 categories: ai
 ---
-
-We have already made superhuman systems in Chess and Go. The equivalent would be a model that is able to attain better than the average human 
-This will be the first superhuman system that require human language. 
+Random notes that I did not manage to put it in a nice post
 
 
 
+Competitive programming
+- Certain fields in mathematics could be easily automated - for example taking integrals (differentiation is far easier than integration) and solving Olympiad geometry. Problems are easy to invent and correctness is easy to prove. [However](https://x.com/littmath/status/1874559283859501567), in most of research mathematics, analyzing whether a proof is correct requires no less expertise to generate the proof. In competitive programming you can just compare the outputs between more efficient algorithms and less efficient algorithms.
+- In robotics, you need to interact with the environment. There is much engineering to do to stream inputs and outputs with robotics models. Simulations model the world the to a certain extent. But this is not superintelligence, but general intelligence. I would superintelligence would require robots to build and repair themselves.
+- In experimental science, you need to wait for the results. This makes iteration speed slow. You also need robotics to be solve first before you can automate your experiments.
 
-
-
-However, I don't think the effort spent on this  . In any case, I would expect this to be SSI.inc's first product.
-
-This will be the first 
-
-
-We still need to build the online judging platform for the AI.
-
-Unlike training the superhuman competitive programmer, the AI will only be given access just enough information to understand what are competitive programming problems.
-
-What is different here is that there will be no external resources.
-
-This training process will involve inventing problems
-- Invent problem
-- Decide which problems are worth solving
-- Generate the test cases
-- Write a brute force solution
-- There is a natural challenge of inventing problems. These are probably open problems. The AI agents within the system will attempt to improvement.
-
-
-The AI may be given this algorithms as they are included in an introduction to algorithms.
-- Euclidean algorithm
-- Dijkstra algorithm
-
-
-The AI system will need to invent all the [advanced algorithms](https://cp-algorithms.com/)
-- Segment tree
-- Red–black tree
-
-
-
-This is what we will observe in the system
-- Creating their own benchmark on what is a nice problem
-- Cleaning up code 
-- Building their own Wikipedia of knowledge
-- Sharing sample code
-- Debating on complexity
-- Pointing out mistakes in solution by adding test cases
-
-
-Note that the interactions are still controlled. The community doesn't build the judge, they just use it.
-
-
-The result is a mini scientific community.
-
-I believe that competitive programming is the first scientific community that we can meaningfully automate. We have solved Chess and Go, but their moves are limited. There are an exponential
 
 
 
 This is for academic interest.
 To prove the claim, you actually need to publish the pretraining dataset for public scrutiny. Even so that does not really change the conclusion, we do expect most of the knowledge is created in the selfplay output.
 
-This is analoguous to AlphaZero. AlphaZero can be trained with pure sel
 
-What is different here
-- AlphaZero can use a random number generator. There are plays that a learned amateur will not make. AlphaZero will create their own puzzles and solve their own puzzle. Same for this
-
-
-
-Code is the easiest real-world system that you can interact with. In the past we interacted with Physics simulators.
-
-
-
-The AI will write their own Wikipedia on the learnings. There will be weak solvers and strong solvers and they can compare themselves on the leaderboard.
-
-
-
-After showing that we are able to ship the  
-
-
-
-
-
-The idea of competitive programming is to write a program that produces a certain output for a given input under time and memory constraints.
 
 
 This will involve trivial manipulating problems (e.g. make an offline problem and online problem). The system will check itself with brute force code. The problem bank is already huge, I don't think it is necessary to invent completely new problems.
 
 
 
-
-
-I predict an AI. If there are problems that could not be solved, it is because of the ambiguities of the problem statement writing, rather. AI should be able to take that feedback and fix it.
-
-by the end of 2025, AI should be able to set a competitive programming contest.
-
-I think this requires inventing problems and solving those.
-
-Editorials, solutions, understand the merits, improve the train of thought.
-
-
-By end of 2025, there should be an AI system that is able to solve all current and future competitive programming problems.
-
-
-Given knowledge limited to the introduction to algorithm course, a rigorous definition of what are good programming problem, produce the superhuman competitive programmer.
-
-This is more for demonstrating the ability for AI system to produce a non-trivial amounts on knowledge.
-
-This would mean identifying competitive programming knowledge in the pretraining data and removing it. There are extra steps involved that do not translate to immediate performance.
-
-AlphaGo was developed before AlphaZero. It makes sense show that AlphaGo works first.
-
-This is narrow ASI that involves human language.
-
-It will be interesting to see that the AI from the community versus AI trained with access to the hardest human problems.
-
-When this is complete, we will see academic efforts to reproduce this - similar to Karpathy's training runs to produce GPT-2. However, this is bottlenecked by code execution.
-
-
-
-
-
-I can claim that I have sent the dataset to the best prompt engineer in the world and this is their best performance. We can now decide whether to launch and move on. If we want to improve the prompts.
-
 Instead of passing (prompt + input) to the model provider, I could pass pointer({training input, training label}) + input) to the model provider and the model provider retrieves the prompts.
 
 Few shot examples serves as pointer({training input, training label})
 
-If Anthropic wants me to use their model for production purposes, it would be great if they help us find a prompt that satisfies our purposes. Currently, I can talk to one of their friendly solution engineers where we offer a dataset and they help us find a prompt (but I am not too sure it is a really good use of their time).
-
-It is not their job to tell us what makes sense to use LLM and what does not make sense to use LLMs.
-
-Maybe o1 model can do this well?
-
-It is in the incentive for the model provider to
-
-This is the input I want to pass to the model provider
-
-This is the output I want from the model provider.
-
-
-
-
-
-
-
-
-I hope the prompting could make it to the post-training dataset of the most advanced models.
 
 
 There are obvious things I want to automate. I do not want to change the text in the prompts anymore. When my job is classification, my job is classification. When my job is generation, my job is generation. As long as the job is done (without cheating), I do not care how the prompts are written.
-
-
-
 
 
 
@@ -162,66 +39,12 @@ I really hope this part of my job is automated away so I can focus on data and i
 
 
 
+This is equivalent to me posting the (not very sensitive) [data](https://github.com/tonghuikang/automatic-prompt-engineer/blob/master/qiqc_truncated.csv) on Fiverr and asking pay $5 for anyone who can come up with a prompt that achieve a better performance.
 
 
-
-- Sometimes I might just need to apply heuristics on the output
-	- If the model provider uptime is bad, what should be the default judgment?
-	- Are there some heuristics I can apply to improve the performance (if a certain word appears in the input).
-
-
-
-
-
-Although I think I can go to an Anthropic solution engineer and ask them to help us save money, I don't think it is really in their interest.
-
-There is space for a provider-agnostic prompt optimizer. When my job is classification, my job is classification. Of course, I would expect the . I will pay per outcome for the provider-agnostic prompt optimizer. This is equivalent to me posting the (not very sensitive) [data](https://github.com/tonghuikang/automatic-prompt-engineer/blob/master/qiqc_truncated.csv) on Fiverr and asking pay $5 for anyone who can come up with a prompt that achieve a better performance.
-
-They should also include an analysis on whether how important is each few shot examples. Maybe I will pass unlabelled examples and it will flag to me which examples are likely very wrong.
-
-
-
-
-
-There should be a product that only helps developers classify
-
-Developers should have access to the prompts.
-
-Serve the developers rather than the model providers
-
-Outcome-based pricing here.
-
-
-The optimizer can provide me options - for each model provider, what is the average cost per input - and it makes it easy for me to do the performance quality tradeoff. In my current workflow, I can only manage one model at a time.
-
-
-Maybe fine-tuning BERT models is the most cost-efficient way to do classification. This could be an API served by the prompt optimizer.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Generation and classification
-
-All AI applications can be summarized into two uses
-- Classification, where the output is one of countable set of labels
-- Generation, where the output is a string of text
-
-
-
-
-## Prompting techniques for non-reasoning models
 
 I used to strongly argue that model should reason first, and make the judgment later. I no longer feel this way. I have multiple experiences where I could not beat the performance of a prompt provides their classification in the first token.
+
 
 If your output looks like this, are you really doing chain-of-thought?
 
@@ -235,16 +58,14 @@ My view on prompting techniques - whatever that works. I don't care.
 
 
 
+Gradient-based methods for prompt engineering?
 
 
-Gradient-based methods.
 
 Just finetune a 200m parameter model instead (but serving calling a general purpose 8b model can be cheaper than keeping a 200m parameter model live)
 
 
 
-
-## Outcome based prompting
 
 Do not talk to me until either
 - you have a prompt that can curve fit to my examples
@@ -258,24 +79,11 @@ You specify the outcomes
 
 
 
-
-## What I mean by prompting
-
 I define what is meant by prompting - the activity to craft text so to achieve better performance at a repeatedly executed task.
 
 
 
-
-
-
-
-## Tool use
-
-There is a lot 
-
 The underlying case is classification. Has the customer agreed to make the booking?
-
-
 
 LLM providers should provide the code to write the tool use
 
@@ -293,27 +101,7 @@ Squeeze whatever you learnt from the tools within 100k tokens. Leave the remaini
 
 
 
-## We should no longer be writing any prompts
 
-When you do classification, your job is classification
-
-When you do generation, your job is generation
-
-Few shot examples should serve a case law.
-
-LLM providers should provide this.
-
-
-
-
-
-
-
-## Benchmarks should accelerate the progress
-
-
-
-## The path to superintelligence
 
 
 Competitive programming is the easiest scientific community to build
@@ -330,12 +118,12 @@ Automating mathematical research is much harder than competitive programming
 - Correctness is hard to prove. Perelman's proof to the Poincaré conjecture took the mathematical community years to validate.
 - 
 
-
+https://x.com/littmath/status/1874559283859501567
 
 
 It will take a lot of conscious effort and engineering to build the competitive programming supercommunity. It will take more time and inputs from mathematical experts to automate mathematics. We will get there, ultimately, we all live under the same laws of Physics.
 
-#### Robotics
+
 
 The first thing we need to have is a generic robotics model.
 
@@ -344,29 +132,6 @@ Robots that repair themselves, robots that improve their own models.
 
 
 
-## AI should interpret my intentions
-
-When I type a word into Google search, I am usually doing a spell check.
-
-I only have time to write two words.
-
-When I do a search on Google
-- Retrieve who asked the quote
-- 
-
-
-Consider these Google search queries
-
-```
-Sutstker
-ippudo
-necessarily
-
-
-```
-
-
-## AI needs to be clear on who they serve
 
 The salesperson wants to sell.
 
@@ -393,10 +158,6 @@ I write my predictions regarding AI for the year 2025 and beyond.
 
 
 
-
-
-
-# Recreating mathematical knowledge
 
 Why code instead of math - code is verifiable. Mathematics, involves deducing whether the argument is valid. There are also a lot of assumptions in the arguments. Not too sure about Lean.
 
@@ -431,16 +192,6 @@ Maybe we will award more credit to under-appreciated discoveries.
 
 
 
-
-# Verifier for mathematics
-
-Unlike competitive programming, mathematics is not that verifiable.
-
-
-
-
-# Only specific fields of math would be solved
-
 AlphaGeometry requires
 
 Now we have AI that is able 
@@ -454,7 +205,6 @@ The effort to verify [issues in the mathematical proof](https://en.wikipedia.org
 Not for code though
 
 
-# Software engineering community
 
 Unlike the competitive programming community. the community will need to build tools for themselves.
 
@@ -462,8 +212,6 @@ They will figure out what is cool. They will decide how much compute resources t
 
 
 
-
-# General mathematical fields should remain unsolved
 
 Pareleman's proof took years for, and require back-and-forth
 
@@ -473,8 +221,6 @@ Verifiable tasks maybe? Prime factorization?
 
 
 
-
-# Experimental scientific fields should remain unsolved
 
 We are only interested in the science that is verifiable and falsifiable.
 
@@ -497,7 +243,6 @@ Scientific equipments?
 
 
 
-# Any work that can be verified should be automated
 
 It is all about connecting the APIs and training to connect the APIs
 
@@ -509,7 +254,7 @@ Writing documentation that could be followed. Poe server bot documentation is ba
 
 
 
-# Any work that you can call someone to do can be done satisfactorily
+
 
 Fiverr but for five hour or five day tasks. I think this is what Sierra is doing - outcome based pricing.
 
@@ -518,7 +263,6 @@ Maybe we will have a bidding market.
 
 
 
-# Work that require context and not verifiable is still done by humans
 
 Improving recommendation systems.
 
@@ -527,7 +271,7 @@ This will eventually be automated - this is the point where people should agree 
 
 
 
-# Robotics is about connecting the APIs
+
 
 I think we have the ingredients to solve the problem.
 
@@ -540,7 +284,7 @@ Robotics needs to be solved first before we automate experimental science.
 
 
 
-# General robotics model
+
 
 Given any sensors, it can quickly learn its sensor
 
@@ -551,24 +295,6 @@ It is still a pain to set up hardward and I swore off hardware.
 
 
 
-
-# Communication
-
-Sonnet is preferred because it somehow communicates better.
-
-For general purpose models, it is important to write where the output will be displayed.
-
-
-
-
-# Consumer fine-tuning
-
-I don't think this is a huge trend.
-
-
-
-
-# Products
 
 Serious LLM providers should have their own products so that they can iterate
 
@@ -581,16 +307,6 @@ You go talk to your AI talk to my AI talk to me.
 
 
 
-# We live under the same laws of Physics
-
-There are things
-
-There are things that 
-
-
-
-
-# Everything is next token prediction
 
 What is not next-token - image.
 
@@ -605,7 +321,6 @@ Tokens are clear and interpretable. If we want to move away it is more for infer
 
 
 
-# Live output
 
 This is an API implementation problem. The new inputs is just completion but by the environment.
 
@@ -616,10 +331,6 @@ Tokenizers - I think they are fine.
 
 
 
-# The transformer architecture should be sufficient
-
-TBC
-
 If someone wants to come up with a new architecture, sure, they will need to prove themselves.
 
 Some ideas
@@ -628,10 +339,6 @@ Some ideas
 
 
 
-
-
-
-# Conclusion
 
 This is magic, but it needs to be carefully planned.
 
@@ -642,52 +349,6 @@ Everything will change?
 
 
 
-
-
-
-For example I want to classify whether a piece of content has adult themes.
-
-I need to think 
-- Is content asking about puberty considered having adult themes?
-- Is commentary on war considered adult themes?
-
-Even though the edge cases are not heavily represented in the impression sample, it can change the product over time. 
-
-, then there is a lack of war related content and people stop writing about war and move elsewhere.
-
-After thinking through edge cases. Maybe for most of these categories. Maybe for some of these cases it is very obvious to the human but LLM fails at this.
-
-Even though edge cases are not represented well . 
-
-On why should you care about edge cases.
-
-
-- Edge cases - for an aligned human it is clear what the classification should be, but might be challenging for LLMs
-- Case in point - promotional filter on content with great citations
-- It is possible that these edge cases has outsized impact on the system. Promotional content and citations
-- When you write your examinations
-- When you iterate your prompts, you expand this dataset.
-- How big is the dataset? How many questions do you have in your college admission examinations? The math you use at work may be repetitive and mundane, but the college admission examinations should be comprehensive and intentional.
-- Maybe the math you need to use in college is to calculate your GPA. But that does mean college admissions tests should only test addition and division.
-- If you ask your AI to do topic classification does it refuse to tag topics to adult content?
-
-In your testing set, you should include a 
-
-- You face the beginner error of using accuracy as a metric on a very unbalanced dataset.
-- My recommendation is an impression sampled dataset and an edge case dataset.
-- Maybe you sample questions by impressions
-- This is meant for illustration
-- average user experience is your performance at work. could answer math phd questions but don’t know how to do addition and you do addition for work
-
-
-- Impression-sampled example
-- Edge-case focused example - maybe from your experience with the product, from mistakes from another system (e.g. maybe 20% of feed-impressioned sampled content is promotional, and 0.1% of feed-impressioned sampled is very high quality and contains correct in-text citation, and it is very bad if we penalize the high quality content without knowing)
-    - Example - promotional prompt
-- ???
-
-
-
-Should I talk about both classification and generation? I think I should just focus on classification.
 
 Make sure you have these deets
 
@@ -727,17 +388,12 @@ Preface
 
 
 
-The employee cannot deliver value if you cannot communicate with them. The same principle applies to AI.
-
 You cannot expect autoregressive LLMs to provide the correct integer answer to a math problem in the first few tokens. However, users may want to see the answer in the first line.
 
 Equivalent to scoring well on standardized examinations, doing well on in the chatbot arena does not mean you are a better communicator. The things to optimize for if you want to do well in the chatbot arena is not the same things to optimize for if you want to be the go-to chatbot for your queries.
 
-I imagine in the chatbot arena having wrong guesses is better than . However, 
 
-Why Sonnet is sticky
 
-Doing well 
 
 I expect generic model providers to be aware their their content will be displayed. If you want to optimize for vanity metrics on the LM arena leaderboard, you want to display. If you want to respond in voice, you 
 
