@@ -1,6 +1,6 @@
 ---
 layout: post
-title: If you want me to refer you to Quora
+title: If you want my referral
 categories: quora referrals
 ---
 Thank you for finding this post. I will send them this post when someone reaches out to me with an intention of a getting a role at Quora.
@@ -8,6 +8,7 @@ Thank you for finding this post. I will send them this post when someone reaches
 I do not think I would have received an interview opportunity with Quora based on my undergraduate resume alone. I happened to get lucky in a programming contest held by Quora.
 
 Generally, I am not expected to refer people who I have not worked with. However, I still hope to extend this opportunity to candidates which I think is of great fit.
+
 
 
 ## What is the purpose of referrals
@@ -20,7 +21,8 @@ This is how employee referrals has helped
 - Help to identify candidates of great fit who otherwise won't be identified by recruiters.
 - Help to provide additional context to referred candidates so that they know what they are signing up for.
 
-In other words, the purpose of the referral process is to serve the company. I serve the company.
+In other words, the purpose of the referral process is to serve the company. I serve the company. I want Quora and the products to succeed.
+
 
 
 ## What is included in a referral
@@ -76,25 +78,28 @@ If you are asking for referrals out of the cold, it does not belong to the above
 
 Referrals are also effective when you don't need the referral (your profile is similar to the profiles that we usually interview). In this case, I am still willing the give a referral so that I can serve as an alternative point of view. Of course, my observations may still be reported to the hiring manager.
 
-I will decline to give a referral when I could not easily identify something that recruiters might not be able to appreciate. You are still free to apply through the typical application process, and you should.
+I will decline to give a referral when I could not immediately identify something that I could appreciate. You are still free to apply through the typical application process, and you should.
 
 
-## What to include in your reach-out
+
+## What to include in your reach-out to me
 
 I need to identify something which I think recruiters might not be able to easily appreciate.
 
 Please include your resume and share at least one of the following. Note that you do not need to do ALL of these, you just need ONE.
 
-- A product feature you shipped that I can access. Please specify exactly what did you contribute to the feature.
-- A demo that I can try out, with the url that I can access. I should not be required to install anything.
+- A product feature or a demo that you shipped that I can access. Please specify EXACTLY what did you contribute to the feature. I should not be required to install anything or log in to anything. If there is a sign-up wall, please attach screenshots.
 - Github [profile]() with a [repository](https://github.com/tonghuikang/automatic-prompt-engineer) you think represents your work.
 - Kaggle [profile](https://www.kaggle.com/huikang) and a useful [resource](https://www.kaggle.com/competitions/konwinski-prize/discussion/553294) that you have shared.
 - Knowledge-related social media profile on one of these platforms - [Quora](https://www.quora.com/profile/Tong-Hui-Kang-1), YouTube, TikTok, Zhihu, LinkedIn, Facebook, Instagram. Share a piece of content that you have [published](https://www.quora.com/How-do-you-think-reinforcement-fine-tuning-was-implemented/answer/Tong-Hui-Kang-1) that you think is great.
 - [Poe](https://poe.com/huikang) profile with a [bot](https://poe.com/ChineseStatement) you think is non-trivial.
 
-IF YOU DO NOT HAVE ONE OF THESE ALREADY, PLEASE DIRECTLY APPLY FOR THE ROLE. If you spend time working on one of these, it is very likely that we have already sourced sufficient candidates to interview when you are ready.
+IF YOU DO NOT HAVE ONE OF THESE ALREADY, PLEASE DIRECTLY APPLY FOR THE ROLE. If you spend time working on one of these, it is very likely that we have already sourced sufficient candidates to interview by the time you are ready.
 
-Please keep in mind that sharing your work with me does NOT guarantee a referral from me. In any case, work done here should also help your application, even for roles outside of Quora.
+Please keep in mind that sharing your work with me does NOT guarantee a referral from me. If I am not able to immediately understand your work, I will decline to write a referral and share my general referral [link](https://jobs.ashbyhq.com/quora?utm_source=o3yDr69Ome).
+
+In any case, the things I mentioned could also help with your application even for roles outside of Quora.
+
 
 
 ## What to write when reaching out
@@ -105,6 +110,8 @@ I offer the following template.
 >I would like a referral for the role Senior Full Stack Software Engineer - Core Product, Poe (Remote).
 >
 >I have made (demo) which you access in (url).
+
+Please be concise in your communication.
 
 
 
