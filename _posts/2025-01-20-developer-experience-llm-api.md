@@ -16,10 +16,11 @@ Ease of specifying prompt caching. Anthropic requires you to specify the prefix 
 API responses should also specify the cost of the request, in dollars. Cost tracking is important to me because I need to understand the cost of my use case. Currently the response only contains information on the number of input tokens and the number of output tokens, and I need to look up API prices and write code to do the math. Additional logic is needed if prompt caching is involved. We know that LLMs uses the attention mechanism and parts of the compute scale quadratically with prefix length. Gemini models have a double cost per token beyond 100k tokens. Having the cost in the output will make my life easier.
 
 There are four ways to call Gemini API
-- https://ai.google.dev/gemini-api/docs
-- https://ai.google.dev/gemini-api/docs/openai
-- https://cloud.google.com/vertex-ai/generative-ai/docs/start/quickstarts/quickstart-multimodal
-- https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/call-vertex-using-openai-library
+- [AI Studio](https://ai.google.dev/gemini-api/docs)
+- [AI Studio with OpenAI API](https://ai.google.dev/gemini-api/docs/openai)
+- [Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/start/quickstarts/quickstart-multimodal)
+- [Vertex with OpenAI API](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/call-vertex-using-openai-library) which is actually not because the "API key" only lives for one hour
+
 Some methods are easier than the others. See this thread for [the rant](https://x.com/levelsio/status/1853774638473437451). For OpenAI and Anthropic API, most developers are only exposed to one way of calling them, even though Anthropic models are also served on [AWS](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-claude.html) and OpenAI models are also served on [Azure](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models).
 
 I really wonder whether the Google engineers working on the feature has tested their API products. Have the engineers used their own API for their pet projects? Have they tried other APIs and compared the experience? Have they actually thought about developer experience?
