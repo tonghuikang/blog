@@ -2,8 +2,17 @@
 layout: post
 title: How to prepare for AI as a high school student
 ---
-I am making a presentation to some some students of Nanyang Junior College computing class. These are the notes.
+I am making a presentation to some some students and teachers of Nanyang Junior College in Singapore. These are the notes.
 
+
+
+## Objective
+
+- My background as an ML engineer
+- General career advice
+- What is the current state of AI
+- What is probably the next state of AI
+- How can you prepare for AI
 
 
 
@@ -35,8 +44,8 @@ Just that it is related to machine learning algorithms
 Generally
 - Determining what is worth working on
 - Measuring success rigorously
-- Communicating to an appropriate level of detail
 - Investigating what went wrong
+- Communicating to an appropriate level of detail
 
 Just that it is related to machine learning algorithms
 
@@ -47,7 +56,7 @@ Just that it is related to machine learning algorithms
 
 ## Example project
 
-Given an answer, write follow-up questions for the authors to write more answers
+Given an answer, write follow-up [questions](https://www.quora.com/What-was-the-most-challenging-localization-problem-you-faced-in-the-Scooby-Doo-game/log) for the authors to write more answers
 
 Breaking down this problem
 - Should we even write follow-up questions to the answer
@@ -102,7 +111,7 @@ What could have helped more
 \pagebreak
 </div>
 
-## Predictions on AI
+## The state of AI
 
 In the near term (two years)
 - If you can call a generic human expert to do, AI can do it too, equally well
@@ -113,11 +122,12 @@ In the near term (two years)
 
 ## AI can do all low-context tasks equally well
 
-Low-context / no-context tasks
-- Competitive programming
+Low-context / no-context tasks (easy to describe)
+- Doing A-level math calculations
 - Writing an A-level General Paper essay
+- Competitive programming
 
-High-context tasks
+High-context tasks (difficult to describe)
 - Implementing a button on the Quora website
 - Planning how to improve Quora recommendation systems
 
@@ -134,11 +144,12 @@ Implications
 
 ## AI will be superhuman at all verifiable tasks
 
-Examples of easily verifiable tasks (short feedback loop)
+Examples of easily verifiable tasks (easy to grade)
+- Doing A-level math calculations
 - Competitive programming
 - Implementing a button on the Quora website
 
-Examples of tasks not easily verifiable (long feedback loop)
+Examples of tasks not easily verifiable (difficult to grade)
 - Writing an A-level General Paper essay
 - Planning how to improve Quora recommendation systems
 
@@ -146,7 +157,7 @@ Implications
 - We have been classifying people with examinations and interviews
 - OpenAI o1
 - AI will soon be doing all the work that can be easily verified
-- There is still plenty of human work to do to verify the unverifiable
+- There is still plenty of human work to do to grade the unverifiable
 
 
 <div style="page-break-after: always; visibility: hidden">
@@ -155,26 +166,35 @@ Implications
 
 ## Plotting this out
 
-|                  | Easily verifiable                          | Not easily verifiable                                |
-| ---------------- | ------------------------------------------ | ---------------------------------------------------- |
-| **Low context**  | Competitive programming                    | Writing an A-level General Paper essay               |
-| **High context** | Implementing a button on the Quora website | Planning how to improve Quora recommendation systems |
+|                                             | Easily verifiable<br>(easy to grade)                     | Not easily verifiable<br>(difficult to grade) |
+| ------------------------------------------- | -------------------------------------------------------- | --------------------------------------------- |
+| **Low context<br>(easy to describe)<br>**   | A-level math calculations<br><br>Competitive programming | Writing an A-level General Paper essay        |
+| **High context<br>(difficult to describe)** | Implementing a button on the Quora website               | Improve Quora recommendation systems          |
+
+
+
+## The current state of AI
+
+|                                             | Easily verifiable<br>(easy to grade)                                               | Not easily verifiable<br>(difficult to grade)                                                                        |
+| ------------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Low context<br>(easy to describe)<br>**   | Better than the average professional, soon to be solved at a superhuman level      | AI can provide an acceptable response, but you can do it much better. You need to think of how to grade AI responses |
+| **High context<br>(difficult to describe)** | You rather do this yourself, or break it down into tasks that are easy to describe | You need to make it easy to describe and verify for AI to be useful                                                  |
 
 
 
 
 ## Progression of AI
 
-| Problem | Answer  | Method  | Example   | Ability                                    |
-| ------- | ------- | ------- | --------- | ------------------------------------------ |
-| Known   | Known   | Known   | ChatGPT   | Write code that looks like code            |
-| Known   | Known   | Unknown | o1        | Apply methods to solve a problem           |
-| Known   | Unknown | -       | AlphaZero | Invent new methods to solve a problem      |
-| Unknown | -       | -       | -         | Invent interesting problems and solve them |
+| Problem | Answer  | Method  | Example   | Ability                               |
+| ------- | ------- | ------- | --------- | ------------------------------------- |
+| Known   | Known   | Known   | ChatGPT   | Write code that looks like code       |
+| Known   | Known   | Unknown | o1        | Apply methods to solve a problem      |
+| Known   | Unknown | -       | AlphaZero | Invent new methods to solve a problem |
+| Unknown | -       | -       | -         | Invent and solve interesting problems |
 
-- We have achieved superhuman performance in Go (game) with AlphaZero
-- Competitive programming will be the first scientific discipline that AI will achieve superintelligence from scratch (in 1.5 years)
-- Then more will follow - tasks that are low context and are easily verifiable will be solved earlier
+- We have already achieved superhuman performance in Go (game) with AlphaZero
+- Competitive programming will be the first scientific discipline that AI will achieve superintelligence from scratch (my estimation is mid-2026), solving all problems that have not been invented
+- Then more will follow - tasks that are low context and are easily verifiable will be solved earlier, at a superhuman level
 
 
 <div style="page-break-after: always; visibility: hidden">
@@ -184,9 +204,10 @@ Implications
 ## What I think will take some time
 
 These should take more than four years
-- Humanoid robotics (the physical world is noisy)
-- Managing and using long-term memory well (to become an actual employee)
-- Mind-reading (emotion recognition would need to happen first)
+- Autonomous self-improvement (solving less verifiable low context tasks) 
+- Managing and using long-term memory well (solving high-context tasks)
+- Robotics (experiments in the real world is slow and expensive)
+- Mind-reading (probably AI will need to get better at emotion recognition first)
 
 Ultimately, if there is another human that can do my work, AI can do my work.
 There is no law in physics or theoretical computer science against this.
@@ -198,6 +219,8 @@ There is no law in physics or theoretical computer science against this.
 
 Understand yourself, understand other humans, understand AI
 
+Employ yourself, employ other humans, employ AI
+
 Improve yourself, improve other humans, improve AI
 
 Questions to ask yourself
@@ -206,7 +229,7 @@ Questions to ask yourself
 - How do you know what is good?
 - How do you learn?
 - What do you value?
-- How do you lead?
+- How do you influence?
 
 
 <div style="page-break-after: always; visibility: hidden">
