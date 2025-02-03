@@ -5,6 +5,38 @@ categories: ai
 ---
 Random notes that I did not manage to put it in a nice post
 
+The costs are different. But many of the finite resources are still the same.
+
+Prompting systems should optimizing for human input efficiency.
+
+When the maybes is too large, it makes the classifier look useless.
+
+
+
+
+(The following is appendices, which I likely not have time to go through)
+
+## Progression of AI
+
+| Problem | Answer  | Method  | Example   | Ability                               |
+| ------- | ------- | ------- | --------- | ------------------------------------- |
+| Known   | Known   | Known   | ChatGPT   | Write code that looks like code       |
+| Known   | Known   | Unknown | o1        | Apply methods to solve a problem      |
+| Known   | Unknown | -       | AlphaZero | Invent new methods to solve a problem |
+| Unknown | -       | -       | -         | Invent and solve interesting problems |
+
+- We have already achieved superhuman performance in Go (game) with AlphaZero
+- Competitive programming will be the first scientific discipline that AI will achieve superintelligence from scratch (my estimation is mid-2026), solving all problems that have not been invented
+- Then more will follow - tasks that are low context and are easily verifiable will be solved earlier, at a superhuman level
+
+
+
+
+
+
+Path for AI in software engineer
+- It is easier to start projects than to continue projects. Lovable is good demo, but I don't know if it scales
+- It is up to the model developer to develop good models. Application layer players can't just bootstrap. They serve as the interface. Model developer
 
 
 Competitive programming

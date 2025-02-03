@@ -6,6 +6,7 @@ I am making a presentation to some some students and teachers of Nanyang Junior 
 
 
 
+
 ## Objective
 
 - My background as an ML engineer
@@ -16,17 +17,27 @@ I am making a presentation to some some students and teachers of Nanyang Junior 
 
 
 
+
 ## Background
 
 - Anderson Secondary School (3+2)
 - Anderson Junior College (PCME)
-- Singapore University of Design (ESD, DDP)
+- Singapore University of Technology and Design (ESD, DDP)
 - Machine Learning Engineer at Quora
+
+
+<div style="page-break-after: always; visibility: hidden">
+\pagebreak
+</div>
 
 
 
 
 ## What do I actually do at work
+
+I work at Quora. I work on recommendation systems.
+
+When you sign up for Quora, we send you stories in the Quora digest that we hope that you click and read. One of our recommendation systems decide what stories to send you.
 
 Generally
 - Plan changes
@@ -42,17 +53,19 @@ Just that it is related to machine learning algorithms
 ## Challenges at work
 
 Generally
-- Determining what is worth working on
+- Deciding what is worth working on
 - Measuring success rigorously
 - Investigating what went wrong
 - Communicating to an appropriate level of detail
 
 Just that it is related to machine learning algorithms
 
+
+
+
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
 </div>
-
 
 ## Example project
 
@@ -62,7 +75,7 @@ Breaking down this problem
 - Should we even write follow-up questions to the answer
 - How to write great (?) questions
 - How do we show the questions to the writer
-- When the answer is written, how do we better distribute the answer
+- Making sure that we deliver answers written to the audience it deserves
 - How do we measure success
 
 Why is this fun
@@ -75,9 +88,12 @@ Why is this fun
 \pagebreak
 </div>
 
+
+
+
 ## Advice on starting out
 
-Build a project, deploy it to prod
+Build a project, deploy it to prod (make it easy for people to try)
 - "I have given this advice to many people no one has done it so far" - [Denys Linkov](https://www.linkedin.com/feed/update/urn:li:activity:7287635346698211328/)
 
 Sample from the list of students who graduated from your course
@@ -96,7 +112,7 @@ Sample from the list of students who graduated from your course
 What has happened to help
 
 - Finding doing LeetCode (and solving problems) intrinsically fun
-- Reaching out for opportunities (none of my internships is handed to me on a platter)
+- Researching and reaching out for opportunities (e.g. internships)
 - Pure luck (Quora Programming Contest)
 
 What could have helped more
@@ -111,30 +127,37 @@ What could have helped more
 \pagebreak
 </div>
 
+
+
+
 ## The state of AI
 
-In the near term (two years)
-- If you can call a generic human expert to do, AI can do it too, equally well
-- If you can verify the task is done correctly, AI can do it much better than humans
+Currently
+- AI can already help with tasks that are easy to describe
+- AI is already better than an average professional with tasks that are easy to grade
+
+Soon
+- AI can do all tasks that are easy to describe, as good as a competent professional
+- AI is better than the best professional with tasks that are easy to grade
 
 
 
 
-## AI can do all low-context tasks equally well
+## AI can already help with tasks easy to describe
 
-Low-context / no-context tasks (easy to describe)
+Examples of tasks easy to describe (low-context / no-context tasks)
 - Doing A-level math calculations
 - Writing an A-level General Paper essay
 - Competitive programming
 
-High-context tasks (difficult to describe)
+Examples of tasks difficult to describe (high-context tasks)
 - Implementing a button on the Quora website
 - Planning how to improve Quora recommendation systems
 
 Implications
-- Companies have already experimented with offshoring
-- OpenAI operator
-- AI will soon be doing all the work that is easy to explain and check
+- Companies have already experimented with offshoring work easy to describe
+- OpenAI Deep Research
+- Soon we will use AI to do all the work that is easy to explain
 - If it takes more effort to get others to do I will still rather do it myself
 
 <div style="page-break-after: always; visibility: hidden">
@@ -142,70 +165,65 @@ Implications
 </div>
 
 
-## AI will be superhuman at all verifiable tasks
 
-Examples of easily verifiable tasks (easy to grade)
+
+## AI is already great at tasks easy to grade
+
+Examples of tasks that are easy to grade (easily verifiable)
 - Doing A-level math calculations
 - Competitive programming
 - Implementing a button on the Quora website
 
-Examples of tasks not easily verifiable (difficult to grade)
+Examples of tasks that are not easy to grade (not easily verifiable)
 - Writing an A-level General Paper essay
 - Planning how to improve Quora recommendation systems
 
 Implications
-- We have been classifying people with examinations and interviews
+- We have been grading people with examinations and interviews
 - OpenAI o1
-- AI will soon be doing all the work that can be easily verified
-- There is still plenty of human work to do to grade the unverifiable
+- Soon we will use AI to do all the work that is easy to grade
+- There is still plenty of human work to do to grade the ungradable
 
 
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
 </div>
 
+
+
+
 ## Plotting this out
 
-|                                             | Easily verifiable<br>(easy to grade)                     | Not easily verifiable<br>(difficult to grade) |
-| ------------------------------------------- | -------------------------------------------------------- | --------------------------------------------- |
-| **Low context<br>(easy to describe)<br>**   | A-level math calculations<br><br>Competitive programming | Writing an A-level General Paper essay        |
-| **High context<br>(difficult to describe)** | Implementing a button on the Quora website               | Improve Quora recommendation systems          |
+|                              | Easy to grade                                            | Difficult to grade                     |
+| ---------------------------- | -------------------------------------------------------- | -------------------------------------- |
+| **Easy to <br>describe<br>** | A-level math calculations<br><br>Competitive programming | Writing an A-level General Paper essay |
+| **Difficult to describe**    | Implementing a button on the Quora website               | Improve Quora recommendation systems   |
+
 
 
 
 ## The current state of AI
 
-|                                             | Easily verifiable<br>(easy to grade)                                               | Not easily verifiable<br>(difficult to grade)                                                                        |
-| ------------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Low context<br>(easy to describe)<br>**   | Better than the average professional, soon to be solved at a superhuman level      | AI can provide an acceptable response, but you can do it much better. You need to think of how to grade AI responses |
-| **High context<br>(difficult to describe)** | You rather do this yourself, or break it down into tasks that are easy to describe | You need to make it easy to describe and verify for AI to be useful                                                  |
-
-
-
-
-## Progression of AI
-
-| Problem | Answer  | Method  | Example   | Ability                               |
-| ------- | ------- | ------- | --------- | ------------------------------------- |
-| Known   | Known   | Known   | ChatGPT   | Write code that looks like code       |
-| Known   | Known   | Unknown | o1        | Apply methods to solve a problem      |
-| Known   | Unknown | -       | AlphaZero | Invent new methods to solve a problem |
-| Unknown | -       | -       | -         | Invent and solve interesting problems |
-
-- We have already achieved superhuman performance in Go (game) with AlphaZero
-- Competitive programming will be the first scientific discipline that AI will achieve superintelligence from scratch (my estimation is mid-2026), solving all problems that have not been invented
-- Then more will follow - tasks that are low context and are easily verifiable will be solved earlier, at a superhuman level
+|                                   | Easy to grade                                                                      | Difficult to grade                                                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Easy to <br>describe**          | Better than the average professional, soon to be solved at a superhuman level      | AI can provide an acceptable response, but you can do it much better. You need to think of how to grade AI responses |
+| **Difficult to <br>describe**<br> | You rather do this yourself, or break it down into tasks that are easy to describe | You need to make it easy to describe and verify for AI to be useful                                                  |
 
 
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
 </div>
 
+
+
+
 ## What I think will take some time
 
+These should take more than two years
+- Autonomous self-improvement (solving tasks easy to describe, better than the best human)
+- Managing and using long-term memory well (solving tasks difficult to describe)
+
 These should take more than four years
-- Autonomous self-improvement (solving less verifiable low context tasks) 
-- Managing and using long-term memory well (solving high-context tasks)
 - Robotics (experiments in the real world is slow and expensive)
 - Mind-reading (probably AI will need to get better at emotion recognition first)
 
@@ -226,7 +244,7 @@ Improve yourself, improve other humans, improve AI
 Questions to ask yourself
 - How do you respond?
 - How do you reason?
-- How do you know what is good?
+- How do you evaluate what is good?
 - How do you learn?
 - What do you value?
 - How do you influence?
@@ -235,6 +253,9 @@ Questions to ask yourself
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
 </div>
+
+
+
 
 ## Q&A
 
@@ -252,3 +273,6 @@ Questions that I have received when preparing for this presentation
 10. What is it like in a day as an AI&ML engineer?
 11. Is there any interesting things related to AI/ML that you have encountered in your journey as an AI&ML engineer?
 12. In your opinion, what is the top 3 hard / soft skills needed to strive in the AI industry?
+
+
+
