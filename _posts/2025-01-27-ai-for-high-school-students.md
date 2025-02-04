@@ -2,7 +2,7 @@
 layout: post
 title: How to prepare for AI as a high school student
 ---
-I am making a presentation to some some students and teachers of Nanyang Junior College in Singapore. These are the notes.
+I have [given](https://www.linkedin.com/feed/update/urn:li:activity:7292168349432659968/) a presentation to some some students and teachers of Nanyang Junior College in Singapore, on observations and predictions on AI as well as some career advice. The presentation was given on 3rd February 2025.
 
 
 
@@ -248,31 +248,3 @@ Questions to ask yourself
 - How do you learn?
 - What do you value?
 - How do you influence?
-
-
-<div style="page-break-after: always; visibility: hidden">
-\pagebreak
-</div>
-
-
-
-
-## Q&A
-
-Questions that I have received when preparing for this presentation
-
-1. What is the daily life of a SWE / AI / ML engineer like?
-2. What kinds of challenges do you face?
-3. How do you think AI agents & assistants will change the nature of the job in the next few years?
-4. Could you briefly outline the AI / ML industry, and what opportunities you see for Singapore students / undergraduates / tech workers?
-5. What skills should we work on to be noticed and get into <industry / company>?
-6. What are your subject combination in JC? Are they helpful in your journey of becoming an AI&ML engineer?
-7. Where do you learn most of your knowledge learned for your career? Does it help a lot if we start self-learning knowledge regarding AI/ ML if we intend to work in this industry?
-8. If you are 18 again, what would you do to make your journey as an AI&ML engineer more smooth-sailing?
-9. Does the current AI/ML industry still require many people that knows how to develop AI?
-10. What is it like in a day as an AI&ML engineer?
-11. Is there any interesting things related to AI/ML that you have encountered in your journey as an AI&ML engineer?
-12. In your opinion, what is the top 3 hard / soft skills needed to strive in the AI industry?
-
-
-
