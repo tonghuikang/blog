@@ -2,7 +2,7 @@
 layout: post
 title: How to prepare for AI as a high school student
 ---
-I have [given](https://www.linkedin.com/feed/update/urn:li:activity:7292168349432659968/) a presentation to some some students and teachers of Nanyang Junior College in Singapore, on observations and predictions on AI as well as some career advice. The presentation was given on 3rd February 2025.
+I have given a presentation to some some students and teachers of Nanyang Junior College in Singapore, on observations and predictions on AI as well as some career advice. The presentation happened on on 3rd February 2025. This LinkedIn post is [here](https://www.linkedin.com/feed/update/urn:li:activity:7292168349432659968/) and the feature on their course blog is [here](https://nyjc-computing.github.io/ecg/2025/02/03/ai-ml-fireside-chat.html).
 
 
 
