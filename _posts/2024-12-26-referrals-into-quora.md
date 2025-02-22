@@ -3,7 +3,7 @@ layout: post
 title: If you want my referral
 categories: quora referrals
 ---
-Thank you for finding this post. I will send them this post when someone reaches out to me with an intention of a getting a role at Quora.
+Thank you for finding this post. I will send out this post when someone reaches out to me with an intention of a getting a role at Quora.
 
 I do not think I would have received an interview opportunity with Quora based on my undergraduate resume alone. I happened to get lucky in a programming contest held by Quora.
 
@@ -15,7 +15,7 @@ Generally, I am not expected to refer people who I have not worked with. However
 
 My company has set up a referral process to find people who are a great fit for Quora. Statistics show that employees hired through referrals have longer retention and better performance.
 
-This is how employee referrals has helped
+This is how employee referrals has benefited the company
 
 - Help to get candidates to consider roles at Quora, who otherwise would not have considered roles at Quora.
 - Help to identify candidates of great fit who otherwise won't be identified by recruiters.
@@ -29,7 +29,7 @@ In other words, the purpose of the referral process is to serve the company. I s
 
 This is what I need to fill up when I file a referral
 
-- Job
+- Job (this is a dropdown selection from positions currently open)
 - Name
 - Email
 - Phone
@@ -39,7 +39,11 @@ This is what I need to fill up when I file a referral
 - Website
 - Resume
 - Cover letter
-- Referral or Lead
+- Type (referral or lead)
+	- Referral means you know that I am writing you a referral
+		- You are expected to receive a reply, even if it is a rejection
+	- Lead means that you don't know that I am writing you a referral
+		- A recruiter may or may not reach out to you
 - Rating
 	- Best person I've ever worked with
 	- Top 10%
@@ -84,19 +88,21 @@ I will decline to give a referral when I could not immediately identify somethin
 
 ## What to include in your reach-out to me
 
-I need to identify something which I think recruiters might not be able to easily appreciate.
+I need to identify something I can immediately appreciate.
 
 Please include your resume and share at least one of the following. Note that you do not need to do ALL of these, you just need ONE.
 
 - A product feature or a demo that you shipped that I can access. Please specify EXACTLY what did you contribute to the feature. I should not be required to install anything or log in to anything. If there is a sign-up wall, please attach screenshots.
-- Github [profile]() with a [repository](https://github.com/tonghuikang/automatic-prompt-engineer) you think represents your work.
+- Github [profile](https://github.com/tonghuikang) with a [repository](https://github.com/tonghuikang/automatic-prompt-engineer) you think represents your work.
 - Kaggle [profile](https://www.kaggle.com/huikang) and a useful [resource](https://www.kaggle.com/competitions/konwinski-prize/discussion/553294) that you have shared.
 - Knowledge-related social media profile on one of these platforms - [Quora](https://www.quora.com/profile/Tong-Hui-Kang-1), YouTube, TikTok, Zhihu, LinkedIn, Facebook, Instagram. Share a piece of content that you have [published](https://www.quora.com/How-do-you-think-reinforcement-fine-tuning-was-implemented/answer/Tong-Hui-Kang-1) that you think is great.
 - [Poe](https://poe.com/huikang) profile with a [bot](https://poe.com/ChineseStatement) you think is non-trivial.
 
 IF YOU DO NOT HAVE ONE OF THESE ALREADY, PLEASE DIRECTLY APPLY FOR THE ROLE. If you spend time working on one of these, it is very likely that we have already sourced sufficient candidates to interview by the time you are ready.
 
-Please keep in mind that sharing your work with me does NOT guarantee a referral from me. If I am not able to immediately understand your work, I will decline to write a referral and share my general referral [link](https://jobs.ashbyhq.com/quora?utm_source=o3yDr69Ome).
+Please keep in mind that sharing your work with me does NOT guarantee a referral from me. It is possible that your work is great, but I am not able to understand your work.
+
+If I am not able to immediately understand your work, I will decline to write a referral and share my general referral [link](https://jobs.ashbyhq.com/quora?utm_source=o3yDr69Ome).
 
 In any case, the things I mentioned could also help with your application even for roles outside of Quora.
 
@@ -106,12 +112,11 @@ In any case, the things I mentioned could also help with your application even f
 
 I offer the following template.
 
-
 >I would like a referral for the role Senior Full Stack Software Engineer - Core Product, Poe (Remote).
 >
 >I have made (demo) which you access in (url).
 
-Please be concise in your communication.
+Please be concise in your communication. I need to be able to immediately identify something that I could appreciate.
 
 
 

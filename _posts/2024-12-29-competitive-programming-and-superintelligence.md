@@ -41,8 +41,8 @@ In AlphaZero, the training system is only given the rules of Go. In the supercom
 
 How I expect this is done
 - Start by solving the easiest problems
-- Maintain a [leaderboard](https://judge.yosupo.jp/) of best solutions to equivalent problems
-	- The leaderboard is updated when a significantly better solution is achieved
+- Maintain a [leaderboard](https://judge.yosupo.jp/) of best distinct solutions to equivalent problems
+	- The leaderboard is updated when a significantly better solution (in terms of complexity, or simplicity) is achieved
 - Maintain a [Wikipedia](https://cp-algorithms.com/) of algorithms
 	- When an algorithm is [invented](https://www.quora.com/What-are-some-algorithms-that-were-invented-due-to-competitive-programming/answer/Brian-Bi), the Wikipedia is updated
 - Models learn from the created knowledge and attempt to solve harder problems.
