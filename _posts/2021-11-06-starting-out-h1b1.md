@@ -75,10 +75,10 @@ This is my timeline regarding my H-1B1 visa
 - Labor Condition Application Certified (1 October)
 - Hardcopy Visa application documents shipped (5 October)
 - Hardcopy Visa application documents received (8 October)
-- Embassy interview (13 October, 0915)
+- Embassy interview (13 October, 0915 hrs)
 - Pickup passport with H1B1 visa (14 October)
 - Preflight Covid ART Testing (30 October)
-- Flight the US (2 November 1840)
+- Flight to the US (2 November, 1840 hrs)
 - Commence job (8 November)
 
 
