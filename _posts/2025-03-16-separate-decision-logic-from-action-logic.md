@@ -38,14 +38,14 @@ Consider the following call stack:
 ```
 cron_to_send_notifications()
 	content = retrieve_content()
-	filter_content_and_send(content)
+	filter_content_and_process(content)
 		if filter_content(content): return
 		send_content_to_users(content)
 			users = retrieve_users(content)
-			maybe_send_content(content, user)
-				send_notification(content, users)
-					users = filter_users(content, users)
-					actually_send_notification(content, users)
+			maybe_send_content(content, users)
+				for user in users:
+					if filter_content_for_user(content, user): continue
+					actually_send_notification(content, user)					
 ```
 
 Let's say I want to figure out why a certain user is not getting a notification for a piece of content. I cannot simply call `maybe_send_content` to check the result because it executes an action that will have a product impact.
@@ -79,6 +79,6 @@ cron_to_send_notifications()
 	send_notification(content, users)
 ```
 
-It makes answering questions like "What content is retrieved?" easier because I don't need to combine multiple functions to get the result.
+It makes answering questions like "What content is retrieved?" easier because I don't need to combine multiple functions to get the result. I could just call `prepare_content` instead of needing to combine the outputs of `retrieve_content` and `filter_content`.
 
 One important principle here is that I do not mix decision logic with action logic. In the decision logic, there is no action logic. In the action logic, there is no decision logic.

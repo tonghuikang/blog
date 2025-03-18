@@ -27,6 +27,8 @@ Is there something that you think everyone is doing wrongly?
 
 What do you think everyone else has missed?
 
+What do you think the community is wasting time on?
+
 
 # What things useful to the community do you want to share?
 

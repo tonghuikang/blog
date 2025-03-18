@@ -4,5 +4,7 @@ title: The design of the general robotics model
 ---
 
 
-Imagine how a human would teleop a robot remotely
+Imagine how a human would teleop a robot remotely.
+
+Do that for 
 
