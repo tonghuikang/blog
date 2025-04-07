@@ -434,3 +434,22 @@ The first product prototype I am aware of is Khan Academy. o1 is the first model
 The difference between a good engineer and a great engineer is how they communicate. Communication is not just words. It involves awareness, reflecting, and preparations.
 
 When I do Google search, I still don't read their AI generated summaries. I will ask AI directly for this. I want to read the ground truth, the texts from the horses mouth along with the stamp of approval by the masses. 
+
+
+
+Whether it is easy to grade does not depend on how difficult the task is.
+Similar to the competitive programming problems etc.
+
+Benchmarks do not capture everything.
+There are some human activities that are hard to quantify.
+Passing the benchmark does not mean that it is good.
+There are tasks where making them easy to grade renders the grading meaningless.
+
+Treating a benchmark as ground truth does not necessarily make the underlying human task easy to grade.
+Let's say you want to grade an AI-generated Supreme Court judgment by passing it into an LLM that produces a score between 0 and 1 and treat that as ground truth.
+The AI system that produces the highest scoring Supreme Court judgment may still be very bad.
+
+The AI may be using the wrong methods to arrive at the correct output.
+Maybe you can train an LLM to guess the answer or skip certain steps in the calculation. They get the reward, their answer is correct, but their process is not correct. This is especially applicable for MCQ questions.
+
+Scoring well at MMLU does not necessarily mean that it is more pleasant to talk to the AI.
