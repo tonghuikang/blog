@@ -453,3 +453,9 @@ The AI may be using the wrong methods to arrive at the correct output.
 Maybe you can train an LLM to guess the answer or skip certain steps in the calculation. They get the reward, their answer is correct, but their process is not correct. This is especially applicable for MCQ questions.
 
 Scoring well at MMLU does not necessarily mean that it is more pleasant to talk to the AI.
+
+
+
+
+
+

@@ -29,5 +29,3 @@ You should still train the model to either use tools to calculate, or use reason
 
 
 
-
-
