@@ -11,3 +11,4 @@ Constitution
 
 
 
+Unlike Anthropic [AI Constitution](https://www.anthropic.com/news/claudes-constitution) (dated May 2023), the model spec describes exactly how the model will respond in certain situation.

@@ -159,3 +159,9 @@ Search and learning - you need to search what you are bad at
 
 User feedback is a form of eval, not the eval.
 
+
+
+## Random
+
+Scaling posttraining versus scaling eval - eval tells you the direction you should improve your performance
+
