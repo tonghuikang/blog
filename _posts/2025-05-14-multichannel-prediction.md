@@ -26,36 +26,80 @@ This is what humans do
 - You present gestures or certain body language
 - You words has a certain emphasis or tone
 - While you are talking, you (should) read the facial expression of your audiences
-- You may be multitasking - for example walking up the stairs, eating food
+- You may be multitasking - for example walking up the stairs, eating food, or even driving
+
+Note that you have multiple input channels
+- Voice input
+    - The speaker's sound
+    - Surrounding noise
+- Visual input
+    - The speaker's body language and gestures
+    - The speaker's slides
+    - Other actions going on in the environment
+- Touch feedback
+    - Whether are you actually stepping on something while walking
+    - Whether do you feel the accelerating if you are driving
+- Prior internal thoughts
+
+Note that you have multiple output channels
+- Voice output
+    - What you voice
+- Movements
+    - Your body language and gestures
+    - Background movement activity - e.g. walking
+- Internal thoughts
+    - Interpreting what the speaker said (almost always subconscious)
+    - Interpreting what the speaker mean (usually subconscious)
+    - Preparations to follow-up the conversation
+    - Thought process irrelevant to the conversation - how to merge on the highway
+
+
+Note that you have multiple input channels and multiple output channels.
+
+Humans are multichannel.
 
 We should train models that should at least be able to converse like humans.
-The model should be multichannel.
+
+The model should be multichannel. We can scale the number of channels.
 
 
 
 ## Difference between Omnimodality and Multichannel
 
-GPT-4o introduced omnimodality (the 'o' in 4o).
+OpenAI introduced [GPT-4o](https://openai.com/index/hello-gpt-4o/) on March 13, 2024. The 'o' in 4o refers to omnimodality.
 
-It was claimed that 
+The demo presented where you can video call the AI.
 
-Multichannel here refers to preceving and producing tokens of multiple channels at the same time.
-The tokens may be of the same or different modality.
+The AI takes in
+- Prior text input
+- Sound streaming input
+- Video streaming input
+
+The AI produces
+- What you said
+- What the model says
+- Sound streaming output
+
+I would agree that GPT-4o is already somewhat multi-channel.
+The input is multi-channel - sound and video.
+I am not too sure to what extent the output is multi-channel.
+It is possible that a separate model is used to transcribe the utterances of the user and the model. 
+
+However, there is still some shortcomings here.
+
+- The set of input modalities is fixed and could not scale
+- The model does not think and talk at the same time [^1]
+- The model is not manipulate phyiscal objects at the same time
+
+[^1]: OpenAI introduced [o1](https://openai.com/o1/) on September 12, 2024
+    If you interact with the o-series models on OpenAI first-party app ChatGPT, or use their [reasoning summaries](https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries), the model thinks and "talk" at the same time.
+    In some sense, the o-series models is somewhat multi-channel.
+    I am not sure if the o-series models is the one producing the reasoning summaries.
+
+The model is not truly multi-channel.
+We want the model to be natively multi-channel.
 
 
-
-
-When you talk to someone, you don't get 
-
-When it is appropriate, you interrupt them.
-
-When you listen, you should be thinking of something as well - what to ask next, how to respond.
-
-But humans do not do this.
-
-You don't actually talk to someone.
-
-You need think 
 
 
 ## Architecture
