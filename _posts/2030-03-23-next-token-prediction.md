@@ -2,6 +2,12 @@
 layout: post
 title: Steady state products in AI
 ---
+Omnichannel etc
+You think while you speak
+You interpret what people say while you speak
+
+
+
 When I was in undergrad I was informed - (cite Ilya's video) - if you can predict the next token, you understand.
 
 Next token prediction could be a lot of things. Jason Wei's slides?
@@ -26,6 +32,8 @@ If it doesn't you just redefine your task
 
 You can train a model to predict the next prime number of a large prime number, but this does not mean you should.
 You should still train the model to either use tools to calculate, or use reasoning to calculate by hand.
+
+
 
 
 
