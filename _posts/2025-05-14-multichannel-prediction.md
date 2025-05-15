@@ -1,11 +1,8 @@
 ---
 layout: post
-title: The next generation model should be ambidextrous
+title: The next generation model should be multichannel
 ---
-
-I think this is worthy of being GPT-5.
-I won't be surprised if this is called GPT-4a (a for ambidextrous) or GPT-4m (m for multichannel) though.
-
+I explain how humans are multichannel, and how models could be multichannel too.
 
 
 ## Think of how you converse
@@ -100,93 +97,60 @@ The model is not truly multi-channel.
 We want the model to be natively multi-channel.
 
 
+## Natively multichannel
+
+I explain my expectation of what is meant by natively multichannel.
+
+The model should be able to
+- Spin up modalities
+- Wind down or suspend modalities
+- Decide their output modalities
+- Decide the extent of parallelization of the modalities
+
+TODO: explain
+
+TODO: explain how this can be used as a visual assistant
+
+TODO: explain how this is used in robotics
 
 
 ## Architecture
 
-I think the architecture will be very similar to the standard decoder architecture.
+I think the architecture will be very similar to the standard decoder architecture, with the following differences
+- Instead of one stream of inputs, you have multiple stream of inputs.
+- Instead of one stream of outputs, you have multiple stream of outputs
 
-Instead of one stream of inputs
+I think the rest of the architecture would look similar.
 
-You can have the model to wind-up and wind-down on demand.
+There is this question of whether the outputs should be parallelized.
+
+If you are driving and talking to your front-seat passenger, the two process would not depend on each other. In this case, you can parallelize the driving-related outputs and the conversation-related outputs.
+
+If you are thinking and talking, your thought process needs to align with what you say. I present a scenario. You are in this rapid fire conversation where you answer questions quickly. You are asked - what is your favorite color. You don't really have a favorite color, your verbal response is 50% red and 50% blue. The thought process is also 50% red and 50% blue. If we sample both tokens in parallel, your what you thought is different from what you said.[^k] Ideally, we should sample the thought token first, and then the verbal token so that the verbal token can depend on the thought token.
+
+[^k]: This might be a human experience as well. Also, I think I need a better example.
+
+TODO: example of how the generation would look like
 
 
-## Think of how humans are ambidextrous
 
+## Evaluation
 
-## Everything could still be modelled as a next token prediction
+TODO
 
+The rewards are not longer that verifiable?
 
+You are grading a presentation rather than whether they solve a math model.
 
-## Robotics
 
 
 ## Training
 
-Imitation learning
+TODO
 
-The chain of thought is mostly synthetic data and we could train on it.
-
-
-
-## Inference
-
-Reading might not be easily parallelizable anymore?
+Training is harder because you need to replay the scenario while training.
 
 
 
-
-
-## Consciousness
-
-In this definition, consciousness is the ability to produce interpretable tokens that the model itself could interpret.
-
-
-## Signs
-
-OpenAI response API
-
-
-
-
-
-
-
-The environment is a sampler
-
-
-Omnichannel etc
-You think while you speak
-You interpret what people say while you speak
-
-
-
-When I was in undergrad I was informed - (cite Ilya's video) - if you can predict the next token, you understand.
-
-Next token prediction could be a lot of things. Jason Wei's slides?
-
-When you write the first token you already somewhat planned what to do at the end.
-
-Some tokens are easier than the others
-
-Everything can be formulated as next token prediction (as long as the output is next)
-
-Diffusion?
-Image generation?
-Voice?
-
-Large concept models?
-
-At this point it is somewhat of a ___
-"Everything follow the law of Physics"
-"God has a plan for everything"
-If it doesn't you just redefine your task
-
-
-You can train a model to predict the next prime number of a large prime number, but this does not mean you should.
-You should still train the model to either use tools to calculate, or use reasoning to calculate by hand.
-
-
-
-
+## Footnotes
 

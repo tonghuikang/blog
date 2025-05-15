@@ -459,3 +459,27 @@ Scoring well at MMLU does not necessarily mean that it is more pleasant to talk 
 
 
 
+When I was in undergrad I was informed - (cite Ilya's video) - if you can predict the next token, you understand language.
+
+Next token prediction could be a lot of things. Jason Wei's slides? Some tokens are easier than the others
+
+When you write the first token you already somewhat planned what to do at the end.
+
+Everything can be formulated as next token prediction (as long as the output is next)
+
+Diffusion?
+Image generation?
+Voice?
+
+Large concept models?
+
+At this point it is somewhat of a ___
+"Everything follow the law of Physics"
+"God has a plan for everything"
+If it doesn't you just redefine your task
+
+You can train a model to predict the next prime number of a large prime number, but this does not mean you should.
+You should still train the model to either use tools to calculate, or use reasoning to calculate by hand.
+
+I think this is worthy of being GPT-5.
+I won't be surprised if this is called GPT-4m (m for multichannel) or GPT-4a (a for ambidextrous) or though.
