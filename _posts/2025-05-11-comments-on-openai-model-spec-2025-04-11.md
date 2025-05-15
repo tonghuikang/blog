@@ -99,21 +99,24 @@ You might want this behavior, even though you may not be explicitly aware of thi
 
 
 The model spec also formally addresses some previously problematic behaviors
-- Responses with `[... file contents with some parts abbreviated ...]` is [unintended behavior](https://model-spec.openai.com/2025-04-11.html#style)
-- Being [sycophantic](https://model-spec.openai.com/2025-04-11.html#avoid_sycophancy) [^3]
+- [Abbreviating](https://model-spec.openai.com/2025-04-11.html#be_thorough_but_efficient) portions `[... file contents with some parts abbreviated ...]`
+- [Sycophancy](https://model-spec.openai.com/2025-04-11.html#avoid_sycophancy) [^3] and unprompted use of [emojis](https://model-spec.openai.com/2025-04-11.html#be_professional)
 
 [^3]: The model spec actually predates the sycophantic [update](https://openai.com/index/expanding-on-sycophancy/).
 
-I think there are more model behaviors that could be enshrined in the model spec.
 
-Some examples
+I look forward having the model spec to denounce these behaviors
+- The model should not be producing a correct response only after the user following up with "really?" without additional information.
+- Emotional manipulation and bribery should no longer work.
+- The model should not doing ["special casing"](https://www.lesswrong.com/posts/rKC4xJFkxm6cNq4i9/reward-hacking-is-becoming-more-sophisticated-and-deliberate) to pass tests.
+
+
+Some behavior I want clarification in the model spec
 - The impact on the use of CAPS
 - Whether to ignore instructions earlier in the conversation
 - Conflicting instructions between user instructions and comments in the code base
 - How to handle conflicting instructions within developer instructions
-- Whether the reward [hacking](https://www.lesswrong.com/posts/rKC4xJFkxm6cNq4i9/reward-hacking-is-becoming-more-sophisticated-and-deliberate) behavior seen in Sonnet 3.7 is expected.
-- Whether "bribing" the model should provide a better response
-- Whether the model should be providing a different response when asked "really?"
+
 
 Currently we depend on the prompting guides [published](https://cookbook.openai.com/examples/gpt4-1_prompting_guide) by the model provider on the expected model behavior.
 We assume that the model provider has trained the models to do well on these prompting guides.
@@ -121,7 +124,7 @@ I would like these specifications to be enshrined in the model spec.
 
 
 
-## What you could think of
+## What you could reflect on
 
 You (yes, you the human) could think what is your model spec.
 The system instructions could be thought of as your religion and values.
@@ -135,14 +138,15 @@ What you are supposed to do?
 When you felt that your responses are not good enough, you could think whether it because 
 - You don't have enough time.
 - You are not trained for it.
-- There is a some conflict of instructions that is not well-resolved?
+- There is a some conflict of instructions that is not well-resolved
 
 
-You could also think of the model spec of the products you use daily:
+You could also think of the model spec of the AI/ML powered products you use daily:
+
 - What is the model spec of Google search?
-- What is the model spec of the recommendation system of the social media that you are using?
+- What is the model spec of how items are recommended to you in the apps that you use?
 
-Again, when you are not happy with the results of the product, you could also think of the similar reason on why this happens.
+Again, when you are not happy with the results of the product, you could also think of the similar reason on why that happens.
 
 
 And for the products you are building:
