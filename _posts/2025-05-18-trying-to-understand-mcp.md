@@ -10,12 +10,12 @@ I will focus on the example of booking an AirBnb via an AI interface.
 
 ### What is wrong with the status quo (early 2025)?
 
-You cannot book a AirBnb stay via ChatGPT / Claude.
+You cannot book an AirBnb stay via ChatGPT / Claude.
 
 
 ### What are the parties involved?
 
-- The users, which should not be expected to understand how technology works.
+- The users, who should not be expected to understand how technology works.
 - The model provider (e.g. OpenAI, Anthropic)
 - The AI interface provider (e.g. ChatGPT, Claude, Poe, Siri)
 - The tools provider (weather service, AirBnb)
@@ -26,24 +26,24 @@ You cannot book a AirBnb stay via ChatGPT / Claude.
 - Users get to use more capable AI (book AirBnb via ChatGPT)
 - The model provider gets more API revenue from their models
 - The AI interface provider gets more usage and subscription / advertisement revenue
-- The tools provider get usage (AirBnb gets more bookings)
+- The tools provider gets usage (AirBnb gets more bookings)
 
 
 
 ### Why can't we just get AI to browse like any human would?
 
-AirBnb would prefer that bots do not pretend to be human when visitng their website.
+AirBnb would prefer that bots do not pretend to be human when visiting their website.
 This can cause undue load to the website.
 AirBnb would prefer that you call their API than to impersonate a human.
 
 Browsing the web is slower than directly accessing the tools.
 Users would prefer to get their results quickly.
 
-Tool use could also unblock processes what would be time consuming on a web browser - for example viewing and comparing 50 candidates and reading all the reviews in parallel.
+Tool use could also unblock processes that would be time consuming on a web browser - for example viewing and comparing 50 candidates and reading all the reviews in parallel.
 
 
 
-### Why can't we use function calling?
+### Why can't we just use function calling?
 
 It is possible to provide the tools for the LLM to decide what tools to use and use them.
 
@@ -153,7 +153,7 @@ response = client.responses.create(
 print(response.output)
 ```
 
-Note that even OpenAI current has three ways getting LLMs to use tools
+Note that even OpenAI currently has three ways of getting LLMs to use tools
 - Chat Completions API (widely-used)
 - Responses API ([recommended](https://community.openai.com/t/introducing-the-responses-api/1140929))
 - Assistant API (will be deprecated)
@@ -162,7 +162,7 @@ As models evolve, we expect even more ways to get AI to use tools.
 
 This does not scale.
 
-If a tool provider (e.g. AirBnb) wants to enable models to make bookings on the user's behalf, AirBnb needs to publish the recommended prompts all three versions of OpenAI API.
+If a tool provider (e.g. AirBnb) wants to enable models to make bookings on the user's behalf, AirBnb needs to publish the recommended prompts for all three versions of OpenAI API.
 
 MCP is meant to be standard here, so that AirBnb will only need to maintain one publication on how to use their tools.
 
@@ -178,7 +178,7 @@ Users
 
 
 Model providers
-- They need to train models that is able to use tools reliably and safely.
+- They need to train models that are able to use tools reliably and safely.
 
 
 AI interface providers
@@ -189,7 +189,7 @@ AI interface providers
 
 
 Tool provider
-- The tools has good uptime.
+- The tools have good uptime.
 - The results from the tools are correct.
 - How to use the tools is well-documented. The documentation serves as instructions (i.e. prompts) on how to use the tools.
 - Maintain the MCP server so that MCP clients can interact with it
@@ -214,7 +214,7 @@ The [introduction](https://modelcontextprotocol.io/introduction) presents the fo
 >
 > Remote Services: External systems available over the internet (e.g., through APIs) that MCP servers can connect to
 
-In the starter [example](https://modelcontextprotocol.io/quickstart/server) of calling a weather service, the following desribes what happens.
+In the starter [example](https://modelcontextprotocol.io/quickstart/server) of calling a weather service, the following describes what happens.
 
 > When you ask a question:
 >
@@ -236,6 +236,7 @@ The tool provider maintains a "MCP Server". [^1]
 
 [^1]: There are now [remote MCP servers](https://support.anthropic.com/en/articles/11175166-about-custom-integrations-using-remote-mcp).
     The MCP servers no longer need to be on the user's computer.
+    The user or the AI interface only needs to [copy a URL](https://x.com/alexalbert__/status/1918047745790914772) provided by the tool provider.
 
 
 
@@ -256,7 +257,7 @@ In other words, if you are the tool provider and the AI interface, you should ju
 
 ### References
 
-These are the resources that have I based my research on
+These are the resources that I have based my research on
 
 - [modelcontextprotocol.io/faqs](https://modelcontextprotocol.io/faqs)
 - [modelcontextprotocol.io/quickstart/server](https://modelcontextprotocol.io/quickstart/server)
