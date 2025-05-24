@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Analyzing your chances at a role
-categories: career
 ---
 I write some advice on how to analyze your chances at landing a specific role at a company.
 

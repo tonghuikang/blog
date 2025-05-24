@@ -1,7 +1,6 @@
 ---
 layout: post
 title: If you want my referral
-categories: quora referrals
 ---
 Thank you for finding this post. I will send out this post when someone reaches out to me with an intention of a getting a role at Quora.
 

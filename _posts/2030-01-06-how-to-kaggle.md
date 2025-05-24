@@ -1,7 +1,6 @@
 ---
 layout: post
 title: How to Kaggle
-categories: kaggle
 ---
 I write about things to ask yourself when doing Kaggle
 

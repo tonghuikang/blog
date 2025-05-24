@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Competitive Programming Resources
-categories: competitive-programming
 ---
 
 I present a short list some resources for competitive programming

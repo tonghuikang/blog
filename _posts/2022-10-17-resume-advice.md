@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Tech Resume Advice"
-categories: career
 ---
 
 I have been giving comments on technical resumes in Discord channels by the Tech Interview Handbook and cscareers.dev.

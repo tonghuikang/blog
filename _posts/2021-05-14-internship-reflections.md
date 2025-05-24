@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Internship Reflections
-categories: career
 ---
 
 I would like to elaborate on my internship experience here, and also provide some reflections.

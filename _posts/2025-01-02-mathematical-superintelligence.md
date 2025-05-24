@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Mathematical Superintelligence
-categories: ai
 ---
 I write about the subtasks that we should solve along the way as we reach superintelligence in mathematics.
 

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "How I Comment on Resumes"
-categories: career
 ---
 
 I have been commenting on technical resumes in Discord channels by the Tech Interview Handbook and cscareers.dev.

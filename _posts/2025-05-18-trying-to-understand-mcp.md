@@ -164,7 +164,10 @@ This does not scale.
 
 If a tool provider (e.g. AirBnb) wants to enable models to make bookings on the user's behalf, AirBnb needs to publish the recommended prompts for all three versions of OpenAI API.
 
-MCP is meant to be standard here, so that AirBnb will only need to maintain one publication on how to use their tools.
+In my current understanding, MCP is meant to be the standard for function calling.
+
+With this standard, AirBnb will only need to maintain one publication on how to use their tools.
+
 
 
 ### Who is responsible for what?
@@ -252,6 +255,7 @@ In other words, if you are the tool provider and the AI interface, you should ju
     I wrote the tools (read code, query table).
     I built the interface (interactive Python).
     I don't need to use MCP here, I could just call the function directly.
+    However, if multiple people want to use my tools, I should have some standard, MCP or otherwise.
 
 
 

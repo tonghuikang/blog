@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Starting out as an H-1B1 holder
-categories: career
 ---
 
 In summary, this is my US immigration background

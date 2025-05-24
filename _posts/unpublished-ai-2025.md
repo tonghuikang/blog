@@ -1,7 +1,6 @@
 ---
 layout: post
 title: My predictions for AI in 2025
-categories: ai
 ---
 Random notes that I did not manage to put it in a nice post
 
@@ -483,3 +482,14 @@ You should still train the model to either use tools to calculate, or use reason
 
 I think this is worthy of being GPT-5.
 I won't be surprised if this is called GPT-4m (m for multichannel) or GPT-4a (a for ambidextrous) or though.
+
+
+
+
+
+
+### Why don't we just directly standardize how function calling is done?
+
+In the minimal example of querying the weather, you need to spin up a script in parallel. There is this question - if why can't 
+
+Not sure, I need to ask.

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Interacting with AI
-categories: ai
 ---
 I write what I think the principles of how AI should interact with us.
 

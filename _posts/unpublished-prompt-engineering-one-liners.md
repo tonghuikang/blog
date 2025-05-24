@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Prompt Engineering One-liners
-categories: kaggle
 ---
 I share some one-liners on prompt engineering.
 

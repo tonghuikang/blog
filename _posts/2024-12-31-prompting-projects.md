@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Prompting Projects
-categories: ai prompt-engineering
 ---
 I write a checklist for prompt engineering projects.
 

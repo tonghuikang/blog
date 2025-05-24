@@ -1,9 +1,6 @@
 ---
 layout: post
 title: Competitive Programming and Superintelligence
-categories: ai competitive-programming
-tags:
-  - ai
 ---
 The competitive programming community would be the first scientific community that we will automate. This will be our first step to superintelligence.
 

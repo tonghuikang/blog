@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Developer Experience of Calling LLM APIs
-categories: kaggle
 ---
 I wrote a [page](https://tonghuikang.github.io/llm-pricing/) to compile the LLM prices. Here are my comments on the developer experience.
 
