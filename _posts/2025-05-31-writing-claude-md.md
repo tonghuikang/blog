@@ -3,7 +3,7 @@ layout: post
 title: Writing CLAUDE.md for mature codebases
 ---
 
-I am recently working on writing CLAUDE.md for my organization's monorepo.
+I have recently been working on writing CLAUDE.md for my organization's monorepo.
 This will affect the performance of [Claude Code](https://www.anthropic.com/claude-code), for both better and worse.
 
 I'll share some thoughts on what should be included in CLAUDE.md.
@@ -33,21 +33,26 @@ Individual teams or developers could decide for themselves what to put in those 
 
 The natural state of affairs is that you add `CLAUDE.md` at root to `.gitignore` and then everyone is free to do whatever they want, and also not accidentally commit `CLAUDE.md` to root.
 
-This is not ideal for multiple scenarios:
+This is not ideal. There are multiple scenarios illustrating this:
 - New engineers do not know which rulefile to get started with.
 - When one engineer solves an issue with AI coding, others hit the same problem without knowing the solution exists.
 - Every engineer spends time finding the same effective prompts that colleagues already discovered.
 - AI-generated code varies wildly in style and approach depending on whose local rulefile was used.
-- You cannot enforce security practices (like "never log passwords") across all AI tool usage in your organization.
+
+However, agreeing on a standard rulefile is not easy
+- You want rules that work for everyone, not just yourself
+- You want to understand why every line of instruction is added
+- Nobody should need to prompt against the existing rulefile to get things done
 
 
 ## Principles for the rulefile
 
 
-#### Write instructions that you would want to be instructed with
+#### Write instructions that you would want to receive
 
-- Think of how you are onboarded. You should not be required to read through pages of instructions before committing your first piece of code.
-- There are prompting tricks from 2024 where it claims you can get better performance from the model by "bribing" the model. Do not do this.
+- Think of how you are onboarded. You should not be required to read through pages of instructions before committing your first piece of code. You are expected to have common sense, and should not require an instruction like "do not commit OpenAI API key".
+- Model providers should be thinking a lot about how they want their models to be prompted. You should design your instructions in this direction.
+- There are prompting tricks from 2024 that claim you can get better performance from the model by "bribing" the model. Do not do this.
 
 
 #### Codify the globally applicable processes
@@ -61,6 +66,11 @@ This is not ideal for multiple scenarios:
 
 #### Guide the model to avoid mistakes
 
+- Mistakes generally belong to three categories
+	- Lack of context - there aren't instructions in the code and CLAUDE.md
+	- Lack of instructions - the user could have written a clearer instruction
+	- Model capability - the model is not that good yet
+- You should document the mistakes.
 - If the model frequently makes a mistake, instructions can be written to address the mistakes, subject to the principles below.
 - Many of the instructions in the Anthropic MCP [CLAUDE.md](https://github.com/modelcontextprotocol/python-sdk/blob/2210c1be18d66ecf5553ee8915ad1338dc3aecb9/CLAUDE.md) might be intended to mitigate mistakes.
 
@@ -69,7 +79,7 @@ This is not ideal for multiple scenarios:
 
 - The longer the instruction, the harder it is to maintain.
 - Only include instructions if it is necessary.
-- You want each of your instructions to nudge the model to strictly produce better output.
+- You want each of your instructions to nudge the model toward strictly better output.
 
 
 #### Defer to other sources of information
@@ -86,7 +96,11 @@ This is not ideal for multiple scenarios:
 
 #### Be specific where your instructions apply
 
-- Let's say you frequently work on a config file, and editing the config file requires running a bash command, something like `regen_graphql_schema`. You probably might have a macro that runs `regen_graphql_schema` before every git commit. You should not add an instruction like `Run ``regen_graphql_schema`` on every commit`, because most of the people in the organization do not work with `regen_graphql_schema`.
+- Linting, formatting, typechecking and testing procedures should be universal, and you should include them in your instructions.
+- Some instructions are specific to certain workflows. You should be aware that this is the case.
+	- Let's say you frequently work on a config file, and editing the config file requires running a bash command, something like `regen_graphql_schema`. You probably might have a macro that runs `regen_graphql_schema` before every git commit. You should not add an instruction like `Run ``regen_graphql_schema`` on every commit`, because most of the people in the organization do not work with `regen_graphql_schema`.
+- Specific cases should be part of general instructions.
+	- For the ``regen_graphql_schema`` example, instead of writing `When libsomething/schema.py is edited, run ``regen_graphql_schema``.`, I will write something like - `When editing a config file, read the top of the file for follow-up instructions to follow. For example, in libsomething/schema.py, there is an instruction to run ``regen_graphql_schema`` after every file change.` I am deferring instructions to other sources. When there is another file with similar behavior where you need to run a certain script after editing the file, I will get the model to follow instructions for free.
 
 
 ## How I would maintain the rulefile
