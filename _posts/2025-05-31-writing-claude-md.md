@@ -2,20 +2,20 @@
 layout: post
 title: Writing CLAUDE.md for mature codebases
 ---
+
 I am recently working on writing CLAUDE.md for my organization's monorepo.
-This will affect the performance Claude Code for both better and worse.
+This will affect the performance of [Claude Code](https://www.anthropic.com/claude-code), for both better and worse.
 
 I'll share some thoughts on what should be included in CLAUDE.md.
 
 There are also other coding rules [files](https://x.com/HanchungLee/status/1918920355709673887).
-I will collectively call them "rulefiles" in this doc (CLAUDE.md is too many syllables).
+I will collectively call them "rulefiles" in this doc (CLAUDE.md is too many syllables, and I don't work for Anthropic).
 Ideas in this doc should also apply to other AI coding tools.
 
 
 ## Scope of the coding rules
 
-This is what Anthropic has written about their rulefiles:
-- https://www.anthropic.com/engineering/claude-code-best-practices
+Anthropic has [written](https://www.anthropic.com/engineering/claude-code-best-practices) on how to use `CLAUDE.md`.
 
 Note that you can place the Anthropic rulefile (CLAUDE.md) in multiple locations:
 - The root of your repository
@@ -34,10 +34,11 @@ Individual teams or developers could decide for themselves what to put in those 
 The natural state of affairs is that you add `CLAUDE.md` at root to `.gitignore` and then everyone is free to do whatever they want, and also not accidentally commit `CLAUDE.md` to root.
 
 This is not ideal for multiple scenarios:
-- You want to onboard an engineer (or soon, the AI). There is no standardized rulefile to get started with.
-- Issues faced by one engineer might be faced by another engineer. The instruction to remedy the issue is not effectively shared.
-- (TODO: add a few more)
-
+- New engineers do not know which rulefile to get started with.
+- When one engineer solves an with issue with AI coding, others hit the same problem without knowing the solution exists.
+- Every developer spends time finding the same effective prompts that colleagues already discovered.
+- AI-generated code varies wildly in style and approach depending on whose local rulefile was used.
+- You cannot enforce security practices (like "never log passwords") across all AI tool usage in your organization.
 
 
 ## Principles for the rulefile
@@ -85,9 +86,7 @@ This is not ideal for multiple scenarios:
 
 #### Be specific where your instructions apply
 
-- Let's say you frequently work on a config file, and editing the config file requires running a bash command, something like `regen_graphql_schema`. You probably might have a macro that runs `regen_graphql_schema` before every git commit. You should not add an instruction like `Run regen_graphql_schema on every commit`, because most of the people in the organization do not work with `regen_graphql_schema`.
-
-
+- Let's say you frequently work on a config file, and editing the config file requires running a bash command, something like `regen_graphql_schema`. You probably might have a macro that runs `regen_graphql_schema` before every git commit. You should not add an instruction like `Run ``regen_graphql_schema`` on every commit`, because most of the people in the organization do not work with `regen_graphql_schema`.
 
 
 ## How I would maintain the rulefile
@@ -111,15 +110,12 @@ Should I run evaluations on the updated rulefile? I do not think it is worth the
 
 
 
-## Predictions
+## Where are we headed
 
-Currently a pain point I have is that the environment that has access to production data is separated from the environment that I write code with (which is where Claude Code is installed).
+I predict that AI will be making suggestions on how to improve their own process. After completing the task, the AI may want to reflect on what instructions could have been added, that could have improved their performance. Improvements include requiring fewer back-and-forth interactions with the human, shorter search and thought processes, and fewer uses of tools. [^1]
 
+[^1]: Currently in Claude Code, you can press the `#` key to ask Claude to "remember" something which will then be incorporate into the relevant `CLAUDE.md` file.
 
-I predict that AI will be making suggestions on how to improve their own process.
-This involves suggesting improvements to the rulefiles, and improve the code documentation.
-After completing the task, the AI may want to reflect on what instructions could have been added, that could have improved their performance.
-Improvements include requiring fewer back-and-forth interactions with the human, shorter search and thought processes, and fewer uses of tools.
 
 
 
