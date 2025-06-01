@@ -20,10 +20,10 @@ Anthropic has [written](https://www.anthropic.com/engineering/claude-code-best-p
 Note that you can place the Anthropic rulefile (CLAUDE.md) in multiple locations:
 - The root of your repository
 - In a child folder of your repository
-- In the parent of your repository
+- In a parent folder of your repository
 - Your home folder `~/.claude/CLAUDE.md`
 
-I will focus on the rulefiles that occur at the root of your repo, where it is the most controversial.
+I will focus on the rulefiles that occur at the root of your repository, where it is the most controversial.
 
 Rulefiles at other locations are not that controversial.
 Individual teams or developers could decide for themselves what to put in those files, since they are likely to be the only ones benefiting or suffering from the consequences.
@@ -35,8 +35,8 @@ The natural state of affairs is that you add `CLAUDE.md` at root to `.gitignore`
 
 This is not ideal for multiple scenarios:
 - New engineers do not know which rulefile to get started with.
-- When one engineer solves an with issue with AI coding, others hit the same problem without knowing the solution exists.
-- Every developer spends time finding the same effective prompts that colleagues already discovered.
+- When one engineer solves an issue with AI coding, others hit the same problem without knowing the solution exists.
+- Every engineer spends time finding the same effective prompts that colleagues already discovered.
 - AI-generated code varies wildly in style and approach depending on whose local rulefile was used.
 - You cannot enforce security practices (like "never log passwords") across all AI tool usage in your organization.
 
@@ -44,7 +44,7 @@ This is not ideal for multiple scenarios:
 ## Principles for the rulefile
 
 
-#### Write instructions that you want to be instructed with
+#### Write instructions that you would want to be instructed with
 
 - Think of how you are onboarded. You should not be required to read through pages of instructions before committing your first piece of code.
 - There are prompting tricks from 2024 where it claims you can get better performance from the model by "bribing" the model. Do not do this.
@@ -52,7 +52,7 @@ This is not ideal for multiple scenarios:
 
 #### Codify the globally applicable processes
 
-- What processes do every engineer working on the codebase should know?
+- What processes should every engineer working on the codebase know?
 	- How do you lint, format and typecheck?
 	- How do you run a single test?
 	- How do you run all the tests?
@@ -95,19 +95,25 @@ I will maintain a document in another place with the following columns:
 
 Failure cases | Remedying instructions | Contributor | Status
 ------------- | ---------------------- | ----------- | ------
-Summarize the failure | Instruction that is included | Who contributed this, so that we can contact them | What is the status
+Summarize the failure with the existing AI coding tool | Instruction that is included in rulefile | Who contributed this, so that we can contact them | The instruction may be included, or we have decided this has to be somewhere else
 
 We will be editing this pretty often, so this table will live in a Google / Notion / Quip doc.
-This will not be committed to the codebase.
+People can add comments too.
+This table will not be committed to the codebase.
 
 Before I commit the updated rulefiles, I think I will:
-- Get people to agree on the changes
-	- Make sure that the changes follow the principles above (so that they are unlikely to cause regressions for all reasonable interpretations of the rulefile)
-- Have a trial period of two days
-- Commit the updated rulefile and send a notification to interested people
 
-Should I run evaluations on the updated rulefile? I do not think it is worth the effort. I will defer this to the AI that we will hire in the future.
+- Get some people to agree on all the changes. Make sure that the changes follow the principles above (so that they are unlikely to cause regressions for all reasonable interpretations of the rulefile)
+- Commit the updated rulefile
+- Send a notification to interested people
+- Receive reports on issues with the new rulefile
 
+Should I run evaluations on the updated rulefile?
+
+- If we are confident that every instruction is strictly a good direction, I don't think we need to.
+- I do not think it is worth the effort.
+- Maybe an AI coding tool will build this feature.
+- Maybe try out the new rulefile for a few days (but this is logistically not easy, because I will need to stash the changed rulefile before every commit).
 
 
 ## Where are we headed
@@ -117,6 +123,6 @@ I predict that AI will be making suggestions on how to improve their own process
 [^1]: Currently in Claude Code, you can press the `#` key to ask Claude to "remember" something which will then be incorporate into the relevant `CLAUDE.md` file.
 
 
-
+## Footnotes
 
 
