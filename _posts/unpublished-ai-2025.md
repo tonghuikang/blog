@@ -493,3 +493,41 @@ I won't be surprised if this is called GPT-4m (m for multichannel) or GPT-4a (a 
 In the minimal example of querying the weather, you need to spin up a script in parallel. There is this question - if why can't 
 
 Not sure, I need to ask.
+
+
+
+
+Mistake category | Example | Recommended remedies
+- | - | -
+Lack of context<br><br>The code and the rulefile does not have the instructions. | The tool does not write docstring in the correct format. | Note that you should also consider editing the code, instead of only editing the rulefile.
+Model capability<br><br>The model is not that good yet. | The tool returns conclusions without rigorous checks.<br><br>AI declares that the table layout is fixed when it has not. | Write instructions to nudge the model to check their mistakes. Implement procedures (running through a checklist MCP puppeteer) to make the model aware of its mistakes.
+Unclear instructions<br><br>When using the tool, the user is not specific about what they want. | The tool adds a button in a wrong place on the page, because the instructions given are not precise. | Educate the user to provide better instructions.
+
+
+When you want to review the rulefile, you could analyze whether it is because of "lack of context", "model capability" or "unclear instructions". Being clear about the root cause is important to choose the correct remedy.
+
+
+
+
+[^3]: Should the rulefile include mistakes that would have been fixed as models get better?
+	- I define what is meant by mistakes to be fixed as places where the AI is obviously wrong
+	- A competent engineer would not make this mistake
+	- Think of the intended response
+	- This is distinguished from repository specific workflows
+		- The AI coding tool by default should
+		- This is not immediately obvious from working with the file
+		- The default behavior of AI coding tool not running unit tests on each edit is intended behavior
+		- It should not be controversial to include in the rulefile on the necessary processes
+	- Sometimes it is unclear what you want.
+		- Do you really want a commit message at the end of every reply?
+	- Examples of mistakes I expect the model to fix include:
+		- Not tracing the full call stack before making conclusions
+		- Use of Bash(grep) instead of Grep tool
+
+
+- 
+- If you need rigourous evalau, either the AI coding tool is bad or you are writing the instructions wrongly.
+- Maybe an AI coding tool will build this feature.
+- Maybe try out the new rulefile for a few days (but this is logistically not easy, because I will need to stash the changed rulefile before every commit).
+- I think it is the job of the model provider to evaluate. The people will choose.
+- I expect model updates to be infrequent (in the order of months). The AI coding tool likely frequently (in the order of day) update their prompts, I expect these updates to be strictly improvements.
