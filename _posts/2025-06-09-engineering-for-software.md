@@ -3,7 +3,9 @@ layout: post
 title: Engineering for Software (TBC)
 ---
 
-Software engineering will soon become an exercise to get AI to write software.
+Software engineering will soon become an effort to engineer and empower to get AI to write software.
+
+I write how you should do it, and what mindset do you need to have
 
 - If there is a mistake, think whether are you wrong or the AI is wrong.
 
@@ -61,30 +63,29 @@ Software engineering will soon become an exercise to get AI to write software.
 - In theory, AI can take over your browser and function as an remote employee. In reality we are not there yet, although we will soon be there.
 
 
-Avoid processes that do not make sense.
-
+- Avoid processes that do not make sense.
 
 - You should invest now. Tools that make it easier for AI also make it easier for humans. Some investments might not be worth it might be worth it now. (Give an example.)
 
 - Continue with the example of implementing a button.
 
+- As an engineering leader you unblock individual contributors to make contributions. Your role now is the engineering leader.
 
 
-## Get into the mindset of delegating
-
-Your product manager asks you to build a button.
-
-Your first reaction should not be "how do I implement this button elegantly?". Your reaction should be - "is this something we can delegate to AI"?
-
-You should still think how an elegant implementation would look like. You should still have standards on what elegant implementation is.
-But you should be getting AI to implement the button - and implement it elegantly.
-AI should be meeting your standards, you should not need to regurgitate your standards every time you ask AI to implement a button.
+- In theory, the AI today can take over your computer and do your job.
+- But you want to limit the extent of what you AI can read and write.
+- You do not want your code commits to contain information derived from private documents.
+- You do not want AI to send Slack messages on your behalf.
 
 
 
-## Provide AI access to all the context available
 
-This is how the company implements a button
+
+## Empower AI with all the context available
+
+Your product manager asks you to build a button on your website.
+
+This is how the process of implementing a button goes
 
 - Leadership wants to focus on a certain aspect (improve product experience)
 - Research was done, feedback was solicited on what is the biggest pain points in product experience
@@ -103,32 +104,57 @@ However, all the information is not in one place. This is where all the informat
 - You are informed through Slack that the button is ready for implementation
 - Your code lives on Github
 
-You want to connect AI to all these data sources.
+You want to connect AI to all these data sources. AI should be given access to all the internally public information so that it can gather all the context it needs to do well at the job. You need to invest in tools that AI can use to access all the context they want.
 
 
 
-## Allow AI to execute, with guardrails
+## Empower AI with the ability to execute
 
 This is how you implement a button, as a software engineer
 
 - You change the code
 - You deploy an internal version of the product
 - You test whether the button works.
+- You run the formatter, lint, and unittests.
 - Repeat if there an issue.
 
 This is manual. This is slow. You want to automate this process.
 
-In theory, the AI today can take over your computer and do your job.
-But you want to limit the extent of what you AI can read and write.
-You do not want your code commits to contain information derived from private documents.
-You do not want AI to send Slack messages on your behalf.
+You should provide AI access the ability to execute
+- Give AI the ability to edit code
+- Give AI the ability to initiate the deployment of an internal version of the product
+- Give AI the ability to the code development tools (formatter, lint, and unittests)
+- Give AI the ability to manipulate the browser to test whether the button works
+
+This means you need to build tools for AI. 
 
 Here, you want to limit AI to changing the code, and then test the code.
-You should build tools for the AI so that AI is able to deploy an internal version of the product and test whether the button works.
+You should build tools for the AI so that AI is able to deploy an internal version of the product and test whether the button works. You need to invest in tools that AI can use to effectively execute.
+
+
+## Empower AI to create memory
+
+Help AI to write good comments. You need to communicate to AI what good comments are.
+Help AI to write a good commit message. You need to communicate to AI what good commit messages are.
+
+You need to invest in standards that AI can follow to create memory.
 
 
 
-## Invest in processes
+## The mindset you need to have
+
+
+Your product manager asks you to build a button.
+
+Your first reaction should not be "how do I implement this button elegantly?". Your reaction should be - "how do I delegate this AI"?
+
+You should still think how an elegant implementation would look like. You should still have standards on what elegant implementation is.
+But you should be getting AI to implement the button - and implement it elegantly.
+AI should be meeting your standards, you should not need to regurgitate your standards every time you ask AI to implement a button.
+
+
+
+You need to invest.
 
 You are the factory manager, not a factor worker.
 You run the factory that build buttons, you do not build buttons yourself.
@@ -161,7 +187,8 @@ There are processes that you can wait for someone to unblock you.
 (TODO: add another example of a process that is worth investing now)
 
 
-## Propagate the good use of AI
+
+You need to promote good use of AI.
 
 Human engineers should share how they got AI to work, and the challenges they have faced.
 
@@ -171,12 +198,8 @@ In code review, comment on how your commit would have been done with AI, and dis
 
 
 
-## What is next
 
-Getting AI to improve your processes.
-AI should reflect on their work.
 
-(TODO)
 
 
 ## Footnotes
