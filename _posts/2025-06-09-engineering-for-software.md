@@ -1,83 +1,11 @@
 ---
 layout: post
-title: Engineering for Software (TBC)
+title: Engineering for Software
 ---
 
 Software engineering will soon become an effort to engineer and empower to get AI to write software.
 
-I write how you should do it, and what mindset do you need to have
-
-- If there is a mistake, think whether are you wrong or the AI is wrong.
-
-- You should build tools that AI is easy to use. Start from the command line.
-
-- Think of the blockers to AI productivity.
-
-- If there is a reproducible bug, it is easy for AI to solve.
-
-- The bottleneck will be communication. The bottleneck between humans has always been communication.
-
-- The more guardrails you give, the faster the AI can work. The more you restrict the model what the model can or cannot do, the more you trust it to not do the wrong things.
-
-- Better unit tests.
-
-- Better documentation in the code.
-
-- Single source of truth.
-
-- Build the knowledge graph so that AI can traverse.
-
-- Educate your colleagues on how to use AI. Maybe in the commit message should include how simple the instruction is. Get people to learn the capabilities.
-
-- Avoid investing effort where it will be overturned by better AI models. One frustrating thing is that the image models are blind and they report success when they should not. (Comment on what to do, what not to do)
-
-- Your role is to build processes and oversee results. Hence Engineering for Software.
-
-- You should connect your AI to data sources.
-
-- Stop tolerating suboptimal interfaces. Tools that return responses with verification. Products that forces you to go through a lot of information before getting anything useful.
-
-- You should use AI products where the product builder is aligned with your incentives.
-
-- Make it very obvious when the AI is cheating. If the AI need to write a special case cover up an error, the special case can be surfaced. Get other AI to catch cheating.
-
-- Optimize how much you want to read. Guide AI to communicate effectively. Commit messages should be short.
-
-- You no longer implement a button on the website. Sure you still decide to implement a button. You may be getting AI to implement the button. You now need to think of how to get AI to implement. You will improve the processes on getting AI to implement. You will unblock AI to implement.
-
-- Start with simple tasks. Delegate verifiable tasks first.
-
-
-- Think of AI as a very competent remote contract software engineer. The engineer in the company you respect the most, but from another company.
-- Think of what you are working on. Think whether is it something that you can done by the remote contract software engineer.
-- You need to feel that - I should not be doing this, this could have been done by someone else.
-- You need to build your own desire to delegate. When you are asked to implement a button, your first reaction should be - this is something that could have been done by an AI.
-
-- This does not mean copying your entire company history to the context length. You are tasked with implementing a button. Provide AI all the context. You should not need act as the translator for AI. Invest in building connections.
-
-- You should provide AI with access to these data. I think the model these days (Claude 4 Sonnet) is able to figure how what to search.
-
-- Give the example of implementing a button.
-
-- It is easier to leave AI to do whatever they want if you know the very few things AI has access to.
-- In theory, AI can take over your browser and function as an remote employee. In reality we are not there yet, although we will soon be there.
-
-
-- Avoid processes that do not make sense.
-
-- You should invest now. Tools that make it easier for AI also make it easier for humans. Some investments might not be worth it might be worth it now. (Give an example.)
-
-- Continue with the example of implementing a button.
-
-- As an engineering leader you unblock individual contributors to make contributions. Your role now is the engineering leader.
-
-
-- In theory, the AI today can take over your computer and do your job.
-- But you want to limit the extent of what you AI can read and write.
-- You do not want your code commits to contain information derived from private documents.
-- You do not want AI to send Slack messages on your behalf.
-
-
+I write how you should do it, and what mindset do you need to have.
 
 
 
@@ -106,6 +34,7 @@ However, all the information is not in one place. This is where all the informat
 
 You want to connect AI to all these data sources. AI should be given access to all the internally public information so that it can gather all the context it needs to do well at the job. You need to invest in tools that AI can use to access all the context they want.
 
+But context alone is not enough. AI needs to be able to act on that context.
 
 
 ## Empower AI with the ability to execute
@@ -131,62 +60,71 @@ This means you need to build tools for AI.
 Here, you want to limit AI to changing the code, and then test the code.
 You should build tools for the AI so that AI is able to deploy an internal version of the product and test whether the button works. You need to invest in tools that AI can use to effectively execute.
 
+Execution creates artifacts. But without proper documentation, those artifacts become technical debt.
+
 
 ## Empower AI to create memory
 
-Help AI to write good comments. You need to communicate to AI what good comments are.
-Help AI to write a good commit message. You need to communicate to AI what good commit messages are.
+When humans write code, they leave breadcrumbs - comments explaining why something was done, commit messages describing what changed, documentation explaining how systems work. AI should do the same.
 
-You need to invest in standards that AI can follow to create memory.
+Help AI to write good comments. You need to communicate to AI what good comments are. Not just what the code does (AI can already see that), but why it was written that way, what alternatives were considered, what constraints influenced the design.
 
+Help AI to write good commit messages. You need to communicate to AI what good commit messages are. A good commit message explains the motivation, not just the mechanics. "Add button to pin comments" is bad. "Enable users to highlight important discussions by pinning comments, addressing feedback from Q3 user survey" is good.
+
+Help AI to maintain documentation. When AI changes an API, it should update the API docs. When AI adds a feature, it should update the README. When AI discovers a gotcha, it should document it for the next engineer.
+
+You need to invest in standards that AI can follow to create memory. This memory becomes the context for future AI agents - and for future human engineers.
+
+These three pillars - context, execution, and memory - form the foundation of AI-powered software engineering. But having the tools is not enough. You need the right mindset to use them.
 
 
 ## The mindset you need to have
 
+### From implementer to orchestrator
 
 Your product manager asks you to build a button.
 
-Your first reaction should not be "how do I implement this button elegantly?". Your reaction should be - "how do I delegate this AI"?
+Your first reaction should not be "how do I implement this button elegantly?". Your reaction should be - "how do I delegate this to AI?"
 
 You should still think how an elegant implementation would look like. You should still have standards on what elegant implementation is.
 But you should be getting AI to implement the button - and implement it elegantly.
 AI should be meeting your standards, you should not need to regurgitate your standards every time you ask AI to implement a button.
 
-
+### The factory manager mindset
 
 You need to invest.
 
-You are the factory manager, not a factor worker.
-You run the factory that build buttons, you do not build buttons yourself.
+You are the factory manager, not a factory worker.
+You run the factory that builds buttons, you do not build buttons yourself.
 You implement processes so that you can easily and quickly build things, starting from buttons.
 
 As a software engineer, you should have standards on what good code is.
 You need to implement processes so that AI will follow these standards.
 
-There are processes that should already have been implemented
+### What processes to invest in
+
+There are processes that should already have been implemented:
 - Code linter, code formatter, and unittests
 - Guidelines for commit messages
 
 These are the standard processes in software engineering. Humans follow these standards. AI should also follow these standards.
 
-There are processes that is now worth investing. With Sonnet 4, as implemented in Claude Code, models today are good enough to power agents.
-- Making offline table queries. When I implement a button, I want to have a sense how often similar buttons are being clicked.
+There are processes that are now worth investing in. With Sonnet 4, as implemented in Claude Code, models today are good enough to power agents:
+
+- **Making offline table queries.** When I implement a button, I want to have a sense how often similar buttons are being clicked.
     We do record when and where people click buttons - and I need to write a SQL query to count the number of clicks.
     The idea here is to get the model to write SQL queries which is being executed, and the model will read the result and decide whether to search the code, or write another query, or report success.
-    When I implemented the tool last year (mid-2024), the performance is very bad - it could not choose the table to use and the columns to read, and I had to specify them for the model.
-    But in mid-2025, these performance issues I has been resolved.
+    When I implemented the tool last year (mid-2024), the performance was very bad - it could not choose the table to use and the columns to read, and I had to specify them for the model.
+    But in mid-2025, these performance issues have been resolved.
     There are still some defects (for example reporting that the click-through rate of the buttons is 100% without checking), but I expect the models to get better.
     Overall, the tool is already performing better than a contract data analyst.
 
-There are processes that you can wait for someone to unblock you.
+There are processes that you can wait for someone else to build:
 - Ideally you want coding tools like Claude Code to access all the internally public threads on Slack, and all the internally public Asana tasks.
     I think you can do what you want with Slack and Asana APIs.
     But I may not be building it, because I expect Slack and Asana to build them.
 
-
-(TODO: add another example of a process that is worth investing now)
-
-
+### Promoting AI adoption
 
 You need to promote good use of AI.
 
@@ -194,12 +132,33 @@ Human engineers should share how they got AI to work, and the challenges they ha
 
 In code review, comment on how your commit would have been done with AI, and discuss what is blocking AI from doing it.
 
-(TODO)
+You should establish practices that normalize AI delegation rather than manual implementation:
+
+- Create templates for AI prompts that work well in your codebase. Share successful prompts in your team's documentation.
+- Document patterns where AI consistently fails, so the team knows when human intervention is needed.
+- Include "AI implementation notes" in your pull requests - explain what you delegated to AI, what you had to do manually, and why.
+- Track metrics on AI effectiveness. How much time did AI save? What types of tasks does AI handle well in your specific codebase?
+- Train junior engineers to think "AI-first" - their first instinct should be to delegate to AI, not to implement manually.
+
+The goal is to shift the team culture from "I implemented this feature" to "I successfully got AI to implement this feature". This mental shift is crucial for productivity gains.
 
 
+## The future of software engineering
 
+Software engineering is transforming. The question is not whether AI will write code - it already does. The question is whether you will be the one orchestrating it.
 
+The engineers who thrive in this new world will be those who invest in the right infrastructure:
+- Tools that give AI access to context across all your systems
+- Tools that let AI execute and validate its own work
+- Standards that ensure AI creates maintainable, documented code
 
+But more importantly, they will be the ones who embrace the mindset shift. You are no longer paid to type code. You are paid to ensure the right code gets written, tested, documented, and deployed.
+
+Your value as a software engineer is not diminished - it is elevated. You move from being a craftsman making individual pieces to being an architect designing systems and processes. You move from writing code to ensuring code quality at scale.
+
+The button your product manager asked for? In the old world, you would spend hours implementing it. In the new world, you spend those hours making sure AI can implement not just this button, but every button that comes after it.
+
+That is engineering for software.
 
 
 ## Footnotes
