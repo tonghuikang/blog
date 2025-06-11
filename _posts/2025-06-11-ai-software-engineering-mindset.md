@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The mindset
+title: The mindset for AI software engineering
 ---
 AI will soon act as your peer software engineer. Similar to how you empower your human software engineer, this is how you empower your AI software engineer
 
