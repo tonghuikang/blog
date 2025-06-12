@@ -29,9 +29,9 @@ However, all the information is not in one place. This is where all the informat
 - You are informed through **Slack** that the button is ready for implementation
 - Your code lives on **Github**, which contains information on similar implementations, and what the company has tried in the past.
 
-You want to connect AI to all of these data sources. AI should be given access to all the internally public information so that it can gather all the context it needs to do well at the job. You need to invest in tools that AI can use to access all the context they want.
+You want to connect AI to all of these data sources. AI should be given access to all the internally public information so that it can gather all the context it needs to do well at the job.
 
-AI is already good enough to search through your content. Similar to how a human would, they can think of the search terms they could use to figure out what to search. They could use the search results to refine their search terms. I have seen how AI is able to trace my company's huge monorepo [^3] for information. The AI will perform much better if I can share all the context available.
+AI is already good enough to search through your content. Similar to how a human would, they can reason and think of the search terms they could use to figure out what to search. They could use the search results to refine their search terms. I have seen how AI is able to trace my company's huge monorepo [^3] for information. The AI will perform even better if we can share all the context available. We should invest in tools that AI can use to access all the context they need.
 
 ![](/assets/search-example.png)
 
@@ -60,7 +60,7 @@ You want to make it easy for AI to execute. Human software engineers have these 
 
 [^1]: You also want to provide AI the ability to experiment in a safe environment. You should build separate tools, each with a different level of access. Actions that involve a lot of exploration (e.g. figuring out how to make the offline table query), build a tool with controlled access (e.g. read-only) so that any accidents that happen during exploration (e.g. dropping tables) would be contained. Actions that have a clear and obvious procedure (e.g. checking whether the button works) could have more access (use of web-browser which can have real-world impact), because we do not expect accidents to happen.
 
-[^2]: This is currently not easy at the company I work at. To deploy an internal version of a product, I need to open up three terminals and run three separate commands, and sometimes they fail. Of course, I would appreciate if this was just one command that is run in the background. You see that making investments to help AI execute could help humans execute too.
+[^2]: Currently, to deploy an internal version of a product, I need to open up three terminals and run a command for each of them in parallel. New hires often get confused by the process. You see that making investments to help AI execute could help humans execute better too.
 
 
 
