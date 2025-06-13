@@ -4,19 +4,22 @@ title: The mindset for AI software engineering
 ---
 
 
-AI will soon act as your peer software engineer. Similar to how you empower your human software engineer, this is how you empower your AI software engineer
-
-
 Notes to add
 - Velocity is measured differently. It is okay to wait for one week to solve a very hard problem - e.g. hard to reproduce bug. Compute cost might be a problem.
-- Tasks are as difficult as connecting a verifier.
+- Tasks are as difficult as connecting a verifier. Talk about how I spent two fix to change one line of code (C++ segfault).
 - Models will get better. Build the tools that anticipate the models getting better.
+- Do I need to remember this -> do I need to know how to execute this process?
+- two weeks to solve a segfault, that is bad
+- AI would prefer to use Claude Code
 
 
 Headings
 - The cost calculation has changed
-- Think of how to automate everything you do
-
+- everything you do, Think of how to automate
+- what are rare resources and what are not rare resources, limiting factors
+- rethink of the level scrutiny. You spend one hour writing a docstring, but do people really care?
+- text as the medium of communication. screw the janky UIs no more button clicking. AI would prefer to use Claude Code then some sus no-code tools
+- if AI cant execute, your processes and system is bad, not AI is bad
 
 
 ### From implementer to orchestrator

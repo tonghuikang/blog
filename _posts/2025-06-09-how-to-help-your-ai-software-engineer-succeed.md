@@ -1,8 +1,8 @@
 ---
 layout: post
-title: How to empower your AI software engineer
+title: How to help your AI software engineer succeed
 ---
-AI will soon act as your peer software engineer. Similar to how you empower your human software engineer peers, this is how you can empower your AI software engineer.
+AI will soon act as your peer software engineer. Similar to how you help your human software engineer peers succeed, this is how you can help your AI software engineer succeed.
 
 
 
