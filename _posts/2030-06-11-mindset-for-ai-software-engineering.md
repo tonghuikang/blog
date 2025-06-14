@@ -11,6 +11,7 @@ Notes to add
 - Do I need to remember this -> do I need to know how to execute this process?
 - two weeks to solve a segfault, that is bad
 - AI would prefer to use Claude Code
+- The amount of rigour
 
 
 Headings
@@ -20,6 +21,19 @@ Headings
 - rethink of the level scrutiny. You spend one hour writing a docstring, but do people really care?
 - text as the medium of communication. screw the janky UIs no more button clicking. AI would prefer to use Claude Code then some sus no-code tools
 - if AI cant execute, your processes and system is bad, not AI is bad
+- You should understand the system more.
+
+What has not changed
+- You still need to build systems that is easy to modify
+
+
+Headings
+- Think of how you can automate everything you do
+- Think of how you can verify everything you do
+- Make your work verifiable
+	- Not more trust me
+- Some questions you think is hard to answer (and not worth it to answer) could now be answered
+
 
 
 ### From implementer to orchestrator
@@ -32,6 +46,7 @@ You should still think how an elegant implementation would look like. You should
 But you should be getting AI to implement the button - and implement it elegantly.
 AI should be meeting your standards, you should not need to regurgitate your standards every time you ask AI to implement a button.
 
+
 ### The factory manager mindset
 
 You need to invest.
@@ -42,6 +57,7 @@ You implement processes so that you can easily and quickly build things, startin
 
 As a software engineer, you should have standards on what good code is.
 You need to implement processes so that AI will follow these standards.
+
 
 ### What processes to invest in
 

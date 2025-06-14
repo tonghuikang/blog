@@ -2,15 +2,126 @@
 layout: post
 title: We should scale eval
 ---
+We should evaluate on everything. This is where to find what to evaluate on.
 
-There are the following axes of scaling
+## Product complaints
 
-- Pre-training
-- Post-training
-- Inference 
+- https://x.com/chipro/status/1933905211308835092
 
-I suggest that we should also scale evaluation as well.
 
+
+
+
+
+## Product usage (add footnote instead)
+
+
+I do not know what privacy practices do frontier companies have.
+
+Is 
+
+- Anthropic Clio https://www.anthropic.com/research/clio
+
+
+
+
+## Feedback
+
+ChatGPT left-and-right comparison
+
+If you want to train
+
+
+
+
+## Textbooks
+
+Reading the textbook - do the exercises (cite example), do the homework
+
+If you want to train on a textbook, traditionally serialize the textbook into a stream of text and train the model to predict the next word in the textbook. You can do more with this.
+
+
+
+## Forums
+
+If you want to train on forum, traditionally serialize the forum into a stream of text and train the model to predict the next word in the forum. You can do more with this.
+
+
+
+
+## Benchmarks
+
+LMSys
+
+
+If you want to train on forum, traditionally serialize the forum into a stream of text and train the model to predict the next word in the forum. You can do more with this.
+
+LMSys
+
+
+
+
+
+
+
+Notes
+- Training on my data takes a different meaning
+
+
+
+
+
+These are the existing axes of scaling
+
+- Data (Amount of information used for pretraining, amount of information used for post-training)
+- Model (Larger models with more parameters)
+- Output (Getting the model to generate more outpu)
+
+
+## Find evaluation ideas from everywhere
+
+People using your product. Get permission, somehow. This is why frontier labs are building products.
+
+Published complains about chatbot products that might not be yours
+
+Reading the textbook - do the exercises (cite example)
+
+Forum replies - whether you understand the references (cite example)
+
+An alternate solution to a Codeforces problem (cite example)
+
+Benchmarks - LMSys. I suspect the Gemini team is closely monitoring the LMsys arena
+
+
+
+
+
+## Make everything a benchmark
+
+If the model could not figure out a joke - add it into a benchmark
+
+If the model fails at simple math - add it to a benchmark
+
+The size should be as big as Wikipedia
+
+
+
+
+## Now you can evaluate on everything
+
+It is okay to not perform perfectly in every benchmark. The first step to improvement is awareness.
+
+I think there are some things that LLMs should not be training on. (Sam Altman the perfect AI is a small model that has lots of context)
+
+
+
+
+
+
+Principles
+- Proactively find failure cases. Reported cases in the wild, reported cases from competitor's products. Ask for feedback from users. Fin
+- All failure cases should have an eval. N+1 evaluation.
+- Train the model on these evals. Before release, evaluate the improved model on these evals.
 
 
 
@@ -25,8 +136,10 @@ Diversity of evaluation tasks
 - You want to evaluate the model on all possible use cases
 
 
+
 Duration of evaluation tasks
 - You want your models not just solve 5-second problems, or just 5-minute problems, but 5-hour problems or even 5-year problems. Your evaluation should also test whether the models can solve tasks that require a long time to solve.
+
 
 
 Analysis of response
@@ -50,6 +163,7 @@ Analysis of process
 
 Analysis of training
 - If a model could not perform at a task, could you explain why? If a model could indeed perform at a task, could you explain why? What changes in the pre-training or post-training is needed to ensure that the model is able to solve the problem?
+
 
 
 Correctness standard of tasks
