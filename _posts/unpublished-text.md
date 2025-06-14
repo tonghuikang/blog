@@ -603,3 +603,74 @@ When you want to review the rulefile, you could analyze whether it is because of
 - But you want to limit the extent of what you AI can read and write.
 - You do not want your code commits to contain information derived from private documents.
 - You do not want AI to send Slack messages on your behalf.
+
+
+- 2030-03-23-can-you-cook-what-you-cannot-taste
+
+
+
+Does the KPI align? Distribution stats.
+
+Power versus responsibility
+
+Who is building it and who is using it
+
+Does the system learn?
+
+
+Who is suffering from the pain of your decisions
+
+
+
+
+
+I write some advice on how to analyze your chances at landing a specific role at a company.
+
+
+I do not think I should saying outright to people that you are not fit for a role.
+I don't think I want to easily give out assessment of your chances at getting an interview, especially for a role for a company that I am currently employed in.
+
+
+
+## Find out who was recently hired for the role
+
+What was their previous company.
+
+Did they attend the top schools.
+
+You need to do you own research. I think it is quite hard to do this research by yourself.
+
+What is their visa situation.
+
+What is their level they are hired at
+
+What do you is their backstory
+
+
+
+## Read the requirements
+
+When the role asks for someone how is experienced in the field, it meant what is meant.
+
+
+
+## Ask people
+
+
+
+
+
+
+
+
+I share some one-liners on prompt engineering.
+
+There might repeated content from my other posts, but of many of them could not be put in a logical order in other posts.
+
+Just use string filters lol
+
+I can give some explanation if requested.
+
+- Your job a prompt engineer is not to write prompt but to build a system that measure how bad your prompts are
+- Prompt are temporary, evals are forever (from someone)
+- TBC

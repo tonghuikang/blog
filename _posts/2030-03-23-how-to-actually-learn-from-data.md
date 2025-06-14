@@ -2,6 +2,11 @@
 layout: post
 title: We should scale eval
 ---
+Pretraining should not be just about traing
+
+
+
+
 We should evaluate on everything. This is where to find what to evaluate on.
 
 ## Product complaints
