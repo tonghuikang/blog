@@ -674,3 +674,10 @@ I can give some explanation if requested.
 - Your job a prompt engineer is not to write prompt but to build a system that measure how bad your prompts are
 - Prompt are temporary, evals are forever (from someone)
 - TBC
+
+
+
+
+Communication and empathy
+- What to do when your parent die
+- What to do when you catalytic converter is stolen

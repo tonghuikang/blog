@@ -2,7 +2,12 @@
 layout: post
 title: We should scale eval
 ---
-Pretraining should not be just about traing
+If you use your pretraining data 
+
+Pretraining should not be just about training the model to predict the next in the pretraining dataset.
+
+
+
 
 
 
@@ -18,6 +23,9 @@ We should evaluate on everything. This is where to find what to evaluate on.
 
 
 
+
+
+
 ## Product usage (add footnote instead)
 
 
@@ -27,6 +35,11 @@ Is
 
 - Anthropic Clio https://www.anthropic.com/research/clio
 
+
+
+## Essays
+
+What are the good words used? Could you have written something similar?
 
 
 
