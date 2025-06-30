@@ -60,7 +60,17 @@ How do you behave differently before and after learning? Will you now respond di
 
 Are there unintended consequences from learning something? Are you aware of these effects? How do you contain these effects?
 
+Could you learn from someone else's experiences?
+
+Could you learn from someone else's work?
+
 How do you check whether you have actually learned?
+
+How much effort do you put into learning?
+
+Do you think are you efficient at learning? What processes do you take to help make your learning more efficient?
+
+How do you learn from something that isn't perfect?
 
 
 
@@ -74,7 +84,7 @@ Do you like what are you doing? What are you doing something that you do not lik
 
 What do you find fun? Why do you find it fun? What are you naturally curious about?
 
-What do you regret doing? Why are you still repeatedly doing that?
+What do you regret doing? Why did you do it in the first place?
 
 
 
