@@ -96,6 +96,8 @@ How do you run an organization? How do you know that you are running the organiz
 
 How would you hire? What are the characteristics of the people you want to hire?
 
+Are you aware that you are hiring syncophants?
+
 How much information do you share? Why do you share or not share certain information?
 
 How much awareness do you want over the actions of your hires? When do you need to verify?

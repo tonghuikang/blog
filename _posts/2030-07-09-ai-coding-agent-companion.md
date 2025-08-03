@@ -13,9 +13,7 @@ Similarly, you should not just use AI to execute software engineering tasks. You
 ## Analyze the pain points
 
 The first place to find where the pain points are is to find where the user is in pain. The user is likely to be in pain when the user is literally cursing at the model
- - "wtf" [^2]
-
-[^2]: There are some privacy concerns though. To what extent of privacy the conversations between you and AI? To what extent is the words you utter at your office desk subject to privacy?
+ - "wtf"
 
 Some times the user is more polite
  - "please test"

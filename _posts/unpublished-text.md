@@ -856,4 +856,22 @@ The button your product manager asked for? In the old world, you would spend hou
 That is engineering for software.
 
 
-## Footnotes
+# You can verify with implied information
+
+You only have the answer. From the answer you can infer the hint
+
+
+
+
+# You can verify with alternate information
+
+Good writing
+
+How to screw up a press release.
+
+Everything that could have gone wrong.
+
+You don't just want to solve a problem. You want to solve the problem with all possible reasonable methods.
+
+
+
