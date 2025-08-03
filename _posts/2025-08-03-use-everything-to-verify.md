@@ -8,22 +8,35 @@ We could make better use of the same data. The same data can be used to build va
 
 
 
-# You can verify with the correct objective
+## You can verify with the correct objective
 
 You have a math problem and a solution you consider correct.
 
 > There exists a unique increasing geometric sequence of five 2-digit positive integers. What is their sum?
 
-The correct answer is 211. [^1] With a correct objective, you can train models to generate reasoning chains that reach the right answer while avoiding paths that lead to wrong answers. This is how you can use a correct objective to build a verification environment.
+The correct answer is 211. [^1] With a correct objective, you can now train models to generate reasoning chains that reach the right answer while avoiding paths that lead to wrong answers.
 
 [^1]: A longer writeup on this example is available [here](https://www.quora.com/What-is-reinforcement-fine-tuning/answer/Tong-Hui-Kang-1).
 
+Methods like [GRPO](https://arxiv.org/pdf/2402.03300) can help to train a model to solve a math problem just with the correct objective. This is in summary how GRPO works:
+
+- You prompt the model with the problem statement. You ask for the final solution to be produced within `<boxed>` and `</boxed>`.
+- The model generates 8 solutions.
+- If the solution is correct (as solely determined by the contents in `<boxed>` and `</boxed>`), the reward is 1. Otherwise, the solution is incorrect and the reward is 0.
+- With the mean reward and the standard deviation of the rewards, we compute the advantage of each solution so that the mean is zero and the standard deviation is 1 (hence "**Group Relative** Policy Optimization").
+- The advantage is used to calculate the loss on each token.
+- Repeat until success (cycling between different math problems).
+
+This is how you can use a correct objective to build a verification environment to train the LLM to perform better at math problems.
+
+Note that you do not need the solution, you just need the answer. I will describe how we could have used the solution to build more and better environments.
 
 
 
-# You can verify with incomplete data
 
-You can build a verification environment even if there isn't a single correct objective.
+## You can verify with incomplete data
+
+You can build a verification environment even if you do not have the correct objective.
 
 Someone sought comments on their resume in a [forum](https://www.reddit.com/r/EngineeringResumes/comments/1mbzxsf/student_this_resume_got_me_10_interviews_and_1/). The request got some replies.
 
@@ -31,25 +44,37 @@ However, the comments are not complete. Not everything is nitpicked [^3].
 
 [^3]: For example - I would nitpick "treatment efficiency of 15%" is ambiguous. When reading resumes, I read the first bullet point of the topmost experience. I have general comments [here](https://blog.huikang.dev/2022/10/17/resume-advice.html).
 
-Unlike the math problem, there isn't one correct answer. There are many correct answers, some more valuable than the others. The most upvoted response is not necessarily the complete solution.
+Unlike the math problem, there isn't one correct answer. There are many correct answers, some more valuable than others. The most upvoted response is not necessarily the complete solution.
 
-However, we can still build a verification environment, even if the data is incomplete. We can collate the individual responses. We could also collate external resources not found in the forum post - the forum has a [wiki](https://www.reddit.com/r/EngineeringResumes/wiki/index/) on how to craft your resume. The forum responses, external data, and general instructions can be used to build a rubric to score responses.
+However, we can still build a verification environment even if the data is incomplete. We can collate the individual responses. We could also collate external resources not found in the forum post - the forum has a [wiki](https://www.reddit.com/r/EngineeringResumes/wiki/index/) on how to craft your resume. The forum responses, external data, and general instructions can be used to build a rubric to score responses.
+
+The rubric would look something like this:
+
+- 1 point for identifying a trivial typo
+- 1 point for identifying repeated use of key words
+- 3 points for identifying miscapitalized terminologies (it is ChatGPT not CHATGPT or ChatGTP, which shows a lack of detail and familiarity with the technology)
+- A decaying multiplier so that the most important comment appears at the top
+- A huge penalty for hallucinations - for example, identifying a mistake not found in the resume
+- A score multiplier for making concrete suggestions
+- A penalty for over-long responses
+
+The rubric can be relative as well - given two responses, compare their first bullet points and determine which one is better, and so on. After making all the pairwise comparisons, we can assign rewards to each response and calculate the advantage.
 
 We can now score responses generated by the LLM. By training the LLM on the verification environment, we can ensure that the LLM is able to produce comprehensive and concise comments on your resume.
 
 
 
 
-# You can verify with intermediate objectives
+## You can verify with intermediate objectives
 
 
-Consider the following Problem 6 of the International Mathematical Olympiad.
+Consider the following Problem 6 of the International Mathematical Olympiad (IMO).
 
 > Consider a 2025 x 2025 grid of unit squares. Matilda wishes to place on the grid some rectangular tiles, possibly of different sizes, such that each side of every tile lies on a grid line and every unit square is covered by at most one tile.  
 > 
 > Determine the minimum number of tiles Matilda needs to place so that each row and each column of the grid has exactly one unit square that is not covered by any tile.
 
-Naively, you would think of a solution like this, that requires $2 n - 2$ tiles.
+You would think of a naive solution like this that requires 2n - 2 tiles.
 
 ```
 ⬜ 🟩 🟩 🟩
@@ -58,7 +83,7 @@ Naively, you would think of a solution like this, that requires $2 n - 2$ tiles.
 🟩 🟩 🟩 ⬜
 ```
 
-However, [optimal](https://web.evanchen.cc/exams/IMO-2025-notes.pdf) constructions would use $(n-1)^2 + 4(n-1)$ tiles, and look something like this [^4]
+However, [optimal](https://web.evanchen.cc/exams/IMO-2025-notes.pdf) constructions would use (n-1)^2 + 4(n-1) tiles and look something like this [^4]
 
 [^4]: For the purposes of illustrating how to verify with intermediate objectives, we ignore the requirement to prove the lower bound.
 
@@ -87,18 +112,15 @@ For 9 × 9
 
 To make the best use of this data, we should not merely award full credit for producing the correct construction, and no credit for not producing the correct construction.
 
-Even though the grading rubric does not provide partial credit, we should still give credit for the following observations
+Even though the IMO grading rubric does not provide partial credit, we should still give credit for the following observations
 
 - 2025 is a perfect square (45 × 45)
-- You can do better than $2 n - 2$ tiles
+- You can do better than 2n - 2 tiles
 - Optimal construction for 4 × 4 grid
 - Optimal construction for 9 × 9 grid
 - Optimal construction for 16 × 16 grid
 
 By building a verification environment that allows for intermediate objectives, we can reward the model for finding intermediate results, making it more likely to eventually generate and learn the full solution. This approach should improve the model's ability to find both intermediate steps and complete solutions on new problems.
-
- 
-
 
 We should make use of the data we have to build verification environments with intermediate objectives.
 
@@ -106,7 +128,7 @@ We should make use of the data we have to build verification environments with i
 
 
 
-# You can verify with incorrect data
+## You can verify with incorrect data
 
 You are given my Codeforces solutions that are [wrong](https://codeforces.com/submissions/huikang). Instead of discarding these solutions, you can use my solution to build a verification environment.
 
@@ -120,16 +142,17 @@ By training on incorrect data, you improve the LLM's ability to identify mistake
 
 
 
-# Scaling verification
+## Scaling verification
 
 To scale verification, there are multiple processes that could be automated.
 
-- Obtaining data (obtaining the math problems and the solutions)
-- Creating rubrics from the data (given a math problem and its solution, generate the rubrics)
-- Validating the rubrics from the data (ensuring the rubrics to score the math problem make sense)
-- Designing rubrics for novel data types (how do you verify whether a piece of writing is good)
-- Validating rubrics for novel data types (do the rubrics to verify good writing make sense)
+- Obtaining data (obtaining math problems and their solutions)
+- Creating rubrics from the data (given a math problem and its solution, generate rubrics)
+- Validating the rubrics from the data (ensuring the rubrics for scoring the math problem make sense)
+- Designing rubrics for novel data types (how do you verify whether a piece of writing is good?)
+- Validating rubrics for novel data types (do the rubrics for verifying good writing make sense?)
 
 By scaling verification, we can maximize how much the LLM can learn from the same piece of data.
 
 
+## Footnotes
