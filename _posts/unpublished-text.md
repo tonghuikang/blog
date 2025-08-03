@@ -875,3 +875,17 @@ You don't just want to solve a problem. You want to solve the problem with all p
 
 
 
+
+
+
+Assuming the text published is perfect, the published information is one of the many equally perfect texts. You want train your model . You need to mode . With this 
+
+
+to your model
+only one of the good . You want your model to be able 
+
+Given some data (math problem and solution, forum content, Codeforces submissions), we should build verification environment. We should automate the building of this environment so can scale the creation of verification environments. We should also automate the process of converting novel types of information into verifiable environments.
+
+Building verification environments should be automated. The design of verification environments should also be automated.
+
+Verification environments can be used across different training runs. I suspect LLM providers at the frontier already have some working system of ingesting data and producing verification environments.
