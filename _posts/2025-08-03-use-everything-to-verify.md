@@ -2,7 +2,7 @@
 layout: post
 title: How to use everything to build verification environments
 ---
-Traditionally, training LLMs involves using data to train the model to predict the next token.
+Traditionally, training LLMs involves using data to train the model to predict the next token in the data.
 
 We could make better use of the same data. The same data can be used to build various verification environments which can improve the LLM further.
 
@@ -24,12 +24,10 @@ Methods like [GRPO](https://arxiv.org/pdf/2402.03300) can help to train a model 
 - The model generates 8 solutions.
 - If the solution is correct (as solely determined by the contents in `<boxed>` and `</boxed>`), the reward is 1. Otherwise, the solution is incorrect and the reward is 0.
 - With the mean reward and the standard deviation of the rewards, we compute the advantage of each solution so that the mean is zero and the standard deviation is 1 (hence "**Group Relative** Policy Optimization").
-- The advantage is used to calculate the loss on each token.
+- The advantage is used to calculate the loss on each token, and we update the weights with backpropagation.
 - Repeat until success (cycling between different math problems).
 
 This is how you can use a correct objective to build a verification environment to train the LLM to perform better at math problems.
-
-Note that you do not need the solution, you just need the answer. I will describe how we could have used the solution to build more and better environments.
 
 
 
@@ -40,7 +38,7 @@ You can build a verification environment even if you do not have the correct obj
 
 Someone sought comments on their resume in a [forum](https://www.reddit.com/r/EngineeringResumes/comments/1mbzxsf/student_this_resume_got_me_10_interviews_and_1/). The request got some replies.
 
-However, the comments are not complete. Not everything is nitpicked [^3].
+However, the comments are not complete. Not everything is criticized in detail [^3].
 
 [^3]: For example - I would nitpick "treatment efficiency of 15%" is ambiguous. When reading resumes, I read the first bullet point of the topmost experience. I have general comments [here](https://blog.huikang.dev/2022/10/17/resume-advice.html).
 
@@ -52,11 +50,11 @@ The rubric would look something like this:
 
 - 1 point for identifying a trivial typo
 - 1 point for identifying repeated use of key words
-- 3 points for identifying miscapitalized terminologies (it is ChatGPT not CHATGPT or ChatGTP, which shows a lack of detail and familiarity with the technology)
+- 3 points for identifying miscapitalized terminologies, (it is ChatGPT not CHATGPT or ChatGTP, which shows a lack of detail and familiarity with the technology)
 - A decaying multiplier so that the most important comment appears at the top
 - A huge penalty for hallucinations - for example, identifying a mistake not found in the resume
 - A score multiplier for making concrete suggestions
-- A penalty for over-long responses
+- A penalty for overly long responses
 
 The rubric can be relative as well - given two responses, compare their first bullet points and determine which one is better, and so on. After making all the pairwise comparisons, we can assign rewards to each response and calculate the advantage.
 
@@ -83,7 +81,7 @@ You would think of a naive solution like this that requires 2n - 2 tiles.
 🟩 🟩 🟩 ⬜
 ```
 
-However, [optimal](https://web.evanchen.cc/exams/IMO-2025-notes.pdf) constructions would use (n-1)^2 + 4(n-1) tiles and look something like this [^4]
+However, the [optimal](https://web.evanchen.cc/exams/IMO-2025-notes.pdf) constructions would use (n-1)^2 + 4(n-1) tiles and look something like this [^4]
 
 [^4]: For the purposes of illustrating how to verify with intermediate objectives, we ignore the requirement to prove the lower bound.
 
@@ -130,16 +128,16 @@ We should make use of the data we have to build verification environments with i
 
 ## You can verify with incorrect data
 
-You are given my Codeforces solutions that are [wrong](https://codeforces.com/submissions/huikang). Instead of discarding these solutions, you can use my solution to build a verification environment.
+You are given my Codeforces solutions that are [wrong](https://codeforces.com/submissions/huikang). Instead of discarding these solutions, you can use my solution to build a verification environment too.
 
-This is how you can use my data to implement more verifiable tasks
+Here's how you can use this data to create verifiable tasks:
 
-- Determining whether my solution is wrong. My solution may look correct, but there is actually something wrong in it. An LLM that is good at coding should be able to determine whether my solution is wrong.
-- Changing the minimum amount of code to make my solution pass.
-- Finding a test case where my solution will fail.
+- Determining whether my solution is wrong. My solution may look correct, but there is actually something wrong in it.
+- Determining the key reason why my solution is wrong.
+- Changing the minimum amount of code to make my solution pass, or conclude that it is not salvageable.
+- Finding test cases where my solution will fail.
 
-By training on incorrect data, you improve the LLM's ability to identify mistakes and recover from mistakes.
-
+By training on incorrect data, you improve the LLM's ability to identify mistakes and recover from mistakes - especially mistakes that are not the fault of the LLM.
 
 
 ## Scaling verification
@@ -147,12 +145,14 @@ By training on incorrect data, you improve the LLM's ability to identify mistake
 To scale verification, there are multiple processes that could be automated.
 
 - Obtaining data (obtaining math problems and their solutions)
+- Identifying whether the data is useful (whether the math problem is interesting or even correct)
 - Creating rubrics from the data (given a math problem and its solution, generate rubrics)
 - Validating the rubrics from the data (ensuring the rubrics for scoring the math problem make sense)
 - Designing rubrics for novel data types (how do you verify whether a piece of writing is good?)
 - Validating rubrics for novel data types (do the rubrics for verifying good writing make sense?)
 
-By scaling verification, we can maximize how much the LLM can learn from the same piece of data.
+By making all possible verification environments from a given piece of data, we can maximize how much the LLM can learn from the same piece of data. By scaling verification by automating all the steps in the process, we build a system that is able to capture learning objectives from anything and learn everything.
+
 
 
 ## Footnotes
