@@ -889,3 +889,51 @@ Given some data (math problem and solution, forum content, Codeforces submission
 Building verification environments should be automated. The design of verification environments should also be automated.
 
 Verification environments can be used across different training runs. I suspect LLM providers at the frontier already have some working system of ingesting data and producing verification environments.
+
+
+
+I show how we can use random things on the Internet to build verification environments.
+
+
+## Published LLM bloopers
+
+Chip Huyen [tweeted](https://x.com/chipro/status/1952131790061326593/photo/1) this
+
+![](chip-em-dash%201.png)
+
+This is how we can build a verification environment
+- Collect other LLM bloopers (9.9 vs 9.11)
+- Annotate what is the correct answer
+- Build a verification environment to 
+
+
+## Random mathematics
+
+Someone on the Internet [asked](https://www.reddit.com/r/anime/comments/1lysymd/comment/n2x0fnl/) how much money did [Ruri](https://en.wikipedia.org/wiki/Ruri_Rocks) make for finding this gold nugget.
+
+![](ruri-gold.png)
+
+We should build a verification environment that is able to estimate the size of the nugget given various shots of the illustration, and then . 
+
+- Collect more random mathematics from the Internet
+- 
+
+
+## Figure out the reference
+
+https://x.com/corbtt/status/1942226180792603084
+
+![](grpo-reference.png)
+
+Find the answer in the comments.
+
+
+For the record, the reference is the algorithm for Group Relative Policy Optimization. "Identical starting conditions" refers to the prompt, "average performance" refers the mean reward, "normalized std dev" refers to the process where the calculated advantage for GRPO has a mean of zero and the standard deviation of one.
+
+Apparently Grok 3 [could not](https://x.com/i/grok/share/gOJIpCGKPWzOlD7SY6VUDEPbQ) figure out the reference.
+
+
+Traditionally, training LLMs involves using data to train the model to predict the next token.
+
+We could make better use of the same data. The same data can be used to build various verification environments which can improve the LLM further.
+
