@@ -2,9 +2,9 @@
 layout: post
 title: Life Lessons from Reinforcement Learning
 ---
-I watched Shusen Wang's [video lectures](https://www.youtube.com/@ShusenWang/playlists) on reinforcement learning. I think the video lectures is a much better starting point than Sutton's [book](http://incompleteideas.net/book/the-book-2nd.html) reinforcement learning.
+I have watched Shusen Wang's [video](https://www.youtube.com/@ShusenWang/playlists) [lectures](https://github.com/wangshusen/DRL/) on reinforcement learning. I think the video lectures will greatly help me with reading Sutton's [book](http://incompleteideas.net/book/the-book-2nd.html) on reinforcement learning - especially with the notation.
 
-I write down some life lessons, followed by an AI-generated compilation of Shusen Wang's slides.
+I also write down some life lessons, followed by an AI-generated compilation of Shusen Wang's slides.
 
 
 
@@ -12,7 +12,14 @@ I write down some life lessons, followed by an AI-generated compilation of Shuse
 
 If you do not define your reward, there is no direction on what you are optimizing for.
 
-The reward determines what you are optimizing for. If the reward is wrongly formulated, you are likely to end up with degenerate solutions.
+You need to be clear what you are optimizing for.
+
+Otherwise, you are likely not exactly optimizing what you really want to optimize.
+
+If you want someone to optimize for something, you need to be very careful in defining the rewards.
+
+For example you want someone to write correct and concise code that solve LeetCode problems.
+Without careful definition of what concise refers to, you might end up with unreadable code.
 
 
 
@@ -20,24 +27,42 @@ The reward determines what you are optimizing for. If the reward is wrongly form
 
 You cannot change your current position. You can only move forward in time.
 
-Similar to an large language model, you are a next token predictor.
+Similar to a large language model, you are a next token predictor.
 
-Your job is to produce the best move, for yourself.
+Your job is to produce the best move for yourself.
+
+You should be aware what your current position is, what your available moves are, and choose the best move.
+
+There is no point agonizing over past mistakes if it does not help you make a better decision.
 
 
 
 #### **There exists an ideal**
 
-There exist an ideal move for every position.
+There exists an ideal move for every position.
 
-There exist a correct answer to whether one position is better than another.
+There exists a correct answer to whether one position is better than another.
 
-There exist a correct answer to whether one move is better than the other.
+There exists a correct answer to whether one move is better than another.
 
-Even if you will never be able to calculate the ideal, it does not mean that the ideal does not exist. Even if you will never be able to calculate the correct answer, it does not mean the correct answer does not exist.
+Even if you will never be able to calculate the ideal, it does not mean that the ideal does not exist. Even if you will never be able to calculate the correct answer, it does not mean that the correct answer does not exist.
 
- For brevity, "God" here denotes the ideal.
+For brevity, "God" here denotes the ideal.
 
+
+#### **We live with approximations**
+
+For many early game chess positons, you will never know whether one move is better than the other.
+
+For many actions in live, you cannot fully enumerate over all the possible actions.
+
+You can only estimate.
+
+You can only estimate a finite number of times.
+
+Yet, you still need to make the best decision. Yet, you still need to learn.
+You need to be able to under uncertainty.
+You need to implement processes that still work even with approximations.
 
 
 #### **The best action that God takes for himself might not be the best action you could take for yourself**
@@ -54,30 +79,38 @@ You should figure out the best moves for yourself. The best move for another per
 
 #### **You might not be taking the best action you could take for yourself**
 
+It is possible that the action you are likely to take is not the best action you could take.
 
-However, it is possible that God plays a move that is you make you use of.
-
-Note that you might not be playing actions that are best for yourself either.
+For example, you might know that exercising regularly is the best action for your health, but you choose to skip it for immediate comfort.
 
 
 
 #### **You will over-estimate if you sample the best outcome**
 
-You have 10 coins. You filp each of them 100 times.
+You have 10 coins. You flip each of them 100 times.
 
 It is likely that one of the coins produces more than 50, or even more than 55 heads.
 
-You might wrongly conclude that the best coin is the one that produces the most heads, where is reality, all coins are fair coins.
+You might wrongly conclude that the best coin is the one that produces the most heads, when in reality, all coins are fair coins.
 
 Similarly, you have 10 possible actions to take, and you sample the results from each of the actions.
+
+There are some lessons from this.
+
+Do not look at the most successful outcome and think that you could have become like that.
+Plenty of luck is involved.
+
+If you look only at the sequence of most successful outcomes, you will overestimate the success of a given set of moves.
+
 
 
 #### **You can learn without playing through the entire game**
 
-TD methods update estimates based on other estimates without waiting for a final outcome.
+There are reinforcement learning methods that learn estimates based on other estimates without waiting for a final outcome.
 
-You could play a few steps. You do not need to reach the destination before starting to learn something.
+There are things to be learned even if you do not complete it.
 
+For example, you can build small projects and have a better appreciation of how much it takes to complete the full project without completing the full project.
 
 
 
@@ -454,65 +487,124 @@ $$y_t = r_t + \gamma Q_\pi(s_{t+1}, a_{t+1})$$
 ## 6. Policy Gradient Methods
 
 
-### Baseline Methods
+### REINFORCE with Baseline
 
 
-**Problem**: High variance in policy gradient estimates
+#### Foundation Concepts
+
+**Value Functions**:
+- **Discounted Return**: $U_t = R_t + \gamma R_{t+1} + \gamma^2 R_{t+2} + \gamma^3 R_{t+3} + \cdots$
+- **Action-Value Function**: $Q_\pi(s_t, a_t) = \mathbb{E}[U_t | s_t, a_t]$
+- **State-Value Function**: $V_\pi(s_t) = \mathbb{E}_A[Q_\pi(s_t, A) | s_t]$
 
 
-**Solution**: Use a baseline $b$ that is independent of action $A$:
+#### Policy Gradient with Baseline
+
+**Core Formula**:
+$$\frac{\partial V_\pi(s_t)}{\partial \theta} = \mathbb{E}_{A_t \sim \pi}\left[\frac{\partial \ln \pi(A_t | s_t; \theta)}{\partial \theta} \cdot (Q_\pi(s_t, A_t) - V_\pi(s_t))\right]$$
+
+**Key Insight**: $g(A_t) = \frac{\partial \ln \pi(a_t|s_t;\theta)}{\partial \theta} \cdot (Q_\pi(s_t, a_t) - V_\pi(s_t))$
 
 
-$$\mathbb{E}_{A \sim \pi}\left[b \cdot \frac{\partial \ln \pi(A  \vert  s;\theta)}{\partial \theta}\right] = b \cdot \mathbb{E}_{A \sim \pi}\left[\frac{\partial \ln \pi(A  \vert  s;\theta)}{\partial \theta}\right]$$
+#### Three Approximations
+
+1. **Monte Carlo Approximation**: Approximate expectation using one sample $a_t$
+2. **Return Approximation**: Approximate $Q_\pi(s_t, a_t)$ by $u_t = \sum_{i=t}^n \gamma^{i-t} r_i$
+3. **Value Network Approximation**: Approximate $V_\pi(s)$ by value network $v(s; w)$
 
 
-**Key Property**: The baseline doesn't introduce bias but reduces variance.
+#### Algorithm
+
+1. **Observe trajectory**: $s_t, a_t, r_t, s_{t+1}, a_{t+1}, r_{t+1}, ..., s_n, a_n, r_n$
+2. **Compute return**: $u_t = \sum_{i=t}^n \gamma^{i-t} r_i$
+3. **Compute error**: $\delta_t = v(s_t; w) - u_t$
+4. **Update policy network**: $\theta \leftarrow \theta - \beta \cdot \delta_t \cdot \frac{\partial \ln \pi(a_t | s_t;\theta)}{\partial \theta}$
+5. **Update value network**: $w \leftarrow w - \alpha \cdot \delta_t \cdot \frac{\partial v(s_t;w)}{\partial w}$
 
 
-**Common Baselines**:
+#### Network Architecture
 
-- Constant baseline
-
-- State-value function $V(s)$
-
-- Moving average of returns
+- **Policy Network**: State $s$ → Conv → Dense → Softmax → Action probabilities
+- **Value Network**: State $s$ → Conv → Dense → Scalar value $v(s; w)$
+- Networks can share parameters in early layers
 
 
-### Policy Gradient Theorem
+### Advantage Actor-Critic (A2C)
 
 
-**Objective**: Maximize expected return
+#### Architecture
 
-$$J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}[R(\tau)]$$
-
-
-**Policy Gradient**:
-
-$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T \nabla_\theta \ln \pi_\theta(a_t  \vert  s_t) \cdot R_t\right]$$
+**Two Neural Networks**:
+- **Policy Network (Actor)**: $\pi(a|s; \theta)$ - outputs action probabilities
+- **Value Network (Critic)**: $v(s; w)$ - outputs state value estimate
 
 
-**With Baseline**:
+#### Temporal Difference Learning
 
-$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T \nabla_\theta \ln \pi_\theta(a_t  \vert  s_t) \cdot (R_t - b(s_t))\right]$$
+**TD Target**: $y_t = r_t + \gamma \cdot v(s_{t+1}; w)$
 
+**TD Error**: $\delta_t = v(s_t; w) - y_t$
 
-### Actor-Critic Methods
-
-
-**Architecture**:
-
-- **Actor**: Policy network $\pi_\theta(a \vert s)$
-
-- **Critic**: Value network $V_\phi(s)$ or $Q_\phi(s,a)$
+**Key Difference from REINFORCE**: Uses bootstrapping with $v(s_{t+1}; w)$ instead of waiting for complete returns
 
 
-**Benefits**:
+#### Advantage Function
 
-- Lower variance than pure policy gradient
+$$\text{Advantage} = Q_\pi(s_t, a_t) - V_\pi(s_t)$$
 
-- More sample efficient than value-based methods
+Approximated as: $Q_\pi(s_t, a_t) \approx r_t + \gamma \cdot V_\pi(s_{t+1})$
 
-- Can handle continuous action spaces
+
+#### A2C Algorithm
+
+1. **Observe transition**: $(s_t, a_t, r_t, s_{t+1})$
+2. **Compute TD target**: $y_t = r_t + \gamma \cdot v(s_{t+1}; w)$
+3. **Compute TD error**: $\delta_t = v(s_t; w) - y_t$
+4. **Update critic**: $w \leftarrow w - \alpha \cdot \delta_t \cdot \frac{\partial v(s_t;w)}{\partial w}$
+5. **Update actor**: $\theta \leftarrow \theta + \beta \cdot \frac{\partial \ln \pi(a_t | s_t;\theta)}{\partial \theta} \cdot (y_t - v(s_t; w))$
+
+
+#### Mathematical Foundation
+
+**Theorem 1**: $Q_\pi(s_t, a_t) = \mathbb{E}_{S_{t+1}}[R_t + \gamma \cdot V_\pi(S_{t+1})]$
+
+**Theorem 2**: $V_\pi(s_t) = \mathbb{E}_{A_t,S_{t+1}}[R_t + \gamma \cdot V_\pi(S_{t+1})]$
+
+
+### REINFORCE versus A2C
+
+
+#### Key Differences
+
+**REINFORCE with Baseline**:
+- Uses Monte Carlo return: $u_t = \sum_{i=t}^n \gamma^{i-t} r_i$
+- Error: $\delta_t = v(s_t; w) - u_t$
+- Updates after complete episodes
+- No bootstrapping - uses actual returns
+- Unbiased but high variance
+
+**A2C**:
+- Uses TD target: $y_t = r_t + \gamma \cdot v(s_{t+1}; w)$
+- TD error: $\delta_t = v(s_t; w) - y_t$
+- Can update after each step
+- Uses bootstrapping from value function
+- Lower variance but introduces bias
+
+
+#### Multi-step A2C
+
+**Multi-step TD target**: $y_t = \sum_{i=0}^{m-1} \gamma^i r_{t+i} + \gamma^m v(s_{t+m}; w)$
+
+This provides a spectrum between one-step TD (m=1) and Monte Carlo (m=∞).
+
+
+#### Trade-offs
+
+- **Variance**: A2C has lower variance due to bootstrapping
+- **Bias**: REINFORCE is unbiased, A2C has bias from value approximation
+- **Sample Efficiency**: A2C is more sample efficient
+- **Update Frequency**: REINFORCE requires complete episodes, A2C can update online
+- **Complexity**: REINFORCE is simpler, A2C requires managing two networks
 
 
 ---
@@ -857,3 +949,8 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{s \sim \rho}\left[\nabla_\theta \mu_\the
 3. **Monitor Learning**: Plot learning curves
 
 4. **Ablation Studies**: Remove components to understand contributions
+
+
+# Footnotes
+
+These are my footnotes
