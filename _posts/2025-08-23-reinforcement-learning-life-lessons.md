@@ -29,7 +29,7 @@ We want to avoid optimizing for solutions that are roundabout.
 
 A policy considers a state and suggests a set of actions for the next step.
 
-A policy is denoted $\pi(a | s)$.
+A policy is denoted $\pi(a  \vert  s)$.
 Why is policy a set of actions rather than one actions
 There are some games where the suggested action has to be probabilistic otherwise you will be taken advantage of (rock-scissors-paper, poker).
 Even when we know that there are perfect actions, (e.g. chess games)
@@ -234,7 +234,7 @@ The RL paradigm consists of:
 
   
 
-$$\pi(a | s) = \mathbb{P}(A = a | S = s)$$
+$$\pi(a  \vert  s) = \mathbb{P}(A = a  \vert  S = s)$$
 
   
 
@@ -284,7 +284,7 @@ where $\gamma$ is the discount factor ($0 < \gamma \leq 1$).
 
   
 
-$$Q_\pi(s_t, a_t) = \mathbb{E}[U_t | S_t = s_t, A_t = a_t]$$
+$$Q_\pi(s_t, a_t) = \mathbb{E}[U_t  \vert  S_t = s_t, A_t = a_t]$$
 
   
 
@@ -334,15 +334,11 @@ OpenAI Gym is a toolkit for developing and comparing reinforcement learning algo
 
 Architecture:
 
-```
-
-State s → Conv Layer → Dense Layer → Q(s, "left"; w)
-
-→ Q(s, "right"; w)
-
-→ Q(s, "up"; w)
-
-```
+$$\text{State } s \rightarrow \text{Conv Layer} \rightarrow \text{Dense Layer} \rightarrow \begin{cases}
+Q(s, \text{"left"}; w) \\
+Q(s, \text{"right"}; w) \\
+Q(s, \text{"up"}; w)
+\end{cases}$$
 
   
 
@@ -436,7 +432,7 @@ State s → Conv Layer → Dense Layer → Q(s, "left"; w)
 
 1. Observe transition $(s_t, a_t, r_t, s_{t+1})$
 
-2. Sample $a_{t+1} \sim \pi(\cdot | s_{t+1})$ using current policy
+2. Sample $a_{t+1} \sim \pi(\cdot  \vert  s_{t+1})$ using current policy
 
 3. Compute TD target: $y_t = r_t + \gamma Q_\pi(s_{t+1}, a_{t+1})$
 
@@ -444,13 +440,9 @@ State s → Conv Layer → Dense Layer → Q(s, "left"; w)
 
 **Tabular Version**:
 
-```
+For each state-action pair $(s, a)$:
 
-For each state-action pair (s, a):
-
-Q(s, a) ← Q(s, a) + α[r + γQ(s', a') - Q(s, a)]
-
-```
+$$Q(s, a) \leftarrow Q(s, a) + \alpha[r + \gamma Q(s', a') - Q(s, a)]$$
 
   
 
@@ -474,15 +466,15 @@ Q(s, a) ← Q(s, a) + α[r + γQ(s', a') - Q(s, a)]
 
 Starting with the Bellman equation:
 
-$$Q_\pi(s_t, a_t) = \mathbb{E}[U_t | S_t = s_t, A_t = a_t]$$
+$$Q_\pi(s_t, a_t) = \mathbb{E}[U_t  \vert  S_t = s_t, A_t = a_t]$$
 
   
 
 Using the recursive property:
 
-$$Q_\pi(s_t, a_t) = \mathbb{E}[R_t + \gamma U_{t+1} | S_t = s_t, A_t = a_t]$$
+$$Q_\pi(s_t, a_t) = \mathbb{E}[R_t + \gamma U_{t+1}  \vert  S_t = s_t, A_t = a_t]$$
 
-$$= \mathbb{E}[R_t | S_t = s_t, A_t = a_t] + \gamma \mathbb{E}[Q_\pi(S_{t+1}, A_{t+1}) | S_t = s_t, A_t = a_t]$$
+$$= \mathbb{E}[R_t  \vert  S_t = s_t, A_t = a_t] + \gamma \mathbb{E}[Q_\pi(S_{t+1}, A_{t+1})  \vert  S_t = s_t, A_t = a_t]$$
 
   
 
@@ -584,7 +576,7 @@ $$y_t = r_t + \gamma Q_\pi(s_{t+1}, a_{t+1})$$
 
   
 
-$$\mathbb{E}_{A \sim \pi}\left[b \cdot \frac{\partial \ln \pi(A | s;\theta)}{\partial \theta}\right] = b \cdot \mathbb{E}_{A \sim \pi}\left[\frac{\partial \ln \pi(A | s;\theta)}{\partial \theta}\right]$$
+$$\mathbb{E}_{A \sim \pi}\left[b \cdot \frac{\partial \ln \pi(A  \vert  s;\theta)}{\partial \theta}\right] = b \cdot \mathbb{E}_{A \sim \pi}\left[\frac{\partial \ln \pi(A  \vert  s;\theta)}{\partial \theta}\right]$$
 
   
 
@@ -614,13 +606,13 @@ $$J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}[R(\tau)]$$
 
 **Policy Gradient**:
 
-$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T \nabla_\theta \ln \pi_\theta(a_t | s_t) \cdot R_t\right]$$
+$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T \nabla_\theta \ln \pi_\theta(a_t  \vert  s_t) \cdot R_t\right]$$
 
   
 
 **With Baseline**:
 
-$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T \nabla_\theta \ln \pi_\theta(a_t | s_t) \cdot (R_t - b(s_t))\right]$$
+$$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T \nabla_\theta \ln \pi_\theta(a_t  \vert  s_t) \cdot (R_t - b(s_t))\right]$$
 
   
 
@@ -630,7 +622,7 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T 
 
 **Architecture**:
 
-- **Actor**: Policy network $\pi_\theta(a|s)$
+- **Actor**: Policy network $\pi_\theta(a \vert s)$
 
 - **Critic**: Value network $V_\phi(s)$ or $Q_\phi(s,a)$
 
@@ -684,7 +676,7 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}\left[\sum_{t=0}^T 
 
 **Gaussian Policy**:
 
-$$\pi_\theta(a|s) = \mathcal{N}(\mu_\theta(s), \sigma_\theta^2(s))$$
+$$\pi_\theta(a \vert s) = \mathcal{N}(\mu_\theta(s), \sigma_\theta^2(s))$$
 
   
 
@@ -698,7 +690,7 @@ where:
 
 **Beta Policy** (for bounded actions):
 
-$$\pi_\theta(a|s) = \text{Beta}(\alpha_\theta(s), \beta_\theta(s))$$
+$$\pi_\theta(a \vert s) = \text{Beta}(\alpha_\theta(s), \beta_\theta(s))$$
 
   
 
@@ -714,7 +706,7 @@ $$\mu_\theta: S \rightarrow A$$
 
 **Policy Gradient**:
 
-$$\nabla_\theta J(\theta) = \mathbb{E}_{s \sim \rho}\left[\nabla_\theta \mu_\theta(s) \nabla_a Q(s,a)|_{a=\mu_\theta(s)}\right]$$
+$$\nabla_\theta J(\theta) = \mathbb{E}_{s \sim \rho}\left[\nabla_\theta \mu_\theta(s) \cdot \nabla_a Q(s,a)\Big\vert_{a=\mu_\theta(s)}\right]$$
 
   
 
@@ -834,9 +826,9 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{s \sim \rho}\left[\nabla_\theta \mu_\the
 
 - **Return**: $U_t = R_t + \gamma R_{t+1} + \gamma^2 R_{t+2} + \cdots$
 
-- **Action-Value**: $Q_\pi(s, a) = \mathbb{E}[U_t | S_t = s, A_t = a]$
+- **Action-Value**: $Q_\pi(s, a) = \mathbb{E}[U_t  \vert  S_t = s, A_t = a]$
 
-- **State-Value**: $V_\pi(s) = \mathbb{E}[U_t | S_t = s]$
+- **State-Value**: $V_\pi(s) = \mathbb{E}[U_t  \vert  S_t = s]$
 
   
 
@@ -852,17 +844,17 @@ $$\nabla_\theta J(\theta) = \mathbb{E}_{s \sim \rho}\left[\nabla_\theta \mu_\the
 
 ### Policy Gradient
 
-- **Basic PG**: $\nabla_\theta J(\theta) = \mathbb{E}\left[\nabla_\theta \ln \pi_\theta(a|s) \cdot R\right]$
+- **Basic PG**: $\nabla_\theta J(\theta) = \mathbb{E}\left[\nabla_\theta \ln \pi_\theta(a \vert s) \cdot R\right]$
 
-- **With Baseline**: $\nabla_\theta J(\theta) = \mathbb{E}\left[\nabla_\theta \ln \pi_\theta(a|s) \cdot (R - b)\right]$
+- **With Baseline**: $\nabla_\theta J(\theta) = \mathbb{E}\left[\nabla_\theta \ln \pi_\theta(a \vert s) \cdot (R - b)\right]$
 
   
 
 ### Continuous Control
 
-- **Gaussian Policy**: $\pi_\theta(a|s) = \mathcal{N}(\mu_\theta(s), \sigma_\theta^2(s))$
+- **Gaussian Policy**: $\pi_\theta(a \vert s) = \mathcal{N}(\mu_\theta(s), \sigma_\theta^2(s))$
 
-- **Deterministic PG**: $\nabla_\theta J = \mathbb{E}\left[\nabla_\theta \mu_\theta(s) \nabla_a Q(s,a)|_{a=\mu_\theta(s)}\right]$
+- **Deterministic PG**: $\nabla_\theta J = \mathbb{E}\left[\nabla_\theta \mu_\theta(s) \cdot \nabla_a Q(s,a)\Big\vert_{a=\mu_\theta(s)}\right]$
 
   
 
