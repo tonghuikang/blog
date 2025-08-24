@@ -4,85 +4,56 @@ title: Life Lessons from Reinforcement Learning
 ---
 I watched Shusen Wang's [video lectures](https://www.youtube.com/@ShusenWang/playlists) on reinforcement learning. I think the video lectures is a much better starting point than Sutton's [book](http://incompleteideas.net/book/the-book-2nd.html) reinforcement learning.
 
-I write down some life lessons, followed by an AI-generated compilation of Shusen Wang's slides. For brevity, "God" here denotes the best possible agent.
+I write down some life lessons, followed by an AI-generated compilation of Shusen Wang's slides.
 
 
-#### You need to define what you want
 
-You need to define your reward.
+#### **You need to define what you want**
 
-The reward is denoted $R$.
 If you do not define your reward, there is no direction on what you are optimizing for.
 
-#### You need to define how much you want it now
-
-You need to define the return.
-
-The return is defined based on much you value the reward you get today versus the reward you get tomorrow.
-The discount factor is denoted $\gamma$ .
-The return is denoted $G$. 
-$G = R_t + \gamma R_{t+1} + \gamma^2 R_{t+2} + \dots$
-In most cases, we want a discount factor that is less than one, even for scenarios where you do not really mind the difference of the length of the solution - like chess games.
-We want to avoid optimizing for solutions that are roundabout.
-
-#### Your job is to suggest the next move given your current position
-
-A policy considers a state and suggests a set of actions for the next step.
-
-A policy is denoted $\pi(a  \vert  s)$.
-Why is policy a set of actions rather than one actions
-There are some games where the suggested action has to be probabilistic otherwise you will be taken advantage of (rock-scissors-paper, poker).
-Even when we know that there are perfect actions, (e.g. chess games)
-
-#### There is a best possible move given a current position.
-
-There exist an optimal policy that maximizes the return.
-
-This is denoted as $\pi^*(a \vert s)$.
-
-
-#### It is possible to calculate how good positions are for you
-
-Given a state, there exist a function that calculates the best expected return.
-
-This is denoted as $V^*(s)$
-
-Given a state and a policy, there exist a function that calculates the expected return based on the policy.
-
-This is denoted as $V_{\pi}(s)$
+The reward determines what you are optimizing for. If the reward is wrongly formulated, you are likely to end up with degenerate solutions.
 
 
 
-#### It is possible to calculate how good actions are for you
+#### **Your job is to suggest the next move given your current position**
 
-Given a state and an action, there exist a function that calculates the optimal action-value
+You cannot change your current position. You can only move forward in time.
 
-This is denoted as $Q^*(s, a)$
+Similar to an large language model, you are a next token predictor.
 
-Given a state and a policy and an action, there exist a function that calculates the action-value
-
-This is denoted as $Q_{\pi}(s, a)$
+Your job is to produce the best move, for yourself.
 
 
 
-#### You can predict how good actions are choose the best action to take.
+#### **There exists an ideal**
 
-The best action to take at state $s$ is action $a$ where $Q^*(s, a)$ is maximized.
+There exist an ideal move for every position.
 
-Assuming you have made good estimates of $Q^*(s, a)$ for all action $a$.
+There exist a correct answer to whether one position is better than another.
 
+There exist a correct answer to whether one move is better than the other.
 
+Even if you will never be able to calculate the ideal, it does not mean that the ideal does not exist. Even if you will never be able to calculate the correct answer, it does not mean the correct answer does not exist.
 
-#### The best action that God takes might not be the best action you should take
-
-It is not necessary true that $a$ that maximizes $Q_{\pi}(s, a)$ is the same as that $a$ that maximizes $Q^*(s, a)$. 
-
-Intuitively, there are chess moves played by God that you do not understand.
-
-Unless you get God to play all the actions for you.
+ For brevity, "God" here denotes the ideal.
 
 
-#### The action you are taking might not be the best action you are taking
+
+#### **The best action that God takes for himself might not be the best action you could take for yourself**
+
+There are chess moves played by God that you do not understand.
+
+If you do not truly understand why the move is played, it is a bad move for you, even though it is the best move for God.
+
+God is not going to play all the actions for you.
+
+You should figure out the best moves for yourself. The best move for another person might not be the best move for you.
+
+
+
+#### **You might not be taking the best action you could take for yourself**
+
 
 However, it is possible that God plays a move that is you make you use of.
 
@@ -90,49 +61,36 @@ Note that you might not be playing actions that are best for yourself either.
 
 
 
-#### You will over-estimate
+#### **You will over-estimate if you sample the best outcome**
+
+You have 10 coins. You filp each of them 100 times.
+
+It is likely that one of the coins produces more than 50, or even more than 55 heads.
+
+You might wrongly conclude that the best coin is the one that produces the most heads, where is reality, all coins are fair coins.
+
+Similarly, you have 10 possible actions to take, and you sample the results from each of the actions.
+
+
+#### **You can learn without playing through the entire game**
+
+TD methods update estimates based on other estimates without waiting for a final outcome.
+
+You could play a few steps. You do not need to reach the destination before starting to learn something.
 
 
 
-
-There exist 
-
-There exist a set of optimal actions for every state.
-
-If you know the optimal action to take, you have the optimal policy.
-
-
-
-
-
-
-There exist 
-
-You should take the best action
-
-You are going to overestimate if you take the top of the estimate
-
-You can learn without playing the entire game in full
 
 
 ---
 
 
-# Deep Reinforcement Learning: Comprehensive Study Guide
+# Summary of Shusen Wang's slides
 
+The slides on Deep Reinforcement Learning are available on [Github](https://github.com/wangshusen/DRL/).
   
 
-**Author**: Shusen Wang, Stevens Institute of Technology
-
-**Source**: http://wangshusen.github.io/
-
-  
-
----
-
-  
-
-## Table of Contents
+### Table of Contents
 
   
 
