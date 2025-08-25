@@ -292,7 +292,8 @@ OpenAI Gym is a toolkit for developing and comparing reinforcement learning algo
 
 Architecture:
 
-$$\text{State } s \rightarrow \text{Conv Layer} \rightarrow \text{Dense Layer} \rightarrow \begin{cases}
+$$\text{State } s \rightarrow \text{Conv Layer} \rightarrow \text{Dense Layer} \rightarrow 
+\begin{cases}
 Q(s, \text{"left"}; w) \\
 Q(s, \text{"right"}; w) \\
 Q(s, \text{"up"}; w)
@@ -490,20 +491,29 @@ $$y_t = r_t + \gamma Q_\pi(s_{t+1}, a_{t+1})$$
 ### REINFORCE with Baseline
 
 
-#### Foundation Concepts
-
-**Value Functions**:
-- **Discounted Return**: $U_t = R_t + \gamma R_{t+1} + \gamma^2 R_{t+2} + \gamma^3 R_{t+3} + \cdots$
-- **Action-Value Function**: $Q_\pi(s_t, a_t) = \mathbb{E}[U_t | s_t, a_t]$
-- **State-Value Function**: $V_\pi(s_t) = \mathbb{E}_A[Q_\pi(s_t, A) | s_t]$
-
-
 #### Policy Gradient with Baseline
 
-**Core Formula**:
-$$\frac{\partial V_\pi(s_t)}{\partial \theta} = \mathbb{E}_{A_t \sim \pi}\left[\frac{\partial \ln \pi(A_t | s_t; \theta)}{\partial \theta} \cdot (Q_\pi(s_t, A_t) - V_\pi(s_t))\right]$$
+**Core Formula**[^baseline]:
 
-**Key Insight**: $g(A_t) = \frac{\partial \ln \pi(a_t|s_t;\theta)}{\partial \theta} \cdot (Q_\pi(s_t, a_t) - V_\pi(s_t))$
+$$\frac{\partial V_\pi(s_t)}{\partial \theta} = \mathbb{E}_{A_t \sim \pi}\left[\frac{\partial \ln \pi(A_t  \vert  s_t; \theta)}{\partial \theta} \cdot (Q_\pi(s_t, A_t) - V_\pi(s_t))\right] = \mathbb{E}_{A_t \sim \pi}\left[\frac{\partial \ln \pi(A_t  \vert  s_t; \theta)}{\partial \theta} \cdot Q_\pi(s_t, A_t)\right]$$
+
+**Key Insight**: $g(A_t) = \frac{\partial \ln \pi(a_t \vert s_t;\theta)}{\partial \theta} \cdot (Q_\pi(s_t, a_t) - V_\pi(s_t))$
+
+[^baseline]: I find baselines really interesting.
+
+    This is how I understand why we should use baselines - because what we could sample is finite.
+
+    Assume there are 100 actions,
+    10 of which (preferred) has a true action-value of 1000,
+    and all the other 90 of which (dispreferred) have an action-value of 999.
+    If we do not use baseline and we sample 10 actions,
+    gradient accent will make the dispreferred actions more likely as well - just that the preferred action is made more likely 1000/999 times more.
+    With a baseline, gradient accent will make the dispreferred actions less likely, and the preferred actions more likely.
+
+    I was also thinking - why don't use the average of sampled action values as the baseline,
+    instead of training a value function?
+    I understand that we want to approximate the value function at a certain state with just one trajectory.
+    Approximating the value function with trajectories might be much more expensive than training a value function.
 
 
 #### Three Approximations
@@ -518,7 +528,7 @@ $$\frac{\partial V_\pi(s_t)}{\partial \theta} = \mathbb{E}_{A_t \sim \pi}\left[\
 1. **Observe trajectory**: $s_t, a_t, r_t, s_{t+1}, a_{t+1}, r_{t+1}, ..., s_n, a_n, r_n$
 2. **Compute return**: $u_t = \sum_{i=t}^n \gamma^{i-t} r_i$
 3. **Compute error**: $\delta_t = v(s_t; w) - u_t$
-4. **Update policy network**: $\theta \leftarrow \theta - \beta \cdot \delta_t \cdot \frac{\partial \ln \pi(a_t | s_t;\theta)}{\partial \theta}$
+4. **Update policy network**: $\theta \leftarrow \theta - \beta \cdot \delta_t \cdot \frac{\partial \ln \pi(a_t  \vert  s_t;\theta)}{\partial \theta}$
 5. **Update value network**: $w \leftarrow w - \alpha \cdot \delta_t \cdot \frac{\partial v(s_t;w)}{\partial w}$
 
 
@@ -535,7 +545,7 @@ $$\frac{\partial V_\pi(s_t)}{\partial \theta} = \mathbb{E}_{A_t \sim \pi}\left[\
 #### Architecture
 
 **Two Neural Networks**:
-- **Policy Network (Actor)**: $\pi(a|s; \theta)$ - outputs action probabilities
+- **Policy Network (Actor)**: $\pi(a \vert s; \theta)$ - outputs action probabilities
 - **Value Network (Critic)**: $v(s; w)$ - outputs state value estimate
 
 
@@ -561,14 +571,14 @@ Approximated as: $Q_\pi(s_t, a_t) \approx r_t + \gamma \cdot V_\pi(s_{t+1})$
 2. **Compute TD target**: $y_t = r_t + \gamma \cdot v(s_{t+1}; w)$
 3. **Compute TD error**: $\delta_t = v(s_t; w) - y_t$
 4. **Update critic**: $w \leftarrow w - \alpha \cdot \delta_t \cdot \frac{\partial v(s_t;w)}{\partial w}$
-5. **Update actor**: $\theta \leftarrow \theta + \beta \cdot \frac{\partial \ln \pi(a_t | s_t;\theta)}{\partial \theta} \cdot (y_t - v(s_t; w))$
+5. **Update actor**: $\theta \leftarrow \theta + \beta \cdot \frac{\partial \ln \pi(a_t  \vert  s_t;\theta)}{\partial \theta} \cdot (y_t - v(s_t; w))$
 
 
 #### Mathematical Foundation
 
-**Theorem 1**: $Q_\pi(s_t, a_t) = \mathbb{E}_{S_{t+1}}[R_t + \gamma \cdot V_\pi(S_{t+1})]$
+**Theorem 1**: $$Q_\pi(s_t, a_t) = \mathbb{E}_{S_{t+1}}[R_t + \gamma \cdot V_\pi(S_{t+1})]$$
 
-**Theorem 2**: $V_\pi(s_t) = \mathbb{E}_{A_t,S_{t+1}}[R_t + \gamma \cdot V_\pi(S_{t+1})]$
+**Theorem 2**: $$V_\pi(s_t) = \mathbb{E}_{A_t,S_{t+1}}[R_t + \gamma \cdot V_\pi(S_{t+1})]$$
 
 
 ### REINFORCE versus A2C
@@ -633,7 +643,9 @@ MCTS consists of four iterative steps:
 - Start from the root node (current state $s_t$)
 - Traverse the tree using a selection policy
 - Balance exploration and exploitation using UCB (Upper Confidence Bound):
+
   $$UCB = Q(s,a) + c \sqrt{\frac{\ln N(s)}{N(s,a)}}$$
+  
   where:
   - $Q(s,a)$: Average value of action $a$ in state $s$
   - $N(s)$: Number of times state $s$ was visited
@@ -644,7 +656,9 @@ MCTS consists of four iterative steps:
 **Question**: What will be the opponent's action?
 - Given player action $a_t$, opponent's action $a_t'$ leads to new state $s_{t+1}$
 - Opponent's action is randomly sampled from policy:
+
   $$a_t' \sim \pi(\cdot \vert s_t'; \theta)$$
+  
   where $s_t'$ is the state observed by the opponent
 
 #### Step 3: Evaluation
@@ -655,13 +669,16 @@ MCTS consists of four iterative steps:
   - Win: $r_T = +1$
   - Lose: $r_T = -1$
 - Evaluate state $s_{t+1}$ using value network:
+
   $$v(s_{t+1}; \mathbf{w})$$
 
 #### Step 4: Backup
 - MCTS repeats simulations many times
 - Each child of $a_t$ has multiple recorded $V(s_{t+1})$ values
 - Update action-value:
+
   $$Q(a_t) = \text{mean}(\text{recorded } V\text{ values})$$
+  
 - The Q values will be used in Step 1 (selection)
 
 ### Decision Making After MCTS
@@ -669,7 +686,9 @@ MCTS consists of four iterative steps:
 After running MCTS simulations:
 - $N(a)$: Number of times action $a$ has been selected
 - Final decision:
+
   $$a_t = \arg\max_a N(a)$$
+  
 - Choose the action that was explored most frequently
 
 **Key Properties**:
