@@ -640,7 +640,7 @@ where S is sampled from state transitions and A is sampled from policy $\pi(A\ve
 
 TRPO repeats two steps:
 
-1. **Approximation**: Given $\theta_{old}$, construct $L(\theta\vert\theta_{old})$ that approximates $J(\theta)$ in the neighborhood of $\theta_{old}$
+1. **Approximation**: Given $$\theta_{old}$$, construct $$L(\theta\vert\theta_{old})$$ that approximates $$J(\theta)$$ in the neighborhood of $$\theta_{old}$$
 
 2. **Maximization**: In the trust region $\mathcal{N}(\theta_{old})$, find $\theta_{new}$ by:
    $$\theta_{new} \leftarrow \arg\max_{\theta \in \mathcal{N}(\theta_{old})} L(\theta\vert\theta_{old})$$
@@ -665,9 +665,9 @@ TRPO repeats two steps:
 
 #### TRPO vs Policy Gradient
 
-- Both are policy-based reinforcement learning methods with the same objective function: $J(\theta) = \mathbb{E}_S[V_\pi(S)]$
-- **Policy Gradient**: Maximizes $J(\theta)$ by stochastic gradient ascent
-- **TRPO**: Maximizes $J(\theta)$ by trust-region algorithm
+- Both are policy-based reinforcement learning methods with the same objective function: $$J(\theta) = \mathbb{E}_S[V_\pi(S)]$$
+- **Policy Gradient**: Maximizes $$J(\theta)$$ by stochastic gradient ascent
+- **TRPO**: Maximizes $$J(\theta)$$ by trust-region algorithm
 
 #### Why TRPO?
 
