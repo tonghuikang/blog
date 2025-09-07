@@ -47,18 +47,15 @@ image = modal.Image.debian_slim(python_version="3.13").pip_install(
 
 This looks much more complicated than I expected, and I have no idea what `cu12torch2.6cxx11abiFALSE-cp313-cp313` is. Apparently, Claude Code got this instruction from some Modal [documentation](https://modal.com/docs/examples/install_flash_attn). I would appreciate if this were cited in the reply and in the code comments.
 
-Similarly, if you are referencing the chat history to answer the question or generate an image, you have to declare that you have referenced the chat history [^simon-chat-history].
+Similarly, if you are referencing the chat history to answer the question or generate an image, you have to declare that you have referenced the chat history[^simon-chat-history].
 
 [^simon-chat-history]: Simon Willison on ChatGPT's [memory](https://simonwillison.net/2025/May/21/chatgpt-new-memory/) feature in 2024. When he asked for an image "dog in a pelican costume", he did not expect ChatGPT to refer to past chats and add a sign.
 
 
 
-
-
-
 ## AI should be steerable and immediately helpful
 
-There is this [discussion](https://x.com/jeremyphoward/status/1961680007396561208) on whether AI interfaces should ask clarifying questions [^openai-clarifying-questions], or be immediately helpful by making assumptions on the query.
+There is this [discussion](https://x.com/jeremyphoward/status/1961680007396561208) on whether AI interfaces should ask clarifying questions[^openai-clarifying-questions], or be immediately helpful by making assumptions on the query.
 
 [^openai-clarifying-questions]: OpenAI has this guidance on whether to ask [clarifying questions](https://model-spec.openai.com/2025-04-11.html#ask_clarifying_questions).
 
@@ -68,12 +65,11 @@ The interface should provide affordances for me to do so.
 
 One such affordance is search auto-complete (yeah this has existed before ChatGPT). As you type characters, it shows you how you could complete the query. If one of the queries happens to be exactly what you want, you can complete the query with fewer keystrokes - this is immediately helpful. If the query you want is not suggested, you just keep typing - this is steerable.
 
-We should have the same expectation for chat. Let's say you want to research where to go for lunch. You would say something like "Asian food for lunch in Mountain View" or "Asian lunch", depending on how much the AI knows about you. Then the AI comes up with suggestions immediately - this is immediately helpful. Then you follow up with "no noodles", and AI immediately[^imcomplete-completion] narrows down its queries, cutting off its previous reply[^multichannel]. You say "tabulate" and AI presents the information as a nice Markdown table immediately. You say "map", and AI presents a map immediately - this is steerable. Chat interfaces will evolve like this - companies will decide how much they want to be the first to do this.
+We should have the same expectation for chat. Let's say you want to decide where to go for lunch. You would say something like "Asian food for lunch in Mountain View" or "Asian lunch", depending on how much the AI knows about you. Then the AI comes up with suggestions immediately - this is immediately helpful. While the suggestions are streaming, you follow up with "no noodles", and AI immediately[^imcomplete-completion] narrows down its queries, cutting off its previous reply[^multichannel]. You say "tabulate" and AI presents the information as a nice Markdown table immediately. You say "map", and AI presents a map immediately - this is steerable. Chat interfaces will evolve to this - companies will decide how much they want to be the first to do this.
 
-[^imcomplete-completion]: Many of the current chat interfaces are not even able to respond to follow-up instructions immediately. Either they queue the messages and inject them once the previous completion is complete, or they ignore the previous completion entirely.
+[^imcomplete-completion]: Many of the current chat interfaces are not even able to respond to follow-up instructions immediately. Either you cannot send a message while the previous message is streaming, or they queue the messages and inject them once the previous completion is complete, or the injection ignores the previous completion entirely.
 
 [^multichannel]: LLMs currently cannot multitask. LLMs currently work on single-threaded conversations. LLMs are currently not able to generate instructions for tool calling and respond to the human at the same time. I have a [proposal](https://blog.huikang.dev/2025/05/14/multichannel-prediction.html) for how we can rearchitect the LLM interface to work with multi-threaded conversations.
-
 
 
 
@@ -88,6 +84,7 @@ However, I only find the [answer](https://x.com/arithmoquine/status/196417996332
 ![claude-seahorse](/assets/claude-seahorse.png)
 
 
+
 ## AI should continuously improve
 
 When you work with another human, you expect that it becomes easier to work with them over time. You expect their future performance to be better than their best prior performance.
@@ -99,7 +96,7 @@ How does the human naturally improve at working with you? This is probably what 
 - Where to find information? The human learns where to find information and no longer needs to be spoon-fed the information needed to do their job.
 - What are the processes? The human learns how the company works. If humans want to ship a change, they now know the materials needed and the key people to convince.
 - How do you communicate? The human learns your communication preferences - what information they need to see, and in what detail you present your findings.
-- What is your role? The human learns their role - are they supposed to only follow instructions, or are they supposed to give feedback on your decisions?
+- What is their role? The human learns their role - are they supposed to only follow instructions, or are they supposed to give feedback on your decisions?
 
 We have to think about what the equivalent is for AI products.
 
@@ -116,6 +113,7 @@ If you develop models, you should improve the models in these directions. Many o
 If you develop applications, you should first check whether you are writing your prompts incorrectly or calling the models incorrectly. You should design your product in a way that allows the model to follow these principles. Even so, the current iterations of models might not be aligned enough. You could implement scaffolds that help the model better adhere to the principles. There is this question of how much effort you should put into the scaffold when the next generation of models will make your work this quarter redundant. There is value in predicting the future so that you can better allocate your focus.
 
 I hope these principles should be the baseline expectations we have for AI products - because these principles will soon be the baseline expectations we have for AI products.
+
 
 
 ## Footnotes
