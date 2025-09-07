@@ -2,6 +2,8 @@
 layout: post
 title: My predictions for AI in 2025
 ---
+
+
 Random notes that I did not manage to put it in a nice post
 
 The costs are different. But many of the finite resources are still the same.
@@ -937,3 +939,52 @@ Traditionally, training LLMs involves using data to train the model to predict t
 
 We could make better use of the same data. The same data can be used to build various verification environments which can improve the LLM further.
 
+
+
+For example I ran a test script to reproduce a bug in the terminal of Claude Code, and ask Claude Code to fix it. Claude Code is expected to run the test script in its own terminal to check. Currently, it is not always the case.
+
+Apparently it is not enough for me to put this information in CLAUDE.md (instructions that Claude Code should have read before starting any work). I had to force Claude Code to go through a checklist
+- Even time Claude Code attempts to conclude, I will check for a string, which goes something like "I have addressed everything the checklist"
+- If the string does not appear in the response, I will disallow Claude Code to terminate, and I print the checklist
+- Claude Code is expected to respond to each item in the checklist
+- Claude Code should make remedies if any item in the checklist is not met.
+
+The  [checklist](https://github.com/tonghuikang/claude-code-template/blob/68481fdcbd9eaa088cda06c3b03ffc81bf5efcb4/.claude/checklist.py) looks like this. Apparently, this is still not enough. After the first iteration, Claude Code also has the tendency to print the string to skip the check.
+
+```
+Review the changes you have made in this conversation.
+
+Check that you
+
+- did not implement try-except unless specifically given approval
+- did not implement logic forks unless specifically given approval
+- did not silently fail
+- tested your changes
+	- if you have made changes since your last change you have to test again
+```
+
+
+
+This assumes that the AI is acting in the best interest of the human using it. This is not the case if you talk to a chatbot hosted by IKEA for example, because the role of the IKEA chatbot is to sell furniture. You cannot get responses from the IKEA chatbot if you ask whether you can get cheaper and equivalent furniture from Amazon, for example.
+
+
+
+Your own data should be easily accessible. Comment on Slack and Notion. GDPR. Gatekeep other people's data, sure, but your own data you should have control.
+
+
+
+
+### AI should work by default
+
+OpenAI [model spec](https://model-spec.openai.com/2025-04-11.html#general_principles) has been intentional at choosing sensible defaults for their models.
+
+One appeal of Claude Code is that it just works. I would enter a fresh computer and install Claude Code and it just works.
+
+Previously people has been prompting the model with promises of 
+
+AI models should just work without bombastic prompting. Instead of developers thinking how the model should be prompted, model providers should think how the model should be prompted. The burden on alignment is on the model provider, not the developer.
+
+CLAUDE.md is a good way to collect feedback on what the model is currently not doing by default.
+
+
+ We also need to learn what is blocking AI from achieving what humans can achieve - if you do not allow AI products to access certain information, you will need to spoonfeed them information.
