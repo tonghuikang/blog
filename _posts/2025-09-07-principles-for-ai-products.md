@@ -117,8 +117,4 @@ If you develop applications, you should first check whether you are writing your
 I hope these principles should be the baseline expectations we have for AI products - because these principles will soon be the baseline expectations we have for AI products.
 
 
-
-TO ADD:
-humans build their own processes, so should AI
-
 ## Footnotes
