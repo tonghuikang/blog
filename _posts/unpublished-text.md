@@ -1131,3 +1131,11 @@ The difference with heuristic competitions is that your opponent is dynamic now.
 Learning how to analyze your code, learning how to debug your output are emergent abilities we want to train the LLMs for.
 
 
+
+Software engineering is not just about execution. It is also about building processes to execute better. [^1]
+
+[^1]: In some sense, code itself is already a process for the machine to follow.
+
+Similarly, you should not just use AI to execute software engineering tasks. You should also use AI to build better software engineering processes. These are some steps you should follow.
+
+
