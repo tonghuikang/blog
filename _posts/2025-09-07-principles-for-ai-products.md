@@ -30,7 +30,7 @@ Imagine working with someone who does not check their own work. Would you trust 
 
 ## AI should be clear about where it gets its information
 
-AI needs to be clear about where it got its information. The citations have to be meaningful.
+AI needs to be clear about where it got its information. Information should be cited.
 
 Recently I wanted to install Flash Attention on Modal (my current go-to cloud service for personal projects). Claude Code wrote this code, seemingly out of nowhere, for me.
 
@@ -75,7 +75,9 @@ We should have the same expectation for chat. Let's say you want to decide where
 
 ## AI should respect my time and attention
 
-I recently found out about an interesting query to ask an offline LLM - "Is there a seahorse emoji?". I journaled it and wanted to credit the first person who asked this question to AI. This is a task suitable for deep research - you want AI to search multiple sources, compare and contrast them, and then tell me the answer.
+Recently, there is an interesting query to ask an offline LLM - "Is there a seahorse emoji?". It is a great query that even most LLMs today that are touted to have PhD level intelligence fumble with. I ought to give credit to the person who discovered this query, in my journals.
+
+Finding out who discovered this query is a task suitable for deep research - you want AI to search multiple sources, compare and contrast them, and then tell me the answer.
 
 I expect the answer to be very simple - find me the earliest verifiable publication, and also how confident you are with the answer.
 
@@ -115,5 +117,8 @@ If you develop applications, you should first check whether you are writing your
 I hope these principles should be the baseline expectations we have for AI products - because these principles will soon be the baseline expectations we have for AI products.
 
 
+
+TO ADD:
+humans build their own processes, so should AI
 
 ## Footnotes
