@@ -4,18 +4,17 @@ title: Improving AI software engineering processes
 ---
 A competent software engineer could fix an issue with just one instruction. However, the engineer usually needs to give their AI coding tools multiple follow-up instructions to do the same thing[^counting-instructions]. There is a gap here.
 
-These are some steps to follow for AI to execute software engineering tasks better.
+[^counting-instructions]: One instruction, not one LLM call. It is expected that AI products use multiple LLM calls, multiple code edits, multiple code executions to achieve the tasks. We should not expect AI products to be perfect at every step, and I argue that training models and building products with this expectation is bad. AI products should focus on what actually affects the user, in this case, avoiding requiring the user to point out obvious mistakes with follow-up instructions.
 
-[^counting-instructions]: One instruction, not one LLM call. It is expected that AI products use multiple LLM calls, multiple code edits, multiple code executions to achieve the tasks. We should not expect AI products to be perfect at every step, and I argue that training models and building products with this expectation is bad. AI products should focus on what actually affects the user, in this case, avoiding requiring the user to point out obvious mistakes with follow-up instructions. 
+If we want to systematically get AI to execute software engineering tasks better, these are some steps we could follow.
+
 
 
 ## Collect all the human interactions
 
-The git history has been useful to investigate what has been done in the past. However, it does not contain all the information.
-
 We need the conversation history to identify places for improvements, and to backtest improvements later.
 
-AI responses could always be regenerated. Code can always be rerun. However, human interactions cannot be reliably reproduced. Within the company, there should be some standardized processes to collect these conversations, store it somewhere and make it easy to read.
+AI responses could always be regenerated. Code can always be rerun. However, human interactions cannot be reliably reproduced. Within the company, there should be some standardized processes to collect these conversations, store them somewhere and make them easy to read.
 
 
 
@@ -34,9 +33,10 @@ Sometimes the user is more polite
 Certain statements from the AI suggest that AI is doing something wrong
 - "You're absolutely right"
 
-We want to collect the pain points. Currently we can read the conversation history between people working on the codebase and AI. If we want to make a change, we can cite all this evidence of pain.
+We want to aggregate the pain points. We can read the conversation history between people working on the codebase and AI[^pain]. If we want to make a change, we can cite all this evidence of pain.
 
-Note that pain may not necessarily be collected from the human. For example, if AI takes a long time to figure out the exact logic of the function, it could be interpreted as pain and be used for improvement.
+[^pain]: Note that pain may not necessarily be collected from the human. For example, if AI takes a long time to figure out the exact logic of the function, it could be interpreted as pain and be used for improvement.
+
 
 
 
@@ -88,9 +88,11 @@ You can maybe save on the backtesting step, if your change is very local. One su
 
 ## Where are we headed
 
+Models will get better over time. However, even the best software engineers in the world would require a good codebase to execute instructions efficiently. There is still a need to ensure that the code has good processes in place.
+
 People who make AI coding tools should make it very easy to improve processes. Currently, while it is possible to implement a Claude Code hook to deliver instructions when 100-line functions are edited, the code to implement the hook is very complicated. It is also difficult to test whether the hook is working correctly - being triggered at and only at the intended places, and delivering the intended effect. Even if the hook is correctly implemented, there is no tooling to backtest against previous pain points.
 
-We should expect AI to work through all these steps to improve processes too[^memory-feature]. Human employees are expected to not only follow processes, human employees are expected to improve processes. We should have the same expectation for AI.
+We should expect AI to work through all these steps to improve processes too[^memory-feature]. Human employees are expected to not only follow processes, human employees are expected to improve processes. It is a matter of time before we have the same expectation for AI.
 
 
 [^memory-feature]: On the other hand, AI coding tools should also stop promoting offering AI-powered band-aids that do not really solve the problem. AI coding tools usually have this memory feature where you can get AI to improve on their AGENTS.md or CLAUDE.md. This goes against my recommendation of keeping the system instructions short, and defer to code and processes instead. I would recommend promoting a product feature only when your own engineers actually use and love the feature.
