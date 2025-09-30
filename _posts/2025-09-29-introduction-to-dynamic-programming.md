@@ -7,7 +7,11 @@ These are some notes on dynamic programming.
 
 ## What is dynamic programming?
 
-It is a way to solve a problem by breaking it down into subproblems.
+Dynamic programming solves problems by
+
+- breaking them down into overlapping subproblems
+- solving the subproblems
+- reusing solutions to subproblems
 
 
 These are what I consider canonical problems in dynamic programming:
@@ -21,15 +25,15 @@ These are what I consider canonical problems in dynamic programming:
 
 You need to define the following:
 
-- What exactly is a state
-- How do you transition between states
+- What exactly is a state (what exactly is a subproblem - what is the (input) key and what is the (output) value)
+- How do you transition between states (how do you use solve the current subproblem with other subproblem)
 
 You need to estimate the following:
 
 - Total number of states
 - Total number of transitions
 
-Check this estimate to see whether you will exceed the time limit.
+Use this estimate to determine if your solution will run within the time limit.
 
 
 ## Top-down approach and bottom-up approach
@@ -38,12 +42,14 @@ In the top-down approach, you start by calling the function to compute the full 
 In the bottom-up approach, you start by calling the function to compute the smallest possible subproblems.
 
 
-A top-down approach would look like this.
+A top-down approach would look like this:
 
 ```python
+from functools import cache
+
 @cache
 def knapsack(weight_remaining: int, current_item: int) -> int:
-    # returns the maxmimum possible value
+    # returns the maximum possible value
 
     if current_item == len(item_values):
         return 0
@@ -89,18 +95,15 @@ for item_value, item_weight in zip(item_values, item_weights):
 # the result is max(dp)
 ```
 
-Top down approaches are easier to understand.
-The transition logic lives alongside the state logic.
-It is very clear that the state is (weight_remaining: int, current_item: int) and returns the maximum value.
-For the bottom-up approach, it is harder to see what exactly is the transition.
+Top-down approaches are easier to understand because the transition logic lives alongside the state definition.
+It's clear that the state is (weight_remaining, current_item) and the function returns the maximum value.
+The state representation and transitions are harder to understand in the bottom-up approach.
 
-Top down approaches might exceed time limit.
-For Python there is a default recursion limit of 1000.
-Also the Python code needs to maintain the call stack which might be additional overhead.
-For the bottom up approach it is clearer where the compute bottlenecks are.
+Top-down approaches might have high constant factors that can cause you to exceed the time limit.
+One source of the overhead is the Python call stack.
+For the bottom-up approach, it is clearer where the compute bottlenecks are.
 
-Top down approaches might manage sparsity better.
+Top-down approaches might manage sparsity better.
 Maybe for some variants of the knapsack problem you do not need to compute all the possible states, just a small subset of it.
 It is harder to implement a bottom-up approach that takes advantage of this observation.
-
 
