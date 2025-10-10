@@ -1139,3 +1139,20 @@ Software engineering is not just about execution. It is also about building proc
 Similarly, you should not just use AI to execute software engineering tasks. You should also use AI to build better software engineering processes. These are some steps you should follow.
 
 
+
+## Observations
+
+The recruiter will only have 6 seconds to look at the resume. What would the recruiter look at?
+
+Instead of spending one hour on one application, spend 5 minutes on 10 applications instead
+
+Your resume will stand out if you have URLs that link to the demos the reader can try
+
+Not too sure if it is a good idea to fake projects - you actually need to build the projects that you have claimed to build
+
+Put yourself in the shoes of the recruiter. By what standards do you think you could be hired?
+
+Some final checks - what are some things that must not be wrong (e.g. studies end date)
+
+Build a system for yourself to make applying to jobs more efficient
+
