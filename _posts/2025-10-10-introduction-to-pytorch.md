@@ -2,7 +2,7 @@
 layout: post
 title: Introduction to PyTorch
 ---
-These is some quick revision notes on PyTorch
+These are some quick revision notes on PyTorch
 
 
 A simple PyTorch model could look like this
@@ -23,7 +23,19 @@ class SimpleNN(nn.Module):
 ```
 
 
-The core initialization loop looks like this.
+Chaining modules together
+
+```python
+# Using nn.Sequential
+model = nn.Sequential(
+    nn.Linear(input_size, hidden_size),
+    nn.ReLU(),
+    nn.Linear(hidden_size, output_size)
+)
+```
+
+
+Model and optimizer
 
 ```python
 from torch.optim import AdamW
@@ -32,16 +44,35 @@ model = SimpleNN()
 optimizer = AdamW(model.parameters(), lr=learning_rate)
 ```
 
+Data
 
-The core training loop looks like this.
+```python
+from torchvision import datasets, transforms
 
-```python 
-predictions = model(inputs)
-loss = cross_entropy(predictions, labels)
-loss.backward()
-optimizer.step()
-optimizer.zero_grad()
+train_dataset = datasets.CIFAR10(root='./data', train=True, download=True,
+                                  transform=transforms.ToTensor())
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 ```
+
+
+Training loop
+
+```python
+model.train()
+for inputs, labels in train_loader:
+    predictions = model(inputs)
+    loss = cross_entropy(predictions, labels)
+    loss.backward()
+    optimizer.step()
+    optimizer.zero_grad()
+```
+
+
+What to look out for in training
+
+- Loss
+- Grad norm `torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=max_norm)`
+- Validation metrics
 
 
 Tools to use in PyTorch
