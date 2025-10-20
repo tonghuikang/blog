@@ -12,7 +12,7 @@ Before this concept, the default recommendation to improve your experience with 
 
 Maybe this is good enough for a hobby project or to just slightly align the model to your biggest preference, but for larger projects where you need to collaborate, this becomes unsustainable.
 
-We should not dump all the instructions for the AI model (Claude-Sonnet-4.5, GPT-5) to process. Hence we have **progressive disclosure** - we deliver the instructions to the model in stages as needed.
+We should not always upfront dump all the instructions for the AI model (Claude-Sonnet-4.5, GPT-5) to process. Hence we have **progressive disclosure** - we deliver the instructions to the model in stages as needed.
 
 The concept of progressive disclosure is not new - there is already a Wikipedia [page](https://en.wikipedia.org/wiki/Progressive_disclosure). When you first use a well-designed product, you will not be introduced to all the advanced and rarely used features immediately. A well-designed product should be easy to learn and less error prone. This concept is being applied to how AI models interact with the environment. A well-built environment should progressively disclose instructions to the AI model.
 
