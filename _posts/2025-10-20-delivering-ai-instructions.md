@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Delivering instructions for AI
+title: Delivering instructions to AI models
 ---
 Claude Skills [introduces](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview#how-skills-work) a concept called "[progressive disclosure](https://en.wikipedia.org/wiki/Progressive_disclosure)" to AI products.
 
