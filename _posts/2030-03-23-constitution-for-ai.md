@@ -2,7 +2,7 @@
 layout: post
 title: Constitution for AI
 ---
-
+auto tuning 
 Constitution
 
 - The human legal system has the following structure - constitution, legislation, case law - in this decreasing order of precedence.

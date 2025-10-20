@@ -1156,3 +1156,173 @@ Some final checks - what are some things that must not be wrong (e.g. studies en
 
 Build a system for yourself to make applying to jobs more efficient
 
+
+
+
+
+
+With my sparse time and complementary GPU credits, I made a big bet to solving . 
+
+Hypothesis
+- LLMs are already well trained at code implementations
+- Writing code is the most directly way to solve ARC-AGI-2
+- Hoping to get 6% correct to put myself in line for a Kaggle Gold medal
+
+Achievements
+- Understanding the pitfalls of GRPO
+- Generating many ARC-AGI solutions
+- Visualization on how the logprob changed over the iterations
+- Separating generation and training
+
+Things I have learnt
+- Logprob
+- Logit movements
+- Gradient norm - and how many parameters actually changed
+
+I built a large repository of code solutions for ARC-AGI. I experiment with a method
+
+Even though my LLM has not performed well, I have learnt a lot from the experience.
+
+Believe AI should implement processes for coding
+
+
+
+
+
+Product
+
+AI coding tools could be doing much more. I believe we have the capability, we just need to deploy it.
+
+I have opinions on AI products, and hope to make AI products better.
+
+
+
+
+Models
+
+Opinions on how AI models could be better - multichannel models
+
+Greater plans for AI models - competitive programming supercommunity
+
+
+
+
+
+
+I have some predictions on how AI will develop. 
+
+I hope to work in improving AI models
+
+Work on AI coding tools. Write CLAUDE.md
+
+Work on prompt engineering
+
+Finetuning LLMs. Made a bet. Did not really pay off. Crafted solutions that I consider golden. I still have some idea?
+
+AI building systems to make itself more useful.
+
+
+
+
+
+Here I will enumerate the design instructions.
+
+* Deliver everytime (CLAUDE.md) vs based on conditions (hooks / local CLAUDE.md)
+* if delivered based on conditions, how the conditions are triggered
+	* system prompt (if going to do something, read something)
+	* scaffolds (hooks, local CLAUDE.md)
+	* deterministic processes (unit tests)
+* How are the instructions added into the context
+	* The agent decides how much to read
+	* It could be reading a file
+	* It could be injected as a reminder
+
+
+
+
+
+In Claude Code, you write to CLAUDE.md. In other AI coding agents, you write this instructions in AGENTS.md.
+
+These instructions are loaded every time. This also means ...
+
+You can get AI to write this piece of text, but I am still inherently suspicious for the performance.
+
+
+
+
+
+
+
+## Claude Code hooks
+
+Hooks are triggered based on the workflow.
+
+
+
+
+
+There are different ways on how instructions are delivered
+* deliver everytime (CLAUDE.md) vs based on conditions (hooks / local CLAUDE.md)
+* if based on conditions, how the conditions are triggered - system prompt (if going to do something, read something), scaffolds (hooks, local CLAUDE.md), deterministic processes (unit tests)
+* what are the instructions - could be a markdown, or tool calling guide
+
+Root CLAUDE.md files are loaded everytime
+
+Local CLAUDE.md files are triggered when a file is being read by Claude Code
+
+The Claude Code edit hooks I added are triggered based deterministic conditions (string match), and reads a short string.
+
+Skills seems to be triggered based on the system prompt "Always loaded" (Level 1). When triggered, it will read the full skill file (Level 2). The skill file points to other resources (Level 3). The difference between skills and just adding doc reference to CLAUDE.md is probably Claude Code has some scaffold to automatically load the skill file?
+
+I like the "progressive disclosure" part. I don't think it is sustainable to go down the path of ever increasing CLAUDE.md and system prompts.
+
+The issue with MCP currently is that the MCP context is always loaded. The official Asana and Notion MCP combined is taking 60k tokens, which is 3 cents per every message by Sonnet API costs, even if you are not using the MCP.
+
+
+
+
+
+
+Even though I have not used Claude Skills (seems like this is only available on Claude.ai not Claude Code), I like this release for a few reasons
+
+
+
+Probably I will not use Claude Skills. If I want to tell the model where to find information without 
+
+I like how the design on delivering information with Claude Skills.
+
+
+
+
+
+
+
+
+
+Other ways I could imagine information could be triggered.
+
+On streaming versus on completion.
+
+
+## How the instruction is triggered
+
+pass
+
+
+
+
+## What does the instruction contains
+
+Generally just text. But maybe tool calling instructions.
+
+
+
+
+
+I expect models to not just follow instructions, but discover instructions and make instructions. We have trained models that are able to navigate the codebase to discover instructions, and react to instructions delivered with feedback.
+
+[^prediction]With greater awareness of the concept of progressive disclosure, I do not think we need models with 10 million tokens of context. The context length of humans is probably 1000 tokens, with 10k buffer but they can still operate more efficiently (in terms of tokens) and effectively (in terms of performance) than the frontier models and scaffold for many tasks. I suspect if we have a model that is just 10k context but has the ability to decide what to put and remove in their context they can perform better than a 200k context model with lower compute.
+
+Even if there are tasks that need 10 million tokens to do, we will. We already have auto-compacting models. 
+
+In any case, 
