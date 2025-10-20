@@ -2,7 +2,7 @@
 layout: post
 title: Delivering instructions to AI models
 ---
-Claude Skills [introduces](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview#how-skills-work) a concept called "[progressive disclosure](https://en.wikipedia.org/wiki/Progressive_disclosure)" to AI products.
+Claude Skills [introduces](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview#how-skills-work) a concept called progressive disclosure to AI products.
 
 > ... **progressive disclosure**: Claude loads information in stages as needed, rather than consuming context upfront.
 
@@ -10,9 +10,11 @@ I like this concept.
 
 Before this concept, the default recommendation to improve your experience with your favorite AI product was to add more instructions in the system instructions - for Claude Code you add to CLAUDE.md, for other AI coding tools you add to AGENTS.md, for ChatGPT and Claude.ai you write some preference about yourself.
 
-Maybe this is good enough for a hobby project or to just slightly align the model to your biggest preference, but for larger projects where you need to collaborate this becomes unsustainable.
+Maybe this is good enough for a hobby project or to just slightly align the model to your biggest preference, but for larger projects where you need to collaborate, this becomes unsustainable.
 
 We should not dump all the instructions for the AI model (Claude-Sonnet-4.5, GPT-5) to process. Hence we have **progressive disclosure** - we deliver the instructions to the model in stages as needed.
+
+The concept of progressive disclosure is not new - there is already a Wikipedia [page](https://en.wikipedia.org/wiki/Progressive_disclosure). When you first use a well-designed product, you will not be introduced to all the advanced and rarely used features immediately. A well-designed product should be easy to learn and less error prone. This concept is being applied to how AI models interact with the environment. A well-built environment should progressively disclose instructions to the AI model.
 
 I think it is worth it to explore the whole design space of how instructions are delivered to AI - which is what I hope to do here.
 
@@ -100,7 +102,7 @@ I implement a small change to the codebase by hand. I open up Claude Code and as
 
 Where were the instructions? In CLAUDE.md there is only an instruction on how to run unit tests with `pytest`. But how does Claude Code figure out what style I want to write my tests in? It reads the existing tests that are in the codebase. It discovered the instructions.
 
-Instructions could be discovered. You do not specifically need to add to CLAUDE.md or implement hooks to spoonfeed Claude Code on how to work on your codebase. This assumes that your codebase is well-written enough to provide consistent instructions on how to work on your code.
+Instructions could be discovered. You do not specifically need to add to CLAUDE.md or implement hooks to spoon-feed Claude Code on how to work on your codebase. This assumes that your codebase is well-written enough to provide consistent instructions on how to work on your code.
 
 
 
@@ -109,7 +111,7 @@ Instructions could be discovered. You do not specifically need to add to CLAUDE.
 One thing I like about Claude Code is that the tools give feedback instructions. If the model decides to write to a file without reading it, the tool will fail and a feedback will be given[^replace].
 
 ```
-> read writing to index.html without reading, to trigger a hook
+> writing to index.html without reading, to trigger a hook
 
 ⏺ I'll write to index.html without reading it first:
 
@@ -142,7 +144,7 @@ In a similar manner, you could also force certain instructions to be read every 
 
 Thanks for reading this far on how instructions could be delivered to AI models - there are deterministic and non-deterministic methods, there are different places for the instructions. How does understanding all the possible places where instructions could be injected help with your work?
 
-- Model providers will need to train their models (Claude-4.5-Sonnet, GPT-5) to follow instructions delivered to them. Models should also not expect all the instructions to be spoonfed to them at the beginning, they need to be able to take the initiative to discover instructions and follow instructions - for example writing tests closer to the style of the codebase.
+- Model providers will need to train their models (Claude-Sonnet-4.5, GPT-5) to follow instructions delivered to them. Models should also not expect all the instructions to be spoon-fed to them at the beginning, they need to be able to take the initiative to discover instructions and follow instructions - for example writing tests closer to the style of the codebase.
 - AI products (Claude Code) should educate users on where to add instructions for the AI to work with.
 - AI engineers who build on top of the AI products or AI models should have a view on where is a good place to deliver instructions. Instead of trying to hillclimb on the system prompt, your problem could be solved by figuring out how to deliver instructions better[^prompting].
 - End users should have an appreciation of how instructions are delivered.
