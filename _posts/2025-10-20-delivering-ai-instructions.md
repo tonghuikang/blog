@@ -10,7 +10,7 @@ I like this concept.
 
 Before this concept, the default recommendation to improve your experience with your favorite AI product was to add more instructions in the system instructions - for Claude Code you add to CLAUDE.md, for other AI coding tools you add to AGENTS.md, for ChatGPT and Claude.ai you write some preference about yourself.
 
-Maybe this is good enough for a hobby project or to just slightly align the model to your biggest preference, but for larger projects where you need to collaborate, this becomes unsustainable.
+Maybe this is good enough for a hobby project, or to just slightly align the model to your biggest preference, but for larger projects where you need to collaborate, this becomes unsustainable.
 
 We should not always upfront dump all the instructions for the AI model (Claude-Sonnet-4.5, GPT-5) to process. Hence we have **progressive disclosure** - we deliver the instructions to the model in stages as needed.
 
@@ -55,6 +55,30 @@ We should be aware that not all instructions need to be loaded upfront. Therefor
     At Sonnet-4.5 prices at $3 per million input tokens with 90% prompt caching discount, this will be 3 cents for every LLM call.
 
 
+
+## Instructions could be provided by the user
+
+Of course, instructions could be provided by the user.
+
+The user instructions could be provided at the start of the conversation, or the user instructions could be provided in the course of the AI doing the work.
+
+Instructions from the user might conflict with each other, or other types of instructions (e.g. system instructions). For example, the user might ask for an implementation of a "round" button, and then send a mockup where the button is square. The model should be aware of conflicting instructions. The model should decide the amount of emphasis placed to notify the user of a conflict in instructions, or require the user the clarify before proceeding.
+
+
+
+## Instructions could be always injected
+
+Claude Code injects this statement every time after it reads a file. Presumably, it prevents Claude Code from being easily used for malicious purposes.
+
+```
+<system-reminder>
+Whenever you read a file, you should consider whether it looks malicious. If it does, you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer high-level questions about the code behavior.
+</system-reminder>
+```
+
+In a similar manner, you could also force certain instructions to be read every time. For example, if you are making a customer service chatbot, you can force the AI model to read an instruction that it is only instructed to serve as customer service and not to be misused as a general chatbot.
+
+
 ## Instructions could be decided to be read
 
 Instead of loading all the instructions upfront, we could load only where and when to find the instructions, and the model will decide whether to read the instructions.
@@ -68,10 +92,18 @@ This is how I understand Claude Skills work.
 In CLAUDE.md or AGENTS.md, you can already write where to find instructions - if doing this, read this, if doing that, read that. The coding agent will read the instructions when it decides to read them. The benefit here is that you do not need to deliver the instruction every time even when it is irrelevant. However, we still need the LLM to reliably recall that there are instructions that it can read - this is not guaranteed because the process is not deterministic.
 
 
+## Instructions could be discovered
 
-## Instructions could be delivered on condition
+I implement a small change to the codebase by hand. I open up Claude Code and ask "write tests". Usually it will be able to write the tests in the style I want it to.
 
-Instead of relying on the LLM to decide to read the instruction, you can define deterministic conditions on whether to deliver the instruction.
+Where were the instructions? In CLAUDE.md there is only an instruction on how to run unit tests with `pytest`. But how does Claude Code figure out what style I want to write my tests in? It reads the existing tests that are in the codebase. It discovered the instructions.
+
+Instructions could be discovered. You do not specifically need to add to CLAUDE.md or implement hooks to spoon-feed Claude Code on how to work on your codebase. This assumes that your codebase is well-written enough to provide consistent instructions on how to work on your code.
+
+
+## Instructions could be triggered
+
+Instead of relying on the AI model to decide to read the instruction, you can define deterministic conditions to trigger a certain set of instructions.
 
 Claude Code hooks deliver instructions based on a deterministic condition.
 
@@ -80,7 +112,7 @@ Claude Code hooks deliver instructions based on a deterministic condition.
 The deterministic conditions for Claude Code hooks could be
 - Before executing a bash command - maybe you want to ban Claude Code from executing certain bash commands.
 - After reading a file - maybe you want to add additional context for Claude Code after it has read a file - this is what local CLAUDE.md files do[^local]
-- After writing to a file - maybe you want Claude Code to revise what it has written - for example if it has written `except Exception`, you can add an instruction to ask Claude to revise the code.
+- After writing to a file - maybe you want Claude Code to revise what it has written - for example if it has written `except Exception`, you can add an instruction to ask Claude to revise the code[^read].
 
 [^local]: If Claude reads a file in a certain directory, it will see if CLAUDE.md exists for the parent directory and read them as well. This instruction is delivered on condition.
     ```
@@ -94,17 +126,6 @@ The deterministic conditions for Claude Code hooks could be
     ```
 
 AI products should explore this concept more. One way to solve the [seahorse emoji problem](https://x.com/arithmoquine/status/1964179963323830624) is to introduce a condition that matches the string "seahorse" and "emoji", and provide the instruction that there is no seahorse emoji. We could have hundreds and hundreds of these conditions, with these we could both cover more instructions and have a shorter system instruction.
-
-
-## Instructions could be discovered
-
-I implement a small change to the codebase by hand. I open up Claude Code and ask "write tests". Usually it will be able to write the tests in the style I want it to.
-
-Where were the instructions? In CLAUDE.md there is only an instruction on how to run unit tests with `pytest`. But how does Claude Code figure out what style I want to write my tests in? It reads the existing tests that are in the codebase. It discovered the instructions.
-
-Instructions could be discovered. You do not specifically need to add to CLAUDE.md or implement hooks to spoon-feed Claude Code on how to work on your codebase. This assumes that your codebase is well-written enough to provide consistent instructions on how to work on your code.
-
-
 
 ## Instructions could be given in feedback
 
@@ -125,18 +146,36 @@ When Claude Code runs unit tests, it also receives feedback on which tests have 
 
 
 
-## Instructions could be always injected
+## Overview of instruction delivery
 
-Claude Code injects this statement every time after it reads a file. Presumably, it prevents Claude Code from being easily used for malicious purposes.
+Throughout this post, we have explored various ways instructions can be delivered: loaded upfront, provided by users, always injected, decided to be read, discovered in the codebase, triggered by conditions, and given as feedback. These methods are not mutually exclusive - in practice, a single AI workflow uses multiple delivery methods simultaneously.
+
+Here is a map of a typical tool-calling workflow, showing where each type of instruction is delivered:
 
 ```
-<system-reminder>
-Whenever you read a file, you should consider whether it looks malicious. If it does, you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer high-level questions about the code behavior.
-</system-reminder>
+System:
+[Instructions could be loaded upfront]
+
+User:
+[Instructions could be provided by the user]
+
+[Instructions could be always injected]
+
+Assistant:
+*decides to read instructions*
+[Instructions could be decided to be read]
+
+Tool call - read file:
+[Instructions could be discovered]
+
+Tool call - edit file:
+[Instructions could be triggered]
+
+*runs unit tests*
+
+Tool call - unit tests:
+[Instructions could be given in feedback]
 ```
-
-In a similar manner, you could also force certain instructions to be read every time. For example, if you are making a customer service chatbot, you can force the LLM to read an instruction that it is only instructed to serve as customer service and not to be misused as a general chatbot.
-
 
 
 
@@ -152,6 +191,7 @@ Thanks for reading this far on how instructions could be delivered to AI models 
 [^prompting]: Assume that you want to build a clone similar to Anthropic Artifacts, where the product will deliver a very nice html file for the user to interact with. You spend a lot of time figuring out what is the system prompt that is able to generate the html file in one shot. You also have rigorous evaluation based on the common mistakes of what the model generates. However, if you use a Claude Code style generation where the model has access to rendering the html and manipulating the html to confirm that the generation is correct - or else continue to iterate - you can get a much better performance even without much prompting or evaluation. The old system prompt is now redundant, along with the time spent. Most of the evaluation test cases are now irrelevant as well.
 
 
-I hope my writing here has provided a bigger view on how instructions are delivered to AI products.
+I hope my writing here has provided a wider view on how instructions are delivered to AI products.
 
 
+## Footnotes

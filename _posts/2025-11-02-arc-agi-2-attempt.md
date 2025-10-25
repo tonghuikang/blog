@@ -7,7 +7,6 @@ Refer to GRPO
 
 
 What I bet on
-
 - Models are good at writing code. We see that small models could
 - ARC-AGI problems could easily be solved with code, if the instructions are given
 

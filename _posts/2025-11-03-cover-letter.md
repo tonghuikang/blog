@@ -10,17 +10,21 @@ To whom it may concern
 
 I would like to work on frontier AI models and products at your company.
 
-Currently I work on Quora's recommendation systems. I also spend my time at work building AI integrations - notably getting CLAUDE.md to work and Claude Code hooks, and unlocking AI access to more than just code and unit testing.
+Currently, I work at Quora integrating AI tools, while working on the recommendation system. I write and maintain the CLAUDE.md and hooks of Quora monorepo. I built the agentic query over Quora data lake and content.
 
-Things I have built - ARC-AGI-2 code dataset, ARC-AGI-2 finetuning attempt, 
-Smaller projects - electoral boundaries, participated with Meta AI Hackercup, 
-Some writeups - GRPO (pending), principles for AI product, TBC
+I have been an ardent user of LLMs and I have good intuition on where LLM responses are bad and how to improve them.
+
+Things I have built - ARC-AGI-2 code dataset, ARC-AGI-2 finetuning attempt
+Smaller projects - electoral boundaries, participated with Meta AI Hackercup 2024
+Some writeups - GRPO (pending), principles for AI product
+I still do LeetCode for fun.
 
 These are some things I hope to build
-- Competitive programming supercommunity
 - Multichannel models
+- Prompt decaching
+- Competitive programming supercommunity
 
-Of course, I am happy to start out in any relevant position that work.
+Of course, I am happy to start out in any relevant position that works.
 
 Linked copy is available on cover.huikang.dev.
 
