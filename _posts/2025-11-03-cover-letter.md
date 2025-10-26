@@ -10,7 +10,7 @@ To whom it may concern
 
 I would like to work on frontier AI models and products at your company.
 
-Currently, I work at Quora integrating AI tools, while working on the recommendation system. I write and maintain the CLAUDE.md and hooks of Quora monorepo. I built the agentic query over Quora data lake and content.
+I work at Quora, currently integrating AI tools like Claude Code while working on the recommendation system. I write and maintain the CLAUDE.md and hooks of Quora monorepo. I built the agentic query over Quora data lake and content.
 
 I have been an ardent user of LLMs and I have good intuition on where LLM responses are bad and how to improve them.
 

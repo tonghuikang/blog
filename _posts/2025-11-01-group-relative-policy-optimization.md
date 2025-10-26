@@ -4,6 +4,10 @@ title: Group Relative Policy Optimization
 ---
 
 
+This is the formula presented in the GRPO paper
+
+
+
 # Intuition
 
 In supervised finetuning - 
