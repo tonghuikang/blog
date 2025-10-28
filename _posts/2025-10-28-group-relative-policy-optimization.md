@@ -26,8 +26,6 @@ Let me break down this expression component by component:
 
 **The $\frac{1}{\vert o_i \vert}$ term**: This averages over all tokens in sequence $i$. The sequence $o_i$ has length $\vert o_i \vert$, so we sum over time steps $t=1$ to $\vert o_i \vert$ and normalize by sequence length.
 
-**The KL term**: The expression $$\beta \mathbb{D}_{KL}[\pi_{\theta} \vert\vert \pi_{ref}]$$ is a regularization term (subtracted from the objective) that penalizes the new policy $$\pi_\theta$$ from diverging too far from the reference policy $$\pi_{ref}$$. The coefficient $$\beta$$ controls the strength of this constraint.
-
 **The advantage $\hat{A}_{i,t}$**: This is calculated as the group-relative advantage. For token $t$ in sequence $i$:
 
 $$\hat{A}_{i,t} = \tilde{r}_i = \frac{R(o_i) - \frac{1}{G}\sum_{j=1}^G R(o_j)}{\text{std}(R(o_1), \ldots, R(o_G))}$$
@@ -35,22 +33,78 @@ $$\hat{A}_{i,t} = \tilde{r}_i = \frac{R(o_i) - \frac{1}{G}\sum_{j=1}^G R(o_j)}{\
 where $R(o_i)$ is the reward for sequence $i$. The advantage is computed by subtracting the mean reward across all $G$ sequences in the group and dividing by the group standard deviation to normalize the advantages. Note that the advantage is constant for all tokens in a sequence (it doesn't depend on $t$).
 
 
-**What is the probability ratio?**
+**The probability ratio**:
 
-The ratio $$\frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}$$ is the importance sampling ratio:
+$$\frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}$$
 
-- The numerator is $$\pi_\theta(o_{i,t} | q, o_{i,<t})$$: the probability of token $$o_{i,t}$$ under the current policy $$\pi_\theta$$ being optimized
-- The denominator is $$\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})$$: the probability of the same token under the old policy $$\pi_{\theta_{old}}$$ from the previous iteration
+- The numerator $\pi_\theta(o_{i,t} \vert q, o_{i,<t})$ is the probability of token $o_{i,t}$ under the current policy $\pi_\theta$ being optimized
+- The denominator $\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})$ is the probability of the same token under the old policy $\pi_{\theta_{old}}$ from the previous iteration
 
-This ratio tells us how much more or less likely the token is under the new policy compared to the old policy.
+Note that if pi old already 0.99, the probability ratio cannot increase to 1.1, because probability cannot be more than one.
 
-If the advantage is positive, you are maximizing the ratio (multiplied by the advantage) until it reaches $$1 + \epsilon$$. In other words, you are increasing the probability of every token in the positive-advantage sequence by up to a factor of $$1 + \epsilon$$ (typically $$\epsilon = 0.2$$, so up to 20% increase).
+**The clipped objective**:
 
-If the advantage is negative, you are maximizing the ratio (which means minimizing it when multiplied by the negative advantage) until it reaches $$1 - \epsilon$$. This decreases the probability of every token in the negative-advantage sequence by up to a factor of $$1 - \epsilon$$ (typically down to 0.8, so up to 20% decrease)
+$$\min \left[ \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right]$$
 
-There is this KL divergence term.
+Factoring out the advantage, with abridged notation:
 
-Note that this is an objective function. It is not a loss function. This is not meant to be differentiable.
+$$\hat{A} \cdot \min \left[ \frac{\pi_\theta}{\pi_{\theta_{old}}}, \text{clip} \left( \frac{\pi_\theta}{\pi_{\theta_{old}}}, 1 - \epsilon, 1 + \epsilon \right) \right]$$
+
+This min operation implements the clipping behavior:
+
+**When advantage is positive** ($\hat{A} > 0$):
+We will increase $\pi_\theta$ until the ratio reaches $1 + \epsilon$. In other words, we will increase $\pi_\theta$ until it is $(1 + \epsilon) \times \pi_{\theta_{old}}$.
+
+
+**Example 1**: $\pi_{\theta_{old}} = 0.900$, $\epsilon = 0.2$, $\hat{A} = 1.0$
+
+| $\pi_{\theta_{old}}$ | $\pi_\theta$ | Ratio | Clipped ratio | Clipped objective |
+|---------------------|-------------|-------|---------------|-------------------|
+| 0.900 | 0.800 | 0.889 | 0.889 | 0.889 |
+| 0.900 | 0.900 | 1.000 | 1.000 | 1.000 |
+| 0.900 | 0.950 | 1.056 | 1.056 | 1.056 |
+| 0.900 | 1.000 | **1.111** | **1.111** | **1.111** |
+
+We have not maximized the objective until $\pi_\theta$ reaches exactly 1.000 (the probability constraint). At this point, ratio = 1.111, which is still below the clip boundary of 1.2.
+
+**Example 2**: $\pi_{\theta_{old}} = 0.010$, $\epsilon = 0.2$, $\hat{A} = 1.0$
+
+| $\pi_{\theta_{old}}$ | $\pi_\theta$ | Ratio | Clipped ratio | Clipped objective |
+|---------------------|-------------|-------|---------------|-------------------|
+| 0.010 | 0.008 | 0.800 | 0.800 | 0.800 |
+| 0.010 | 0.010 | 1.000 | 1.000 | 1.000 |
+| 0.010 | 0.012 | **1.200** | **1.200** | **1.200** |
+| 0.010 | 0.100 | 10.000 | **1.200** | **1.200** |
+| 0.010 | 0.500 | 50.000 | **1.200** | **1.200** |
+
+Notice that any value of $\pi_\theta \geq 0.012$ have the same objective value (1.200) because they exceed the clip boundary. The clipped objective alone does not constrain how large the probability goes.
+
+**When advantage is negative** ($\hat{A} < 0$):
+We will decrease $\pi_\theta$ until the ratio reaches $1 - \epsilon$. In other words, we will decrease $\pi_\theta$ until it is $(1 - \epsilon) \times \pi_{\theta_{old}}$.
+
+**Example 3**: $\pi_{\theta_{old}} = 0.900$, $\epsilon = 0.2$, $\hat{A} = -1.0$
+
+| $\pi_{\theta_{old}}$ | $\pi_\theta$ | Ratio | Clipped ratio | Clipped objective |
+|---------------------|-------------|-------|---------------|-------------------|
+| 0.900 | 0.900 | 1.000 | 1.000 | -1.000 |
+| 0.900 | 0.800 | 0.889 | 0.889 | -0.889 |
+| 0.900 | 0.720 | **0.800** | **0.800** | **-0.800** |
+| 0.900 | 0.500 | 0.556 | **0.800** | **-0.800** |
+| 0.900 | 0.100 | 0.111 | **0.800** | **-0.800** |
+
+Notice that any value of $\pi_\theta \leq 0.720$ have the same objective value (-0.800) because they exceed the clip boundary. The clipped objective alone does not constrain how small the probability goes.
+
+
+
+**The KL term**: The expression $$\beta \mathbb{D}_{KL}[\pi_{\theta} \vert\vert \pi_{ref}]$$ is a regularization term (subtracted from the objective) that penalizes the new policy $$\pi_\theta$$ from diverging too far from the reference policy $$\pi_{ref}$$. The coefficient $$\beta$$ controls the strength of this constraint.
+
+The KL divergence is defined as:
+
+$$\mathbb{D}_{KL}\left[\pi_{\theta} || \pi_{ref}\right] = \frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})}- \log\frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})} - 1$$
+
+Even though the clipped objective alone does not constrain how large the probability goes for positive advantage sequences, or how small the probability goes for negative advantage sequences, the KL divergence term will control for this.
+
+TODO: Some worked example on whether the upper bound of pi theta if pi ref is 0.001.
 
 
 
