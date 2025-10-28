@@ -2,7 +2,8 @@
 layout: post
 title: Group Relative Policy Optimization
 ---
-The formula for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the DeepSeekMath paper.
+
+The expression for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the DeepSeekMath paper (submitted Feburary 2024).
 
 $$
 \begin{split}
@@ -11,18 +12,41 @@ $$
 \end{split}
 $$
 
-The advantage At is calculated with (formula).
+Let me break down this expression component by component:
 
-Understanding what is algorithm means
+**$\theta$**: The policy parameters we are optimizing. $\pi_\theta$ is the current policy, $\pi_{\theta_{old}}$ is the policy from the previous iteration, and $\pi_{ref}$ is a reference policy (typically the supervised fine-tuned model before RL training).
 
-What is the ratio ()?
+**$\mathcal{J}_{GRPO}(\theta)$**: This is the objective function to be *maximized* (not a loss to be minimized). The goal is to find parameters $\theta$ that maximize expected returns while staying close to the old policy.
 
-The numerator is 
-The denominator is 
+**Expectation $\mathbb{E}[\cdot]$**: We take the expectation over:
+- Questions $q$ sampled from the question distribution $P(Q)$
+- A group of $G$ output sequences $\\{o_1, o_2, ..., o_G\\}$ sampled from the old policy $\pi_{\theta_{old}}(O \vert q)$
 
-If the advantage is positive - you want will be maximizing (ratio) until it is more than . In other words, you are increasing the probability of every token in the positive sequence by 1 + e. 
+**The $\frac{1}{G}\sum_{i=1}^G$ term**: This averages the objective over all $G$ sampled outputs in the group. Each question gets $G$ different rollouts, and we aggregate their contributions equally.
 
-If the advantage is negative - you will be maximizing the (ratio) until it i
+**The $\frac{1}{\vert o_i \vert}$ term**: This averages over all tokens in sequence $i$. The sequence $o_i$ has length $\vert o_i \vert$, so we sum over time steps $t=1$ to $\vert o_i \vert$ and normalize by sequence length.
+
+**The KL term**: The expression $$\beta \mathbb{D}_{KL}[\pi_{\theta} \vert\vert \pi_{ref}]$$ is a regularization term (subtracted from the objective) that penalizes the new policy $$\pi_\theta$$ from diverging too far from the reference policy $$\pi_{ref}$$. The coefficient $$\beta$$ controls the strength of this constraint.
+
+**The advantage $\hat{A}_{i,t}$**: This is calculated as the group-relative advantage. For token $t$ in sequence $i$:
+
+$$\hat{A}_{i,t} = \tilde{r}_i = \frac{R(o_i) - \frac{1}{G}\sum_{j=1}^G R(o_j)}{\text{std}(R(o_1), \ldots, R(o_G))}$$
+
+where $R(o_i)$ is the reward for sequence $i$. The advantage is computed by subtracting the mean reward across all $G$ sequences in the group and dividing by the group standard deviation to normalize the advantages. Note that the advantage is constant for all tokens in a sequence (it doesn't depend on $t$).
+
+
+**What is the probability ratio?**
+
+The ratio $$\frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}$$ is the importance sampling ratio:
+
+- The numerator is $$\pi_\theta(o_{i,t} | q, o_{i,<t})$$: the probability of token $$o_{i,t}$$ under the current policy $$\pi_\theta$$ being optimized
+- The denominator is $$\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})$$: the probability of the same token under the old policy $$\pi_{\theta_{old}}$$ from the previous iteration
+
+This ratio tells us how much more or less likely the token is under the new policy compared to the old policy.
+
+If the advantage is positive, you are maximizing the ratio (multiplied by the advantage) until it reaches $$1 + \epsilon$$. In other words, you are increasing the probability of every token in the positive-advantage sequence by up to a factor of $$1 + \epsilon$$ (typically $$\epsilon = 0.2$$, so up to 20% increase).
+
+If the advantage is negative, you are maximizing the ratio (which means minimizing it when multiplied by the negative advantage) until it reaches $$1 - \epsilon$$. This decreases the probability of every token in the negative-advantage sequence by up to a factor of $$1 - \epsilon$$ (typically down to 0.8, so up to 20% decrease)
 
 There is this KL divergence term.
 
