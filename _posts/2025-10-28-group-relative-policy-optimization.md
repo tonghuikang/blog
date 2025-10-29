@@ -14,9 +14,15 @@ $$
 
 Let me break down this expression component by component:
 
-**$\theta$**: The policy parameters we are optimizing. $\pi_\theta$ is the current policy, $\pi_{\theta_{old}}$ is the policy from the previous iteration, and $\pi_{ref}$ is a reference policy (typically the supervised fine-tuned model before RL training).
+**$\theta$**: The policy parameters we are optimizing. In the context of language models, $\theta$ represents all the neural network weights (typically billions of parameters).
 
-**$\mathcal{J}_{GRPO}(\theta)$**: This is the objective function to be *maximized* (not a loss to be minimized). The goal is to find parameters $\theta$ that maximize expected returns while staying close to the old policy.
+**$\pi_\theta$** (the current policy): This is the language model parameterized by $\theta$ that we're currently optimizing. When we write $\pi_\theta(o_{i,t} \vert q, o_{i,<t})$, this represents the probability that the model assigns to generating token $o_{i,t}$ given the question $q$ and all previous tokens $o_{i,<t}$ in the sequence.
+
+**$\pi_{\theta_{old}}$** (the old policy): This is a snapshot of the policy from the previous training iteration, with frozen parameters $\theta_{old}$.
+
+**$\pi_{ref}$** (the reference policy): This is typically the supervised fine-tuned (SFT) model before any reinforcement learning training began.
+
+**$\mathcal{J}_{GRPO}(\theta)$**: This is the objective function to be maximized. The goal is to find parameters $\theta$ that maximize expected returns while staying close to the old policy.
 
 **Expectation $\mathbb{E}[\cdot]$**: We take the expectation over:
 - Questions $q$ sampled from the question distribution $P(Q)$
@@ -95,8 +101,13 @@ We will decrease $\pi_\theta$ until the ratio reaches $1 - \epsilon$. In other w
 Notice that any value of $\pi_\theta \leq 0.720$ have the same objective value (-0.800) because they exceed the clip boundary. The clipped objective alone does not constrain how small the probability goes.
 
 
+**The KL term**:
 
-**The KL term**: The expression $$\beta \mathbb{D}_{KL}[\pi_{\theta} \vert\vert \pi_{ref}]$$ is a regularization term (subtracted from the objective) that penalizes the new policy $$\pi_\theta$$ from diverging too far from the reference policy $$\pi_{ref}$$. The coefficient $$\beta$$ controls the strength of this constraint.
+The KL divergence is subtracted from the objective as a regularization term:
+
+$$\beta \mathbb{D}_{KL}[\pi_{\theta} \vert\vert \pi_{ref}]$$
+
+This penalizes the new policy from diverging too far from the reference policy. The coefficient beta controls the strength of this constraint.
 
 The KL divergence is defined as:
 
@@ -104,7 +115,49 @@ $$\mathbb{D}_{KL}\left[\pi_{\theta} || \pi_{ref}\right] = \frac{\pi_{ref}(o_{i,t
 
 Even though the clipped objective alone does not constrain how large the probability goes for positive advantage sequences, or how small the probability goes for negative advantage sequences, the KL divergence term will control for this.
 
-TODO: Some worked example on whether the upper bound of pi theta if pi ref is 0.001.
+**Example 4**: How the KL gradient changes with different reference probabilities at the clip boundary.
+
+Given: $\hat{A} = 0.01$, $\epsilon = 0.20$, $\beta = 0.02$, $\pi_{\theta_{old}} = 0.500$, $\pi_\theta = 0.600 = (1 + \epsilon) \times \pi_{\theta_{old}}$
+
+| $\pi_{ref}$ | $\pi_{\theta_{old}}$ | $\pi_\theta$ | $\frac{dJ}{d\pi_\theta}$ (clip term) | $\frac{dJ}{d\pi_\theta}$ (KL) | Total gradient |
+|------------|---------------------|-------------|-----------------------------------|------------------------------|----------------|
+| 0.500 | 0.500 | 0.600$^-$ | +0.020 | -0.0056 | +0.0144 |
+| 0.100 | 0.500 | 0.600$^-$ | +0.020 | -0.0278 | -0.0078 |
+| 1e-50 | 0.500 | 0.600$^-$ | +0.020 | -0.0333 | -0.0133 |
+
+For this worked example, you see that the overall gradient at the clip boundary could be positive or negative depending on $\pi_{ref}$. This means that $\pi_{ref}$ may be able to influence whether we update $\pi_\theta$ to at least the clip boundary, or we prefer somewhere short of that.
+
+The clip term does not penalize if $\pi_\theta$ goes over the clipping zone, but the KL term may penalize that.
+
+The clip term gradient (before the clip function applies):
+
+$$\frac{dJ}{d\pi_\theta}(\text{clip}) = \frac{\hat{A}}{\pi_{\theta_{old}}}$$
+
+The KL gradient is:
+
+$$\frac{dJ}{d\pi_\theta}(\mathbb{D}_{KL}) = -\beta \cdot \frac{\pi_\theta - \pi_{ref}}{\pi_\theta^2}$$
+
+They are equal (total gradient = 0) when:
+
+$$\frac{\hat{A}}{\pi_{\theta_{old}}} = \beta \cdot \frac{\pi_\theta - \pi_{ref}}{\pi_\theta^2}$$
+
+Expressing $\pi_\theta$ in terms of $\pi_{ref}$, let $c = \frac{2\hat{A}}{\beta \pi_{\theta_{old}}}$:
+
+$$\pi_\theta = \frac{1 \pm \sqrt{1 - 2c\pi_{ref}}}{c}$$
+
+The discriminant $1 - 2c\pi_{ref}$ is negative when $\pi_{ref} > \frac{1}{2c}$. This means there is no real equilibrium point in the valid probability range where the clip gradient and KL gradient balance. In such cases, both gradients push in the same direction throughout, and $\pi_\theta$ will be driven toward the boundary constraints (probability limit of 1.0 or the clip boundary).
+
+For the worked example ($\hat{A} = 0.01$, $\beta = 0.02$, $\pi_{\theta_{old}} = 0.5$), we have $c = \frac{2 \times 0.01}{0.02 \times 0.5} = 2$:
+
+$$\pi_\theta = \frac{1 \pm \sqrt{1 - 4\pi_{ref}}}{2}$$
+
+The critical value where the clip boundary $\pi_\theta = 0.6$ is optimal occurs when $\pi_{ref} = 0.24$ (since $0.6 = \frac{1 + \sqrt{1 - 4(0.24)}}{2} = \frac{1 + 0.2}{2}$). For $\pi_{ref} < 0.24$, the optimal $\pi_\theta$ is below the clip boundary.
+
+If the KL gradient magnitude is higher than the clip term gradient, it is better to reduce the probability than to increase the probability, even if the advantage is positive.
+
+However, this rarely happens. The advantage has to be as small as 0.01 to allow the KL gradient to slightly overcome the clip gradient. Note that the standard deviation of advantage is normalized to one. This is the case even though the KL divergence value is gigantic (e.g., for $\pi_{ref} = 10^{-50}$ and $\pi_\theta = 0.6$, the KL divergence $\mathbb{D}_{KL} \approx 115$).
+
+Moreover, $\pi_{\theta_{old}}$ is updated at each iteration. In the next iteration of training, $\pi_\theta$ can still increase arbitrarily close to one, regardless of how small $\pi_{ref}$ and $\hat{A}$ are.
 
 
 

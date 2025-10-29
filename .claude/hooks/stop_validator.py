@@ -22,14 +22,7 @@ You will
     - For each item in the todo list
     - Reason whether you have addressed the requirement
 
-If you have made edits, you will ALSO
-
-1) Run tests
-    - Search for appropriate tests,
-    - Read up how to run the test.
-    - Run the test.
-2) Run the formatter
-    - See CLAUDE.md for instructions
+Please use Puppeteer to visit http://localhost:4000/ to check whether your content is correctly rendered.    
 """
 
 BASH_AFTER_EDIT_REMINDER = "It seems that you did not run bash after your last edit."
