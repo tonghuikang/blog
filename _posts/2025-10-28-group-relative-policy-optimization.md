@@ -48,6 +48,7 @@ $$\frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,
 
 Note that if pi old already 0.99, the probability ratio cannot increase to 1.1, because probability cannot be more than one.
 
+
 **The clipped objective**:
 
 $$\min \left[ \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right]$$
@@ -109,11 +110,12 @@ $$\beta \mathbb{D}_{KL}[\pi_{\theta} \vert\vert \pi_{ref}]$$
 
 This penalizes the new policy from diverging too far from the reference policy. The coefficient beta controls the strength of this constraint.
 
-The KL divergence is defined as:
+The GRPO paper estimates the KL divergence with the unbiased reverse-KL estimator (Schulman 2020):
 
 $$\mathbb{D}_{KL}\left[\pi_{\theta} || \pi_{ref}\right] = \frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})}- \log\frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})} - 1$$
 
-Even though the clipped objective alone does not constrain how large the probability goes for positive advantage sequences, or how small the probability goes for negative advantage sequences, the KL divergence term will control for this.
+Taking the expectation over $o_{i,t} \sim \pi_\theta$ recovers the standard categorical $D_{KL}[\pi_\theta || \pi_{ref}]$, and each sample value is non-negative.
+
 
 **Example 4**: How the KL gradient changes with different reference probabilities at the clip boundary.
 
@@ -133,9 +135,9 @@ The clip term gradient (before the clip function applies):
 
 $$\frac{dJ}{d\pi_\theta}(\text{clip}) = \frac{\hat{A}}{\pi_{\theta_{old}}}$$
 
-The KL gradient is:
+The KL term gradient is:
 
-$$\frac{dJ}{d\pi_\theta}(\mathbb{D}_{KL}) = -\beta \cdot \frac{\pi_\theta - \pi_{ref}}{\pi_\theta^2}$$
+$$\frac{dJ}{d\pi_\theta}(\text{KL}) = -\beta \cdot \frac{\pi_\theta - \pi_{ref}}{\pi_\theta^2}$$
 
 They are equal (total gradient = 0) when:
 
@@ -145,13 +147,13 @@ Expressing $\pi_\theta$ in terms of $\pi_{ref}$, let $c = \frac{2\hat{A}}{\beta 
 
 $$\pi_\theta = \frac{1 \pm \sqrt{1 - 2c\pi_{ref}}}{c}$$
 
-The discriminant $1 - 2c\pi_{ref}$ is negative when $\pi_{ref} > \frac{1}{2c}$. This means there is no real equilibrium point in the valid probability range where the clip gradient and KL gradient balance. In such cases, both gradients push in the same direction throughout, and $\pi_\theta$ will be driven toward the boundary constraints (probability limit of 1.0 or the clip boundary).
+The discriminant $1 - 2c\pi_{ref}$ is negative when $\pi_{ref} > \frac{1}{2c} = \frac{\beta \pi_{\theta_{old}}}{4\hat{A}}$. This means there is no real equilibrium point in the valid probability range where the clip gradient and KL gradient balance. In such cases, both gradients push in the same direction throughout (really?), and $\pi_\theta$ will be driven toward the boundary constraints (probability limit of 1.0 or the clip boundary).
 
 For the worked example ($\hat{A} = 0.01$, $\beta = 0.02$, $\pi_{\theta_{old}} = 0.5$), we have $c = \frac{2 \times 0.01}{0.02 \times 0.5} = 2$:
 
 $$\pi_\theta = \frac{1 \pm \sqrt{1 - 4\pi_{ref}}}{2}$$
 
-The critical value where the clip boundary $\pi_\theta = 0.6$ is optimal occurs when $\pi_{ref} = 0.24$ (since $0.6 = \frac{1 + \sqrt{1 - 4(0.24)}}{2} = \frac{1 + 0.2}{2}$). For $\pi_{ref} < 0.24$, the optimal $\pi_\theta$ is below the clip boundary.
+The critical value where the clip boundary $\pi_\theta = 0.6^-$ is optimal occurs when $\pi_{ref} = 0.24$ (since $0.6 = \frac{1 + \sqrt{1 - 4(0.24)}}{2} = \frac{1 + 0.2}{2}$). For $\pi_{ref} < 0.24$, the optimal $\pi_\theta$ is below the clip boundary.
 
 If the KL gradient magnitude is higher than the clip term gradient, it is better to reduce the probability than to increase the probability, even if the advantage is positive.
 
@@ -173,7 +175,6 @@ Advantage is suspicious. This means if you have the wrong thought process but th
 The odds term is suspicious?
 
 If the old probability is already close to 1 you want to go even more than 1?
-
 
 
 
@@ -212,6 +213,7 @@ Happen to find a sequence that works, starting with simpler problems
 Figuring out certain words that promote success.
 
 I think this is more like SFT but on 
+
 
 
 
@@ -319,5 +321,3 @@ What should people do
 
 
 ARC-AGI example
-
-
