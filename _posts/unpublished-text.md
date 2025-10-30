@@ -1326,3 +1326,37 @@ I expect models to not just follow instructions, but discover instructions and m
 Even if there are tasks that need 10 million tokens to do, we will. We already have auto-compacting models. 
 
 In any case, 
+
+
+The clip term gradient (before the clip function applies):
+
+$$\frac{dJ}{d\pi_\theta}(\text{clip}) = \frac{\hat{A}}{\pi_{\theta_{old}}}$$
+
+The KL term gradient is:
+
+$$\frac{dJ}{d\pi_\theta}(\text{KL}) = -\beta \cdot \frac{\pi_\theta - \pi_{ref}}{\pi_\theta^2}$$
+
+They are equal (total gradient = 0) when:
+
+$$\frac{\hat{A}}{\pi_{\theta_{old}}} = \beta \cdot \frac{\pi_\theta - \pi_{ref}}{\pi_\theta^2}$$
+
+Expressing $\pi_\theta$ in terms of $\pi_{ref}$, let $c = \frac{2\hat{A}}{\beta \pi_{\theta_{old}}}$:
+
+$$\pi_\theta = \frac{1 \pm \sqrt{1 - 2c\pi_{ref}}}{c}$$
+
+The discriminant $1 - 2c\pi_{ref}$ is negative when $\pi_{ref} > \frac{1}{2c} = \frac{\beta \pi_{\theta_{old}}}{4\hat{A}}$. This means there is no real equilibrium point in the valid probability range where the clip gradient and KL gradient balance. In such cases, both gradients push in the same direction throughout (really?), and $\pi_\theta$ will be driven toward the boundary constraints (probability limit of 1.0 or the clip boundary).
+
+For the worked example ($\hat{A} = 0.01$, $\beta = 0.02$, $\pi_{\theta_{old}} = 0.5$), we have $c = \frac{2 \times 0.01}{0.02 \times 0.5} = 2$:
+
+$$\pi_\theta = \frac{1 \pm \sqrt{1 - 4\pi_{ref}}}{2}$$
+
+The critical value where the clip boundary $\pi_\theta = 0.6^-$ is optimal occurs when $\pi_{ref} = 0.24$ (since $0.6 = \frac{1 + \sqrt{1 - 4(0.24)}}{2} = \frac{1 + 0.2}{2}$). For $\pi_{ref} < 0.24$, the optimal $\pi_\theta$ is below the clip boundary.
+
+
+Moreover, $\pi_{\theta_{old}}$ is updated at each iteration. In the next iteration of training, $\pi_\theta$ can still increase arbitrarily close to one, regardless of how small $\pi_{ref}$ and $\hat{A}$ are.
+
+
+The clip term does not penalize if $\pi_\theta$ goes over the clipping zone, but the KL term may penalize that.
+If the KL term gradient magnitude is higher than the clip term gradient, it is better to reduce the probability than to increase the probability, even if the advantage is positive.
+
+This is the case even though the KL divergence value is gigantic (e.g., for $\pi_{ref} = 10^{-50}$ and $\pi_\theta = 0.6$, the KL divergence $\mathbb{D}_{KL} \approx 115$).
