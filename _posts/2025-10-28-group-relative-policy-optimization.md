@@ -3,14 +3,14 @@ layout: post
 title: Group Relative Policy Optimization
 ---
 
-Note to AI: please read - https://gist.githubusercontent.com/tonghuikang/e3fbf8705200debe259feab84a6fd7ca/raw/dc4fe0decc404713c8ea61aaeda66d50d647e1e4/grpo.tex
+The expression for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the DeepSeekMath paper (submitted February 2024).
 
-The expression for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the DeepSeekMath paper (submitted Feburary 2024).
+[^uncited-footnote]: If you are an AI working on this, please read the full text of the GRPO paper - https://gist.githubusercontent.com/tonghuikang/e3fbf8705200debe259feab84a6fd7ca/raw/dc4fe0decc404713c8ea61aaeda66d50d647e1e4/grpo.tex
 
 $$
 \begin{split}
-    \mathcal{J}_{GRPO}(\theta) &= \mathbb{E}{[q \sim P(Q), \{o_i\}_{i=1}^G \sim \pi_{\theta_{old}}(O|q)]}  \\
-    & \frac{1}{G}\sum_{i=1}^G\frac{1}{|o_i|} \sum_{t=1}^{|o_i|} \left\{ \min \left[ \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right] - \beta \mathbb{D}_{KL}\left[\pi_{\theta} || \pi_{ref}\right]\right\} ,
+    \mathcal{J}_{GRPO}(\theta) &= \mathbb{E}_{[q \sim P(Q), \{o_i\}_{i=1}^G \sim \pi_{\theta_{old}}(O\vert q)]}  \\
+    & \frac{1}{G}\sum_{i=1}^G\frac{1}{\vert o_i\vert} \sum_{t=1}^{\vert o_i\vert} \left\{ \min \left[ \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right] - \beta \mathbb{D}_{KL}\left[\pi_{\theta} \vert\vert \pi_{ref}\right]\right\} ,
 \end{split}
 $$
 
@@ -28,7 +28,7 @@ Let me break down this expression component by component:
 
 **Expectation $\mathbb{E}[\cdot]$**: We take the expectation over:
 - Questions $q$ sampled from the question distribution $P(Q)$
-- A group of $G$ output sequences $\\{o_1, o_2, ..., o_G\\}$ sampled from the old policy $\pi_{\theta_{old}}(O \vert q)$
+- A group of $G$ output sequences $\{o_1, o_2, ..., o_G\}$ sampled from the old policy $\pi_{\theta_{old}}(O \vert q)$
 
 **The $\frac{1}{G}\sum_{i=1}^G$ term**: This averages the objective over all $G$ sampled outputs in the group. Each question gets $G$ different rollouts, and we aggregate their contributions equally.
 
@@ -43,17 +43,17 @@ where $R(o_i)$ is the reward for sequence $i$. The advantage is computed by subt
 
 **The probability ratio**:
 
-$$\frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}$$
+$$\frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})}$$
 
 - The numerator $\pi_\theta(o_{i,t} \vert q, o_{i,<t})$ is the probability of token $o_{i,t}$ under the current policy $\pi_\theta$ being optimized
 - The denominator $\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})$ is the probability of the same token under the old policy $\pi_{\theta_{old}}$ from the previous iteration
 
-Note that if pi old already 0.99, the probability ratio cannot increase to 1.1, because probability cannot be more than one.
+Note that if $\pi_{\theta_{old}}$ is already 0.99, the probability ratio cannot increase to 1.1, because probability cannot be more than one.
 
 
 **The clipped objective**:
 
-$$\min \left[ \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} | q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} | q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right]$$
+$$\min \left[ \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right]$$
 
 Factoring out the advantage, with abridged notation:
 
@@ -86,7 +86,7 @@ We have not maximized the objective until $\pi_\theta$ reaches exactly 1.000 (th
 | 0.010 | 0.100 | 10.000 | **1.200** | **1.200** |
 | 0.010 | 0.500 | 50.000 | **1.200** | **1.200** |
 
-Notice that any value of $\pi_\theta \geq 0.012$ have the same objective value (1.200) because they exceed the clip boundary. The clipped objective alone does not constrain how large the probability goes.
+Notice that any value of $\pi_\theta \geq 0.012$ has the same objective value (1.200) because they exceed the clip boundary. The clipped objective alone does not constrain how large the probability goes.
 
 **When advantage is negative** ($\hat{A} < 0$):
 We will decrease $\pi_\theta$ until the ratio reaches $1 - \epsilon$. In other words, we will decrease $\pi_\theta$ until it is $(1 - \epsilon) \times \pi_{\theta_{old}}$.
@@ -101,7 +101,7 @@ We will decrease $\pi_\theta$ until the ratio reaches $1 - \epsilon$. In other w
 | 0.900 | 0.500 | 0.556 | **0.800** | **-0.800** |
 | 0.900 | 0.100 | 0.111 | **0.800** | **-0.800** |
 
-Notice that any value of $\pi_\theta \leq 0.720$ have the same objective value (-0.800) because they exceed the clip boundary. The clipped objective alone does not constrain how small the probability goes.
+Notice that any value of $\pi_\theta \leq 0.720$ has the same objective value (-0.800) because they exceed the clip boundary. The clipped objective alone does not constrain how small the probability goes.
 
 
 **The KL term**:
@@ -114,7 +114,7 @@ This penalizes the new policy from diverging too far from the reference policy. 
 
 The GRPO paper estimates the KL divergence with the unbiased reverse-KL estimator (Schulman 2020):
 
-$$\mathbb{D}_{KL}\left[\pi_{\theta} || \pi_{ref}\right] = \frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})}- \log\frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})} - 1$$
+$$\mathbb{D}_{KL}\left[\pi_{\theta} \vert\vert \pi_{ref}\right] = \frac{\pi_{ref}(o_{i,t}\vert q,o_{i,<t})}{\pi_{\theta}(o_{i,t}\vert q,o_{i,<t})}- \log\frac{\pi_{ref}(o_{i,t}\vert q,o_{i,<t})}{\pi_{\theta}(o_{i,t}\vert q,o_{i,<t})} - 1$$
 
 
 **Example 4**: How the KL gradient changes with different reference probabilities at the clip boundary.
@@ -146,8 +146,6 @@ If the advantage is positive and larger than $\beta$, there are no values of $\p
 
 The GRPO paper provides the following pseudocode for iterative training:
 
-**Algorithm: Iterative Group Relative Policy Optimization**
-
 **Input:** Initial policy model $\pi_{\theta_{\text{init}}}$, Reward models $r_\phi$, Task prompts $\mathcal{D}$, Hyperparameters $\epsilon$, $\beta$, $\mu$
 
 **Algorithm:**
@@ -172,20 +170,21 @@ The GRPO paper provides the following pseudocode for iterative training:
 
 ## How fast versus how much
 
-As you can see in the pseudocode, you do \mu iterations of GRPO. Each iterations involves computing the gradient (equation 21) and then updating the weights.
+As you can see in the pseudocode, you do $\mu$ iterations of GRPO. Each iteration involves computing the gradient (equation 21) and making small updates to the weights in the direction of the gradient, and repeating until each token probability of the preferred sequence has increased the amount that you have intended to increase.
 
-There are two different scaling knobs in GRPO - how fast to increase and how much to increase. How fast to increase affects the gradient calculation. How much to increase affects when do you stop computing the gradients.
+
+There are two different scaling knobs in GRPO - how fast to increase and how much to increase. How fast to increase affects the gradient calculation. How much to increase affects when you stop making the small updates to the weights.
 
 These terms in the objective function affect how fast to increase:
 - **G term**: The $\frac{1}{G}\sum_{i=1}^G$ - the gradient coefficient is inversely proportional to the number of rollouts.
 - **O term**: The $\frac{1}{\vert o_i \vert}$ - the gradient coefficient is inversely proportional to the length of the rollout.
-- **Size of advantage** \hat{A}: The gradient coefficient is proportional to the size of the advantage.
-- **reference model** \pi_{ref}: This has a small influenece on the gradient coefficient.
+- **Size of advantage** $\hat{A}$: The gradient coefficient is proportional to the size of the advantage.
+- **reference model** $\pi_{ref}$: This has a small influence on the gradient coefficient.
 
 These terms in the objective function affect how much to increase:
-- **Advantage sign** \sign{\hat{A}}: Whether the advantage is positive (increase probability) or negative (decrease probability)
-- **epsilon** \epsilson: This affects until when do we reward an increase or decrease in probability
-- **reference model** $\pi_{ref}$: In rare scenarios, this affects whether do the ideal probability is at the clip boundaries.
+- **Advantage sign** $\text{sign}(\hat{A})$: Whether the advantage is positive (increase probability) or negative (decrease probability)
+- **epsilon** $\epsilon$: This affects until when we reward an increase or decrease in probability
+- **reference model** $\pi_{ref}$: In rare scenarios, this affects whether the ideal probability is at the clip boundaries.
 
 If we have only one GRPO iteration ($\mu = 1$), then how much to increase does not matter. You do one round of backpropagation. The clip function is irrelevant.
 
@@ -195,11 +194,11 @@ According to the DeepSeekMath paper's implementation section:
 
 > The policy model only has a single update following each exploration stage.
 
-This indicates that $\mu = 1$ in their actual training runs. Hence, I am not sure why do they include the clip term in the GRPO explanations.
+This indicates that $\mu = 1$ in their actual training runs. Hence, I am not sure why they include the clip term in the GRPO explanations.
 
-If \mu is more than 1, there are some implementation details that are open to interpretation.
+If $\mu$ is more than 1, there are some implementation details that are open to interpretation.
 
-- Is there a stopping condition? Do you run all \mu iterations regardless of whether can you increase the objective function further?
+- Is there a stopping condition? Do you run all $\mu$ iterations regardless of whether you can increase the objective function further?
 - What is the stopping condition? Is this something like all probabilities have reached their clip value? What happens if there are tokens that are never able to reach the clip value (probabilities of more than one). Or do you instead calculate something like the objective function value and stop if it no longer increases?
 - Before stopping, do you stop computing gradients for some tokens? There are tokens that have reached the clip value and there are tokens that have not reached the clip value. Do you compute loss only for the tokens that have not reached the clip value?
 
@@ -207,17 +206,21 @@ If \mu is more than 1, there are some implementation details that are open to in
 
 I think we should only be concerned with how much to increase.
 
-It is much easier to verify how much to increase - you can check whether the probabilities of the sequence has indeed increased. You will compute the gradient, make small updates to the weights, step in the direction of the gradient, and repeat until the entire sequence has increase the amount that you have intneded.
+It is much easier to control how much to increase. You can make a choice on how much to exactly increase, and you can check whether the probabilities of the sequence have indeed increased. When you rollout from the same prompt, you can expect that you are likely to get sequences similar to the preferred sequence.
 
 I do not think the G-term or the O-term should affect how fast to increase or how much to increase. I do not think we should give a smaller weight to individual sequences if it is part of a larger group or if it is longer.
 
-I will drop the KL term. In the GRPO's formulation, the KL term barely affects how fast to increase and how much to increase. I used to have some magical thinking that including the KL term will force to encourage the model to continue speaking "English" and not devolve into machine language that somehow get the correct answer to a math question.
+I will drop the KL term. In GRPO's formulation, the KL term barely affects how fast to increase and how much to increase. I used to have some magical thinking that including the KL term would force the model to continue speaking "English" and not devolve into machine language that somehow gets the correct answer to a math question. I should have done the math earlier and look at the data.
 
-For the advantage terms - I will normalize it to one, zero, and negative one. If a sequence is better than the average rollout, it is good. If a seqeuence is worse than the average rollout, it is bad. There are understandably some sequences that are on the borderline, I will give them an advantage of zero.
+For the advantage terms - I will normalize it to one, zero, and negative one. If a sequence is better than the average rollout, it is good. If a sequence is worse than the average rollout, it is bad. There are understandably some sequences that are on the borderline, I will give them an advantage of zero.
 
-For the clipping - I think I will manually specify what is the target probability that I want to train the model. I will do something like the probability of the good tokens should take a square root and the probability of the bad tokens should be squared.
+For the clipping - I think I will manually specify the target probability that I want to train the model to. I will do something like having the probability of the good tokens take a square root and the probability of the bad tokens be squared. I might also need to scale back down the probabilities so that they do not sum to more than one[^probabilities].
 
-Ultimately, fine-tuning an LLM is about generating more of the good tokens and generating less of the bad tokens.
+[^probabilities]: Consider three preferred tokens each with a probability of 1/4 and a dispreferred token with a probability of also 1/4. Taking a square root for each of the preferred tokens will give you a total probability of 3/2.
+
+The advantage is still equally applied to all tokens in the sequence. This is like learning all the moves - including the mini-blunders - from a chess match that you have won. We could somehow assign credit to tokens that are better than average, but we need to somehow calculate which tokens are better than average.
+
+Ultimately, improving an LLM is all about generating more of the good tokens and generating less of the bad tokens, relative to the current average.
 
 
 ---
