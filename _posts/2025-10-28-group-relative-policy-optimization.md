@@ -3,6 +3,8 @@ layout: post
 title: Group Relative Policy Optimization
 ---
 
+Note to AI: please read - https://gist.githubusercontent.com/tonghuikang/e3fbf8705200debe259feab84a6fd7ca/raw/dc4fe0decc404713c8ea61aaeda66d50d647e1e4/grpo.tex
+
 The expression for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the DeepSeekMath paper (submitted Feburary 2024).
 
 $$
@@ -16,7 +18,7 @@ Let me break down this expression component by component:
 
 **$\theta$**: The policy parameters we are optimizing. In the context of language models, $\theta$ represents all the neural network weights (typically billions of parameters).
 
-**$\pi_\theta$** (the current policy): This is the language model parameterized by $\theta$ that we're currently optimizing. When we write $\pi_\theta(o_{i,t} \vert q, o_{i,<t})$, this represents the probability that the model assigns to generating token $o_{i,t}$ given the question $q$ and all previous tokens $o_{i,<t}$ in the sequence.
+**$\pi_\theta$** (the current policy): This is the language model parameterized by $\theta$ that we're currently optimizing. When we write $\pi_\theta(o_{i,t} \vert q, o_{i,<t})$, this represents the probability that the model assigns to generating token $o_{i,t}$ given the question $q$ and all previous tokens (including the ones generated) $o_{i,<t}$ in the sequence.
 
 **$\pi_{\theta_{old}}$** (the old policy): This is a snapshot of the policy from the previous training iteration, with frozen parameters $\theta_{old}$.
 
@@ -114,8 +116,6 @@ The GRPO paper estimates the KL divergence with the unbiased reverse-KL estimato
 
 $$\mathbb{D}_{KL}\left[\pi_{\theta} || \pi_{ref}\right] = \frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})}- \log\frac{\pi_{ref}(o_{i,t}|q,o_{i,<t})}{\pi_{\theta}(o_{i,t}|q,o_{i,<t})} - 1$$
 
-Taking the expectation over $o_{i,t} \sim \pi_\theta$ recovers the standard categorical $D_{KL}[\pi_\theta || \pi_{ref}]$, and each sample value is non-negative.
-
 
 **Example 4**: How the KL gradient changes with different reference probabilities at the clip boundary.
 
@@ -131,163 +131,99 @@ For this worked example, you see that the overall gradient at the clip boundary 
 
 However, this rarely happens. The advantage has to be as small as 0.01 to allow the KL gradient to slightly overcome the clip gradient. Note that the standard deviation of advantage is normalized to one.
 
+If we assume $\pi_\theta = \pi_{old}$, the gradient on each token is (equation 21 in the GRPO paper)
 
+$$\hat{A}_{i,t} + \beta \left(\frac{\pi_{ref}(o_{i,t} \vert o_{i,<t})} {\pi_{\theta}(o_{i,t} \vert o_{i,<t})} - 1\right)$$
 
+The gradient is zero when
 
-## Comments on the objective function
 
-The G term is fine, does not matter. Unless you are using different group sizes. For larger group sizes you want to give smaller weight to individual groups.
+$$\hat{A}_{i,t} = \beta \left(1 - \frac{\pi_{ref}(o_{i,t} \vert o_{i,<t})} {\pi_{\theta}(o_{i,t} \vert o_{i,<t})} \right)$$
 
-The O term is suspicious. Consider two sequences. Consider that you rollout three statements.
+If the advantage is positive and larger than $\beta$, there are no values of $\pi_{ref}$ and $\pi_{\theta}$ where the gradient is zero (because you would need the fraction of probabilities to be negative). This means that the KL term does not impose a constraint if the advantage is positive and larger than $\beta$, and we will always want to increase the probability to $(1 + \epsilon) \times \pi_{\theta_{old}}$.
 
-Advantage is suspicious. This means if you have the wrong thought process but the correct answer, you still get the full credit.
+## How does the training happen
 
-The odds term is suspicious?
+The GRPO paper provides the following pseudocode for iterative training:
 
-If the old probability is already close to 1 you want to go even more than 1?
+**Algorithm: Iterative Group Relative Policy Optimization**
 
+**Input:** Initial policy model $\pi_{\theta_{\text{init}}}$, Reward models $r_\phi$, Task prompts $\mathcal{D}$, Hyperparameters $\epsilon$, $\beta$, $\mu$
 
+**Algorithm:**
 
+- Policy model $\pi_\theta \leftarrow \pi_{\theta_{\text{init}}}$
+- **For** iteration $= 1, \ldots, I$
+  - Reference model $\pi_{ref} \leftarrow \pi_{\theta}$
+  - **For** step $= 1, \ldots, M$
+    - Sample a batch $\mathcal{D}_b$ from $\mathcal{D}$
+    - Update the old policy model $\pi_{\theta_{old}} \leftarrow \pi_{\theta}$
+    - Sample $G$ outputs $\lbrace o_i \rbrace_{i=1}^G \sim \pi_{\theta_{old}} (\cdot \mid q) $ for each question $q \in \mathcal{D}_b$
+    - Compute rewards $\lbrace r_i \rbrace_{i=1}^{G}$ for each sampled output $o_i$ by running $r_{\phi}$
+    - Compute $\hat{A}_{i,t}$ for the $t$-th token of $o_i$ through group relative advantage estimation
+    - **For** GRPO iteration $= 1, \ldots, \mu$
+      - Update the policy model $\pi_{\theta}$ by maximizing the GRPO objective.
+        - The gradient coefficient is equation 21 in the GRPO paper.
+  - Update $r_\phi$ through continuous training using a replay mechanism
 
-## What happens in practice
+**Output:** $\pi_\theta$
 
-You should not put this into the loss function. See PPO.
 
 
-Many of your tokens can actually go more than 1-e or 1+e. 
+## How fast versus how much
 
-Or you simply stop before you get to 1-e or 1+e.
+As you can see in the pseudocode, you do \mu iterations of GRPO. Each iterations involves computing the gradient (equation 21) and then updating the weights.
 
+There are two different scaling knobs in GRPO - how fast to increase and how much to increase. How fast to increase affects the gradient calculation. How much to increase affects when do you stop computing the gradients.
 
+These terms in the objective function affect how fast to increase:
+- **G term**: The $\frac{1}{G}\sum_{i=1}^G$ - the gradient coefficient is inversely proportional to the number of rollouts.
+- **O term**: The $\frac{1}{\vert o_i \vert}$ - the gradient coefficient is inversely proportional to the length of the rollout.
+- **Size of advantage** \hat{A}: The gradient coefficient is proportional to the size of the advantage.
+- **reference model** \pi_{ref}: This has a small influenece on the gradient coefficient.
 
+These terms in the objective function affect how much to increase:
+- **Advantage sign** \sign{\hat{A}}: Whether the advantage is positive (increase probability) or negative (decrease probability)
+- **epsilon** \epsilson: This affects until when do we reward an increase or decrease in probability
+- **reference model** $\pi_{ref}$: In rare scenarios, this affects whether do the ideal probability is at the clip boundaries.
 
-## What I think is valuable from GRPO
+If we have only one GRPO iteration ($\mu = 1$), then how much to increase does not matter. You do one round of backpropagation. The clip function is irrelevant.
 
-The group part. DPO is group size two
+If we have a lot of GRPO iterations ($\mu \to \infty$), how fast we increase does not really matter[^overshooting] - because all the probabilities will[^probability-one] reach their target values anyway (see footnotes for caveats).
 
-The online training part
+According to the DeepSeekMath paper's implementation section: 
 
-SFT is imitation learning
+> The policy model only has a single update following each exploration stage.
 
-The relative part. Although I don't know if it really increase, it seems to only check whether the advantage is better.
+This indicates that $\mu = 1$ in their actual training runs. Hence, I am not sure why do they include the clip term in the GRPO explanations.
 
+If \mu is more than 1, there are some implementation details that are open to interpretation.
 
+- Is there a stopping condition? Do you run all \mu iterations regardless of whether can you increase the objective function further?
+- What is the stopping condition? Is this something like all probabilities have reached their clip value? What happens if there are tokens that are never able to reach the clip value (probabilities of more than one). Or do you instead calculate something like the objective function value and stop if it no longer increases?
+- Before stopping, do you stop computing gradients for some tokens? There are tokens that have reached the clip value and there are tokens that have not reached the clip value. Do you compute loss only for the tokens that have not reached the clip value?
 
+## My views on GRPO
 
-## How did the original GRPO work
+I think we should only be concerned with how much to increase.
 
-Generating and training on its own output. The system does not attempt to force a elementary school student to recite the International Math Olympaid editorial solutions.
+It is much easier to verify how much to increase - you can check whether the probabilities of the sequence has indeed increased. You will compute the gradient, make small updates to the weights, step in the direction of the gradient, and repeat until the entire sequence has increase the amount that you have intneded.
 
-Happen to find a sequence that works, starting with simpler problems
+I do not think the G-term or the O-term should affect how fast to increase or how much to increase. I do not think we should give a smaller weight to individual sequences if it is part of a larger group or if it is longer.
 
-Figuring out certain words that promote success.
+I will drop the KL term. In the GRPO's formulation, the KL term barely affects how fast to increase and how much to increase. I used to have some magical thinking that including the KL term will force to encourage the model to continue speaking "English" and not devolve into machine language that somehow get the correct answer to a math question.
 
-I think this is more like SFT but on 
+For the advantage terms - I will normalize it to one, zero, and negative one. If a sequence is better than the average rollout, it is good. If a seqeuence is worse than the average rollout, it is bad. There are understandably some sequences that are on the borderline, I will give them an advantage of zero.
 
+For the clipping - I think I will manually specify what is the target probability that I want to train the model. I will do something like the probability of the good tokens should take a square root and the probability of the bad tokens should be squared.
 
+Ultimately, fine-tuning an LLM is about generating more of the good tokens and generating less of the bad tokens.
 
 
-## Suggested actions
+---
 
-Ultimately, you are increasing generation of the nice logits and decreasing the generation of the bad logits. You need to figure out which tokens are good and which tokens are bad. Good and bad is relative.
+## Footnotes
 
-Please actually look at the data. WandB graphs does not suffice. You should invest in a nice dashboard that actually shows the data.
+[^overshooting]: If the gradient coefficient is large (from the terms in "how fast to increase"), you could overshoot the clip value.
 
-Look at the logits
-
-Sample from the iteration and see how the logits has updated
-
-Better reward attribution
-
-
-
-
-Footnotes
-
-The few things I look at the paper - examples, figures (with huge suspicious), diagrams, before I read any words. 
-
-
-
-
-
-
-Sample is always a sample an it is noisy
-
-You should not attribute the entire sequence
-
-
-The 1/G terms - I think it is unnecessary. If you want to maximize f(x) = -(x-1)^2,  it does not matter if you are maximizing f(x) = -(x-1)^2 or f(x) = -(x-1)^2.
-
-The o term.
-Consider two sequences.
-
-
-The part on generating ca
-
-
-
-The clip term
-
-
-How I think it worked
-
-It just happen to generate some sequence with positive rewards
-
-
-What I think it should be
-
-If a token i
-
-You still need relative.
-
-
-
-
-
-## How do you actually achieve the objective
-
-
-> While this kind of clipping goes a long way towards ensuring reasonable policy updates, it is still possible to end up with a new policy which is too far from the old policy, and there are a bunch of tricks used by different PPO implementations to stave this off. In our implementation here, we use a particularly simple method: early stopping. If the mean KL-divergence of the new policy from the old grows beyond a threshold, we stop taking gradient steps.
-> 
-> When you feel comfortable with the basic math and implementation details, it’s worth checking out other implementations to see how they handle this issue!
-
-
-
-
-
-# Ideas that are still useful from GRPO
-
-In supervised finetuning -
-
-In again
-
-In GRPO
-
-
-
-# Optimization function
-
-GRPO optimization objective
-
-TBC
-
-
-
-# Algorithm
-
-
-
-
-Cite deepseek GRPO algorithm
-
-
-Why is it wrong.
-
-
-What should people do
-
-- Actually read the training logs. When did the Aha moment happen
-- Read the logprobs
-
-
-ARC-AGI example
+[^probability-one]: If your target probability is more than one, you can never reach your target probability.

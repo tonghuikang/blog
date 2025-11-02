@@ -9,6 +9,10 @@ def validate_edit_content(old_string: str, new_string: str, filepath: str) -> li
     """Validate content from Edit or Write operations."""
     issues = []
 
+    if ".md" in filepath:
+        if "|" in new_string:
+            issues.append("Use \\vert instead of | if you are writing LaTeX.")
+
     if ".py" in filepath:
 
         if "except Exception" in new_string:

@@ -8,7 +8,8 @@
       "Bash(uv run pytest:*)",
       "Bash(uv run:*)",
       "Bash(bundle exec jekyll build:*)",
-      "Bash(bundle exec jekyll serve:*)"
+      "Bash(bundle exec jekyll serve:*)",
+      "Read(//tmp/**)"
     ],
     "deny": [],
     "ask": []

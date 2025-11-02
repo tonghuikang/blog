@@ -2,9 +2,6 @@
 layout: post
 title: Cover letter
 ---
-Companies to apply to - Anthropic, Google Deepmind, Meta, OpenAI, xAI
-
-
 
 To whom it may concern
 
@@ -26,7 +23,9 @@ These are some things I hope to build
 
 Of course, I am happy to start out in any relevant position that works.
 
-I am currently on the H-1B visa. I am a Singapore citizen eligible for USA H-1B1 work authorization [without lottery](https://www.dol.gov/agencies/whd/immigration/h1b1), unaffected by the [100k fee](https://www.facebook.com/photo/?fbid=1236782038492934) imposed on H-1B visas. I am eager to start working as soon as the visa process allows.
+I am currently on the H-1B visa. I am a Singapore citizen eligible for USA H-1B1 work authorization [without lottery](https://www.dol.gov/agencies/whd/immigration/h1b1), unaffected by the [100k fee](https://www.facebook.com/photo/?fbid=1236782038492934) imposed on H-1B visas. 
+I am currently based on South Bay and I am keen to relocate. 
+I am eager to start working as soon as the visa process allows.
 
 A linked copy of this text is also available on cover.huikang.dev.
 
