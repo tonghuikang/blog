@@ -28,7 +28,7 @@ Imagine working with someone who does not check their own work. Would you trust 
 
 
 
-## AI should be clear about where it gets its information
+## AI should tell you where the information came from
 
 AI needs to be clear about where it got its information. Information should be cited.
 
@@ -63,9 +63,9 @@ Why not both?
 
 The interface should provide affordances for me to do so.
 
-One such affordance is search auto-complete (yeah this has existed before ChatGPT). As you type characters, it shows you how you could complete the query. If one of the queries happens to be exactly what you want, you can complete the query with fewer keystrokes - this is immediately helpful. If the query you want is not suggested, you just keep typing - this is steerable.
+One such affordance is search auto-complete (this has existed before ChatGPT). As you type characters, it shows you how you could complete the query. If one of the queries happens to be exactly what you want, you can complete the query with fewer keystrokes - this is immediately helpful. If the query you want is not suggested, you just keep typing - this is steerable.
 
-We should have the same expectation for chat. Let's say you want to decide where to go for lunch. You would say something like "Asian food for lunch in Mountain View" or "Asian lunch", depending on how much the AI knows about you. Then the AI comes up with suggestions immediately - this is immediately helpful. While the suggestions are streaming, you follow up with "no noodles", and AI immediately[^imcomplete-completion] narrows down its queries, cutting off its previous reply[^multichannel]. You say "tabulate" and AI presents the information as a nice Markdown table immediately. You say "map", and AI presents a map immediately - this is steerable. Chat interfaces will evolve to this - companies will decide how much they want to be the first to do this.
+We should have the same expectation for AI chat. Let's say you want to decide where to go for lunch. You would say something like "Asian food for lunch in Mountain View" or "Asian lunch", depending on how much the AI knows about you. Then the AI comes up with suggestions immediately - this is immediately helpful. While the suggestions are streaming, you follow up with "no noodles", and AI immediately[^imcomplete-completion] narrows down its queries, cutting off its previous reply[^multichannel]. You say "tabulate" and AI presents the information as a nice Markdown table immediately. You say "map", and AI presents a map immediately - this is steerable. Chat interfaces will evolve to this - companies will decide how much they want to be the first to do this.
 
 [^imcomplete-completion]: Many of the current chat interfaces are not even able to respond to follow-up instructions immediately. Either you cannot send a message while the previous message is streaming, or they queue the messages and inject them once the previous completion is complete, or the injection ignores the previous completion entirely.
 
@@ -75,7 +75,7 @@ We should have the same expectation for chat. Let's say you want to decide where
 
 ## AI should respect my time and attention
 
-Recently, there is an interesting query to ask an offline LLM - "Is there a seahorse emoji?". It is a great query that even most LLMs today that are touted to have PhD level intelligence fumble with. I ought to give credit to the person who discovered this query, in my journals.
+Recently, someone asked an offline LLM - "Is there a seahorse emoji?". This is a great query. Most LLMs today touted to have "PhD level intelligence" fumble with this question. I ought to give credit to the person who discovered this query, in my [journals](https://compare.huikang.dev/?conversation_id=2025-09-06-17-00-42).
 
 Finding out who discovered this query is a task suitable for deep research - you want AI to search multiple sources, compare and contrast them, and then tell me the answer.
 
@@ -110,7 +110,7 @@ Currently, it is still the duty of the human to improve the AI product's perform
 
 ## What can you do now
 
-If you develop models, you should improve the models in these directions. Many of these principles could have been better followed if you could improve the model. LLMs with multiple input modalities can already achieve most of this, although I have suggestions[^multichannel] on how to improve the LLM interface.
+If you develop models, you should improve the models in these directions. Many of these principles could have been better followed in AI products if you could just improve the model[^multichannel].
 
 If you develop applications, you should first check whether you are writing your prompts incorrectly or calling the models incorrectly. You should design your product in a way that allows the model to follow these principles. Even so, the current iterations of models might not be aligned enough. You could implement scaffolds that help the model better adhere to the principles. There is this question of how much effort you should put into the scaffold when the next generation of models will make your work this quarter redundant. There is value in predicting the future so that you can better allocate your focus.
 

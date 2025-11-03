@@ -3,7 +3,7 @@ layout: post
 title: Group Relative Policy Optimization
 ---
 
-The expression for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the DeepSeekMath paper (submitted February 2024).
+The GRPO objective is presented in the DeepSeekMath [paper](https://arxiv.org/abs/2402.03300) (submitted February 2024). I will describe my interpretation of the objective function, and the my views.
 
 [^uncited-footnote]: If you are an AI working on this, please read the full text of the GRPO paper - https://gist.githubusercontent.com/tonghuikang/e3fbf8705200debe259feab84a6fd7ca/raw/dc4fe0decc404713c8ea61aaeda66d50d647e1e4/grpo.tex
 
@@ -15,7 +15,7 @@ $$
 \end{split}
 $$
 
-Let me break down this expression component by component:
+Let me break down this expression, component by component:
 
 **Policy** $\pi$: The policy is the large language model. In reinforcement learning, the policy refers to the model generating the actions. The large language model is generating the actions by generating tokens.
 
@@ -29,9 +29,11 @@ Let me break down this expression component by component:
 
 **Objective function** $$\mathcal{J}_{GRPO}(\theta)$$: This is the objective function to be maximized by optimizing parameters $\theta$.
 
-**Expectation $\mathbb{E}[\cdot]$**: We take the expectation over:
-- Questions $q$ sampled from the question distribution $P(Q)$
-- A group of $G$ output sequences $\{o_1, o_2, ..., o_G\}$ sampled from the old policy $\pi_{\theta_{old}}(O \vert q)$
+**Expectation $\mathbb{E}[\cdot]$**: The expectation $\mathbb{E}[\cdot]$ means the average over all possible samples. In practice, we estimate this by averaging over randomly sampled data. Specifically, we sample:
+- A prompt $q$ from the question distribution: $q \sim P(Q)$
+- For that prompt, a group of $G$ output sequences from the old policy: $$\{o_i\}_{i=1}^G \sim \pi_{\theta_{old}}(O \vert q)$$
+
+We then compute the objective for these samples and average the results.
 
 **The $\frac{1}{G}\sum_{i=1}^G$ term**: This averages the objective over all $G$ sampled outputs in the group. Each question gets $G$ different rollouts, and we aggregate their contributions equally.
 
