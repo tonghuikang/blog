@@ -10,7 +10,8 @@ The expression for [GRPO](https://arxiv.org/abs/2402.03300) is presented in the 
 $$
 \begin{split}
     \mathcal{J}_{GRPO}(\theta) &= \mathbb{E}_{[q \sim P(Q), \{o_i\}_{i=1}^G \sim \pi_{\theta_{old}}(O\vert q)]}  \\
-    & \frac{1}{G}\sum_{i=1}^G\frac{1}{\vert o_i\vert} \sum_{t=1}^{\vert o_i\vert} \left\{ \min \left[ \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \right] - \beta \mathbb{D}_{KL}\left[\pi_{\theta} \vert\vert \pi_{ref}\right]\right\} ,
+    & \frac{1}{G}\sum_{i=1}^G\frac{1}{\vert o_i\vert} \sum_{t=1}^{\vert o_i\vert} \Biggl\{ \min \Biggl[ \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})} \hat{A}_{i,t}, \text{clip} \left( \frac{\pi_\theta(o_{i,t} \vert q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t} \vert q, o_{i,<t})}, 1 - \epsilon, 1 + \epsilon \right)  \hat{A}_{i,t} \Biggr] \\
+    & \phantom{\frac{1}{G}\sum_{i=1}^G\frac{1}{\vert o_i\vert} \sum_{t=1}^{\vert o_i\vert} \Biggl\{ \min \Biggl[} - \beta \mathbb{D}_{KL}\left[\pi_{\theta} \vert\vert \pi_{ref}\right]\Biggr\} ,
 \end{split}
 $$
 
