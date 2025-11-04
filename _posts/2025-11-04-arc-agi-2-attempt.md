@@ -3,17 +3,15 @@ layout: post
 title: My attempt on ARC-AGI-2
 ---
 
-ARC-AGI 2
+Here I share the motivations and lessons behind by attempt at [ARC-AGI-2](https://arcprize.org/arc-agi/2/)
 
-You can see the problems in this site that I have built.
+To be upfront, my accuracy score on the evaluation set is [zero](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/).
+I also do not claim to have improved performance even on the data I have trained on.
 
-To be upfront, my score on the evaluation set is [zero](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/).
-I also do not claim to have better performance even on the data I have trained on.
+In any case, these are my contributions, in two html files
 
-In any case, these are my contributions, in two URLs
-
-- Code solutions for some ARC-AGI problems https://arc.huikang.dev/?task=007bbfb7
-- Finetuning dashboard https://tonghuikang.github.io/grpo-grind-11/
+- Code solutions - [arc.huikang.dev](https://arc.huikang.dev/) for some ARC-AGI problems
+- Finetuning dashboard - [traces.huikang.dev](https://tonghuikang.github.io/grpo-grind-11/)
 
 I hope this is interesting.
 
@@ -23,29 +21,37 @@ I hope this is interesting.
 
 This is what I observe
 
-- LLMs are already good at LeetCode. LLMs could perform better than me at LeetCode. ARC-AGI problems is not much harder than LeetCode problems.
-- LLMs are bad at recognizing patterns
+- LLMs are already good at LeetCode problems.
+- The code solutions to ARC-AGI problems is not much harder than LeetCode problems.
+    There are no advanced data structures.
+    There is no need to optimize for time complexity.
+    There are no edge case that you find out and think through.
+    Most of the time, you just need to put for loops in the correct places.
+    For half of the ARC-AGI-2 eval set problems, I think I could write the code in under 10 minutes.
 
-I just do not believe the LLMs cannot write code to solve to get at least 5% in the ARC-AGI-2 eval set.
-I could solve more than half ARC-AGI-2 eval set eval set in under 10 minutes each, with code. I do not believe AI cannot do this.
+I thought that I could easily achieve 6% just by lightly aligning the LLMs. As you can see, this is much harder than expected.
 
-I believe getting LLMs to write code is one path to solving ARC-AGI-2 completely.
+I still believe writing code is one way to solve ARC-AGI. As a human, you solve ARC-AGI with a processes. You do not just stream the output cell by cell - you copy the input, change the grid size, change some colors - you follow some procedure. The procedure can be codified, with code.
 
+[^LLM-only]: Even if we have a LLM-only solution to solve ARC-AGI, it will involve the LLM reasoning by the coordinates, and making one operation at a time. It will still involve code.
+
+
+
+# General approach
 
 This is my approach
 
-- I create a golden dataset
-- I use the golden dataset to guide the reinforcement learning
+- I create a set of "golden" solutions
+- I use the golden solutions to guide the reinforcement learning
 
 
 
 # Golden solution
 
-For each problems, I find the tokens that could generate significantly better performance.
+This is one golden solution [example](https://arc.huikang.dev/?task=007bbfb7)
 
-This is one example of the golden solution
 
-```
+```python
 def solve(grid: list[list[int]]) -> list[list[int]]:
     """
     Observation:
@@ -84,7 +90,7 @@ def solve(grid: list[list[int]]) -> list[list[int]]:
     return result
 ```
 
-There are multiple parts to the solution
+There are multiple parts to this golden solution
 
 - The function signature. `def solve(grid: list[list[int]]) -> list[list[int]]:` Import statements are expected to be inside the function definition.
 - Observations. I intend the trivial observations to be listed earlier
@@ -92,6 +98,80 @@ There are multiple parts to the solution
 - Code, probably with comments. Inner function definitions and import statements are allowed.
 - Return statement `return result`
 
+
+You have 
+Currently it seems that AI is able to solve LeetCode problems without thinking.
+
+Maybe not all the time, but at least 1 in 64 times of the times.
+
+Why not thinking - I don't think I have enough GPUs.
+
+
+# Prompting
+
+When I ask the LLM to generate the solution, I have a prompt. The prompt looks like this
+
+```
+<|im_start|>user
+Implement a Python function that maps the input to the outuput.
+
+The function docustring should include
+- some key observations
+- the general prodcedure
+
+def solve(grid: list[list[int]]) -> list[list[int]]:
+    """
+    Observation:
+    1. Mention the key patterns in the input and output
+    2. (other key patterns)
+    3. ...
+    ...
+
+    Procedure:
+    1. Mention key steps involved in solving the problem
+    2. (other key patterns)
+    3. ...
+    ...
+    N. Return the result
+    """
+
+    <implementation of the procedure here>
+
+    return result
+
+Do not write anything else outside the function.
+
+
+- Example 1 -
+
+Example input 1:
+000
+077
+000
+
+(transposed view):
+000
+070
+070
+
+Matrix size: 3 x 3
+
+{other example cases, and also the test cases}
+
+<|im_end|>
+<|im_start|>assistant
+def solve(grid: list[list[int]]) -> list[list[int]]:
+    """
+    Observations:
+```
+
+Probably I could have done serious prompt engineering in the prompts.
+
+One way is to include a long list of ways ARC-AGI problems are solved.
+
+However, this is something that should be done after I score 6% on the leaderboard.
+
+I do not do this now because this will increase the context length and would require me more GPUs to train my LLMs.
 
 
 # Training procedure
@@ -117,6 +197,18 @@ This is different from the usual GRPO-style reinforcement learning. What is diff
 
 
 
+# Some interesting examples
+
+Certain words are important - cite URL
+
+Fixing mistakes - cite URL
+
+Until I am confident that one token is indeed better than the other. Even so, there are some slip throughs.
+Sometimes if you have alternate spacing you can get a better reward. This is spurious. One way I could have accounted for this is whether the sample token would be unaffected if I run the formatter.
+
+It still remains a question on whether these fixes generalize.
+
+
 # Implementation
 
 You need to choose the level of abstraction to work with. I am not going to modify PyTorch code or vLLM code, I trust that they are efficient.
@@ -128,41 +220,40 @@ I run the risk from implementing wrongly. It is very possible that I am missing 
 Now there is Claude Code and GPT-5.
 
 
-Redact the last line. Train whether it could produce the last line
-
-
 
 # Performance analysis
 
 As mentioned, my score for the competition is still zero.
 
+Some basic cases could still be solved, even after finetuning. See Kaggle notebook.
+
 This is a list of everything needs to be right for this work
 
 - I could generate enough golden solutions
 - Given the golden docstring, (or the LLM could have already done this)
+- The LLM could be easily tuned to recognize patterns
+- The LLM does not need extensive chain of thought to recognize patterns
+- At least 1 in 64 rollouts needs to be correct
 - Training on the training set improves performance on the training set (I am stuck here)
 - Training on the training set improves performance on a similar test set
 - Either I am able to fine-tune long context, or short context fine-tuning generalizes to long context
-- I have enough GPU credits
 
 
-
-
-# Alternatives considered
-
-- Chain of thought. The docstring is the chain of thought.
-
-
-
-# What did I actually end up with
-
-When it is quite clear that LLMs could not easily do the job, I spent my time on something else instead.
+While all of these happens, it assumes that I have enough GPU credits.
 
 
 
 # What I should have done
 
+(Also include the path that I decided not to take and still agree with it.)
+
 I spent a few weeks trying to ...
+
+I do not believe that you can train a model to predict the whole output. You cannot just pass in a Sudoku. One cell to fill up yes, but you cannot solve the entire Sudoku. It does not make sense.
+
+Chain of thought. The docstring is the chain of thought.
+
+Overall it is still fun. I learnt a lot of things. I do have some regrets for other[AIMO-1] Kaggle[AIMO-2] competitions[Konwinski], but for some reason I do not really regret my work here even though I spent much more time on this. Probably this is because I score zero and I am just too far from getting any medals. Probably because I am optimizing for learning rather than optimizing for medals. Probably I am working mostly off Kaggle and the development environment is much more egronomic. Probably I could use the GPU credits more efficiently.
 
 
 
@@ -185,9 +276,6 @@ vLLM
 
 
 
-# Fine-tuning procedures
-
-SFT
 
 
 
