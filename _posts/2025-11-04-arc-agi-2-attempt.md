@@ -17,27 +17,29 @@ I hope this is interesting.
 
 
 
-# What I am betting on
+## What I am betting on
 
 This is what I observe
 
 - LLMs are already good at LeetCode problems.
+    In addition, it seems that LLMs can solve LeetCode even without a dedicated thought process. 
 - The code solutions to ARC-AGI problems is not much harder than LeetCode problems.
     There are no advanced data structures.
     There is no need to optimize for time complexity.
     There are no edge case that you find out and think through.
     Most of the time, you just need to put for loops in the correct places.
-    For half of the ARC-AGI-2 eval set problems, I think I could write the code in under 10 minutes.
+    For half of the ARC-AGI-2 eval set problems, I think I can write the code in under 10 minutes.
 
 I thought that I could easily achieve 6% just by lightly aligning the LLMs. As you can see, this is much harder than expected.
 
-I still believe writing code is one way to solve ARC-AGI. As a human, you solve ARC-AGI with a processes. You do not just stream the output cell by cell - you copy the input, change the grid size, change some colors - you follow some procedure. The procedure can be codified, with code.
+I see writing or following a procedure[^LLM-only] to be the way to solve ARC-AGI. As a human, you solve ARC-AGI with a processes. You copy the input, change the grid size, change some colors - you follow some procedure. The procedure can be codified, with code.
 
-[^LLM-only]: Even if we have a LLM-only solution to solve ARC-AGI, it will involve the LLM reasoning by the coordinates, and making one operation at a time. It will still involve code.
+[^LLM-only]: Even if we have a LLM-only solution to solve ARC-AGI, it will involve the LLM reasoning by the coordinates, and making one operation at a time.
+    Instead of writing code and executing it, it simulates the execution of the code.
 
 
 
-# General approach
+## General approach
 
 This is my approach
 
@@ -46,7 +48,7 @@ This is my approach
 
 
 
-# Golden solution
+## Golden solution
 
 This is one golden solution [example](https://arc.huikang.dev/?task=007bbfb7)
 
@@ -93,21 +95,29 @@ def solve(grid: list[list[int]]) -> list[list[int]]:
 There are multiple parts to this golden solution
 
 - The function signature. `def solve(grid: list[list[int]]) -> list[list[int]]:` Import statements are expected to be inside the function definition.
-- Observations. I intend the trivial observations to be listed earlier
+- Observations.
+    I intend the trivial observations to be listed earlier.
+    I do not intend subsequent observations refute prior observations.
 - Procedure. What the code should do.
-- Code, probably with comments. Inner function definitions and import statements are allowed.
+    This should describe the overall approach to map the input to the output.
+- Code, probably with comments.
+    Inner function definitions and import statements are allowed.
+    It is intended that the code follows the described procedure.
+    When writing code, the model is not supposed to discover whether the procedure is wrong.
 - Return statement `return result`
 
 
-You have 
-Currently it seems that AI is able to solve LeetCode problems without thinking.
+Note that there is no thought process involved.
+The observations and the procedure is intended to be the thought process.
 
-Maybe not all the time, but at least 1 in 64 times of the times.
+Note that I do not leave space for the model to reflect on its own outputs.
+There is no "Wait, I might be wrong, the correct observation should be ...".
+This will mean that it is inevitable that the model can be wrong and is not able to fix its mistakes.
+However, there is also a check at the end where I will run the code to confirm if it is correct on the example test cases.
+I just need the model to be right in approximately 1 in 64 times.
 
-Why not thinking - I don't think I have enough GPUs.
 
-
-# Prompting
+## Prompting
 
 When I ask the LLM to generate the solution, I have a prompt. The prompt looks like this
 
@@ -121,7 +131,7 @@ The function docustring should include
 
 def solve(grid: list[list[int]]) -> list[list[int]]:
     """
-    Observation:
+    Observations:
     1. Mention the key patterns in the input and output
     2. (other key patterns)
     3. ...
@@ -165,24 +175,42 @@ def solve(grid: list[list[int]]) -> list[list[int]]:
     Observations:
 ```
 
-Probably I could have done serious prompt engineering in the prompts.
+I describe some charactertics of my prompt
 
-One way is to include a long list of ways ARC-AGI problems are solved.
+- The deliverable is simple - write a function.
+    There is no requirement to use my predefined functions.
+    The model already knows how to transpose a matrix.
+- The assistant prefix.
+    The function signatures tells the model that is the input and output.
+    By ending with `Observations:`, I want the model to go straight into writing observations.
+- Input matrix.
+    I provide the inputs as numbers.
+    I think the tokenizer for the model I am using (`Qwen3-4B-Instruct-2507`) already treats individual numbers as a token each.
+    I also provide the transposed matrix.
+    I hope with the transposed matrix it is easier for the model to see which cells are above one another.
+- Input features.
+    I provide information on the matrix size.
+    I considered adding a lot more features, to inform the model what to try.
+    These are some features that I have considered - where the symmetry is, number of islands, the size of each islands, what the shapes are, repetition patterns.
+    However, I do not want to add these features early because it adds to the prompt input size.
+    With a longer prompt input size, I need more GPUs to finetune.
+    I want to prove that I am able to solve some problems first, before adding the features.
 
-However, this is something that should be done after I score 6% on the leaderboard.
-
-I do not do this now because this will increase the context length and would require me more GPUs to train my LLMs.
+I hope the model can work with this prompt and probably generate a function that is able to map the example input to the example output. If the function could map the example input to the example output without hardcoding, the function should be able to map the test input to the test output.
 
 
-# Training procedure
 
-This is the general training procedure.
+## Training procedure
 
-- The last k tokens of the golden solution is redacted.
-- With the last k tokens missing, I sample the next token.
-- For each token sampled, I do multiple rollouts.
-    - For each rollout, the reward is one if the solution is correct. The reward is zero if the solution is wrong.
-- The advantage for each sampled token is calculated.
+This is the training procedure I eventually settled with.
+
+- The last `k` tokens of the golden solution is redacted.
+- With the last `k` tokens missing, I sample the next token `{t}`.
+    The teacher token from the golden solution is added to the set of tokens.
+- For each token in `{t}`, I do multiple rollouts.
+    - For each rollout, the rollout reward is one if the solution is correct. The reward is zero if the solution is wrong.
+    - The action reward for each token `t` is the average over its rollout rewards.
+- With the action rewards, the advantage for each sampled token `t` is calculated.
 - If the advantage is positive, I will train the model to increase the probability of generating the token. If the advantage is negative. I will train the model to decrease the probability of generating the token.
 - The value k is updated. Whether I increase or decrease k depends on the average reward.
 
@@ -191,17 +219,46 @@ This is different from the usual GRPO-style reinforcement learning. What is diff
 
 - The action is one token, not the whole sequence.
 - I removed the G-term, the O-term, the KL term.
-- The clip value is different. For positive advantage, I attempt half the logprob. For negative advantage, I attempt to increase the logprob by two. After each iteration of training, I check whether the logprob has indeed moved to the direction I intend it to move.
 - The advantage value is normalized to either 1, 0 or -1.
 - The advantage calculation is different. Even if the reward of the action is positive, if I am not confident that the reward. (For example, if you have a pair of 8 rollouts, one with 4 correct and one with 5 correct, how confident that one is really better than the other).
+- The clip value is different. For positive advantage, I attempt to halve the logprob (there will be adjustments so that the sum of probabilties is still one). For negative advantage, I attempt to increase the logprob by two. After each iteration of training, I check whether the logprob has indeed moved to where I intend it to move.
+
+I describe my motivations behind my changes to GRPO in this [blog](https://blog.huikang.dev/2025/10/28/group-relative-policy-optimization.html).
+
+
+## Visualizing the training
+
+Instead of numbers, I want to visualize how training
+
+traces.huikang.dev
+
+I think this is probably the most interesting thing I want to share here.
+
+
+I also included the reference model probabilities. The reference model is the un-finetuned model
 
 
 
-# Some interesting examples
+Certain words are important
 
-Certain words are important - cite URL
+1fad071e - token 201
 
-Fixing mistakes - cite URL
+5582e5ca - token 158
+
+59341089 - token 74
+
+Fixing mistakes
+
+f2829549 - token 68
+
+ed36ccf7 - token 96
+
+6150a2bd - token 172
+
+Suprious
+
+c8f0f002 - token 141
+
 
 Until I am confident that one token is indeed better than the other. Even so, there are some slip throughs.
 Sometimes if you have alternate spacing you can get a better reward. This is spurious. One way I could have accounted for this is whether the sample token would be unaffected if I run the formatter.
@@ -209,7 +266,7 @@ Sometimes if you have alternate spacing you can get a better reward. This is spu
 It still remains a question on whether these fixes generalize.
 
 
-# Implementation
+## Implementation
 
 You need to choose the level of abstraction to work with. I am not going to modify PyTorch code or vLLM code, I trust that they are efficient.
 
@@ -219,9 +276,16 @@ I run the risk from implementing wrongly. It is very possible that I am missing 
 
 Now there is Claude Code and GPT-5.
 
+Inference is an API.
+
+Training is an API.
+
+Training machines and inference machines could be two very different machines.
 
 
-# Performance analysis
+
+
+## Performance analysis
 
 As mentioned, my score for the competition is still zero.
 
@@ -243,7 +307,7 @@ While all of these happens, it assumes that I have enough GPU credits.
 
 
 
-# What I should have done
+## What I should have done
 
 (Also include the path that I decided not to take and still agree with it.)
 
@@ -257,7 +321,7 @@ Overall it is still fun. I learnt a lot of things. I do have some regrets for ot
 
 
 
-# What I observed
+## What I observed
 
 
 Training-serving descrepancies
@@ -273,6 +337,8 @@ These are currently the constraints in open source software
 Quantization
 
 vLLM
+
+## Footnotes
 
 
 
