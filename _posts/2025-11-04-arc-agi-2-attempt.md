@@ -212,10 +212,10 @@ This is the training procedure I eventually settled with.
     - The action reward for each token `t` is the average over its rollout rewards.
 - With the action rewards, the advantage for each sampled token `t` is calculated.
 - If the advantage is positive, I will train the model to increase the probability of generating the token. If the advantage is negative. I will train the model to decrease the probability of generating the token.
-- The value k is updated. Whether I increase or decrease k depends on the average reward.
+- The value `k` is updated. Whether I increase or decrease `k` depends on the state reward. The state reward is the weighted probability average of action rewards.
 
 
-This is different from the usual GRPO-style reinforcement learning. What is different here:
+There are some modifications from the GRPO-style reinforcement learning. What is different here:
 
 - The action is one token, not the whole sequence.
 - I removed the G-term, the O-term, the KL term.
@@ -228,59 +228,108 @@ I describe my motivations behind my changes to GRPO in this [blog](https://blog.
 
 ## Visualizing the training
 
-Instead of numbers, I want to visualize how training
+Instead of numbers, I want to look at the data.
+I hope more people look at the data, and make it easy to look at the data.
 
-traces.huikang.dev
+Let me walkthrough the visualization.
 
-I think this is probably the most interesting thing I want to share here.
-
-
-I also included the reference model probabilities. The reference model is the un-finetuned model
-
+- The default [view](http://traces.huikang.dev/), which you can filter by [problem](http://traces.huikang.dev/?problem=1fad071e) and redaction [length](http://traces.huikang.dev/?problem=1fad071e&redacted=201).
+- The prompt modal, which is accessible by clicking on the problem hash.
+    The darker the color, the larger the token logprob.
+    The color indicates whether the currently tuned model produce a higher completion probability for the token.
+    If you mouseover a token, you can see the logprob from tuned model and the logprob from the reference model.
+- The completion modal, which is accessible by clicking on the squares.
+    Each completion is one token.
+    Similarly, if you mouseover the token, you can see the tuned model probability and the reference model probability.
+    I have one completion modal for each action.
+    The completion modal shows the completion (action) reward, as well as my measure of confidence of whether the action 
+    Then the rollout information follows. It shows full function for the completely rolled-out text, and the rollout reward.
 
 
 Certain words are important
 
-1fad071e - token 201
+http://traces.huikang.dev/?problem=1fad071e&redacted=201
 
-5582e5ca - token 158
+http://traces.huikang.dev/?problem=5582e5ca&redacted=158
 
-59341089 - token 74
+http://traces.huikang.dev/?problem=59341089&redacted=74
+
+(todo: explain)
+
 
 Fixing mistakes
 
-f2829549 - token 68
+http://traces.huikang.dev/?problem=f2829549&redacted=68
 
-ed36ccf7 - token 96
+http://traces.huikang.dev/?problem=ed36ccf7&redacted=96
 
-6150a2bd - token 172
+http://traces.huikang.dev/?problem=6150a2bd&redacted=172
 
-Suprious
-
-c8f0f002 - token 141
+(todo: explain)
 
 
-Until I am confident that one token is indeed better than the other. Even so, there are some slip throughs.
-Sometimes if you have alternate spacing you can get a better reward. This is spurious. One way I could have accounted for this is whether the sample token would be unaffected if I run the formatter.
+Mistakes
 
-It still remains a question on whether these fixes generalize.
+http://traces.huikang.dev/?problem=00576224&redacted=132
+
+You can see that the state reward at this redaction length was initially above 0.5.
+However, after training on other tokens, the state reward at this redaction length decreased to almost zero.
+
+In the most recent action sampling, the three completion tokens are pretty much equivalent to each other - it is just a closing bracket with different amount of succeeding spaces.
+
 
 
 ## Implementation
 
-You need to choose the level of abstraction to work with. I am not going to modify PyTorch code or vLLM code, I trust that they are efficient.
+I need to decide on level of abstraction to work with. There are these levels of abstraction
 
-I implement from PyTorch. I want to learn.
+- You do not finetune the model at all.
+    People won prizes in AIMO 1 and AIMO 2 without finetuning the model
+- You finetune the model, but the whole finetuning process as a black box.
+    This is as-if you are using OpenAI finetuning API.
+- You use open source finetuning packages and you intend
+- You write your
+    You still treat 
+- You modify underlying packages PyTorch and vLLM code as well.
+    This involves getting into PyTorch internals or vLLM implementation.
+    For example, you want some features that they have not implemented.
 
-I run the risk from implementing wrongly. It is very possible that I am missing a layer normalization somewhere and my model is just entirely wrong. I have some checks - for example comparing my logprobs with vLLM's logprobs to check that they are within range.
+This depends on my objective.
+I want to learn and prove my capability.
 
-Now there is Claude Code and GPT-5.
+I decide to work with PyTorch and vLLM.
+I want to build the finetuning from scratch, from where the loss is computed.
 
-Inference is an API.
+I run the risk from implementing wrongly.
+It is very possible that I am missing a layer normalization somewhere and my model is just entirely wrong. 
+I have some checks - for example comparing my logprobs with vLLM's logprobs to check that they are within range.
 
-Training is an API.
+This year is a special year.
+This year we have Claude Code and GPT-5.
+This is the time where you can learn asking anything about the codebase with AI, while the AI that not yet powerful enough to do everything for you.
+This window will not last long.
+
+I also made training and inference an API.
+To make an inference, I will make a REST API call to a vLLM server.
+To train the model, I will make a REST API call with the prompt, the completions and the target logprob I want for the training.
+
+
+I try to do on policy training.
+I don't think we need to be that on-policy.
+Gradient updates has to be on policy.
+The generated data does not need to be on-policy.
+Why do I still want on-policy.
+
+I saved the weights to disk.
+I simply restart the vLLM server.
+Saving the weights took 30 seconds. The vLLM server takes 40 seconds to start.
+There is this sleep and wake, but I could not get it to work.
 
 Training machines and inference machines could be two very different machines.
+
+When Thinking Machines announced their product Tinker, I can see the point.
+There is a lot of creative things you can do in post-training.
+However, the infrastructure you need to maintain is a pain.
 
 
 
