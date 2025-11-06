@@ -10,7 +10,7 @@ I also do not claim to have improved performance even on the data I have trained
 
 In any case, these are my contributions, in two html files
 
-- Code solutions - [arc.huikang.dev](https://arc.huikang.dev/) for some ARC-AGI problems
+- Golden solutions partial dataset - [arc.huikang.dev](https://arc.huikang.dev/)
 - Finetuning dashboard - [traces.huikang.dev](https://tonghuikang.github.io/grpo-grind-11/)
 
 I hope this is interesting.
@@ -246,36 +246,31 @@ Let me walkthrough the visualization.
     Then the rollout information follows. It shows full function for the completely rolled-out text, and the rollout reward.
 
 
-Certain words are important
+The visualization surfaces common mistakes made by the model.
 
-http://traces.huikang.dev/?problem=1fad071e&redacted=201
-
-http://traces.huikang.dev/?problem=5582e5ca&redacted=158
-
-http://traces.huikang.dev/?problem=59341089&redacted=74
-
-(todo: explain)
-
-
-Fixing mistakes
-
-http://traces.huikang.dev/?problem=f2829549&redacted=68
-
-http://traces.huikang.dev/?problem=ed36ccf7&redacted=96
-
-http://traces.huikang.dev/?problem=6150a2bd&redacted=172
-
-(todo: explain)
+- [f2829549](https://arc.huikang.dev/?task=f2829549) is about finding cells that are not colored in either partition.
+    - The model would [initially](http://traces.huikang.dev/?problem=f2829549&redacted=68) compare with the first column with the last column.
+    - The correct solution involves comparing the first column with the fourth column.
+- [6150a2bd](https://arc.huikang.dev/?task=6150a2bd) is about rotating the model by 180 degrees.
+    - The model would [initially](http://traces.huikang.dev/?problem=6150a2bd&redacted=172) rotate 90 degrees
+- [ed36ccf7](https://arc.huikang.dev/?task=ed36ccf7) is about rotating the matrix by 90 degrees.
+    - The model would [initially](http://traces.huikang.dev/?problem=ed36ccf7&redacted=96) rotate the wrong direction.
 
 
-Mistakes
+The visualization surfaces some words that are important in context.
 
-http://traces.huikang.dev/?problem=00576224&redacted=132
+- [1fad071e](https://arc.huikang.dev/?task=1fad071e) counts the number of 2x2 blue blocks.
+    - The model would [initially](http://traces.huikang.dev/?problem=1fad071e&redacted=201) generate " list" in the sentence "Return as a single-row list".
+    - The golden solution suggests a space " " which sets up the generation of " 1x5 matrix".
+    - However, the space is not necessary the only optimal next character to generate. If the model generates " matrix", the model can get an increase in reward.
+- [5582e5ca](https://arc.huikang.dev/?task=5582e5ca) is about finding the most common element.
+    - The model would [initially](http://traces.huikang.dev/?problem=5582e5ca&redacted=158) generate "examples" in "In all examples, the final output grid ..."
+    - The sentence in the golden solution is "In all training examples, the most frequent value appears exactly 3 times."
+    - My algorithm explores other tokens that are also able to acheive a significantly higher than average reward, such as " given", " test", " the", " provided", along with " training" from the golden solution.
+    - This way we do not only encourage the model to generate the token from the golden solution, but also other token with significantly better reward.
 
-You can see that the state reward at this redaction length was initially above 0.5.
-However, after training on other tokens, the state reward at this redaction length decreased to almost zero.
-
-In the most recent action sampling, the three completion tokens are pretty much equivalent to each other - it is just a closing bracket with different amount of succeeding spaces.
+I hope people look at what exactly are they training on, and whether they have achieved the training objective.
+When people share the results, I hope they also share some illustrative examples from the data.
 
 
 
@@ -284,52 +279,129 @@ In the most recent action sampling, the three completion tokens are pretty much 
 I need to decide on level of abstraction to work with. There are these levels of abstraction
 
 - You do not finetune the model at all.
-    People won prizes in AIMO 1 and AIMO 2 without finetuning the model
-- You finetune the model, but the whole finetuning process as a black box.
-    This is as-if you are using OpenAI finetuning API.
-- You use open source finetuning packages and you intend
-- You write your
-    You still treat 
-- You modify underlying packages PyTorch and vLLM code as well.
-    This involves getting into PyTorch internals or vLLM implementation.
-    For example, you want some features that they have not implemented.
+    People won cash prizes in AIMO 1 and AIMO 2 without finetuning the model.
+- You finetune the model, but treat the whole finetuning process as a black box.
+    This is similar to the experience of using OpenAI finetuning API.
+    You treat the entire finetuning dataset as a prompt.
+- You use open source finetuning packages without modification.
+    You would still probably tune some hyperparameters (the group size G)
+    You inform your hyperparameters based on the metrics (loss, reward, KL divergence, grad norm).
+- You write your finetuning pipeline from standard libraries.
+    You define some libraries as standard (PyTorch, vLLM) which you do not intend to modify.
+    You avoid any other packages except these standard libraries, you implement them from scratch.
+- You modify underlying standard libaries (PyTorch, vLLM) code as well.
+    You might want to modify PyTorch internals to achieve higher performance.
+    You might want to edit vLLM code to implement something new.
 
-This depends on my objective.
-I want to learn and prove my capability.
+How you choose you level of abstraction depends on your objective.
+How much effort are you willing to spend?
+How confident are you of your capabilities?
+What do you want to learn?
 
-I decide to work with PyTorch and vLLM.
-I want to build the finetuning from scratch, from where the loss is computed.
+**I decided to go with implementing the finetuning pipeline from scratch with standard libraries.**
 
-I run the risk from implementing wrongly.
-It is very possible that I am missing a layer normalization somewhere and my model is just entirely wrong. 
-I have some checks - for example comparing my logprobs with vLLM's logprobs to check that they are within range.
+I want to learn how is it like to build a finetuning pipeline from scratch.
+I also want the flexibility to try out different loss functions and training patterns.
+I want to prove my capability.
 
-This year is a special year.
-This year we have Claude Code and GPT-5.
-This is the time where you can learn asking anything about the codebase with AI, while the AI that not yet powerful enough to do everything for you.
-This window will not last long.
+Another factor that affected my decision is that now we have Claude Code and GPT-5.
+You can get questions about the code somewhat answered in the terminal where you execute your code.
+I cannot imagine learning PyTorch in the previous year.
 
-I also made training and inference an API.
-To make an inference, I will make a REST API call to a vLLM server.
-To train the model, I will make a REST API call with the prompt, the completions and the target logprob I want for the training.
+There are some risks with implementing the finetuning pipeline from scratch.
+There is not really a good reference implementation I could follow.
+It is very possible that I am missing a layer normalization somewhere in my model definition.
+I can mitigate this risk with some checks - for example comparing my logprobs with vLLM's logprobs to check that they are within range.
 
 
-I try to do on policy training.
-I don't think we need to be that on-policy.
-Gradient updates has to be on policy.
-The generated data does not need to be on-policy.
-Why do I still want on-policy.
+**This is my training setup that builds from PyTorch and vLLM**
 
-I saved the weights to disk.
-I simply restart the vLLM server.
-Saving the weights took 30 seconds. The vLLM server takes 40 seconds to start.
-There is this sleep and wake, but I could not get it to work.
+- I deploy four types of containers on Modal
+    - Reference model vLLM inference "reference server" - For calculating reference model logprobs.
+        There is one continer.
+    - Tuned model vLLM inference "inference server" - For calculating next token logprobs and rollouts.
+        There are two containers - one that is deploying and one that is serving.
+    - Training server - Receives training entries and enqueues the training process.
+        Each training datapoint consists of the prompt, the completions and the target logprob.
+    - Code execution - Receives code and executes the code.
+        I got code execution to be remote so that my computer is not burdened with code execution compute.
+- My local MacBook will be calling the vLLM inferences, training and execution APIs
 
-Training machines and inference machines could be two very different machines.
+**This is what happens when I start the training process**
 
-When Thinking Machines announced their product Tinker, I can see the point.
-There is a lot of creative things you can do in post-training.
-However, the infrastructure you need to maintain is a pain.
+- A script is started on my local MacBook.
+- The script will enqueue ARC-AGI problems I am training on.
+    The ARC-AGI problems is dequeued in parallel for processing, and re-enqueued after processing
+- When a problem is processed
+    - I retrieve the current redaction length.
+    - I call the reference server for the logprobs.
+        (I only need to call this once per problem because I can cache the logprobs, the reference model is not being updated anyway)
+    - I call the inference server for the logprobs.
+    - I choose what tokens will be given a rollout.
+    - I call the inference server again for the rollouts.
+    - When I get all the rollouts, I call the execution server to execute the code.
+    - I calculate the rollout reward for each rollout.
+    - I calculate the action reward for each token.
+    - I calculate the advantage for each token.
+    - I calculate the target logprob.
+        If the advantage is positive, I want to increase the logprob to the target logprob.
+        If the advantage is negative, I want to decrease the logprob to the target logprob.
+    - With the (prompt, completion tokens, advtanges, target logprobs), I send this training entry to the training server.
+    - Depending on the state reward (probability weighted average of action rewards), I update the redaction length for the problem.
+
+
+**This is what happens in the training server**
+
+- When a training entry is enqueued
+    - I dequeue from the queue 4 training entries
+    - For each training entry
+        I calculate the loss with the forward pass
+        I calculate the gradient with backpropagation
+    - With the accumulated gradients, the optimizer takes a steps and update the weights
+- At approximately every three minutes
+    - I pause the training process and save the model weights to disk.
+        Saving the model weights took 30 seconds.
+    - I kill one of the "inference server".
+        So that it reloads the model weights from disk.
+        Loading the model weights takes 40 seconds.
+
+
+
+
+**You see that I make training and inference an API.**
+
+There are some benefits in this arrangement.
+- I can develop my code on my notebook.
+    Whenever I edit my code, I do not need to spin up a GPU server.
+    I also do not need to SSH into a GPU server to edit my code.
+- I can easily scale up and scale down my GPU usage.
+    The GPU are only active when I am running the compute that requires GPUs.
+- I can provide clarity what is being passed in training.
+    The training entry includes only information necessary for training.
+    This way I can debug individual components.
+
+
+**You may notice that my training is not exactly on-policy.**
+
+For example, for a certain prompt (prompt + golden solution at a certain redaction length), for a model version 100, for a set of next tokens the true rollout reward is [0.5, 0.6, 0.7], and its advantages [-1, 0, +1]. We will train the model to generate more of the third token with the higher rollout reward. However, for model version 101, the true rollout reward is [0.8, 0.7, 0.6] and its advantages [+1, 0, -1].
+If we use the rollout rewards of model version 100 to train model version of 101, it means that we are not training model version 101 in the correct direction. On-policy training would mean that I can training model version 101 with the rollouts of model version 100.
+
+However, I do not think that this is a huge concern. Good tokens to train on are likely to be good for most model version. We saw the data.
+
+I still think we should get rollout from updated models, for the following reasons
+- Your rollout rewards are more accurate.
+    While it is unlikely that positive advantage actions can become a negative advantage action within a few model versions, it is possible that this is true after many model versions.
+    You do want to ensure that you are still training your model to generate the positive advantage actions.
+- You want to caculate rollout rewards with the latest model which is the most competent.
+    Even if you do not face the scenario of positive advantage actions becoming negative advantage, you still want to be able to find postive advantage tokens.
+    For example, we start with a model that could not implement the code for a particular problem even given the correct observation and procedure.
+    You cannot find positive advantage tokens for the observation and procedure, because none of the rollout would have positive reward.
+    Only after you train the model and updated the vLLM server, then you can find positive advantage tokens in the observation and procedure.
+
+
+[^tinker]: When Thinking Machines announced their product Tinker, I can see the point.
+    There is a lot of creative things you can do in post-training.
+    However, the infrastructure you need to maintain is a pain.
 
 
 
@@ -338,25 +410,35 @@ However, the infrastructure you need to maintain is a pain.
 
 As mentioned, my score for the competition is still zero.
 
-Some basic cases could still be solved, even after finetuning. See Kaggle notebook.
+I thought about the list of everything needs to be right for this to work
 
-This is a list of everything needs to be right for this work
+- I could generate golden solutions, and the golden solutions are actually good.
+- I could move the individual logprobs in the direction that I want.
+- When I move individual logprobs in the direction that I want, similar logprobs would also move in the direction that I want
+- When I move individual logprobs in the direction that I want, I do not break the model - I do not move other logprobs in the directions I do not want.
+- Training on the golden solution generalizes to sequences that the model would generate. The golden solution is generated by Claude Code after multiple iterations. This code might not be natural code that the model would generate.
+- My training implementation is actually correct. I did not construct the model architecture wrongly. The training serving discrepancy is acceptable.
+- The LLM could be finetuned to recognize patterns from 2D matrix represented in a string.
+- Training on the training set improves performance on the training set.
+- Training on the training set improves performance on the slighty different version of the training set (the expected algorithm is the same, but all the test cases is different)
+- Training on the training set improves performance on a similar test set.
+- Either I am able to fine-tune long context, or short context fine-tuning generalizes to long context.
+- I do not run out of GPU credits doing all of these.
 
-- I could generate enough golden solutions
-- Given the golden docstring, (or the LLM could have already done this)
-- The LLM could be easily tuned to recognize patterns
-- The LLM does not need extensive chain of thought to recognize patterns
-- At least 1 in 64 rollouts needs to be correct
-- Training on the training set improves performance on the training set (I am stuck here)
-- Training on the training set improves performance on a similar test set
-- Either I am able to fine-tune long context, or short context fine-tuning generalizes to long context
 
+This is what you would have seen if my training is indeed successful
+- For a particular problem, for a particular redaction length, after a few iterations of training, the state reward improves to close to one
+- Then we set a larger redaction length. The state reward also successfully improves to close to one.
+- We set a larger redaction length again, and until the redaction length is equal to the full golden solution minus the assistant problem. The state reward of the fully redacted solution is still close to one. This means that we could solve the problem.
+- For similar problems not in the training set, their state reward also increases to one.
 
-While all of these happens, it assumes that I have enough GPU credits.
+As you can see, while I am able to move the individual logits in the direction that I want, it does not seem convincing that the model can work with longer and longer redaction length. 
 
 
 
 ## What I should have done
+
+I think certain parts of the algorithm should be simpler.
 
 (Also include the path that I decided not to take and still agree with it.)
 
