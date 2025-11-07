@@ -3,7 +3,7 @@ layout: post
 title: My attempt on ARC-AGI-2
 ---
 
-Here I share the motivations and lessons behind by attempt at [ARC-AGI-2](https://arcprize.org/arc-agi/2/)
+Here I share the motivations and lessons behind my attempt at [ARC-AGI-2](https://arcprize.org/arc-agi/2/)
 
 To be upfront, my accuracy score on the evaluation set is [zero](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/).
 I also do not claim to have improved performance even on the data I have trained on.
@@ -11,7 +11,7 @@ I also do not claim to have improved performance even on the data I have trained
 In any case, these are my contributions, in two html files
 
 - Golden solutions partial dataset - [arc.huikang.dev](https://arc.huikang.dev/)
-- Finetuning dashboard - [traces.huikang.dev](https://tonghuikang.github.io/grpo-grind-11/)
+- Finetuning dashboard - [traces.huikang.dev](https://traces.huikang.dev/)
 
 I hope this is interesting.
 
@@ -26,13 +26,13 @@ This is what I observe
 - The code solutions to ARC-AGI problems is not much harder than LeetCode problems.
     There are no advanced data structures.
     There is no need to optimize for time complexity.
-    There are no edge case that you find out and think through.
+    There are no edge cases that you find out and think through.
     Most of the time, you just need to put for loops in the correct places.
     For half of the ARC-AGI-2 eval set problems, I think I can write the code in under 10 minutes.
 
 I thought that I could easily achieve 6% just by lightly aligning the LLMs. As you can see, this is much harder than expected.
 
-I see writing or following a procedure[^LLM-only] to be the way to solve ARC-AGI. As a human, you solve ARC-AGI with a processes. You copy the input, change the grid size, change some colors - you follow some procedure. The procedure can be codified, with code.
+I see writing or following a procedure[^LLM-only] to be the way to solve ARC-AGI. As a human, you solve ARC-AGI with a process. You copy the input, change the grid size, change some colors - you follow some procedure. The procedure can be codified, with code.
 
 [^LLM-only]: Even if we have a LLM-only solution to solve ARC-AGI, it will involve the LLM reasoning by the coordinates, and making one operation at a time.
     Instead of writing code and executing it, it simulates the execution of the code.
@@ -124,11 +124,11 @@ When I ask the LLM to generate the solution, I have a prompt. The prompt looks l
 
 ```
 <|im_start|>user
-Implement a Python function that maps the input to the outuput.
+Implement a Python function that maps the input to the output.
 
-The function docustring should include
+The function docstring should include
 - some key observations
-- the general prodcedure
+- the general procedure
 
 def solve(grid: list[list[int]]) -> list[list[int]]:
     """
@@ -186,7 +186,7 @@ def solve(grid: list[list[int]]) -> list[list[int]]:
     Observations:
 ```
 
-I describe some charactertics of my prompt
+I describe some characteristics of my prompt
 
 - The deliverable is simple - write a function.
     There is no requirement to use my predefined functions.
@@ -216,7 +216,7 @@ I hope the model can work with this prompt and probably generate a function that
 This is the training procedure I eventually settled with.
 
 - The last `k` tokens of the golden solution is redacted.
-- With the last `k` tokens missing, I sample the next token `{t}`.
+- With the last `k` tokens missing, I sample the next tokens `{t}`.
     The teacher token from the golden solution is added to the set of tokens.
 - For each token in `{t}`, I do multiple rollouts.
     - For each rollout, the rollout reward is one if the solution is correct. The reward is zero if the solution is wrong.
@@ -231,8 +231,8 @@ There are some modifications from the GRPO-style reinforcement learning. What is
 - The action is one token, not the whole sequence.
 - I removed the G-term, the O-term, the KL term.
 - The advantage value is normalized to either 1, 0 or -1.
-- The advantage calculation is different. Even if the reward of the action is positive, if I am not confident that the reward. (For example, if you have a pair of 8 rollouts, one with 4 correct and one with 5 correct, how confident that one is really better than the other).
-- The clip value is different. For positive advantage, I attempt to halve the logprob (there will be adjustments so that the sum of probabilties is still one). For negative advantage, I attempt to increase the logprob by two. After each iteration of training, I check whether the logprob has indeed moved to where I intend it to move.
+- The advantage calculation is different. Even if the reward of the action is positive, I may not be confident in the reward. (For example, if you have a pair of 8 rollouts, one with 4 correct and one with 5 correct, how confident are you that one is really better than the other?)
+- The clip value is different. For positive advantage, I attempt to halve the logprob (there will be adjustments so that the sum of probabilities is still one). For negative advantage, I attempt to increase the logprob by two. After each iteration of training, I check whether the logprob has indeed moved to where I intend it to move.
 
 I describe my motivations behind my changes to GRPO in this [blog](https://blog.huikang.dev/2025/10/28/group-relative-policy-optimization.html).
 
@@ -254,8 +254,8 @@ Let me walkthrough the visualization.
     Each completion is one token.
     Similarly, if you mouseover the token, you can see the tuned model probability and the reference model probability.
     I have one completion modal for each action.
-    The completion modal shows the completion (action) reward, as well as my measure of confidence of whether the action 
-    Then the rollout information follows. It shows full function for the completely rolled-out text, and the rollout reward.
+    The completion modal shows the completion (action) reward, as well as my measure of confidence for the action. 
+    Then the rollout information follows. It shows the full function for the completely rolled-out text, and the rollout reward.
 
 
 The visualization surfaces common mistakes made by the model.
@@ -278,8 +278,8 @@ The visualization surfaces some words that are important in context.
 - [5582e5ca](https://arc.huikang.dev/?task=5582e5ca) is about finding the most common element.
     - The model would [initially](http://traces.huikang.dev/?problem=5582e5ca&redacted=158) generate "examples" in "In all examples, the final output grid ..."
     - The sentence in the golden solution is "In all training examples, the most frequent value appears exactly 3 times."
-    - My algorithm explores other tokens that are also able to acheive a significantly higher than average reward, such as " given", " test", " the", " provided", along with " training" from the golden solution.
-    - This way we do not only encourage the model to generate the token from the golden solution, but also other token with significantly better reward.
+    - My algorithm explores other tokens that are also able to achieve a significantly higher than average reward, such as " given", " test", " the", " provided", along with " training" from the golden solution.
+    - This way we do not only encourage the model to generate the token from the golden solution, but also other tokens with significantly better reward.
 
 I hope people look at what exactly are they training on, and whether they have achieved the training objective.
 When people share the results, I hope they also share some illustrative examples from the data[^data].
@@ -295,7 +295,7 @@ I need to decide on level of abstraction to work with.
 There are these levels of abstraction that I could have worked with
 - You do not finetune the model at all.
     People won cash prizes in [AIMO 1](https://www.kaggle.com/competitions/ai-mathematical-olympiad-prize/writeups/after-exams-3rd-place-solution) and [AIMO 2](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/writeups/aliev-3rd-place-solution-report) without finetuning the model.
-- You finetune the model, but treat the whole finetuning process as a black box.
+- You fine-tune the model, but treat the whole fine-tuning process as a black box.
     This is similar to the experience of using OpenAI finetuning API.
     You treat the entire finetuning dataset as a prompt.
 - You use open source finetuning packages without modification.
@@ -304,20 +304,20 @@ There are these levels of abstraction that I could have worked with
 - You write your finetuning pipeline from standard libraries.
     You define some libraries as standard (PyTorch, vLLM) which you do not intend to modify.
     You avoid any other packages except these standard libraries, you implement them from scratch.
-- You modify underlying standard libaries (PyTorch, vLLM) code as well.
+- You modify underlying standard libraries (PyTorch, vLLM) code as well.
     You might want to modify PyTorch internals to achieve higher performance.
     You might want to edit vLLM code to implement something new.
 
-How you choose you level of abstraction depends on your objective.
+How you choose your level of abstraction depends on your objective.
 How much effort are you willing to spend?
 How confident are you of your capabilities?
 What do you want to learn?
 
 
 
-**I decided to go with implementing the finetuning pipeline from scratch with standard libraries.**
+**I decided to go with implementing the fine-tuning pipeline from scratch with standard libraries.**
 
-I want to learn how is it like to build a finetuning pipeline from scratch.
+I want to learn what it is like to build a fine-tuning pipeline from scratch.
 I also want the flexibility to try out different loss functions and training patterns.
 I want to prove my capability.
 
@@ -325,7 +325,7 @@ Another factor that affected my decision is that now we have Claude Code and GPT
 You can get questions about the code somewhat answered in the terminal where you execute your code.
 I cannot imagine learning PyTorch in the previous year.
 
-There are some risks with implementing the finetuning pipeline from scratch.
+There are some risks with implementing the fine-tuning pipeline from scratch.
 There is not really a good reference implementation I could follow.
 It is very possible that I am missing a layer normalization somewhere in my model definition.
 I can mitigate this risk with some checks - for example comparing my logprobs with vLLM's logprobs to check that they are within range.
@@ -336,7 +336,7 @@ I can mitigate this risk with some checks - for example comparing my logprobs wi
 
 - I deploy four types of containers on Modal
     - Reference model vLLM inference "reference server" - For calculating reference model logprobs.
-        There is one continer.
+        There is one container.
     - Tuned model vLLM inference "inference server" - For calculating next token logprobs and rollouts.
         There are two containers - one that is deploying and one that is serving.
     - Training server - Receives training entries and enqueues the training process.
@@ -351,7 +351,7 @@ I can mitigate this risk with some checks - for example comparing my logprobs wi
 
 - A script is started on my local MacBook.
 - The script will enqueue ARC-AGI problems I am training on.
-    The ARC-AGI problems is dequeued in parallel for processing, and re-enqueued after processing
+    The ARC-AGI problems are dequeued in parallel for processing, and re-enqueued after processing
 - When a problem is processed
     - I retrieve the current redaction length.
     - I call the reference server for the logprobs.
@@ -366,7 +366,7 @@ I can mitigate this risk with some checks - for example comparing my logprobs wi
     - I calculate the target logprob.
         If the advantage is positive, I want to increase the logprob to the target logprob.
         If the advantage is negative, I want to decrease the logprob to the target logprob.
-    - With the (prompt, completion tokens, advtanges, target logprobs), I send this training entry to the training server.
+    - With the (prompt, completion tokens, advantages, target logprobs), I send this training entry to the training server.
     - Depending on the state reward (probability weighted average of action rewards), I update the redaction length for the problem.
 
 
@@ -455,7 +455,7 @@ Even eliminating this time fully is not critical for me, for now.
 
 
 
-**The graularity of bfloat16 is pretty low**
+**The granularity of bfloat16 is pretty low**
 
 In float32, the exponent is 8 bit and the fraction is 23 bit.
 
@@ -467,9 +467,9 @@ Here are some [illustrative](https://flop.evanau.dev/brainfloat-converter) numbe
 
 The next larger bfloat16 number is approximately 0.78% larger.
 
-If your entire model is in bfloat16 and you want to decrease the absolute value of the logprob by 0.5% in each individual GRPO iteration, you cannot might not be able to backpropagate the gradient.
+If your entire model is in bfloat16 and you want to decrease the absolute value of the logprob by 0.5% in each individual GRPO iteration, you might not be able to backpropagate the gradient.
 
-If you still plan to train with a fully bfloat16 model, you need make sure your logprobs actually move.
+If you still plan to train with a fully bfloat16 model, you need to make sure your logprobs actually move.
 
 I tried to train in float16 (5 bit exponent, 10 bit fraction) but the model will start throwing NaN outputs within one or two rounds of weight updates. float16 is not an option for training.
 
@@ -488,7 +488,7 @@ If you choose float32 for vLLM serving, it will default to [not](https://github.
 
 **You can mix float32 and bfloat16 attention in PyTorch**
 
-For this I will need to cast the QKV states to bfloat16 before passing it to the attention module, and then cast back to 
+For this I will need to cast the QKV states to bfloat16 before passing it to the attention module, and then cast back to the original dtype. 
 The mathematical operation is to drop the 16 out of the 23 bits.
 
 The code looks like this.
@@ -551,11 +551,11 @@ However, when I deploy the model to vLLM in bfloat16, the logprob for the token 
 I eventually trained and served the model entirely in bfloat16.
 
 Initially when I train the model in bfloat16, the logprob did not move.
-I need to increase relax my grad norm clipping so that I can even more the logprob.
+I need to relax my grad norm clipping so that I can even move the logprob.
 
 However, I still want to move the logprob with the minimum amount possible.
-I had different grad norm clipping value increase over the different GRPO iterations.
-Eventually the logprob moved, but I still have suspicisons which weights are actually being updated.
+I had different grad norm clipping values increase over the different GRPO iterations.
+Eventually the logprob moved, but I still have suspicions about which weights are actually being updated.
 
 
 
@@ -563,9 +563,9 @@ Eventually the logprob moved, but I still have suspicisons which weights are act
 
 As mentioned, my score for the competition is still zero.
 
-The [original](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/output?scriptVersionId=262016237) model did manage to solve the first problem correctly, so is my [finetuned](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/output?scriptVersionId=273076021) model. Beyond that, my
+The [original](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/output?scriptVersionId=262016237) model did manage to solve the first problem correctly, as did my [finetuned](https://www.kaggle.com/code/huikang/arc-agi-2-code-approach/output?scriptVersionId=273076021) model.
 
-I thought about all the things that needs to be right for my approach to work.
+I thought about all the things that need to be right for my approach to work.
 
 - I could generate golden solutions, and the golden solutions are actually good.
 - I could move the individual logprobs in the direction that I want.
@@ -575,7 +575,7 @@ I thought about all the things that needs to be right for my approach to work.
 - My training implementation is actually correct. I did not construct the model architecture wrongly. The training serving discrepancy is acceptable.
 - The LLM could be finetuned to recognize patterns from 2D matrix represented in a string.
 - Training on the training set improves performance on the training set, even though I am training on individual tokens.
-- Training on the training set improves performance on the slighty different version of the training set (the expected algorithm is the same, but all the test cases is different)
+- Training on the training set improves performance on the slightly different version of the training set (the expected algorithm is the same, but all the test cases are different)
 - Training on the training set improves performance on test sets of similar difficulty.
 - Either I am able to fine-tune long context, or short context fine-tuning generalizes to long context.
 - I do not run out of GPU credits doing all of these.
@@ -588,7 +588,7 @@ This is what you would have seen if my training is indeed successful
 - We set a larger redaction length again, and until the redaction length is equal to the full golden solution minus the assistant problem. The state reward of the fully redacted solution is still close to one. This means that we could solve the problem.
 - For similar problems not in the training set, their state reward also increases to one.
 
-As you can see, while I am able to move the individual logits in the direction that I want, it does not seem that it is able to generalize to solve the problem.
+As you can see, while I am able to move the individual logprobs in the direction that I want, it does not seem to generalize to solve the problem.
 
 
 
@@ -628,7 +628,7 @@ Looking at the generated data has benefitted me a lot.
 We should also look into how the data is generated.
 
 
-For some reason I do not have much regrets on this, even though I should. I do have some regrets for [other](https://www.kaggle.com/code/huikang/code-interpreter-baseline) [Kaggle](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/571230) [competitions](https://www.kaggle.com/competitions/konwinski-prize/discussion/568634), but for some reason I do not really regret my work here even though I spent much more time on this. Probably because I am scoring zero and I am just too far from getting any medals. Probably because I am just doing a side project, and any valid submission is a bonus. Probably I spending very limited time on Kaggle notebooks and the development environment is more ergonomic and the changes easily tracked.
+For some reason I do not have much regret about this, even though I am scoring zero. I do have some regrets for [other](https://www.kaggle.com/code/huikang/code-interpreter-baseline) [Kaggle](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/571230) [competitions](https://www.kaggle.com/competitions/konwinski-prize/discussion/568634), but for some reason I do not really regret my work here even though I spent much more time on this. Probably because I am scoring zero and I am just too far from getting any medals. Probably because I am just doing a side project, and any valid submission is a bonus. Probably because I spent very limited time on Kaggle notebooks and the development environment is more ergonomic and the changes are easily tracked.
 
 I hope this is interesting to you too.
 
