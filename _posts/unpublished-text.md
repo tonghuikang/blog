@@ -1480,3 +1480,38 @@ Better reward attribution
 Look at what are you rewarding
 
 
+
+I should have studied 
+
+This way if I need to try out a different training config I can just use ...?
+
+I had some logic where I search for a good redaction length to start with.
+This has caused much complexity.
+
+There are times I did a 
+
+
+
+I think certain parts of the algorithm should be simpler.
+
+I have this logic where
+
+I should have saved the training bits.
+
+
+I should have conventional reinforcement methods to 
+
+
+I think I might trying a new technique on a problem that is too hard.
+Since I have .
+Probably I should have tried solving ???
+
+
+
+(Also include the path that I decided not to take and still agree with it.)
+
+I spent a few weeks trying to ...
+
+I do not believe that you can train a model to predict the whole output. You cannot just pass in a Sudoku. One cell to fill up yes, but you cannot solve the entire Sudoku. It does not make sense.
+
+Chain of thought. The docstring is the chain of thought.
