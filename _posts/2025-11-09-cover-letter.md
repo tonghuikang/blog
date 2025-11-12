@@ -24,16 +24,16 @@ I wrote prompts to label topics on content, and created the pipeline to backfill
 
 I believe I have good taste in [AI products](https://blog.huikang.dev/2025/09/07/principles-for-ai-products.html), especially on how AI responses should [be](https://compare.huikang.dev/).
 I write about prompt engineering [projects](https://blog.huikang.dev/2024/12/31/prompting-projects.html), instruction [delivery](https://blog.huikang.dev/2025/10/20/delivering-ai-instructions.html), and reinforcement [learning](https://blog.huikang.dev/2025/08/23/reinforcement-learning-life-lessons.html).
-I have also experimented with automated [prompting](https://autoprompt.huikang.dev/html_output/prompt-history-classification.html), [animating](https://tonghuikang.github.io/flash-attention-animation/) [flash](https://www.quora.com/How-does-flash-attention-work/answer/Tong-Hui-Kang-1) [attention](https://github.com/tonghuikang/llm_architecture), [AI](https://www.facebook.com/codingcompetitions/hacker-cup/2024/final-round/scoreboard?track=AI_CLOSED_TRACK) [competitive](https://github.com/tonghuikang/meta-ai-hackercup-2024) [programming](https://github.com/tonghuikang/meta-ai-hackercup-2025), and some [Kaggle](https://www.kaggle.com/code/huikang/starter-notebook-select-patch-verify) [competitions](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/571230).
+I have also experimented with automated [prompting](https://autoprompt.huikang.dev/html_output/prompt-history-classification.html), [animating](https://tonghuikang.github.io/flash-attention-animation/) [flash](https://www.quora.com/How-does-flash-attention-work/answer/Tong-Hui-Kang-1) [attention](https://github.com/tonghuikang/llm_architecture), [profiling](https://github.com/tonghuikang/optimizer-memory-profiles) [LLMs](https://tonghuikang.github.io/perfetto/out/ui/ui/dist/index.html), [AI](https://www.facebook.com/codingcompetitions/hacker-cup/2024/final-round/scoreboard?track=AI_CLOSED_TRACK) [competitive](https://github.com/tonghuikang/meta-ai-hackercup-2024) [programming](https://github.com/tonghuikang/meta-ai-hackercup-2025), and some [Kaggle](https://www.kaggle.com/code/huikang/starter-notebook-select-patch-verify) [competitions](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-2/discussion/571230).
 
 I also write about things I believe will be built - prompt [decaching](https://github.com/tonghuikang/blog/blob/main/_posts/2030-01-15-prompt-decaching.md), [multichannel](https://blog.huikang.dev/2025/05/14/multichannel-prediction.html) models, competitive programming [supercommunity](https://blog.huikang.dev/2024/12/29/competitive-programming-and-superintelligence.html). I hope to help build any of these. Of course, I am happy to start out in any relevant position to prove my value.
 
 
 I am currently based in the San Francisco Bay Area. I am happy to relocate to the City. I am currently on an H-1B visa. I am a Singapore citizen eligible for USA H-1B1 work authorization [without lottery](https://www.dol.gov/agencies/whd/immigration/h1b1), unaffected by the [100k fee](https://www.facebook.com/photo/?fbid=1236782038492934) imposed on H-1B visas. I am eager to start working as soon as the visa process allows.
 
-A hyperlinked copy of this text is also available on [cover.huikang.dev](https://cover.huikang.dev).
+This cover letter is available on [cover.huikang.dev](https://cover.huikang.dev). My resume is available on [resume.huikang.dev](https://resume.huikang.dev).
 
-I have worked on AI experiments during my free time. I hope to work on AI full-time as well.
+I have worked on AI experiments during all my free time. I hope to work on AI full-time as well.
 
 Thank you for reading.
 
