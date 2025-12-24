@@ -109,7 +109,9 @@ Sandbox benchmarks like SWE-bench are different from real world coding scenarios
 
 Evaluating the model in a sandboxed benchmark is straightforward, you just run a script. Of course, there is a lot of work in curating the tasks for SWE-bench, and good taste is needed for good tasks.
 
-Evaluating the model against coding sessions is more involved. There is no ground truth here. There is no script to run to confirm whether the task is correctly done. You cannot reproduce the user's environment because you do not have access to the environment.
+Evaluating the model against coding sessions is more involved. There is no ground truth here. There is no script to run to confirm whether the task is correctly done. You cannot reproduce the user's environment because you do not have access to the environment[^life-advice].
+
+[^life-advice]: This is similar to our experiences as well. You cannot go back in time, try something else, and see if things turn out better. You can only imagine what would have happened. You can only evaluate your actions with limited data, and you need learn from this limited data.
 
 You will need to create your own standards on what is good and what is bad. The remainder of the coding sessions could provide clues, but you still need to have your own judgment.
 
