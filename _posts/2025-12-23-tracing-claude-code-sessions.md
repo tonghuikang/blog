@@ -2,9 +2,9 @@
 layout: post
 title: Tracing Claude Code sessions
 ---
-I have built yet another visualizer for Claude Code sessions
+I have built yet another visualizer for Claude Code sessions.
 
-https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing
+https://sessions.huikang.dev/
 
 This is a feature walkthrough
 - (please fill up)

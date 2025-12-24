@@ -17,7 +17,10 @@
             "Bash(ls:*)",
             "Bash(cat:*)",
             "Bash(lsof:*)",
-            "Bash(curl:*)"
+            "Bash(curl:*)",
+            "Bash(bundle exec jekyll build:*)",
+            "Bash(bundle exec jekyll serve:*)",
+            "WebSearch"
         ],
         "deny": []
     },
