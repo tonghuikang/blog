@@ -16,7 +16,7 @@ This was built[^mcp][^updates] with Claude Code itself.
 
 [^mcp]: I was using [`@modelcontextprotocol/server-puppeteer`](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) to [manipulate](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/puppeteer) the browser. According to the npm site, the package is no longer supported. As I write this, I [found](https://www.reddit.com/r/ClaudeAI/comments/1li46d8/puppeteer_mcp_server_is_archived_any_alternatives/) out that I can use [`@playwright/mcp`](https://www.npmjs.com/package/@playwright/mcp) instead.
 
-[^updates]: It is unlikely that I will include more sessions. The main objective of making this prototype is to write this blogpost, which has been achieved. I will only add sessions if I have something I want to explicitly share - for example the methods on prompting Claude Code or to reproduce a certain bug with Claude Code. It is also likely that I will move on to a different prototype. It might be possible that Claude Code builds this and this prototype is no longer needed.
+[^updates]: It is unlikely that I will include more sessions. The main objective of making this prototype is to write this blogpost, which has been achieved. I will only add sessions if I have something I want to explicitly share - for example the methods on prompting Claude Code or to reproduce a certain bug with Claude Code. It is also likely that I will move on to a different prototype. Claude Code may eventually build this natively, making this prototype obsolete.
 
 
 
@@ -32,7 +32,7 @@ This was built[^mcp][^updates] with Claude Code itself.
 
 I want to take the opportunity to share how I prompt Claude Code. As Claude Code improves, some of these prompting methods will perform better, and some of these prompts will no longer be necessary.
 
-#### **I get Claude Code to start working as early as possible**
+#### **Immediately send in the first instruction**
 
 In this example, I ask Claude Code to whitelist traces belonging to projects that I want to publish. To do this, Claude Code will need to edit gitignore. Claude Code will also need to write and run a cleanup script to remove the files that are not gitignored so that what I see locally is what I see when I publish the project.
 
@@ -40,13 +40,13 @@ Instead of writing my instructions all at once, I break down my instructions and
 
 My first [instruction](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-sessions&session=c2edc133-2bfc-4ebd-b066-0256bcd25d87&msg=d5d0642c-9c00-41c3-a5ca-6a29c66e66cc) is just to edit gitignore to allow a certain project to be tracked. I let Claude Code understand the codebase and carry on with the task. Then I inject another [instruction](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-sessions&session=c2edc133-2bfc-4ebd-b066-0256bcd25d87&msg=1e66f03a-a8fc-48db-bf45-fc9c6beb79f9) to write the cleanup script.
 
-There are some benefits to breaking down the instructions. You want your agent to start working on the problem as soon as possible. The shorter your first instruction, the earlier the agent can start working. The second instruction that you write can depend on how the agent is performing.
+Breaking down instructions lets your agent start working sooner. The shorter your first instruction, the earlier the agent can start working. The second instruction that you write can depend on how the agent is performing.
 
 For this, both the interface and the model should be steerable and immediately helpful. Claude Code allows this, I can send messages to Claude Code while Claude Code is working on the problem. The messages will be queued and delivered when Claude Code finishes a tool use[^steerable]. However, I still often see Claude Code dropping my instructions.
 
 [^steerable]: Even so, there are times where Claude Code could ignore your submitted messages. The harness should have provided a to-do list where it asks the model on whether all the instructions of the user have been addressed.
 
-#### **I make design choices that make it easy to communicate with Claude Code.**
+#### **Invest in communication**
 
 If I find myself taking a lot of effort to tell Claude Code what I want, I should think of ways to make this simpler.
 
@@ -60,7 +60,7 @@ Ideally, when appropriate, Claude Code should take the initiative to make commun
 
 
 
-#### **I ask Claude Code to show me a working example**
+#### **Ask for proof of work**
 
 Instead of me checking Claude Code's work, I ask Claude Code to show the proof that it is working.
 
@@ -72,7 +72,7 @@ Claude Code should take the initiative to produce the working example without me
 
 
 
-#### **I get Claude Code to describe the issue to me instead**
+#### **Let Claude tell you what is the issue**
 
 Instead of describing the issue to Claude Code, I show Claude Code the place where I find there is an issue, and I ask Claude Code to describe the issue to me.
 
@@ -80,7 +80,7 @@ In this example, Claude Code rendered the agent messages inside a tool message i
 
 Instead of describing the issue to Claude Code, I [asked](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=bde6418c-ae88-4e72-a8c4-4323aa337806&msg=59a90e9d-58a7-4c7c-ae0c-6bf3b9563280) Claude Code on "tell me what you see in (url)". Claude Code opens up Puppeteer, goes to the URL, and describes the issue to me[^boxing]. I then ask to fix one of the issues that it has surfaced. 
 
-There are benefits to doing this. I no longer need to take time to describe the issue since it could be faster for Claude Code to look into the problem and tell me what the issue is. If the issue that Claude Code accurately surfaces aligns with the issue you want to fix, you can be more confident that Claude Code understands your assignment. There might be other issues that you are not aware of, and this interaction provides an opportunity for you to ask to fix the other issues as well.
+This saves me time describing issues — Claude Code can look into the problem faster than I can explain it. If the issue that Claude Code accurately surfaces aligns with the issue you want to fix, you can be more confident that Claude Code understands your assignment. There might be other issues that you are not aware of, and this interaction provides an opportunity for you to ask to fix the other issues as well.
 
 For this to work, Claude Code needs to have good product taste.
 
