@@ -20,11 +20,11 @@ This was built[^mcp][^updates] with Claude Code itself.
 
 
 
-Reasons that I am building this
+## Why I built this
 
 - Persist and visualize my own Claude Code sessions in one place
 - Share how I prompt Claude Code (and my views on prompting)
-- Deliver some views on how evaluation and training could be done
+- Deliver some views on how evaluation (and training) could be done
 
 
 
@@ -42,7 +42,7 @@ My first [instruction](https://tonghuikang.github.io/claude-code-sessions/?proje
 
 There are some benefits to breaking down the instructions. You want your agent to start working on the problem as soon as possible. The shorter your first instruction, the earlier the agent can start working. The second instruction that you write can depend on how the agent is performing.
 
-For this, both the interface and the model should be both steerable and immediately helpful. Claude Code allows this, I can send messages to Claude Code while Claude Code is working on the problem. The messages will be queued and delivered when Claude Code finishes a tool use[^steerable]. However, I still often see Claude Code dropping my instructions.
+For this, both the interface and the model should be steerable and immediately helpful. Claude Code allows this, I can send messages to Claude Code while Claude Code is working on the problem. The messages will be queued and delivered when Claude Code finishes a tool use[^steerable]. However, I still often see Claude Code dropping my instructions.
 
 [^steerable]: Even so, there are times where Claude Code could ignore your submitted messages. The harness should have provided a to-do list where it asks the model on whether all the instructions of the user have been addressed.
 
@@ -56,7 +56,7 @@ I should not tolerate such bottlenecks in communication. Therefore, I [asked](ht
 
 Now I no longer need to take screenshots, I just pass in the URLs. Claude Code could also use the same URLs to show that it has completed its work. The early investment to improve communication is worth it.
 
-Ideally, when appropriate, Claude Code should take the initiative to make communication easier. I have plenty of [experience](https://compare.huikang.dev/) [generating](https://traces.huikang.dev/) [html](https://aimo.huikang.dev/tokens) [files](https://aimo.huikang.dev/leaderboard) so I know what are the good practices, but people who are new do not.
+Ideally, when appropriate, Claude Code should take the initiative to make communication easier. I have plenty of [experience](https://compare.huikang.dev/) [generating](https://traces.huikang.dev/) [html](https://aimo.huikang.dev/tokens) [files](https://aimo.huikang.dev/leaderboard) so I know what the good practices are, but people who are new do not.
 
 
 
@@ -85,11 +85,11 @@ There are benefits to doing this. I no longer need to take time to describe the 
 For this to work, Claude Code needs to have good product taste.
 
 
-[^boxing]: In this case, Claude Code [tells](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=bde6418c-ae88-4e72-a8c4-4323aa337806&msg=8b501b2c-bd07-40f6-b6da-2789f38bd2b1) me a bunch of issues but misses the most obvious issues that the box highlighting is overpowering the text and making the text unreadable. This is not ideal, but has provided me a useful signal that Claude Code does not yet understand the assignment.
+[^boxing]: In this case, Claude Code [tells](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=bde6418c-ae88-4e72-a8c4-4323aa337806&msg=8b501b2c-bd07-40f6-b6da-2789f38bd2b1) me a bunch of issues but misses the most obvious issue: the box highlighting is overpowering the text and making the text unreadable. This is not ideal, but has provided me a useful signal that Claude Code does not yet understand the assignment.
 
 
 
-## How evaluation and training could be done
+## How evaluation could be done
 
 Usually coding performance is represented as variants of SWE-bench. I describe how SWE-bench is different from real world coding scenarios.
 
@@ -98,7 +98,7 @@ These are some things you should observe with my coding sessions
 - My instructions are messy. I can ask for one thing, but ask for something completely different right after. Claude Code needs to be able to track all my instructions and address them all.
 - My instructions need to be interpreted. The words from me need to be corroborated with the context found in the code.
 - The description of the environment is incomplete. The model may not be served all the information. It is up to the agent to discover, and also decide to spend tokens in discovering.
-- The reward needs to be inferred. When the sessions ends, it might be that the task is complete. It might be that I have given up and copied the entire conversation to Codex.
+- The reward needs to be inferred. When the session ends, it might be that the task is complete. It might be that I have given up and copied the entire conversation to Codex.
 
 Sandbox benchmarks like SWE-bench are different from real world coding scenarios
 
@@ -113,7 +113,7 @@ Evaluating the model against coding sessions is more involved. There is no groun
 
 You will need to create your own standards on what is good and what is bad. The remainder of the coding sessions could provide clues, but you still need to have your own judgment.
 
-This is how I expect one entry of evaluation is done for one model.
+This is how I expect evaluation to be done for one model.
 
 - You have one reference prompt-completion pair from the session. The reference completion is one turn taken by the model. The reference prompt is all the tokens before the reference completion.
 - You get the model to generate the new completion from the reference prompt.
@@ -127,7 +127,7 @@ This is how you can grade whether a completion is better than the reference comp
 - You check whether the new completion is also advancing the task at a similar amount with the similar token budget.
 - You produce an overall judgment.
 
-Notice what I described here involves comparing a new completion with a reference completion. The reference completion has access to the remainder of the sessions, whereas this is not the case for the new completion. You access the remainder from the new completion because you cannot fully reproduce the environment that created the reference session. If you want to compare two new completions, you need to design the process slightly differently. One simple way to do this is to compare two new completions against the reference completion and decide among the two new completion which one is better, or is it a tie.
+Notice what I described here involves comparing a new completion with a reference completion. The reference completion has access to the remainder of the sessions, whereas this is not the case for the new completion. You access the remainder from the new completion because you cannot fully reproduce the environment that created the reference session. If you want to compare two new completions, you need to design the process slightly differently. One simple way to do this is to compare two new completions against the reference completion and decide among the two new completions which one is better, or is it a tie.
 
 Once you can evaluate, you can train. You train the model to produce more of the better completion on the reference prompts.
 
