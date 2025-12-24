@@ -4,7 +4,7 @@ title: Tracing Claude Code sessions
 ---
 I have built yet another visualizer for Claude Code sessions - [sessions.huikang.dev](https://sessions.huikang.dev/)
 
-![claude-code-sessions](claude-code-sessions.png)
+![claude-code-sessions](/assets/claude-code-sessions.png)
 
 This is a feature walkthrough
 - [Browse projects and sessions](https://sessions.huikang.dev/) in a sidebar, view conversation transcripts with color-coded messages ([user](https://sessions.huikang.dev/?project=claude-code-sessions&session=fd293da7-7072-4a0c-a1fc-716fbe921e85&msg=08b14646-3e30-4ca5-a2cd-a6bd6d2c2286), [assistant](https://sessions.huikang.dev/?project=claude-code-sessions&session=fd293da7-7072-4a0c-a1fc-716fbe921e85&msg=975613e8-4a42-4457-84be-587470360695), [tool](https://sessions.huikang.dev/?project=claude-code-sessions&session=fd293da7-7072-4a0c-a1fc-716fbe921e85&msg=334a8ce7-c277-444e-a2c2-5305412dc649))
@@ -14,17 +14,17 @@ This is a feature walkthrough
 This was built[^mcp][^updates] with Claude Code itself.
 
 
-[^mcp]: I was using [`@modelcontextprotocol/server-puppeteer`](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) to [manipulate](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/puppeteer) the browser. According to the npm site, the package is no longer supported. As I write this, I [found](https://www.reddit.com/r/ClaudeAI/comments/1li46d8/puppeteer_mcp_server_is_archived_any_alternatives/) out that that I can use [`@playwright/mcp`](https://www.npmjs.com/package/@playwright/mcp) instead.
+[^mcp]: I was using [`@modelcontextprotocol/server-puppeteer`](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) to [manipulate](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/puppeteer) the browser. According to the npm site, the package is no longer supported. As I write this, I [found](https://www.reddit.com/r/ClaudeAI/comments/1li46d8/puppeteer_mcp_server_is_archived_any_alternatives/) out that I can use [`@playwright/mcp`](https://www.npmjs.com/package/@playwright/mcp) instead.
 
-[^updates]: It is unlikely that I will include more sessions. The main objective of making this prototype is to write this blogpost, which has been achieved. I will only add sessions if I have something I want to explicitly share - for example the methods on prompting Claude Code or to reproduce a certain bug with Claude Code. It is also likely that I will move on to different prototype. It might be possible that Claude Code builds this and this prototype is no longer needed.
+[^updates]: It is unlikely that I will include more sessions. The main objective of making this prototype is to write this blogpost, which has been achieved. I will only add sessions if I have something I want to explicitly share - for example the methods on prompting Claude Code or to reproduce a certain bug with Claude Code. It is also likely that I will move on to a different prototype. It might be possible that Claude Code builds this and this prototype is no longer needed.
 
 
 
 Reasons that I am building this
 
 - Persist and visualize my own Claude Code sessions in one place
-- Share how I prompt the Claude Code (and my views on prompting)
-- Deliver some views on evaluation and training could be done
+- Share how I prompt Claude Code (and my views on prompting)
+- Deliver some views on how evaluation and training could be done
 
 
 
@@ -34,7 +34,7 @@ I want to take the opportunity to share how I prompt Claude Code. As Claude Code
 
 #### **I get Claude Code to start working as early as possible**
 
-In this example, I ask Claude Code to whitelist traces belonging to projects that I want to publish. To do this, Claude Code will need to edit gitignore. Claude Code will also need to write and run cleanup script to remove the files that are not gitignored so that what I see locally is what I see when I publish the project.
+In this example, I ask Claude Code to whitelist traces belonging to projects that I want to publish. To do this, Claude Code will need to edit gitignore. Claude Code will also need to write and run a cleanup script to remove the files that are not gitignored so that what I see locally is what I see when I publish the project.
 
 Instead of writing my instructions all at once, I break down my instructions and submit them separately.
 
@@ -44,13 +44,13 @@ There are some benefits to breaking down the instructions. You want your agent t
 
 For this, both the interface and the model should be both steerable and immediately helpful. Claude Code allows this, I can send messages to Claude Code while Claude Code is working on the problem. The messages will be queued and delivered when Claude Code finishes a tool use[^steerable]. However, I still often see Claude Code dropping my instructions.
 
-[^steerable]: Even so, there are times where Claude Code could ignore your submitted messages. The harness should have provided a to-do list where it asks the model on whether all the instructions of the user has been addressed.
+[^steerable]: Even so, there are times where Claude Code could ignore your submitted messages. The harness should have provided a to-do list where it asks the model on whether all the instructions of the user have been addressed.
 
 #### **I make design choices that make it easy to communicate with Claude Code.**
 
 If I find myself taking a lot of effort to tell Claude Code what I want, I should think of ways to make this simpler.
 
-When the first prototype is done, I find it very difficult to describe issues to Claude Code. I had to give instructions to Claude Code that it to navigate to the second session and the message with a certain substring. Alternatively, I take screenshots and [upload](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=10d53ddc-6406-4bed-a32b-da56257311f1&msg=6eecbb54-1feb-4fc2-8acd-826551b53bef) the screenshot to the Claude Code, and Claude Code will need to reverse engineer the screenshot to figure out which message am I talking about.
+When the first prototype is done, I find it very difficult to describe issues to Claude Code. I had to give instructions to Claude Code to navigate to the second session and the message with a certain substring. Alternatively, I take screenshots and [upload](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=10d53ddc-6406-4bed-a32b-da56257311f1&msg=6eecbb54-1feb-4fc2-8acd-826551b53bef) the screenshot to Claude Code, and Claude Code will need to reverse engineer the screenshot to figure out which message I am talking about.
 
 I should not tolerate such bottlenecks in communication. Therefore, I [asked](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=10d53ddc-6406-4bed-a32b-da56257311f1&msg=dc745936-f392-49ac-b80d-c091e171bed0) that "navigating the page should change the query params".
 
@@ -62,7 +62,7 @@ Ideally, when appropriate, Claude Code should take the initiative to make commun
 
 #### **I ask Claude Code to show me a working example**
 
-Instead of me checking Claude Code work, I ask Claude Code to show the proof that it is working.
+Instead of me checking Claude Code's work, I ask Claude Code to show the proof that it is working.
 
 In this example, I [asked](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=860b45a6-fc81-4387-a675-085104ac280d&msg=f34b05fb-5b5d-4d1b-be95-57664d357d7b) Claude Code to display the agent trace within the session itself. The result should look something like `http://localhost:44043/?project=claude-code-tracing&session=10d53ddc-6406-4bed-a32b-da56257311f1&msg=deefa37a-9f1b-4466-abcf-44786f2b8183` where I can visit and inspect the outcome.
 
@@ -78,9 +78,9 @@ Instead of describing the issue to Claude Code, I show Claude Code the place whe
 
 In this example, Claude Code rendered the agent messages inside a tool message in the main thread. However, the rendering is horrible, the text in the agent messages is hardly visible.
 
-Instead of describing the issue to Claude Code, I [asked](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=bde6418c-ae88-4e72-a8c4-4323aa337806&msg=59a90e9d-58a7-4c7c-ae0c-6bf3b9563280) Claude Code on "tell me what you see in (url)". Claude Code opens up Puppeteer, goes the the URL, and describes the issue to me[^boxing]. I then ask to fix one of the issues that it has surfaced. 
+Instead of describing the issue to Claude Code, I [asked](https://tonghuikang.github.io/claude-code-sessions/?project=claude-code-tracing&session=bde6418c-ae88-4e72-a8c4-4323aa337806&msg=59a90e9d-58a7-4c7c-ae0c-6bf3b9563280) Claude Code on "tell me what you see in (url)". Claude Code opens up Puppeteer, goes to the URL, and describes the issue to me[^boxing]. I then ask to fix one of the issues that it has surfaced. 
 
-There are benefits to doing this. I no longer need to take time to describe the issue since it could be faster for Claude Code to look into the problem tell me what the issue is. If the issue that Claude Code accurately surfaces aligns with the issue you want to fix, you can be more confident that Claude Code understands your assignment. There might be other issues that you are not aware of, and this interaction provides an opportunity for you to ask to fix the other issues as well.
+There are benefits to doing this. I no longer need to take time to describe the issue since it could be faster for Claude Code to look into the problem and tell me what the issue is. If the issue that Claude Code accurately surfaces aligns with the issue you want to fix, you can be more confident that Claude Code understands your assignment. There might be other issues that you are not aware of, and this interaction provides an opportunity for you to ask to fix the other issues as well.
 
 For this to work, Claude Code needs to have good product taste.
 
@@ -96,20 +96,20 @@ Usually coding performance is represented as variants of SWE-bench. I describe h
 These are some things you should observe with my coding sessions
 
 - My instructions are messy. I can ask for one thing, but ask for something completely different right after. Claude Code needs to be able to track all my instructions and address them all.
-- My instructions needs to be interpreted. The words from me needs to be corroborated with the context found in the code.
-- The description of the environment is incomplete. The model may not served all the information. It is up to the agent to discover, and also decide spend tokens in discovering.
+- My instructions need to be interpreted. The words from me need to be corroborated with the context found in the code.
+- The description of the environment is incomplete. The model may not be served all the information. It is up to the agent to discover, and also decide to spend tokens in discovering.
 - The reward needs to be inferred. When the sessions ends, it might be that the task is complete. It might be that I have given up and copied the entire conversation to Codex.
 
- Sandbox benchmarks like SWE bench is different from the real world coding scenario
+Sandbox benchmarks like SWE-bench are different from real world coding scenarios
 
-- Instructions are precise. There is only usually only one task that is to be solved. There are instructions on how to reproduce the issue.
+- Instructions are precise. There is usually only one task that is to be solved. There are instructions on how to reproduce the issue.
 - Instructions are clear. There is only one way to interpret the instruction.
 - The environment is reproducible.
 - The reward is clear. Benchmarks have processes to calculate the performance of the model. If the model is tasked to fix an issue, there are held-out test cases that the model needs to pass. If the model passes the test cases, the model succeeded, otherwise not.
 
-Evaluating the model in a sandboxed benchmark is straightforward, you just run a script. Of course, there is a lot of work in curating the tasks for SWE bench, and good taste is needed to for good tasks.
+Evaluating the model in a sandboxed benchmark is straightforward, you just run a script. Of course, there is a lot of work in curating the tasks for SWE-bench, and good taste is needed for good tasks.
 
-Evaluating the model against coding sessions is more involved. There are no ground truth here. There is no script to run to confirm whether the task is correctly done. You cannot reproduce the user's environment because you do not have access to the environment.
+Evaluating the model against coding sessions is more involved. There is no ground truth here. There is no script to run to confirm whether the task is correctly done. You cannot reproduce the user's environment because you do not have access to the environment.
 
 You will need to create your own standards on what is good and what is bad. The remainder of the coding sessions could provide clues, but you still need to have your own judgment.
 
