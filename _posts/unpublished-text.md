@@ -1515,3 +1515,69 @@ I spent a few weeks trying to ...
 I do not believe that you can train a model to predict the whole output. You cannot just pass in a Sudoku. One cell to fill up yes, but you cannot solve the entire Sudoku. It does not make sense.
 
 Chain of thought. The docstring is the chain of thought.
+
+
+
+
+- You have prompt-completion pairs from the session. The completion is one turn taken by the model. The prompt is all the tokens before the completion.
+- You get the model to generate multiple completions given the prompt.
+- You have an evaluator that calculates the best completion given the prompt.
+- You train on the best completion.
+- Repeat.
+
+The purpose of evaluation is to understand whether a model is performing well at a certain task. If the model is not performing at a certain task, effort should be input . Of course, measuring whether how well the model is performing is not that straightforward.
+
+In SWE-bench, you can use the process provided by the benchmark to evaluate the model. If the model is asked to fixed a bug, 
+
+Evaluation is different if you are looking at coding sessions and sandbox benchmarks. When looking at coding sessions, you will need to evaluate whether the response made by the agent is good.
+
+This is how I expect frontier AI companies use coding sessions to evaluate their models. Assume they want to decide whether their newly trained model performs better than the model that is involved in the coding session.
+
+One entry in the evaluation is one turn taken by the model.
+
+Once you are able to evaluate, you can train. This is how I think training could be done
+
+-
+
+This is how validation could be done
+
+- You have a held out set of sessions.
+- You train the model to generate multiple completions given the prompt.
+- You train the model to generate multiple completions given the prompt.
+
+
+- They look at one turn taken by the model
+- For each coding session they look 
+- They run the same prompt against other
+
+Of course, there is still value training in sandboxes.
+
+
+There may be no right answers. But there are wrong answers. If the model is producing the wrong answer, we should train the model to produce the okay answers.
+
+- I want all my interactions with AI to be recorded, so I can annotate and share to promote knowledge on how to interact with AI
+- Ideally this is something that Claude Code should have build
+
+What I expect frontier companies to be collecting
+
+- Every follow-up message either contains new information, or AI is doing.
+- I would expect finetuning to happen on the action level. You cannot reproduce the environment, because you do not have access to that.
+- There should be a evaluator. Similar to chess, you make a move, the Stockfish evaluator bar goes up or down. 
+
+
+
+
+
+## What could AI coding tools provide
+
+Ideally I want visualize all my Claude Code sessions on the web and share them. (What other AI coding tool have this feature?)
+
+
+This only shows the process of building the visualizer itself. I have some projects that I have no yet published. I hope to add more, but it will be slow.
+
+
+Currently the default for AI coding tools. Claude Code gets you to opt in although the default .
+Other AI coding tools do not show you an opt-in screen. It is only the enterprise offering.
+
+
+Ideally AI coding tool provider should identify what should be learnt, at the AI coding tool's cost. You just need the information on whether the scenario could fail, you do not need the whole trajectory data (you can see that I am taking a risk myself by sharing my session data). I understand AI coding tools. Interactions with AI is actually more valuable than published information out there, interactions with your AI is even more valuable. I understand that to gain an edge over the competitors you will need to.
