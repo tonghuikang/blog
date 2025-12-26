@@ -2,7 +2,9 @@
 layout: post
 title: Tracing Claude Code sessions
 ---
-I have built yet another visualizer for Claude Code sessions - [sessions.huikang.dev](https://sessions.huikang.dev/)
+I have built yet another[^similar-work] visualizer for Claude Code sessions - [sessions.huikang.dev](https://sessions.huikang.dev/)
+
+[^similar-work]: I think LangSmith was the first major platform to build a [feature](https://docs.langchain.com/langsmith/trace-claude-code) to trace Claude Code. While I was building this over the last weekend, Braintrust followed up [shortly after](https://www.braintrust.dev/docs/integrations/sdk-integrations/claude-code#trace-claude-code). Simon Willison [made](https://simonwillison.net/2025/Dec/25/claude-code-transcripts/) `uvx claude-code-transcripts` on Christmas Day.
 
 ![claude-code-sessions](/assets/claude-code-sessions.png)
 
@@ -11,7 +13,7 @@ This is a feature walkthrough
 - Claude Code may invoke [subagents](https://sessions.huikang.dev/?project=claude-code-tracing&session=10d53ddc-6406-4bed-a32b-da56257311f1&msg=deefa37a-9f1b-4466-abcf-44786f2b8183) via the Task tool. You can see the subagent interactions displayed inline within the parent session
 
 
-This was built[^mcp][^updates] with Claude Code itself.
+This was built[^mcp][^updates] with Claude Code itself. The code is [here](https://github.com/tonghuikang/claude-code-sessions).
 
 
 [^mcp]: I was using [`@modelcontextprotocol/server-puppeteer`](https://www.npmjs.com/package/@modelcontextprotocol/server-puppeteer) to [manipulate](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/puppeteer) the browser. According to the npm site, the package is no longer supported. As I write this, I [found](https://www.reddit.com/r/ClaudeAI/comments/1li46d8/puppeteer_mcp_server_is_archived_any_alternatives/) out that I can use [`@playwright/mcp`](https://www.npmjs.com/package/@playwright/mcp) instead.
