@@ -2,16 +2,62 @@
 layout: post
 title: Reading papers
 ---
-I am moving from one place to another. I printed a plenty of papers and I want to clear them out.
+I am moving from one place to another. Over my stay in the United States, I have printed a plenty of papers. These are the papers I have kept as I moved[^disclaimer].
+
+[^disclaimer]: This just means that I previously printed the papers, and I did not discard the papers as I moved. There are very impactful papers in the field that I did not print. There are also papers in the list which I had not really read.
 
 
-
-# Large Language Model papers
-
+## Large Language Model papers
 
 
+Training guides
+- How to Scale Your Model [[link](https://jax-ml.github.io/scaling-book/)] Google DeepMind, 2025
 
-# Recommendation Systems papers
+
+GRPO and variants
+
+- Group Sequence Policy Optimization
+- Understanding R1-Zero-Like Training: A Critical Perspective [[link](https://arxiv.org/abs/2503.20783)] Sea AI Lab, 26 Mar 2025
+- Why RLHF (and Other RL-Like Methods) Don't Bring True RL to LLMs [[link](https://www.linkedin.com/pulse/why-rlhf-other-rl-like-methods-dont-bring-true-rl-llmsand-atlas-wang-s1efc/)] Atlas Wang, 2025
+- DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models [[link](https://arxiv.org/abs/2402.03300)] DeepSeek, 5 Feb 2024
+- KTO: Model Alignment as Prospect Theoretic Optimization [[link](https://arxiv.org/abs/2402.01306)] Cohere, 2 Feb 2024
+- ORPO: Monolithic Preference Optimization without Reference Model [[link](https://arxiv.org/abs/2403.07691)] KAIST, 12 Mar 2024
+- Direct Preference Optimization: Your Language Model is Secretly a Reward Model [[link](https://arxiv.org/abs/2305.18290)] Stanford, 29 May 2023
+- A General Theoretical Paradigm to Understand Learning from Human Preferences [[link](https://arxiv.org/abs/2310.12036)] DeepMind, 18 Oct 2023
+
+
+Technical reports
+
+- Mixtral of Experts [[link](https://arxiv.org/abs/2401.04088)] Mistral AI, 8 Jan 2024
+- Kimi k1.5: Scaling Reinforcement Learning with LLMs [[link](https://huggingface.co/papers/2501.12599)] Moonshot AI, 20 Jan 2025
+- DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning [[link](https://arxiv.org/abs/2501.12948)] DeepSeek, 22 Jan 2025
+- GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models [[link](https://arxiv.org/abs/2508.06471)] Zhipu AI, 20 Jun 2025
+- The Llama 3 Herd of Models [[link](https://arxiv.org/abs/2407.21783)] Meta, 31 Jul 2024
+- LLaMA: Open and Efficient Foundation Language Models [[link](https://arxiv.org/abs/2302.13971)] Meta, 27 Feb 2023
+
+
+Efficiency efforts
+
+- LoRA: Low-Rank Adaptation of Large Language Models [[link](https://arxiv.org/abs/2106.09685)] Microsoft, 17 Jun 2021
+- Hyena Hierarchy: Towards Larger Convolutional Language Models [[link](https://arxiv.org/abs/2302.10866)] Stanford, 21 Feb 2023
+
+
+Prompting
+
+- Let's Verify Step by Step [[link](https://arxiv.org/abs/2305.20050)] OpenAI, 31 May 2023
+- Chain-of-Thought Prompting Elicits Reasoning in Large Language Models [[link](https://arxiv.org/abs/2201.11903)] Google, 28 Jan 2022
+- In-Context Learning for Extreme Multi-Label Classification [[link](https://arxiv.org/abs/2401.12178)] Ghent University, 22 Jan 2024
+
+
+Early alignment efforts
+
+- Training Language Models to Follow Instructions with Human Feedback [[link](https://arxiv.org/abs/2203.02155)] OpenAI, 4 Mar 2022
+- Reinforced Self-Training (ReST) for Language Modeling [[link](https://arxiv.org/abs/2308.08998)] DeepMind, 17 Aug 2023
+- RLAIF: Scaling Reinforcement Learning from Human Feedback with AI Feedback [[link](https://arxiv.org/abs/2309.00267)] Google, 1 Sep 2023
+- Constitutional AI: Harmlessness from AI Feedback [[link](https://arxiv.org/abs/2212.08073)] Anthropic, 15 Dec 2022
+
+
+## Recommendation Systems papers
 
 
 
@@ -116,7 +162,25 @@ Miscellaneous
 
 
 
-# Other ML papers
+## Other ML resources
+
+Reinforcement learning
+
+- Reinforcement Learning: An Introduction [[link](http://incompleteideas.net/book/the-book-2nd.html)] Sutton & Barto, 2018
+
+
+Image models
+
+- High-Resolution Image Synthesis with Latent Diffusion Models [[link](https://arxiv.org/abs/2112.10752)] LMU Munich, 20 Dec 2021
+- An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale [[link](https://arxiv.org/abs/2010.11929)] Google, 22 Oct 2020
+
+
+Attention mechanism
+
+- Attention Is All You Need [[link](https://arxiv.org/abs/1706.03762)] Google, 12 Jun 2017
+- BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding [[link](https://arxiv.org/abs/1810.04805)] Google, 11 Oct 2018
+- Long Short-Term Memory-Networks for Machine Reading [[link](https://arxiv.org/abs/1601.06733)] University of Edinburgh, 25 Jan 2016
+- Neural Machine Translation by Jointly Learning to Align and Translate [[link](https://arxiv.org/abs/1409.0473)] Mila, 1 Sep 2014
 
 
 # Random comments (will classify)
