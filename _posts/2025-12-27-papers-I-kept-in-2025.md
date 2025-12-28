@@ -73,7 +73,7 @@ For an introduction to recommendation systems, I recommend
 
 
 
-**Value modeling** - Recommendation systems calculate P(action) for multiple actions, for each candidate. The candidates are ranked based on a utility function. The utility function takes the action probability as arguments. You need to design a good utility function for your recommendation system.
+**Value modeling** - Recommendation systems calculate P(action) for multiple actions, for each candidate. The candidates are ranked based on a utility function. The utility function takes the action probability as arguments. You need to design a good utility function for your recommendation system. The design also involves deciding how important is each action.
 
 - What We Know About Using Non-Engagement Signals in Content Ranking [[link](https://arxiv.org/abs/2402.06831)] Integrity Institute, 9 Feb 2024 - This puts down in writing that engaging content is usually negatively correlated with "quality".
 - Multi-Objective Recommendation via Multivariate Policy Learning [[link](https://arxiv.org/abs/2405.02141)] Spotify, 3 May 2024
@@ -109,7 +109,7 @@ For an introduction to recommendation systems, I recommend
 - Deep Interest Network for Click-Through Rate Prediction [[link](https://arxiv.org/abs/1706.06978)] Alibaba, 21 Jun 2017 - This is known as DIN. Shusen Wang covered this [here](https://www.youtube.com/watch?v=_4J9aF5KR84).
 
 
-**Trainable embeddings** - If your model uses sparse features (item IDs, action type is an example of a sparse feature, float values like age is an example of a dense feature), you will need to map each ID to an embedding and train the embeddings. The problem happens when you have too many IDs to train on. You cannot just fit all the sparse feature embeddings into one GPU.
+**Trainable embeddings** - If your model uses sparse features (item IDs, action type is an example of a sparse feature, float values like age is an example of a dense feature), you will need to map each ID to an embedding and train the embeddings. The problem happens when you have too many IDs to train on. It is not a good idea to just use a larger GPU.
 
 - Monolith: Real Time Recommendation System With Collisionless Embedding Table [[link](https://arxiv.org/abs/2209.07663)] ByteDance, 16 Sep 2022
 - Efficient Data Representation Learning in Google-scale Systems [[link](https://dl.acm.org/doi/10.1145/3604915.3608882)] Google, 14 Sep 2023
@@ -140,7 +140,7 @@ For an introduction to recommendation systems, I recommend
 
 
 
-**Item exploration** - New content is important to any recommendation system. To determine successful new content, you will need to deliver the new content to people. When you make a change to a recommendation system, you need to prove that your change is good. However, if you have a variant that delivers more new content to people, the engagement that the variant gets suffers. You still need to prove that new content is good, and the traditional user-split A/B testing approach cannot prove this, even though we know that recommendation system needs at least some new content.
+**Item exploration** - New content is essential to any recommendation system. To help fresh content succeed, you implement methods to surface it more effectively. However, you still need to prove these methods actually work. This is where a challenge arises: traditional user-split A/B testing tends to show lower engagement for variants that prioritize new content—simply because new content hasn't yet accumulated the signals that make established content perform well. Hence there is this line of research on how do you both deliver new content effectively and demonstrate that your approach is beneficial.
 
 - Nonlinear Bandits Exploration for Recommendations [[link](https://dl.acm.org/doi/10.1145/3604915.3610245)] Google, 14 Sep 2023
 - Online Matching: A Real-time Bandit System for Large-scale Recommendations [[link](https://arxiv.org/abs/2307.15893)] Google, 29 Jul 2023
@@ -176,7 +176,7 @@ For an introduction to recommendation systems, I recommend
 
 **Reinforcement learning** - I wrote about reinforcement learning [here](https://blog.huikang.dev/2025/08/23/reinforcement-learning-life-lessons.html).
 
-- Reinforcement Learning: An Introduction [[link](http://incompleteideas.net/book/the-book-2nd.html)] Sutton & Barto, 2018
+- Reinforcement Learning: An Introduction [[link](http://incompleteideas.net/book/the-book-2nd.html)] Sutton & Barto, 2018 - Papers involving reinforcement learning assumes that you have read this book because they do not fully explain the symbols and terminologies they use.
 
 
 **Image models**
