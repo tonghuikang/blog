@@ -1581,3 +1581,39 @@ Other AI coding tools do not show you an opt-in screen. It is only the enterpris
 
 
 Ideally AI coding tool provider should identify what should be learnt, at the AI coding tool's cost. You just need the information on whether the scenario could fail, you do not need the whole trajectory data (you can see that I am taking a risk myself by sharing my session data). I understand AI coding tools. Interactions with AI is actually more valuable than published information out there, interactions with your AI is even more valuable. I understand that to gain an edge over the competitors you will need to.
+
+
+
+# Random comments (will classify)
+
+I want to take the opportunity to share which papers I kept, and my thoughts on reading paper.
+
+I have not written any real papers.
+
+Authors want to get their work published.
+
+You need to understand the motivation of the author
+
+Academia is not that efficient. My estimate is that the industrial labs has more impact per unit spend. Of course, there are labs that create more impact than the others.
+
+There is a parable where you visit a sensei, and your cup is full you cannot pour any more you need to empty your cup
+
+Cite eugeneyan on something about learning.
+
+Learning by doing?
+
+You will be talking to chatbots and asking you what is new. It is like you are the prof and you have a graduate student that understands you well. People should publish their conversations with the paper.
+
+Examples are important. I read the examples first before the abstract. Examples communicate taste the best.
+
+What exactly the model did not say. Even papers contributing to the frontier of open source do not declare everything
+
+Capture the author's intuitions.
+
+Writing papers is performative. Reading papers is performative.
+
+This is list not meant to be a list of papers which are better. It is just printouts that I decide to keep for now.
+
+Good to review old papers to understand what people are thinking at that time.
+
+I can't read without a pen.
