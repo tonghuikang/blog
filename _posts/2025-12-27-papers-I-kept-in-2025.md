@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Papers that I kept in 2025
+title: Papers I kept in 2025
 ---
-I am moving from one place to another. Over my stay in the United States, I have printed plenty of papers. These are the papers I have kept as I moved[^disclaimer], on large language models and recommendation systems.
+I am moving from one place to another. Over my stay in the United States, I have printed plenty of papers, on large language models and recommendation systems. These are the papers I have kept[^disclaimer] as I moved.
 
 [^disclaimer]: This just means that I previously printed the papers, and I did not discard the papers as I moved my residence within the Bay Area. There are very impactful papers in the field that I did not print. There are also papers in the list which I had not really read.
 
