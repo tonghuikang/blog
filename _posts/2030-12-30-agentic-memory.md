@@ -2,6 +2,14 @@
 layout: post
 title: Prompt decaching
 ---
+Context compaction is bad
+
+
+
+## Subtasks
+
+You should train models to handle
+
 
 This is a work-in-progress design document. I have not fully organized my points here.
 
