@@ -44,3 +44,13 @@ Please do not ask me where I got this problem.
 gpt-oss-120b is the go-to model for [AIMO 3](https://www.kaggle.com/competitions/ai-mathematical-olympiad-progress-prize-3). I want to understand the model architecture very well.
 I need to be able to derive the parameter count, and also its GPU memory usage.
 I will also need to compare and explain the differences between 20b and 120b versions.
+
+**Watch some films**
+
+These are the films I have yet to watch
+- Zootopia 2
+- Demon Slayer: Kimetsu no Yaiba Infinity Castle
+- Chainsaw Man - The Movie: Reze Arc (only watched the first half)
+- Ne Zha 2
+- KPop Demon Hunters
+- Neon Genesis Evangelion
