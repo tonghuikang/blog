@@ -1617,3 +1617,27 @@ This is list not meant to be a list of papers which are better. It is just print
 Good to review old papers to understand what people are thinking at that time.
 
 I can't read without a pen.
+
+
+
+
+
+## AI will be able to polish your work
+
+As I write this blogpost, ideally AI should just read my tweets, research the context, and write a presentable blogpost for me which I hope that I would have written. AI that matches what you like and what you have produced[^prior-work].
+
+[^prior-work]: Much of what we do is to remix what we have done in the past, and the exemplar work of other people.
+
+The difference here is that models are not perfect at generating content in the exact style that you want. Models cannot replace Simon Willison yet[^simon]. The input to Simon Willison is the Internet. I have [written](/2024/12/30/prompting-in-2025.html) about how prompting should be automated.
+
+[^simon]: Simon Willison writes prolifically about AI developments. His style and output is distinctive and not easily replicable by current models.
+
+I expect video models to be able to remix content as well.
+
+I think video models are already able to do this. I expect a full-length anime series where final output is AI-generated. However, this does not mean video models are good at directing. I expect plots to be written and key animation frames to be hand drawn. I expect Frieren vs Frieren to be hand directed[^frieren].
+
+[^frieren]: The Frieren vs Frieren fight scene is in [episodes 25-26](https://frieren.fandom.com/wiki/Episode_26) of Frieren: Beyond Journey's End, where Frieren and Fern battle Frieren's clone. The staff at Madhouse were praised for the visuals and animation. We will still prefer the professionally directed version over AI direction.
+
+For some more creative scenes, the sequence is more abstract. I have never done animation - I only see key frames posted on Twitter which I assume is how anime is made[^storytelling]. Oshi no Ko Season 2 had [creative sequences](https://blog.sakugabooru.com/2024/09/04/oshi-no-ko-stage/) that visualized competitive acting instincts through powerful abstraction of feelings.
+
+[^storytelling]: Storytelling is hard. I do not think AI have good models for humans on what humans like. AI needs to be able to predict the comment section and improve the comment section. If you have prior work that has been published, the comment section is an important input to your work.

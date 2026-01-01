@@ -12,75 +12,98 @@ There will continue to be more people working on AI models and products. There w
 
 ## AI will write their own instructions
 
-Models are not expected to just complete a task. Models will think of ways to improve itself at doing similar tasks. Models will write their own instructions, and test their instructions.
+Currently we expect models, with their harness, to complete any task with the resources available to them.
+They are expected to use existing instructions (I had written that instructions is more than just user and system prompt <todo: cite>).
+Models are already expected to check their own work before reporting success.
 
-Systems will scrutinize every interaction you have with AI. Every task will either be perfectly done, or the system will figure out what went wrong and how to avoid such mistakes in the future[^perfect]. Future conversations with AI will [improve](/2025/09/14/improve-ai-software-engineering.html) on the learnings of past conversations.
+Soon we should expect AI to not just complete its task, but also to improve the process of completing similar tasks.
+This involves writing instructions.
 
-[^perfect]: A perfect task here is one where the user does not need to give any follow-up instruction. We should focus on the outcome to the user, as I have [written](/2025/01/01/interacting-with-ai.html) before.
+Currently, the human will need to prompt the model to fix the instructions.
+The instructions may include comments and docstring in the code that inform future models.
+The instructions may be skills files which provides the guide on how to execute certain processes.
 
+We will see models taking initiative to suggest changes to the process.
+We will see models that tastefully fix outdated and inaccurate comments in the codebase.
+Similar to how we trust competent engineers to improve the code they are working on.
 
 
 ## Context constraints will be invisible
 
-Currently we have a limited context window. We have options to use 1 million length context, but models do not perform well under long context[^niah].
+I think context constraints should already be invisible to users of frontier AI products.
+You should not be hit with an instruction on ChatGPT that your conversation is too long.
+There are some processes in the background that compacts the context. (please cite)
 
-[^niah]: The needle in a haystack problem is not a good benchmark for long context performance. The correct solution to the needle in a haystack problem is to use grep over context. We do not need frontier models to perform perfectly at the needle in a haystack problem. The benchmark [underestimates](https://research.trychroma.com/context-rot) what most long context tasks require in practice.
+For developers though, you need to be aware of the context limits. In 2025, the phrase [context engineering](https://www.quora.com/What-do-you-think-of-context-engineering/answer/Tong-Hui-Kang-1) is coined.
+
+However, I think developers will no longer need to care about context length.
+The model API will be shipped with context management.
+It is similar to how you talk to your friend.
+You do not need to ask your friend to delete the old messages so that you can continue talking to them.
 
 OpenAI released the [Responses API](https://platform.openai.com/docs/guides/conversation-state) in 2025 which tracks conversation state server-side. You do not need to pass in the entire conversation history with each request. Instead, you pass around an id representing the state of the conversation, and OpenAI keeps it up-to-date for you.
 
-Models should be able to do well even limited to 8k context. I do not think human context length is that long either. I expect models to take notes on what is relevant to the task, drop the KV cache of information that is irrelevant to the task, and continue with the task[^compaction]. Context constraints will become invisible to developers.
+This developer experience should already be achievable with existing models with a suite of scaffolds.
+However, you might need some [changes](/2025/05/14/multichannel-prediction.html) to the architecture and training to minimize the scaffolds necessary.
 
-[^compaction]: For long-running conversations, OpenAI already offers the `/responses/compact` endpoint to shrink the context you send with each turn.
+[^compaction]:  Write a note that for responses API you still need to compact. For long-running conversations, OpenAI already offers the `/responses/compact` endpoint to shrink the context you send with each turn.
 
 
 
 ## AI will be human-level at manipulating browsers
 
-Currently models try to keep the entire browsing history in context. Claude Code tries to keep all the screenshots in context, and when Claude Code works on frontend tasks it frequently needs to execute [context compaction](https://www.anthropic.com/engineering/claude-code-best-practices).
+The only AI powered browsing experience that I have tried is the Claude extension on Chrome.
 
-Do you really remember what you saw one minute ago?
+There are a few read-only tasks I need to get it to do
+- Go to the date grid on Google Flights so that I can view when is the cheapest flight to book
+- Tabulate my rent options based on listings on Craigslist
+- Calculate the value of my (mostly IKEA) furniture given the image of my room
 
-I would expect models to scan the screen, make a quick note, drop the KV cache, and save the image to the filesystem. Training this is more complicated, because the prompt in the prompt-completion pairs that you train on is more involved.
+The experience is very slow and very inaccurate. I think I can get better results with Claude Code on puppeteer MCP[^puppeteer] with subagents.
 
-This unlocks many things. For example, collating all the information on a webpage[^browser-agent]. There will still be another line of work where agents navigate the web through API calls rather than browsers.
+I see a few problems here.
 
-[^browser-agent]: Claude Code now [supports](https://www.anthropic.com/news/claude-for-chrome) direct browser integration with the `--chrome` flag. Previously, giving Claude Code browser access meant taking screenshots and dropping them into the session.
+- Every action has to be preceeded by a thought process
+- Context is filled up quickly and compaction is slow, because the models is trying to keep every screenshot
+- The models is bad at parallelizing work
+- The models are kind of blind. (footnote)
+- The models only look once. (o3-pro footnote)
 
-Models will be very clear what is read and what is write. Models will be more careful when making actions that cannot be undone.
+(footnote): Even though @modelcontextprotocol/server-puppeteer is deprecated, not recommending @playwright/mcp because it is taking up more tokens (4k vs 14k) and "No vision models needed, operates purely on structured data." is outdated
+
+(footnote): AI is also kind of blind. You see that the bottom set of 30 x 30 matrices are misaligned. This should not pass any design review. https://www.quora.com/Is-ARC-wrong-and-flawed-and-not-an-AGI-test-at-all/answer/Tong-Hui-Kang-1
+
+(o3-pro footnote): I think o3 pioneered a method what the model zooms in to a specific section. I look forward to models drawing lines to an image to check whether did they align the CSS correctly.
+
+I hope to be able to trust AI with all my read-only browser tasks.
+After AI gets my trust with their performance on read-only task, I can slowly trust AI with tasks that (fillme) tasks.
 
 
 
 ## We will stop taking turns with AI
 
-Currently I need to type to Claude Code. Ideally as I am typing, models should already start thinking.
+We are familiar with the chat interface with AI.
+You type something, send enter, and AI replies you with something.
+You are taking turns with AI.
 
-I have [written](/2025/05/14/multichannel-prediction.html) about multichannel models before. Humans are multichannel - we think while we talk, we read facial expressions while we listen. Models should be multichannel too.
+There are some efforts to break this turn-based experience
+- You can interrupt while AI is replying.
+- You may submit messages while AI is replying. However, how early your replies steer the response differs between products.
 
-This is also related to the point on context compaction. Models should be able to work on their task while waiting for commands to finish executing. Models should be able to watch logs streaming, while continuing to read the codebase.
+There are still some bottlenecks
+- Ideally the response to my question should be ready by the time I hit send.[^helpdesk]
+- The AI may need to ask follow-up questions to clarify my search request. But the AI should already start searching in parallel.
+- ???
 
-I look forward to sharing my screen with Claude Code, and the model actually using what it sees on the screen.
+It is possible to achieve all this user experience with the suite of scaffolds.
+However, you might need some [changes](/2025/05/14/multichannel-prediction.html) to the architecture and training to minimize the scaffolds necessary.
 
+[^helpdesk] For some human powered helpdesk chatbots, apparently the human operator can see what you typed before you send. (citation needed)
 
-
-## AI will be able to polish your work
-
-As I write this blogpost, ideally AI should just read my tweets, research the context, and write a presentable blogpost for me which I hope that I would have written. AI that matches what you like and what you have produced[^prior-work].
-
-[^prior-work]: Much of what we do is to remix what we have done in the past, and the exemplar work of other people.
-
-The difference here is that models are not perfect at generating content in the exact style that you want. Models cannot replace Simon Willison yet[^simon]. The input to Simon Willison is the Internet. I have [written](/2024/12/30/prompting-in-2025.html) about how prompting should be automated.
-
-[^simon]: Simon Willison writes prolifically about AI developments. His style and output is distinctive and not easily replicable by current models.
-
-I expect video models to be able to remix content as well.
-
-I think video models are already able to do this. I expect a full-length anime series where final output is AI-generated. However, this does not mean video models are good at directing. I expect plots to be written and key animation frames to be hand drawn. I expect Frieren vs Frieren to be hand directed[^frieren].
-
-[^frieren]: The Frieren vs Frieren fight scene is in [episodes 25-26](https://frieren.fandom.com/wiki/Episode_26) of Frieren: Beyond Journey's End, where Frieren and Fern battle Frieren's clone. The staff at Madhouse were praised for the visuals and animation. We will still prefer the professionally directed version over AI direction.
-
-For some more creative scenes, the sequence is more abstract. I have never done animation - I only see key frames posted on Twitter which I assume is how anime is made[^storytelling]. Oshi no Ko Season 2 had [creative sequences](https://blog.sakugabooru.com/2024/09/04/oshi-no-ko-stage/) that visualized competitive acting instincts through powerful abstraction of feelings.
-
-[^storytelling]: Storytelling is hard. I do not think AI have good models for humans on what humans like. AI needs to be able to predict the comment section and improve the comment section. If you have prior work that has been published, the comment section is an important input to your work.
+When you talk to another human, there are no explicit turns to take.
+You take note of their facial expression and body language.
+You look up certain information while they are talking.
+You write notes to yourself.
 
 
 ## Footnotes
