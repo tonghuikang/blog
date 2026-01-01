@@ -11,18 +11,7 @@ PHRASE_TO_CHECK = "I have addressed every query from the user."
 CHECKING_INSTRUCTIONS = """
 Review your work.
 
-You will
-
-1) Enumerate over every requirement from the user
-    - State the requirement
-    - Cite the user instruction
-    - Add to the todo `TodoWrite` tool
-
-2) Check whether the user instruction is followed
-    - For each item in the todo list
-    - Reason whether you have addressed the requirement
-
-Please use Puppeteer to visit http://localhost:4000/ to check whether your content is correctly rendered.    
+Please use Puppeteer to visit http://localhost:4000/ to check whether your content is correctly rendered, and display the URL to the user according to CLAUDE.md. 
 """
 
 BASH_AFTER_EDIT_REMINDER = "It seems that you did not run bash after your last edit."
