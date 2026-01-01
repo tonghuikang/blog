@@ -4,7 +4,7 @@ title: Predictions for 2026
 ---
 These are my predictions for 2026.[^2025]
 
-[^2025]: See my [predictions for 2025](/2024/12/29/competitive-programming-and-superintelligence.html), [prompting in 2025](/2024/12/30/prompting-in-2025.html), and [mathematical superintelligence](/2025/01/02/mathematical-superintelligence.html) for reference.
+[^2025]: See my [predictions](/2024/12/29/competitive-programming-and-superintelligence.html) [for](/2024/12/30/prompting-in-2025.html) [2025](/2025/01/02/mathematical-superintelligence.html) for reference on how inaccurate they were.
 
 There will continue to be more people working on AI models and products.
 There will continue to be more compute.
