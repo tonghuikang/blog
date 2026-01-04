@@ -2,14 +2,20 @@
 layout: post
 title: My comments on the Evals FAQ
 ---
-Hamel's evals FAQ is a great resource. I (should have) backed my arguments regarding evals with this resource.
+Hamel's evals FAQ is a great resource.
 
 https://hamel.dev/blog/posts/evals-faq/
 
-All opinions here are my own, and do not represent the prevailing opinion of any organization.
+Many of the ideas I have been promoting aligns with the Evals FAQ. The Evals FAQ is a trusted resource.
+
+All opinions here are my own, and do not represent the prevailing opinions or practices of any organization.
 
 
-# Sections that I agree and (should) have cited
+## Sections that I agree and promote
+
+These are ideas that I have been promoting. I should have cited the Evals FAQ when promoting my ideas.
+
+---
 
 > Why do you recommend binary (pass/fail) evaluations instead of 1-5 ratings (Likert scales)?
 > 
@@ -18,7 +24,7 @@ All opinions here are my own, and do not represent the prevailing opinion of any
 I was requested to make classification graduated. It was proposed that in the future we can have different treatment for difference scales and we can reuse the classification. I am against this idea. Either it is bad, or it is not.
 
 
-
+---
 
 > Q: How should I version and manage prompts?
 > 
@@ -34,6 +40,8 @@ I really dislike working with a system where the true prompt and the application
 
 [^system]: My view of my role as a prompt engineer is not to write the prompt, but to correctly build the system for other people to write the prompts.
 
+---
+
 
 >Q: How many people should annotate my LLM outputs?
 >
@@ -42,7 +50,7 @@ I really dislike working with a system where the true prompt and the application
 Annotating the ground truth should not be a democracy. Worse, they treat the annotations as ground truth, and attempt to curve-fit the prompt to the ground truth that contradicts with itself.
 
 
-# Sections that I would add or remove
+## Sections that I would add or remove
 
 
 Evals should allow for ambiguity. You do not need to classify everything. But if your classifier is not classifying anything it is bad.
@@ -52,7 +60,7 @@ AI models are better now. You can get AI models to brainstorm edge cases with yo
 
 
 
-# Sections that I disagree
+## Sections that I disagree
 
 > Be [wary of optimizing for high eval pass rates](https://ai-execs.com/2_intro.html#a-case-study-in-misleading-ai-advice). If you’re passing 100% of your evals, you’re likely not challenging your system enough. A 70% pass rate might indicate a more meaningful evaluation that’s actually stress-testing your application. Focus on evals that help you catch real issues, not ones that make your metrics look good.
 
@@ -69,3 +77,4 @@ Of course, monitoring is still essential. At launch, your score could be 100% bu
 Even if you did not manage to collect additional failure examples, the eval still serves a check when you migrate models or prompts. The eval is like a unit test that is only run once every model migration.
 
 
+## Footnotes
