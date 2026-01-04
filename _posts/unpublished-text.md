@@ -1641,3 +1641,9 @@ I think video models are already able to do this. I expect a full-length anime s
 For some more creative scenes, the sequence is more abstract. I have never done animation - I only see key frames posted on Twitter which I assume is how anime is made[^storytelling]. Oshi no Ko Season 2 had [creative sequences](https://blog.sakugabooru.com/2024/09/04/oshi-no-ko-stage/) that visualized competitive acting instincts through powerful abstraction of feelings.
 
 [^storytelling]: Storytelling is hard. I do not think AI have good models for humans on what humans like. AI needs to be able to predict the comment section and improve the comment section. If you have prior work that has been published, the comment section is an important input to your work.
+
+
+
+
+
+https://hamel.dev/blog/posts/evals-faq/#q-how-do-i-choose-the-right-chunk-size-for-my-document-processing-tasks Agents work now. Agents know how to search for text. You no longer need the "naive vector database retrieval". Claude Code could read code and policies just with string search. Discussions on chunk size for embeddings is no longer relevant. Probably the discussion should be framed as a retrieval system. With the opportunity to do multiple retrieval, I do not think models need perfect search terms every time. What we should compare is the task performance and cost. If there is a simple task but the model is taking unnecessarily long time probably you should investigate.
