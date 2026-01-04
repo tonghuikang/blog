@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Prompt decaching
+title: AI should forget parts of the conversation
 ---
 Context compaction is bad
 
