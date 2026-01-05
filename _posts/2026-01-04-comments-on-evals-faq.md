@@ -13,7 +13,7 @@ The content here does not represent the prevailing opinions or practices of any 
 [^prompting]: I have previously written about prompting projects [here](https://blog.huikang.dev/2024/12/31/prompting-projects.html).
 
 
-## Sections that I agree and promote
+## Sections that I agree with and promote
 
 These are ideas that I have been promoting.
 I should have cited the Evals FAQ when promoting my ideas.
@@ -32,11 +32,11 @@ There are some arguments for having one classifier for all 4 labels
 - You intend to run the LLM for all your content. You think running the LLM only once saves you money, compared to running the LLM three times for three separate classifiers.
 - You think that having one system is simpler, as opposed to multiple systems. You think that one system is easier to maintain.
 
-I argue that you should think harder whether having a graduated 1-4 scale is really a better system than having three binary classifiers.
+I argue that you should think harder about whether having a graduated 1-4 scale is really a better system than having three binary classifiers.
 
 - You need to think about what happens when you want to change one of the systems. Let's say you want to have a different standard on what is allowed to be displayed to new users (label 3 versus label 4). You need to ensure that your single LLM classifier still works for label 2 and label 1. Experimentation is also more complicated now.
 - There might be different levels of scrutiny for different classifications - you are okay if label 3 versus label 4 is mixed up, but you do not want to mix up label 1 versus label 2 because accounts posting label 1 content will get banned.
-- Aligning a binary classifier is much easier than aligning a graduated classifier. It should be easier and faster to align three binary classifiers independently, than to align one 4-class classifier. It is also easier to find cheaper and equally performant classifier if the task is just binary classification.
+- Aligning a binary classifier is much easier than aligning a graduated classifier. It should be easier and faster to align three binary classifiers independently than to align one 4-class classifier. It is also easier to find a cheaper and equally performant classifier if the task is just binary classification.
 
 If your systems are uncoupled, you just need to align the parts that you need to align. Sure, it might cost more to run the LLMs three times, but engineering time usually costs even more money.
 
@@ -67,14 +67,14 @@ I have written exactly on this [before](https://blog.huikang.dev/2024/12/31/prom
 > 
 > If you pass this dataset to your colleague, your colleague is simply guessing what people are voting. Your colleague will likely not perform well. This is what you will be tuning your prompt to.
 
-The FAQ suggests a benevolent dictator to own the prompts, which I agree.
+The FAQ suggests a benevolent dictator to own the prompts, which I agree with.
 
 
 ## Sections that I would add or edit
 
-Evals should only focus on cases where you care about. In other words, you do not need a ground truth label for everything.
+Evals should only focus on cases you care about. In other words, you do not need a ground truth label for everything.
 
-For example the adult content classification, you only want to label what is [obviously](https://en.wikipedia.org/wiki/I_know_it_when_I_see_it) adult and what is obviously not adult. If something is neither obviously adult or obviously not adult, there is no need for a ground truth label. This means, in production, you are ok with the content being classified in either case.
+For example, in adult content classification, you only want to label what is [obviously](https://en.wikipedia.org/wiki/I_know_it_when_I_see_it) adult and what is obviously not adult. If something is neither obviously adult nor obviously not adult, there is no need for a ground truth label. This means, in production, you are okay with the content being classified either way.
 
 ---
 
@@ -84,7 +84,7 @@ I think some updates have to be made considering models are much more powerful n
 - I think models could play a bigger role in prompting. One new use case for LLMs in building the evaluation dataset is to brainstorm the edge cases that we care about. LLMs could even agentically query your data for mistakes the binary classifier is making in production, and put these labels up for human approval.
 
 
-## Sections that I disagree
+## Sections that I disagree with
 
 On passing 100% of your evals
 
@@ -94,13 +94,13 @@ I do not agree that passing 100% of your evals is wrong in itself. Of course, yo
 
 When there is a classification failure, either one or multiple parts must be wrong - the classifier (model + prompt), or the label (or the LLM-as-a-judge evaluator). You should find out which one it is. It is possible that the label is wrong[^borderline]. If the prompt is wrong, you can probably tweak the prompt. If the model is wrong, you likely cannot do anything. My point here is, when there is a mistake, something must be wrong.
 
-[^borderline]: Again, the case might be borderline and probably should allow the system make either classification and not compute loss.
+[^borderline]: Again, the case might be borderline and we should probably allow the system to make either classification and not compute loss.
 
 Mistakes are mistakes. It is possible to fix all these mistakes to get your eval to 100%. Models are better these days, and now you have AI to help you write and improve prompts. It is possible that you are not able to find any more mistakes with reasonable effort.
 
 There could still be value for evals that pass 100%. For example, you have a classifier that classifies whether something is adult. The requirements are quite loose. You only need to classify correctly if something is obviously adult or obviously not adult. There are a lot of borderline cases where you are okay with the system tagging either way. Models today can perform 100% at this task. There is still value in this eval even though it passes 100%.
 
-You can deploy this classifier and monitor mistakes in production. The classifier is likely to make mistakes (something that is obviously adult classified not adult), and you add the mistakes to the evaluation. Then you can tune the classifier to achieve performance on the mistakes and the initial dataset. The eval that passes 100% is still useful.
+You can deploy this classifier and monitor mistakes in production. The classifier is likely to make mistakes (something obviously adult being classified as not adult), and you add the mistakes to the evaluation. Then you can tune the classifier to achieve performance on the mistakes and the initial dataset. The eval that passes 100% is still useful.
 
 You can use the same eval when you migrate models. Models get deprecated, or you found a much cheaper model that is equally performant. The eval that scores 100% still serves as a unit test that is only run once every model migration.
 
