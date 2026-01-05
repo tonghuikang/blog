@@ -1647,3 +1647,12 @@ For some more creative scenes, the sequence is more abstract. I have never done 
 
 
 https://hamel.dev/blog/posts/evals-faq/#q-how-do-i-choose-the-right-chunk-size-for-my-document-processing-tasks Agents work now. Agents know how to search for text. You no longer need the "naive vector database retrieval". Claude Code could read code and policies just with string search. Discussions on chunk size for embeddings is no longer relevant. Probably the discussion should be framed as a retrieval system. With the opportunity to do multiple retrieval, I do not think models need perfect search terms every time. What we should compare is the task performance and cost. If there is a simple task but the model is taking unnecessarily long time probably you should investigate.
+
+
+
+---
+
+
+AI models are better now. You can get AI models to brainstorm edge cases with you. (Is there mention similar to this?)
+
+Some evals are now unnecessary with better models. You might want to have an evals on whether the model is querying with the correct search term, but this is not necessary anymore.
