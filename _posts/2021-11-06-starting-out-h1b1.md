@@ -84,17 +84,17 @@ This is my timeline regarding my H-1B1 visa
 
 ## Flight and Preflight Covid testing
 
-I took Singapore Airlines direct flight from Changi Airport to San Francisco International Airport. My premium economy airfare was \$1109.30. I remember seeing options for a round trip at \$1300, but I did not bother with that.
+I took Singapore Airlines direct flight from Changi Airport to San Francisco International Airport. My premium economy airfare was <span>$</span>1109.30. I remember seeing options for a round trip at <span>$</span>1300, but I did not bother with that.
 
 You cannot do an online check-in on Singapore Airlines with the H-1B1 visa. Apparently, the option is for people who do not need a visa to travel to the US, or are on the [Visa Waiver Program](https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visa-waiver-program.html). I needed to check in physically. This was not indicated in the user interface and gave me a small panic.
 
 The premium economy seat allows for 2 bags of 23 kg each. I tried to check in 3 bags of 10 kg each and was rejected, but we did prepare for the scenario. 
 
-As per [US Covid regulations](https://www.cdc.gov/coronavirus/2019-ncov/travelers/testing-international-air-travelers.html), I needed to take a Covid test. An ART test works for entry into the United States, and I paid $30 for the test. The results of the ART test is produced within less than half an hour. PCR tests are more expensive, and the results is usually only produced the next day. You are recommended to take a test that can print your passport number along with it. The Singapore Airlines website lists [some testing locations](https://www.singaporeair.com/en_UK/sg/travel-info/pdt-pcr-locations/).
+As per [US Covid regulations](https://www.cdc.gov/coronavirus/2019-ncov/travelers/testing-international-air-travelers.html), I needed to take a Covid test. An ART test works for entry into the United States, and I paid <span>$</span>30 for the test. The results of the ART test is produced within less than half an hour. PCR tests are more expensive, and the results is usually only produced the next day. You are recommended to take a test that can print your passport number along with it. The Singapore Airlines website lists [some testing locations](https://www.singaporeair.com/en_UK/sg/travel-info/pdt-pcr-locations/).
 
 You should [research](https://www.cbp.gov/travel/us-citizens/know-before-you-go/prohibited-and-restricted-items) on what you cannot bring to the US. Generally, you cannot bring in food except factory packaged food. After staying for a while, this is what I would have liked to bring into the US to use up my luggage allowance - curry powder and cereal mix (and other drinks). You can buy some of such Asian foods from Ranch 99, but at slightly inflated prices.
 
-I only brought US$1000 into the US. I should have brought in more money to help with the initial deposit and expenses. The FX fees are worth paying to help you transition. You can estimate the FX fees by comparing the difference between the buy and sell value. The exchange in Bishan has a ratio is 2.2%, whereas exchanges in the airport have a ratio of more than 5%. If you use Transferwise, the fee is approximately 0.8% for transferring US$1000, but you will need a US bank account for that.
+I only brought US<span>$</span>1000 into the US. I should have brought in more money to help with the initial deposit and expenses. The FX fees are worth paying to help you transition. You can estimate the FX fees by comparing the difference between the buy and sell value. The exchange in Bishan has a ratio is 2.2%, whereas exchanges in the airport have a ratio of more than 5%. If you use Transferwise, the fee is approximately 0.8% for transferring US<span>$</span>1000, but you will need a US bank account for that.
 
 
 
@@ -125,11 +125,9 @@ I strongly recommend you document the condition of the apartment before moving i
 
 To sign a rental contract with the landlord, you need to place a security deposit and have a valid social security number with preferably some credit history. Some companies offer corporate housing for a few months for you to settle in before you rent a house on your own. I still manage to get a rental contract without credit history, however, I would need to pay double the deposit.
 
-You may be required to get rental insurance. Even if it is not required, I do recommend getting rental insurance. My housing agent administer bills via an Appfolio which has Roost Renters Insurance as a default. It was worth it to go against the default and choose Lemonade which was around \$66 per year compared the \$360 per year that we would have paid with Roost for a similar coverage. See the last section for my Lemonade referral link.
+You may be required to get rental insurance. Even if it is not required, I do recommend getting rental insurance. My housing agent administer bills via an Appfolio which has Roost Renters Insurance as a default. It was worth it to go against the default and choose Lemonade which was around <span>$</span>66 per year compared the <span>$</span>360 per year that we would have paid with Roost for a similar coverage.
 
 I am not the main tenant signing the contract for my first and second locations. If you do not have any contacts here and your company does not offer corporate housing, you can first Airbnb for a temporary place of residence and then find a place to rent for the long term. Alternatively, you can see if anyone on [Craigslist](https://sfbay.craigslist.org/) or Facebook marketplace is looking for housemates.
-
-I will write about the co-living arrangements and move-in procedures in a separate document.
 
 
 
@@ -139,9 +137,9 @@ You need a bank account to receive your payroll, and to make payments from. Many
 
 My friend recommended me Chase Bank. You may ask someone to refer you so that they also get their referral bonus on your first payroll.
 
-The only decision I have to make when opening an account is whether I want to open a savings account. There are restrictions on how often can you withdraw from a savings account (because it is meant for savings).
+The only decision I have to make when opening an account is whether I want to open a savings account. I do not recommend opening a savings account. The interest offered in the savings account is abysmal. You also need to include in your taxes the amount of interest earned, which is a hassle worth more than the interest you earn.
 
-If you do not overdraft, the maximum fees incurred is probably \$12 per month from the checking account and \$5 per month from the savings account. I got charged the savings account fee once.
+If you do not overdraft, the maximum fees incurred is probably <span>$</span>12 per month from the checking account and <span>$</span>5 per month from the savings account. I got charged the savings account fee once.
 
 I had the following to open my bank account
 
@@ -161,9 +159,9 @@ Yours faithfully
 (Signoff)
 ```
 
-I think you will get \$225 for signing up for a new account, in around week after your first paycheck. If you use my referral link (listed in the last section), I get $50 in addition (and you still get your signing bonus).
+I think you will get <span>$</span>225 for signing up for a new account, in around week after your first paycheck.
 
-You do not need a social security number to open your account. However, to apply for a credit card, you need to have a social security number and you need to go down to the office to link your social security number to your account. You may want to apply and use your credit card to build a credit rating. A good credit rating makes approval for housing applications easier. See the last section for my credit card referral link.
+You do not need a social security number to open your account. However, to apply for a credit card, you need to have a social security number and you need to go down to the office to link your social security number to your account. You may want to apply and use your credit card to build a credit rating. A good credit rating makes approval for housing applications easier.
 
 Chase offers a [credit score check](https://www.chase.com/personal/credit-cards/free-credit-score), powered by Experian. For me, it appeared around half a month after I made my first payment on my credit card.
 
@@ -198,11 +196,11 @@ A US phone number is a necessity because you need to accept 2FA notifications vi
 
 My peers recommend Mint Mobile. The prices are much cheaper. However, Mint Mobile requires a [compatible phone](https://www.mintmobile.com/byop/). I should have bought an iPhone when I was in Singapore before moving to the US.
 
-My phone was incompatible, so I have to settle with using ATT for my first few months. I bought a [3-month $99 prepaid plan](https://www.att.com/support/article/wireless/KM1391956/). I would have preferred to obtain a SIM card in store rather than shipping and waiting for it.
+My phone was incompatible, so I have to settle with using ATT for my first few months. I bought a [3-month <span>$</span>99 prepaid plan](https://www.att.com/support/article/wireless/KM1391956/). I would have preferred to obtain a SIM card in store rather than shipping and waiting for it.
 
 However, having experienced using both ATT and Mint Mobile, I can feel the difference in signal strength and coverage.
 
-I have moved on to Mint Mobile after buying an iPhone. I can continue to receive 2FA for my Singapore number because my iPhone supports [dual SIM](https://support.apple.com/en-us/HT209044). However, I think I need to top up $6 every two months to keep the number.
+I have moved on to Mint Mobile after buying an iPhone. I can continue to receive 2FA for my Singapore number because my iPhone supports [dual SIM](https://support.apple.com/en-us/HT209044). However, I think I need to top up <span>$</span>6 every two months to keep the number.
 
 
 
