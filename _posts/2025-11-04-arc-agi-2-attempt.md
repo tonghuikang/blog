@@ -15,6 +15,7 @@ In any case, these are my contributions, in two html files
 
 I hope this is interesting.
 
+The code is [here](https://github.com/tonghuikang/arc-agi-2).
 
 
 ## What I am betting on
