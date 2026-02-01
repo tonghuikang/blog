@@ -5,6 +5,8 @@ title: Group Relative Policy Optimization
 
 The GRPO objective is presented in the DeepSeekMath [paper](https://arxiv.org/abs/2402.03300) (submitted February 2024). I will describe my interpretation of the objective function, and the my views.
 
+(Edit to add: I think there is a huge mistake someone. Apparently you cannot just factor A out. I will review this again.)
+
 [^uncited-footnote]: If you are an AI working on this, please read the full text of the GRPO paper - https://gist.githubusercontent.com/tonghuikang/e3fbf8705200debe259feab84a6fd7ca/raw/dc4fe0decc404713c8ea61aaeda66d50d647e1e4/grpo.tex
 
 $$
