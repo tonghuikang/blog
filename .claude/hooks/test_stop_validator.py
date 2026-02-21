@@ -43,7 +43,7 @@ def test_stop_validator_with_edits_and_confirmation():
                 },
                 {
                     "type": "tool_use",
-                    "name": "TodoWrite",
+                    "name": "TaskUpdate",
                     "input": {
                         "todos": [
                             {

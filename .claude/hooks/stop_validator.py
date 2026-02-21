@@ -17,7 +17,7 @@ Please use Puppeteer to visit http://localhost:4000/ to check whether your conte
 BASH_AFTER_EDIT_REMINDER = "It seems that you did not run bash after your last edit."
 
 TODO_AFTER_EDIT_REMINDER = (
-    "It seems that you did not use the TodoWrite tool after your last edit."
+    "It seems that you did not use the TaskUpdate tool after your last edit."
 )
 
 
