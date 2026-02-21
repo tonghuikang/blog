@@ -1656,3 +1656,28 @@ https://hamel.dev/blog/posts/evals-faq/#q-how-do-i-choose-the-right-chunk-size-f
 AI models are better now. You can get AI models to brainstorm edge cases with you. (Is there mention similar to this?)
 
 Some evals are now unnecessary with better models. You might want to have an evals on whether the model is querying with the correct search term, but this is not necessary anymore.
+
+
+
+## Tasks that are better done with tool feedback
+
+Drawing a pelican on SVG is popularized by Simon Willison.
+
+For AI models that have access to SVG rendering and repeated tool use, I expect a well-written result.
+I expect LLMs to have a concept of the pelican and the bicycle, and validate their own work first before submitting the result to us.
+
+For AI models that have access.
+
+For AI models that are expected . They should be evaluated on the efficiency of their reasoning.
+When we celebrate, we should celerate their thought process of drawing the pelican, not the end result.
+
+We should not expect LLMs to generate great SVGs without a thought process.
+Maybe we do see the LLM being able to place shapes at sensible places in a sensible order.
+
+We should not expect LLMs to regurgitate drawing a pelican.
+
+When we grade model performance on these tasks, we should be aware of the constraints the LLM has.
+
+
+
+
