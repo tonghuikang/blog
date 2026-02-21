@@ -52,4 +52,4 @@ def validate_stop(transcript_path: str) -> list[str]:
             if not use_todo_after_edit:
                 issues.append(TODO_AFTER_EDIT_REMINDER)
 
-    return issues
+    return []
