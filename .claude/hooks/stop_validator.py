@@ -39,7 +39,7 @@ def validate_stop(transcript_path: str) -> list[str]:
                             has_edits = True
                         if content["name"] == "Bash":
                             ran_bash_after_edit = True
-                        if content["name"] == "TodoWrite":
+                        if content["name"] == "TaskUpdate":
                             use_todo_after_edit = True
             if has_edits:
                 break
