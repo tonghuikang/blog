@@ -106,20 +106,20 @@ The agent is already working - it has drafted the button, wired up the export ha
 Halfway through, you notice it has wired the button to the wrong dashboard.
 You type a correction into the chat box.
 Your message is queued until the next tool boundary, and by then the agent has wasted compute on the wrong dashboard.
-The agent has only one output stream, so its thinking and its user-facing output share it.
+The model has only one output stream, so its thinking and its user-facing output share it.
 You see file operations and tool calls but no acknowledgment that you exist - the agent feels like it is stonewalling you.
-You cannot interrupt the agent's chain of thought either.[^interrupt-cot]
+You cannot interrupt the model's chain of thought either.[^interrupt-cot]
 To steer, you have to restart from your correction.
 The main agent abandons its trace, and any Explore subagents that were still mapping the wrong dashboard's data layer have to be killed and re-spawned with the right dashboard in mind, losing the context they had built up.
 
 *What it should be.*
 You send a course correction mid-flight - the agent is wiring the button to the wrong dashboard, or you remember that some of the columns are internal-reference IDs that the end user does not care about.
-The agent reads your message immediately without finishing its current thought.
+The model reads your message immediately without finishing its current thought.
 The planning channel updates to include the new constraint.
-The agent thinks and communicates at the same time, on separate channels.
+The model thinks and communicates at the same time, on separate channels.
 Chain of thought is for the model's own reasoning, not for human consumption - it can be exposed, but it is verbose and meandering by design and is not the most efficient way to communicate with you.
 The user-facing channel speaks differently: concise, direct, addressed to you.
-It acknowledges that the agent heard you, while the thinking and code-writing channels keep running in parallel.
+It acknowledges that the model heard you, while the thinking and code-writing channels keep running in parallel.
 You do not have to wait for a turn boundary, and you do not feel stonewalled.
 
 [^interrupt-cot]: When I tried interrupting `gpt-oss-120b` while it was working on math problems, the resulting trace became token inefficient - the interrupted thought was abandoned and the model started a fresh thought from the new user message.
@@ -133,7 +133,7 @@ The agent wants to run the export against the production database to validate it
 The agent halts and surfaces the approval prompt.
 You approve, deny, or "allow always for this pattern".
 Everything else the agent was doing - drafting the button, type-checking the handler - stops too.
-The agent is single-stream, so a pending approval blocks all the work.
+The model is single-stream, so a pending approval blocks all the work.
 The choices the harness offers you are coarse.
 You pay attention to every prompt and slow the agent down, trust allow-list patterns and sometimes auto-approve the wrong thing, or flip to auto mode and let the agent do anything.[^auto-mode]
 The patterns themselves are not very expressive - you can pre-approve `Bash(psql:*)` for a project, but you cannot make it conditional on the database URL pointing to staging rather than production.
