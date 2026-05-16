@@ -3,14 +3,27 @@ layout: post
 title: All coding models will be interaction models
 ---
 
-Thinking Machines released [Interaction Models](https://thinkingmachines.ai/blog/interaction-models/) earlier this week. (I called them multichannel models [one year ago](/2025/05/14/multichannel-prediction.html))
+Thinking Machines released [interaction models](https://thinkingmachines.ai/blog/interaction-models/) earlier this week (One year ago, I called them [multichannel models](/2025/05/14/multichannel-prediction.html)).
 
 I argue that all frontier coding harnesses will soon be using only interaction models.
 
 
+## What is an interaction model
+
+An interaction model runs many channels of input and output in parallel, instead of one stream that takes turns.
+
+A reasoning model has one output stream. It writes one token at a time and has to finish one thought before starting another. To do two things, it has to do one and then the other.
+
+An interaction model has many output streams. It can think on one channel while it writes to you on another, while it watches a tool's output on a third, while it edits a file on a fourth. The streams are concurrent, and the model can interrupt one of its streams when another surfaces something more important.
+
+On the input side, an interaction model is not waiting for a turn either. It reads your messages as you type them, terminal output as it streams, file changes as they happen, webhook events as they arrive. None of these block the others.
+
+The shape comes from how humans work. A person on a coding task is reading the screen, hearing a coworker, typing, thinking about what to do next, and watching a test suite stream - all at the same time. An interaction model is the same shape.
+
+
 ## Think of how you interact with AI coding tools
 
-You ask the coding agent to debug why the checkout success rate dropped 3% after yesterday's deploy.
+You ask the coding agent to add an "Export to CSV" button to the analytics dashboard.
 For each phase of the session, I describe what it is today, and what it should be.
 
 
@@ -21,24 +34,27 @@ The agent takes a turn.
 First it thinks. Then it reads a file. Then it thinks again.
 Understanding the system happens one read at a time.
 The plan lives inside that thought process, and you only catch fragments of it.
-If you want a structured plan you can read, you invoke plan mode - and the agent does nothing else until the plan is done.
+If you want a structured plan you can read, you invoke plan mode - and the agent does nothing else until the plan is done.[^plan-approval]
 
 *What it should be.*
-The agent reads many parts of the system at the same time - the failing endpoint, the deploy diff, the error logs, the related services - each on its own research channel.
+The agent reads many parts of the system at the same time - the dashboard's data queries, existing CSV export code in the codebase, the permissions model, the design system's button component - each on its own research channel.
 A planning channel holds the running list of what is known, what is being tried, what is pending, drawn from all the parallel research.
-Planning starts as soon as the main shape of the problem is clear, and research keeps filling in the details. If the agent finds that yesterday's deploy added a new retry rule that turns transient errors into hard failures, it can start drafting the fix on the planning channel while other research channels enumerate every endpoint that hits the retry path and check which of those would also need updating.
+Planning starts as soon as the main shape of the problem is clear, and research keeps filling in the details. If the agent finds that the codebase already has a CSV streaming utility used by the reports page, it can start drafting the button and the export handler on the planning channel while other research channels confirm which columns the dashboard exposes and whether the utility respects the dashboard's permissions model.
 The plan is not buried inside a thought process - it is a separate channel you can read at any time. You do not invoke plan mode. The plan is always being written, as one of many channels the agent is running.[^channels]
+
+[^plan-approval]: Plan mode also seems to assume that you will approve every step in the plan. The plan is written as a flat sequence of actions, not as a tree of contingencies. If you deny an approval halfway through, the rest of the plan no longer applies, and the agent has to replan from where it stopped.
 
 [^channels]: The other channels include a user-facing channel (what you read in the interface), a code-writing channel (which is producing edits), and a terminal channel (which is sending commands). On the input side, the agent subscribes to your messages, the terminal output streaming live, file system events from the harness, and the CI service.
 
 #### **Aligning**
 
 *What it is.*
-When the task is ambiguous, the agent either dives in without asking, or asks one clarifying question and stops working until you reply.
+The agent is not sure which columns the export should include, or whether it should be filtered to the dashboard's current view.
+It either dives in and guesses, or asks one clarifying question and stops working until you reply.
 There is no middle ground between guessing and blocking.
 
 *What it should be.*
-The agent asks clarifying questions on the user-facing channel and keeps researching on other channels at the same time.
+The agent asks "which columns?" and "filtered or full?" on the user-facing channel while it keeps researching the CSV utility and the dashboard's data queries on other channels.
 By the time you reply, the agent already has the relevant code in context, and your answer steers the research that is already in flight.
 
 #### **Steering**
@@ -53,21 +69,21 @@ The agent has only one output stream, so what it is thinking and what it is show
 There is no equivalent of nodding or saying "uh-huh, I heard that, let me finish this thought first".
 You cannot interrupt the agent's chain of thought either.[^interrupt-cot] If you do, the agent abandons its current trace and restarts from your new message.
 
-[^interrupt-cot]: When I tried interrupting `gpt-oss-120b` while it was working on math problems, the resulting trace became token inefficient - the interrupted thought was abandoned and the model started a fresh thought from the new user message. An interaction model should be able to absorb a mid-flight interruption and update its current stream without restarting.
-
 *What it should be.*
-You send a course correction mid-flight - the agent is on the wrong endpoint, or you remember an edge case the bug only happens under.
+You send a course correction mid-flight - the agent is wiring the button to the wrong dashboard, or you remember the export needs to respect row-level permissions.
 The agent reads your message immediately without finishing its current thought.
 The planning channel updates to include the new constraint.
 The agent thinks and communicates at the same time, on separate channels. Chain of thought is for the model's own reasoning, not for human consumption - it can be exposed, but it is verbose and meandering by design and is not the most efficient way to communicate with you. The user-facing channel speaks differently: concise, direct, addressed to you. It acknowledges that the agent heard you, while the thinking and code-writing channels keep running in parallel.
 You do not have to wait for a turn boundary, and you do not feel stonewalled.
+
+[^interrupt-cot]: When I tried interrupting `gpt-oss-120b` while it was working on math problems, the resulting trace became token inefficient - the interrupted thought was abandoned and the model started a fresh thought from the new user message. An interaction model should be able to absorb a mid-flight interruption and update its current stream without restarting.
 
 
 #### **Approvals**
 
 *What it is.*
 The agent wants to do something that needs your approval.
-It might be a `git push --force` on a shared branch.
+It might be running the export against the production database to validate it on real data.
 The agent halts and surfaces the approval prompt. You approve, deny, or "allow always for this pattern".
 Everything else the agent was doing stops too. The agent is single-stream, so a pending approval blocks all the work.
 
@@ -76,27 +92,25 @@ Approvals surface on a dedicated approval channel.
 Only the channel that needs the approval pauses. The other channels keep running.
 The agent continues planning, researching, or drafting on the other channels while you decide.
 If you approve, the paused channel resumes. If you deny, the agent updates the planning channel and considers an alternative.
-
-The distinction from Planning's clarifying questions matters - approvals are about authorization, not scope.
-The harness still owns the authorization boundary even when the model is multi-stream. What changes is that asking for authorization no longer freezes the work.
+The distinction from Aligning's clarifying questions matters - approvals are about authorization, not scope. The harness still owns the authorization boundary even when the model is multi-stream. What changes is that asking for authorization no longer freezes the work.
 
 
 #### **Executing**
 
 *What it is.*
-The agent runs a reproduction script. The script takes 90 seconds.
-While the script is running, the agent is blocked.[^subagent]
+The agent runs the new export handler against a large dataset to check it streams correctly. The run takes 90 seconds.
+While it is running, the agent is blocked.[^subagent]
 You are also blocked.
 You wait.
 
-[^subagent]: Strictly, the harness could spawn subagents to do other work in parallel. But subagents are wrapped in tool calls, and the parent has to wait for the subagent to return. There is no streaming back to the parent while the subagent works.
-
 *What it should be.*
-The agent writes the same reproduction script and runs it.
-The agent does not block on the script.
-While the script runs, the agent reads related code on a separate stream.
-The agent also watches the script output, looking for the line that confirms the reproduction.
-When the line appears, the agent stops reading and writes a fix.[^interrupt-self]
+The agent runs the same export against a large dataset.
+The agent does not block on the run.
+While the export streams, the agent reads related code on a separate stream - the existing report exports, the permissions tests.
+The agent watches the export output, looking for the line that confirms all rows streamed without memory pressure.
+When the line appears, the agent stops reading and moves on to writing the unit tests for the new handler.[^interrupt-self]
+
+[^subagent]: Strictly, the harness could spawn subagents to do other work in parallel. But subagents are wrapped in tool calls, and the parent has to wait for the subagent to return. There is no streaming back to the parent while the subagent works.
 
 [^interrupt-self]: This is one of the harder behaviors to train. The model needs to be able to interrupt one of its own streams when another stream surfaces something more important. This is a form of self-interruption, and it is different from being interrupted by the user.
 
@@ -111,49 +125,40 @@ The agent could have noticed the first failure within ten seconds, but it does n
 The agent runs the test suite.
 The agent watches the stream, and at the same time it drafts the PR description on the user-facing channel.
 The first test failure triggers the agent to stop drafting and investigate.
-The failure turns out to be unrelated to the fix.
+The failure turns out to be unrelated to the export change.
 The planning channel updates to note the flaky test.
 The agent continues drafting the PR.
-
-#### **Compaction**
-
-*What it is.*
-The conversation gets long.
-The harness compacts the context.
-
-In Claude Code, this means clearing older tool outputs first, then summarizing the conversation if needed.[^compact-docs] You can also run `/compact` manually with an optional focus like `/compact focus on the API changes`. To control what is preserved, you add a "Compact Instructions" section to CLAUDE.md. The summarization itself is a separate, batched, blocking step. The agent stops the rest of its work to summarize.
-Detailed instructions from early in the conversation may be lost. You are advised to put persistent rules in CLAUDE.md so that they survive compaction.
-
-[^compact-docs]: From the Claude Code [docs](https://code.claude.com/docs/en/how-claude-code-works) on how the context window is managed. Auto-compaction also re-attaches recently invoked skills after the summary, keeping the first 5,000 tokens of each within a 25,000 token budget. Auto-compaction halts with an error if a single tool output is so large that context refills immediately after each summary.
 
 #### **Shipping**
 
 *What it is.*
-When the test suite passes, you ask the agent to push.
+When the tests pass, you ask the agent to push the export feature.
 The agent pushes the branch.
 The agent waits for CI to finish before it does anything else.
 If you want a rollback plan, you ask for it as a separate turn.
 
 *What it should be.*
-When the test suite passes, the agent finalizes the PR.
+When the tests pass, the agent finalizes the PR for the export feature.
 You did not have to ask for status during any of this. The planning channel was already showing you the running state.
 The agent pushes the branch and watches CI.
-While CI runs, the agent writes a rollback plan on another channel.
+While CI runs, the agent writes a rollback plan on another channel - revert the PR, hide the button behind a flag.
 
-
-*What it should be.*
-Compaction is not a separate, batched step.
-The active channels carry the relevant state forward.
-Older parts of the conversation can be dropped because nothing important is only there - it is also in the planning channel, the running code state, or the user-facing channel.
-There is no need for a "Compact Instructions" section because there is no monolithic summarization step that needs to be instructed.
-The agent does not stop to compact. It is already maintaining the state it needs.
-
-
-#### **Reflection**
+#### **Compacting**
 
 *What it is.*
-After the work is done, you reflect on what could be improved.
-You decide what to add to CLAUDE.md, what skills to write, what conventions to formalize.
+After researching the dashboard code, the CSV utility, the permissions model, and running several export runs against large datasets, the conversation gets long. The harness compacts the context. In Claude Code, this means clearing older tool outputs first, then summarizing the conversation if needed.[^compact-docs] You can also run `/compact` manually with an optional focus like `/compact focus on the permissions changes`. To control what is preserved, you add a "Compact Instructions" section to CLAUDE.md. The summarization itself is a separate, batched, blocking step. The agent stops the rest of its work to summarize. Detailed instructions from early in the conversation may be lost - you are advised to put persistent rules in CLAUDE.md so that they survive compaction.
+
+*What it should be.*
+Compaction is not a separate, batched step. The active channels carry the relevant state forward. Older parts of the conversation can be dropped because nothing important is only there - it is also in the planning channel, the running code state, or the user-facing channel. There is no need for a "Compact Instructions" section because there is no monolithic summarization step that needs to be instructed. The agent does not stop to compact. It is already maintaining the state it needs.
+
+[^compact-docs]: From the Claude Code [docs](https://code.claude.com/docs/en/how-claude-code-works) on how the context window is managed. Auto-compaction also re-attaches recently invoked skills after the summary, keeping the first 5,000 tokens of each within a 25,000 token budget. Auto-compaction halts with an error if a single tool output is so large that context refills immediately after each summary.
+
+
+#### **Reflecting**
+
+*What it is.*
+After the export ships, you reflect on what could be improved.
+You decide what to add to CLAUDE.md about the CSV utility, what skills to write for adding future exports, what conventions to formalize.
 Claude Code has [auto memory](https://code.claude.com/docs/en/memory#auto-memory) which saves some learnings into MEMORY.md as you work, but the broader reflection is usually a separate prompt at the end of the session - "what did we learn?" - or it is left to the user.
 Either way, reflection is a discrete step after the work, not something that happens during.
 
@@ -166,7 +171,9 @@ Cross-session memory is then a matter of subscribing future sessions to this sto
 
 
 
-## Your side of the interaction does not change much
+## Implications
+
+### Your side of the interaction does not change much
 
 You might be expecting that interaction models require new interfaces - voice, video, gestures, avatars.
 They do not, for the coding case.
@@ -182,10 +189,6 @@ The model is running many things at once, and your typing is one of the inputs i
 
 The textbox is the same.
 What is behind the textbox is very different.
-
-
-
-## Implications
 
 ### Coding models are already on this trajectory
 
@@ -339,7 +342,7 @@ Neither should the model.
 
 
 
-## Think about what optimal interaction looks like
+### Think about what optimal interaction looks like
 
 I have described one shape of the optimal interaction.
 There are many more.
