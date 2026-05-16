@@ -64,7 +64,8 @@ The agent takes a turn.
 First it thinks.
 Then it reads a file.
 Then it thinks again.
-Understanding the system happens one read at a time.
+For parallel reads, the agent spawns a subagent like Claude Code's [Explore](https://code.claude.com/docs/en/sub-agents).
+The main agent writes the instruction up front, waits for the subagent to return, and reads only its summary - it does not see what the subagent saw, and it cannot steer the subagent mid-flight.
 The plan lives inside that thought process, and you only catch fragments of it.
 If you want a structured plan you can read, you invoke plan mode - and the agent does nothing else until the plan is done.[^plan-approval]
 
@@ -89,28 +90,35 @@ The plan is always being written, as one of many channels the agent is running.[
 *What it is.*
 The agent is not sure which columns the export should include, or whether it should be filtered to the dashboard's current view.
 It either dives in and guesses, or asks one clarifying question and stops working until you reply.
+The question is often the wrong one.
+The agent asks something it could have answered itself by reading more code, while missing the genuine ambiguity that bites later.
+When the agent does ask, it does not surface its current interpretation, so a disagreement over what "the dashboard's current view" means only shows up after the result is wrong.
+Your answers are coupled too - "which columns" depends on "filtered or full" - but the agent asks them as a flat list, not as a dependency tree.
 There is no middle ground between guessing and blocking.
 
 *What it should be.*
 The agent asks "which columns?" and "filtered or full?" on the user-facing channel while it keeps researching the CSV utility and the dashboard's data queries on other channels.
+It surfaces its current interpretation alongside the question - "I see twelve columns on the dashboard, including derived metrics; should the export include all twelve, or the raw columns underneath?" - so you can correct the framing, not just the answer.
+It proposes a reasonable default and flags the assumption on the planning channel, instead of blocking on every choice.
+When you answer one question, the agent integrates and re-asks downstream questions only if they are still ambiguous.
 By the time you reply, the agent already has the relevant code in context, and your answer steers the research that is already in flight.
 
 #### **Steering**
 
 *What it is.*
-The agent is already working - it has started writing code, running commands, producing a prototype.
-Halfway through, you notice it is taking the wrong approach, or you remember a detail you forgot to mention.
-You type it into the chat box.
-Your message is queued.
-It will be delivered at the next tool boundary.
-By then the agent may have already wasted compute pursuing the wrong hypothesis.
-The agent has only one output stream, so what it is thinking and what it is showing you are the same stream.
-You see file operations and tool calls but no acknowledgment that you exist, and the agent feels like it is stonewalling you.
-There is no equivalent of nodding or saying "uh-huh, I heard that, let me finish this thought first".
-You cannot interrupt the agent's chain of thought either.[^interrupt-cot] If you do, the agent abandons its current trace and restarts from your new message.
+The agent is already working - writing code, running commands, producing a prototype.
+Halfway through, you notice the wrong approach.
+You type a correction into the chat box.
+Your message is queued until the next tool boundary, and by then the agent may have wasted compute on the wrong hypothesis.
+The agent has only one output stream, so its thinking and its user-facing output share it.
+You see file operations and tool calls but no acknowledgment that you exist - the agent feels like it is stonewalling you.
+You cannot interrupt the agent's chain of thought either.[^interrupt-cot]
+To steer, you have to restart everything.
+The main agent abandons its trace and starts from your message.
+Any subagents it spawned have to be killed and re-spawned with new instructions, losing the context they had built up.
 
 *What it should be.*
-You send a course correction mid-flight - the agent is wiring the button to the wrong dashboard, or you remember the export needs to respect row-level permissions.
+You send a course correction mid-flight - the agent is wiring the button to the wrong dashboard, or you remember that some of the columns are internal-reference IDs that the end user does not care about.
 The agent reads your message immediately without finishing its current thought.
 The planning channel updates to include the new constraint.
 The agent thinks and communicates at the same time, on separate channels.
@@ -126,12 +134,16 @@ You do not have to wait for a turn boundary, and you do not feel stonewalled.
 #### **Approvals**
 
 *What it is.*
-The agent wants to do something that needs your approval.
+The agent wants to do something that needs your approval - run a command, edit a file outside the project directory, push to a shared branch.
 It might be running the export against the production database to validate it on real data.
 The agent halts and surfaces the approval prompt.
 You approve, deny, or "allow always for this pattern".
 Everything else the agent was doing stops too.
 The agent is single-stream, so a pending approval blocks all the work.
+The choices the harness offers you are coarse.
+You pay attention to every prompt and slow the agent down, trust allow-list patterns and sometimes auto-approve the wrong thing, or flip to auto mode and let the agent do anything.[^auto-mode]
+The patterns themselves are not very expressive - you can pre-approve `Bash(rm:*)` for a project, but you cannot make it conditional on the path being inside that project.
+When the agent does ask, the prompt is the bare command - it does not surface what the agent expects to happen, why it wants to do this, or what it would do if you denied.
 
 *What it should be.*
 Approvals surface on a dedicated approval channel.
@@ -144,22 +156,31 @@ The distinction from Aligning's clarifying questions matters - approvals are abo
 The harness still owns the authorization boundary even when the model is multi-stream.
 What changes is that asking for authorization no longer freezes the work.
 
+[^auto-mode]: Claude Code's permission modes range from approve-every-action to `bypassPermissions` (sometimes called auto mode or YOLO mode), which lets the agent do anything without asking.
+    Auto mode is fast but unsafe - any mistake is committed before you can object.
+    Most experienced users settle somewhere in the middle, with an allow-list of patterns they trust, but the allow-list does not adapt to context.
+
 
 #### **Executing**
 
 *What it is.*
-The agent runs the new export handler against a large dataset to check it streams correctly.
-The run takes 90 seconds.
-While it is running, the agent is blocked.[^subagent]
+A coding session is full of long-running tool calls - the export running against a large dataset, the test suite, the type checker, the CI run, a database query, a deploy.
+Each takes seconds to minutes, and the agent is blocked while it waits.[^backgrounding]
 You are also blocked.
-You wait.
+Even when the answer is obvious in the first ten seconds of output - the first test fails with a clear error, the first 1000 rows of the export reveal a format issue - the agent does not look until the command exits.
 
 *What it should be.*
-The agent runs the same export against a large dataset.
-The agent does not block on the run.
-While the export streams, the agent reads related code on a separate stream - the existing report exports, the permissions tests.
-The agent watches the export output, looking for the line that confirms all rows streamed without memory pressure.
-When the line appears, the agent stops reading and moves on to writing the unit tests for the new handler.[^interrupt-self]
+The agent reads streaming output as it arrives, not after the command exits.
+If the first test failure shows the bug, the agent kills the suite and investigates without waiting for the rest.
+If the export reveals a format issue early, the agent kills the run, fixes the bug, and starts another - no 90-second wait.
+Tool calls fan out in parallel: the export runs against three dataset sizes at once, the test suite and the type checker run concurrently, the branch is pushed and CI is watched while a rollback plan is drafted on another channel.
+The planning channel shows the running state of every active tool call, so you do not have to ask for status.
+None of this is invoked through a special tool or a special flag. The agent is running many channels, each watching a different stream.[^interrupt-self]
+
+[^backgrounding]: Claude Code has partial workarounds.
+    You can set `run_in_background` on a Bash call so the agent does not block, and use the Monitor tool to stream output lines back as notifications.
+    But these are scaffolding around a single-stream model.
+    The agent has to consciously invoke them, and even with them, the rest of the agent's work is still serial.
 
 [^subagent]: Strictly, the harness could spawn subagents to do other work in parallel.
     But subagents are wrapped in tool calls, and the parent has to wait for the subagent to return.
@@ -168,37 +189,6 @@ When the line appears, the agent stops reading and moves on to writing the unit 
 [^interrupt-self]: This is one of the harder behaviors to train.
     The model needs to be able to interrupt one of its own streams when another stream surfaces something more important.
     This is a form of self-interruption, and it is different from being interrupted by the user.
-
-#### **Testing**
-
-*What it is.*
-The agent runs the test suite.
-The output streams for two minutes.
-The agent waits for the suite to finish before it acts on any of it.
-The agent could have noticed the first failure within ten seconds, but it does not look at the output until the command exits.
-
-*What it should be.*
-The agent runs the test suite.
-The agent watches the stream, and at the same time it drafts the PR description on the user-facing channel.
-The first test failure triggers the agent to stop drafting and investigate.
-The failure turns out to be unrelated to the export change.
-The planning channel updates to note the flaky test.
-The agent continues drafting the PR.
-
-#### **Shipping**
-
-*What it is.*
-When the tests pass, you ask the agent to push the export feature.
-The agent pushes the branch.
-The agent waits for CI to finish before it does anything else.
-If you want a rollback plan, you ask for it as a separate turn.
-
-*What it should be.*
-When the tests pass, the agent finalizes the PR for the export feature.
-You did not have to ask for status during any of this.
-The planning channel was already showing you the running state.
-The agent pushes the branch and watches CI.
-While CI runs, the agent writes a rollback plan on another channel - revert the PR, hide the button behind a flag.
 
 #### **Compacting**
 
