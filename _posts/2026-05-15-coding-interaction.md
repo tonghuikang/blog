@@ -194,242 +194,81 @@ When the feature is shipped, the agent will propose to make improvements to AI i
 
 ## Implications
 
-#### **Evaluation will be much harder**
+(write something here)
 
-We will move to a world where we no longer operate with input and output words.
-
-You will look at results.
-
-
-#### **The interaction model should be a drop-in replacement**
-
-You might be expecting that interaction models require new interfaces - voice, video, gestures, avatars.
-They do not, for the coding case.
-
-You still type into a textbox.
-You still read text in a chat panel.
-You still click buttons to approve commands.
-
-What changes is on the model's side.
-The model is no longer waiting for your turn.
-The model is no longer waiting for a tool to finish.
-The model is running many things at once, and your typing is one of the inputs it is reading.
-
-The textbox is the same.
-What is behind the textbox is very different.
 
 #### **Humans will prefer the better interface**
 
-I still prefer Claude Code as my main interface for all my projects.
+I still prefer Claude Code as my main interface.
 
-I have switched between Claude Code and Codex multiple times.[^codex-permissions] Every switch was driven by interaction quality, not by which model was a few percentage points higher on a benchmark.
-The Wispr Flow dictation app is more popular than other speech-to-text tools because the experience is better, even though the underlying transcription quality is comparable.
+For most of work that I do, it is not possible for me to give perfect instructions in the first turn.
+I also operate with imperfect information, I also do not have all the answers.
+I need to interact with the agent to understand the problem together.
 
-This means interaction models have a strong commercial pull.
-A model that is harder to interrupt, harder to steer, harder to ask questions of, and harder to watch will lose users to a model that is none of those things - even if the second model is slightly less capable on autonomous benchmarks.
+For me, Claude Code still feels easier to interact with.
+
+I do not really care whether one model is slightly more intelligent than the other.
+I care about how easy is it for me to communicate with the agent and get things done.
+
 The companies that ship interaction models first will set the floor for what users expect.
 Going back to a single-stream model will feel like going from a chat app to email.
 
-[^codex-permissions]: My current frustration with Codex is that its permissions model is binary.
-    I cannot change the permissions settings the way I can with Claude Code - Codex is either do-nothing (pause on every action for approval) or do-everything (full-auto on anything).
-    There is no middle ground where I can trust some patterns and not others.
-    Claude Code lets me allow-list specific bash patterns, file paths, and tool patterns - a much richer surface for declaring what is safe.
 
-#### **Coding models are already on this trajectory**
 
-The same trajectory we saw for reasoning is the one I expect for interaction.
+#### **Current interfaces will continue to be supported**
 
-In 2024, reasoning was an opt-in feature.
-OpenAI released [o1](https://openai.com/o1/) in September 2024 as a separate product.
-You could pick between o1 and GPT-4o.
-You could pick whether to use extended thinking with Claude Sonnet 3.5.
+Coding agent using interaction models should not require you to turn on your webcam and microphone.
 
-The distinction has collapsed.
-Every frontier coding model today is a reasoning model.
-Nobody ships a competitive non-reasoning model for coding.[^non-reasoning]
+You should still be able to talk to your coding agent with chat, just that it is more responsive and effective.
 
-[^non-reasoning]: Some models still expose a non-thinking mode for smaller models and latency-sensitive use cases.
-    However, on coding leaderboards the entries that matter are all reasoning models.
-
-Reasoning models also happen to be the first widely-shipped models with something close to multi-stream behavior.
-The thought process is one stream.
-The user-facing response is another stream.
-The streams are sequential, not parallel, but they are distinct streams with distinct purposes.
-
-The pattern is - a capability starts as an opt-in feature, becomes the default, then becomes inseparable from the model.
-I expect interaction to follow the same pattern.
-There will be no flag to switch between "interaction mode" and "non-interaction mode".
-Every coding model will be an interaction model.
+For users, you should continue be great at using the current text-interface AI coding tools.
 
 
 
-#### **You will throw away your harnesses**
+#### **You will still need teach your coding agent**
 
-Claude Code and Codex paper over the model's inability to do more than one thing at a time.
+The coding agent does not know about your business.
 
-These parts of the harness exist only because the model is single-stream.
-They will go away.
+You will still need to teach your coding agent the environment you are working with.
+Even with interaction models, the model starts every session still starts afresh.
 
-- Queued user messages.
-  The harness queues your message because the model cannot read while it is writing.
-- Prompting for compaction.
-  The harness prompts the model to summarize because the model does not maintain its own running state.
-- Subagents wrapped in tool calls.
-  The harness spawns subagents because the model cannot run parallel streams natively.
-- Plan mode and todo lists.
-  The harness imposes a plan because the model cannot track multiple intents at once.
-- Polling for long-running tool results.
-  The harness polls because the model cannot read and act on partial output as it streams.
+You will still need to manage instructions and resources for the agent to access.
+Skills will continue to be written.
+Resources will still be needed to be accessed.
 
-These parts of the harness stay, because they exist for reasons that are not about being single-stream.
 
-- Bash execution.
-  The model still cannot run shell commands on the user's machine.
-- File system access.
-  The model still needs the harness to read and write files.
-- Browser and sandbox controls.
-  The model still needs the harness to expose the environment safely.
-- Authentication and authorization.
-  The harness still owns the credentials and the access boundaries.
-- Persistence.
-  The harness still saves transcripts, checkpoints, and rollbacks.
-- Agent [skills](/2026/02/21/skills.html).
-  Interaction or not, the model needs to learn about the system it is working on - where to find information, who to ask for what, the company's conventions, the pitfalls to avoid.
-  Skills are how the model discovers this.
-  The interaction capability does not remove the need for skills.
 
-The harness becomes very thin.
-It is a router that wires streams from the real world into the model, and routes the model's outputs back into the world.
+#### **The model will decide everything**
 
-If I am building yet another coding tool from scratch, I will be exclusively using interaction models.
+Currently the harnesses manages plenty of decisions - for example whether to compact, whether auto-approve a command, the context reset after planning mode.
+
+A lot of the harnesses are built with the assumption of a single-stream model - compaction, monitoring, chain-of-thought.
+Prompts are written and evaluated.
+With this, I think most of the harnesses that we use today will be thrown away.
+
+If I am building yet another coding tool, I will make the harness to work only with interaction models.
+
+
 
 
 
 #### **There will be one coding model size**
 
-My bet is that the coding model market will collapse to one model size served via API.
+My bet is that the coding model market will collapse to one model size served via API[^local-models].
 
-There will not be a larger, slower, smarter model for harder problems.
-There will only be a single model, with a knob for how long it thinks before acting.
+Currently Claude Code by default is served with two models - Opus as the main model and Haiku as the explore model.
 
-The reasons.
+With interaction models, everything will be one model, which means one model size.
 
-- For an interaction model to be responsive across many channels, latency matters.
-  A larger model trades responsiveness for capability, which is the wrong trade for an interaction model.
-- The thinking-effort knob already exists.
-  Claude Code has `low`/`medium`/`high`/`xhigh`/`max`.
-  OpenAI has `reasoning_effort`.
-  Anthropic has `thinking_budget`.
-  Most of the marginal capability gain from a larger model is captured by spending more tokens on thinking.
-- Serving one model size is operationally much simpler.
-  You can pool compute, cache better, scale predictably, and avoid the fragmentation of "which model should I use for which task".
+There will be different knobs that the model can decide to turn for themselves.[^knobs]
 
-Today's model tiering is a reasonable workaround for single-stream models, but it is a workaround.
+[^local-models]: If there are models of different size being developed, I think they are local models that needs to be run on device.
 
-Claude Code uses Haiku for the [Explore](https://code.claude.com/docs/en/sub-agents) subagent.
-There are good reasons for this given today's constraints.
-Reading many files to find a definition burns tokens fast, so a smaller model keeps cost down.
-Exploration is latency-sensitive, so a faster model helps.
-The Explore subagent has an isolated context, so the main agent does not have to absorb the file contents - just the summary.
-And critically, the main model can only do one thing at a time, so spawning a subagent is the only way to explore in parallel with the main work.
-A smaller model in that subagent is the right cost/speed call.
-
-But the whole pattern is scaffolding around the single-stream constraint.
-Asking a subagent to do something is like asking a coworker - they do not fully understand what you mean, and normally you would go back and forth until they do.
-With subagents you cannot.
-The instruction is frozen at spawn time, and the subagent returns whatever it decided to summarize.
-The interaction model is closer to cloning yourself to do many things at once.
-The clones share the full context of what you know and what you are trying to do, without the information loss of writing instructions to a separate agent and waiting for it to write back.
-Exploration becomes a channel on the main model, not a subagent on a smaller model.
-There is no second set of weights to load, no second inference path, no instruction-writing step, and no information lost between the explorer and the main agent.
-The smaller-model-as-subagent pattern is solving a problem that interaction models do not have.
-
-If this prediction holds, the user-facing question of "which model" disappears, replaced by "how long should this think".
-The harness no longer needs a `/model` command, only an effort dial.
-
-
-
-#### **Training interaction models will be hard**
-
-Reasoning models showed up as a step beyond instruct models.
-Interaction models will be a step beyond reasoning models, and the training challenges are non-trivial.
-
-**Context length needs to be actively managed.**
-Multiple parallel channels produce more tokens per second of wall-clock time than a single stream.
-A 30-minute coding session that fit comfortably in 200k tokens as a single stream might not fit if four channels are all writing in parallel.
-The model needs to manage its own context as it works - deciding which channel state to keep, which to summarize, which to drop entirely - without the harness invoking a separate compaction step.
-This is a hard training objective.
-The reward for "good context management" is not obvious, and the failure mode (dropping something important) only surfaces minutes later when the model tries to use what it no longer remembers.
-
-**Self-interruption is a learned behavior.**
-The model needs to interrupt one of its own streams when another stream surfaces something more important.
-This is different from being interrupted by the user, and it is different from finishing a thought before moving on.
-Today's models cannot do this cleanly.
-They either commit to the current thought or abandon it and start over.
-
-**Evaluation gets harder.**
-The reference completion is no longer one self-contained turn.
-It is a slice of a running interaction, and grading it requires simulating the rest of the interaction.
-I wrote about this in the [evaluation section](/2025/05/14/multichannel-prediction.html#evaluation) of the multichannel post.
-
-
-
-#### **Do not bother scaffolding current models into interaction models**
-
-Some of the behaviors I describe above can be approximated by scaffolding around today's single-stream models.
-You can train the model to emit a planning section that the harness parses out.
-You can spawn lots of subagents.
-You can stream tool output into the model's context as it arrives, with elaborate prompting on how to interrupt itself.
-
-I do not think it is worth investing too much engineering effort in this scaffolding.
-
-If the prediction is correct, in two years the model will do all of this natively.
-The scaffolding will be obsolete, the prompts will be obsolete, the harness-side parsers will be obsolete.
-Better to go straight to training interaction models, even if early versions are worse than the current scaffolded approaches.
-
-This is the same argument that applied to reasoning.
-You could approximate reasoning in 2024 by prompting GPT-4 to "think step by step" before answering, with a parser around it.
-That work was obsolete the moment o1 shipped.
-
-
-
-#### **The value beyond iterating with humans**
-
-You might think interaction models matter mostly for humans talking to AI in real time.
-You do not need to be in the loop for interaction models to matter.
-
-The walkthrough above contains several places where the model is not waiting for you.
-
-- It read related code while a reproduction script was running.
-- It drafted the PR while the test suite was running.
-- It wrote the rollback plan while CI was running.
-
-All of these are asynchronous workflows.
-For most of them, you are not in the loop at all.
-
-The benefit is that the model is no longer blocked on slow I/O.
-A human engineer does not sit and stare at the terminal while a build runs.
-Neither should the model.
-
-
-
-#### **Think about what optimal interaction looks like**
-
-I have described one shape of the optimal interaction.
-There are many more.
-
-If you work with coding agents, you have direct evidence of where today's interaction fails you.
-You know when the agent stonewalls.
-You know when you have to queue messages and wait.
-You know when you would have wanted the agent to keep researching while you typed.
-You know when you would have wanted the agent to interrupt you.
-
-Think about what the optimal interaction should look like for your work.
-Write it down.
-Walk through a real task end-to-end the way I have here, and describe what each side should be doing at each moment.
-
-It is much easier to ask for the optimal interaction once you have written it out.
-Model providers and harness builders cannot guess your workflow.
+[^knobs]: We are familiar with the thinking effort as a knob.
+    I think models should be able to tune their thinking effort by prompting themselves.
+    Ther are other knobs that could be turned if you train the model to do so.
+    Maybe the size of the prefix that you can attend to is tunable.
+    Maybe the number of experts that you can use is also tunable.
 
 
 
