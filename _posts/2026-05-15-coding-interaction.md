@@ -49,7 +49,7 @@ The model only sees the final message when you hit send, and starts working from
 *What it should be.*
 You ask the model something like "add Export to CSV to the dashboard".
 When you complete the first phrase, the agent starts to research your code.
-As you modify and elaborate more, it steers the research realtime.
+As you modify and elaborate more, it steers the research in real time.
 By the time you complete your multi-sentence request, the model has already made significant progress in the research.
 The agent can already ask useful follow-up questions for your request.
 
@@ -112,13 +112,13 @@ The agent is already working - it has drafted the button, wired up the export ha
 Halfway through, you notice that the button text is not visible in dark mode.
 You type a correction into the chat box.
 Your message is queued until the next tool boundary - it feels like the agent is stonewalling you.
-You can interrupt the agent to get your queries immediately answered, but this discards current agent progress.
+You can interrupt the agent to get your queries immediately answered, but this discards the agent's current progress.
 
 *What it should be.*
 You point out that the text is not visible in dark mode.
 The model reads your message immediately and acknowledges your comment.
 The planning channel updates to include the new constraint.
-The implementation channel will work on the next available opportunity.
+The implementation channel will pick it up at the next available opportunity.
 You do not have to wait for a turn boundary, and you do not feel stonewalled.
 
 
@@ -145,16 +145,16 @@ If you approve, the paused channel resumes and the export runs.
 
 *What it is.*
 Testing follows a linear process.
-Your dashboard has hundreds of existing tests that programatically tests each component.
+Your dashboard has hundreds of existing tests that programmatically test each component.
 You need to choose a testing setup - do you stop tests on the first failure, or do you continue to run all the tests?
 If the agent stops tests on the first failure, the agent will not be aware of the other tests that will fail and the agent will need multiple round trips to fix.
-If the agents lets all the tests to run, the agent will not be able to fix the first failure as soon as it can.[^monitor]
+If the agent lets all the tests run, the agent will not be able to fix the first failure as soon as it can.[^monitor]
 
 *What it should be.*
-The agent starts testing and there is one input channel dedicated for listening for error.
-There is an output channel that surfaces testing issue.
+The agent starts testing and there is one input channel dedicated to listening for errors.
+There is an output channel that surfaces testing issues.
 If there is indeed a failure, the channel working on the code will be informed and it will be expected to investigate and fix the failure.
-Tests can continue to run so that if there are test failures, it will be surfaced to the agent.
+Tests can continue to run so that if there are more test failures, they will be surfaced to the agent.
 We get both early fixes to failures, and reduced round trips between fixing and testing.
 
 [^monitor]: Claude Code has this [monitor tool](https://code.claude.com/docs/en/tools-reference#monitor-tool) where the agent will monitor something in the background.
@@ -182,7 +182,7 @@ Information removed from context should still be searchable from any channel.
 
 *What it is.*
 After you ship your feature, you want to improve your future experience working with the model.
-You write and improve skills that helps to do your work more efficiently.
+You write and improve skills that help you do your work more efficiently.
 For example, when testing the dashboard, the agent should remember to try both light and dark mode and confirm visibility of every text element.
 The agent will need to search their history and correctly surface pain points that could have been informed with skills.
 
@@ -194,21 +194,21 @@ When the feature is shipped, the agent will propose to make improvements to AI i
 
 ## Implications
 
-(write something here)
+If interaction models are coming, here is what I think changes for users, builders, and the model market.
 
 
 #### **Humans will prefer the better interface**
 
 I still prefer Claude Code as my main interface.
 
-For most of work that I do, it is not possible for me to give perfect instructions in the first turn.
-I also operate with imperfect information, I also do not have all the answers.
+For most of the work that I do, it is not possible for me to give perfect instructions in the first turn.
+I also operate with imperfect information, and I do not have all the answers.
 I need to interact with the agent to understand the problem together.
 
 For me, Claude Code still feels easier to interact with.
 
 I do not really care whether one model is slightly more intelligent than the other.
-I care about how easy is it for me to communicate with the agent and get things done.
+I care about how easy it is for me to communicate with the agent and get things done.
 
 The companies that ship interaction models first will set the floor for what users expect.
 Going back to a single-stream model will feel like going from a chat app to email.
@@ -217,36 +217,36 @@ Going back to a single-stream model will feel like going from a chat app to emai
 
 #### **Current interfaces will continue to be supported**
 
-Coding agent using interaction models should not require you to turn on your webcam and microphone.
+Coding agents using interaction models should not require you to turn on your webcam and microphone.
 
 You should still be able to talk to your coding agent with chat, just that it is more responsive and effective.
 
-For users, you should continue be great at using the current text-interface AI coding tools.
+For users, you should continue to be great at using the current text-interface AI coding tools.
 
 
 
-#### **You will still need teach your coding agent**
+#### **You will still need to teach your coding agent**
 
 The coding agent does not know about your business.
 
 You will still need to teach your coding agent the environment you are working with.
-Even with interaction models, the model starts every session still starts afresh.
+Even with interaction models, the model still starts every session afresh.
 
 You will still need to manage instructions and resources for the agent to access.
 Skills will continue to be written.
-Resources will still be needed to be accessed.
+Resources will still need to be accessed.
 
 
 
 #### **The model will decide everything**
 
-Currently the harnesses manages plenty of decisions - for example whether to compact, whether auto-approve a command, the context reset after planning mode.
+Currently the harnesses manage plenty of decisions - for example, whether to compact, whether to auto-approve a command, and the context reset after planning mode.
 
 A lot of the harnesses are built with the assumption of a single-stream model - compaction, monitoring, chain-of-thought.
 Prompts are written and evaluated.
 With this, I think most of the harnesses that we use today will be thrown away.
 
-If I am building yet another coding tool, I will make the harness to work only with interaction models.
+If I am building yet another coding tool, I will make the harness work only with interaction models.
 
 
 
@@ -260,13 +260,13 @@ Currently Claude Code by default is served with two models - Opus as the main mo
 
 With interaction models, everything will be one model, which means one model size.
 
-There will be different knobs that the model can decide to turn for themselves.[^knobs]
+There will be different knobs that the model can decide to turn for itself.[^knobs]
 
-[^local-models]: If there are models of different size being developed, I think they are local models that needs to be run on device.
+[^local-models]: If there are models of different sizes being developed, I think they are local models that need to be run on device.
 
 [^knobs]: We are familiar with the thinking effort as a knob.
     I think models should be able to tune their thinking effort by prompting themselves.
-    Ther are other knobs that could be turned if you train the model to do so.
+    There are other knobs that could be turned if you train the model to do so.
     Maybe the size of the prefix that you can attend to is tunable.
     Maybe the number of experts that you can use is also tunable.
 
@@ -280,7 +280,7 @@ I think coding will also be the first killer use case for interaction models.
 
 All coding models will be interaction models[^robotics].
 
-[^robotics]: I think the first human-level robotics model will also be interaction models.    
+[^robotics]: I think the first human-level robotics model will also be an interaction model.
 
 
 ## Footnotes
