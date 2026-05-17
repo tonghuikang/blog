@@ -51,7 +51,7 @@ You ask the model something like "add Export to CSV to the dashboard".
 When you complete the first phrase, the agent starts to research your code.
 As you modify and elaborate more, it steers the research realtime.
 By the time you complete your multi-sentence request, the model has already made significant progress in the reasearch.
-The agent can already ask sensible follow-up questions for your request.
+The agent can already ask useful follow-up questions for your request.
 
 [^banks]: For some reason all the banks that I use makes it difficult for me to export all my transcation history at once.
 
@@ -70,74 +70,67 @@ Claude Code writes the instruction up front for the subagent.
 One subagent explores the dashboard component.
 Another subagent explores the data query.
 Another subagent explores the design components.
-However, the main agent writes the instruction up front, waits for the subagent to return, and reads only its summary - it does not see what the subagent saw, and it cannot steer the subagent mid-flight.
+However, the main agent writes the instruction up front, waits for the subagent to return, and reads only its summary - it does not see what exactly subagent saw.
 Claude Code cannot steer subagents mid-flight.
 Information learnt from one subagent cannot influence the research process of another subagent.
+This slows the overall research process, and likely incomplete because subagent do not talk to each other.
 
 *What it should be.*
 The agent starts with a general instruction on what to do "add Export to CSV to the dashboard".
 The agent starts immediately starts multiple channels that investigates the different component.
 One channel explores the dashboard component.
+You do not waste tokens explaining the situation to the subagent.
 Another channel, with the sample prefix, explores the data query.
 Another channel, with the sample prefix, explores the design components.
 Information learnt from one channel is immediately shared with another channel.
+With channel informed how the other channels are doing, the research process is faster and more complete.
+For example, if it is discovered that we have similar data export functions for chat history, this information helps to inform the design components to use and the data queries to make.
+When the research is done, you also do not waste tokens writing the summary.
+
 
 #### **Aligning**
 
 *What it is.*
-The agent is not sure which columns the export should include, or whether it should be filtered to the dashboard's current view.
-It either dives in and exports all twelve columns unfiltered, or asks "which columns?" and stops working until you reply.
-The question is often the wrong one - the agent could have inferred which columns the dashboard surfaces by reading the component, while missing the genuine ambiguity about the filter.
-When the agent does ask, it does not surface its current interpretation, so a disagreement over what "the dashboard's current view" means only shows up after the export is wrong.
-Your answers are coupled too - "which columns" depends on "filtered or full" - but the agent asks them as a flat list, not as a dependency tree.
-There is no middle ground between guessing and blocking.
+There are design decisions involved in a simple button to export a CSV.
+Do we give a choice to the user on what to export?
+Is exporting instantaneous, or is the user required to check back after and hour or so for their data?
+These are questions you need to ask the user.
+There is a tradeoff on whether you want to ask the questions early, or whether you want to do your research first before asking the questions.
+There is a tradeoff on whether to even ask the question, because the Claude Code currently do not work in the background when questions needs to be answered.
 
 *What it should be.*
-The agent asks "which columns?" and "filtered or full?" on the user-facing channel while it keeps researching the CSV utility and the dashboard's data queries on other channels.
-It surfaces its current interpretation alongside the question - "I see twelve columns on the dashboard, including derived metrics; should the export include all twelve, or the raw columns underneath?" - so you can correct the framing, not just the answer.
-It proposes a reasonable default and flags the assumption on the planning channel, instead of blocking on every choice.
-When you answer one question, the agent integrates and re-asks downstream questions only if they are still ambiguous.
-By the time you reply, the agent already has the relevant code in context, and your answer steers the research that is already in flight.
+The agent should not need to make these tradeoffs.
+The agent could ask question as early as they can while working on the research in the background.
+The agent could retract questions if they have found the answer in the resources (for example, there are data exports that are not instantaneous for data requests of a smaller sizes)
+All responses to the agent will be immediately influence the research.
+
 
 #### **Steering**
 
 *What it is.*
 The agent is already working - it has drafted the button, wired up the export handler, and is running a first export to see the output.
-Halfway through, you notice it has wired the button to the wrong dashboard.
+Halfway through, you notice that the button text is not visible in dark mode.
 You type a correction into the chat box.
-Your message is queued until the next tool boundary, and by then the agent has wasted compute on the wrong dashboard.
-The model has only one output stream, so its thinking and its user-facing output share it.
-You see file operations and tool calls but no acknowledgment that you exist - the agent feels like it is stonewalling you.
-You cannot interrupt the model's chain of thought either.[^interrupt-cot]
-To steer, you have to restart from your correction.
-The main agent abandons its trace, and any Explore subagents that were still mapping the wrong dashboard's data layer have to be killed and re-spawned with the right dashboard in mind, losing the context they had built up.
+Your message is queued until the next tool boundary - it feels like the agent feels like it is stonewalling you.[^interrupt-cot]
 
 *What it should be.*
-You send a course correction mid-flight - the agent is wiring the button to the wrong dashboard, or you remember that some of the columns are internal-reference IDs that the end user does not care about.
-The model reads your message immediately without finishing its current thought.
+You point out that the text is not visible in dark mode.
+The model reads your message immediately and acknowledges your comment.
 The planning channel updates to include the new constraint.
-The model thinks and communicates at the same time, on separate channels.
-Chain of thought is for the model's own reasoning, not for human consumption - it can be exposed, but it is verbose and meandering by design and is not the most efficient way to communicate with you.
-The user-facing channel speaks differently: concise, direct, addressed to you.
-It acknowledges that the model heard you, while the thinking and code-writing channels keep running in parallel.
 You do not have to wait for a turn boundary, and you do not feel stonewalled.
 
 [^interrupt-cot]: When I tried interrupting `gpt-oss-120b` while it was working on math problems, the resulting trace became token inefficient - the interrupted thought was abandoned and the model started a fresh thought from the new user message.
     An interaction model should be able to absorb a mid-flight interruption and update its current stream without restarting.
 
 
-#### **Approvals**
+#### **Approving**
 
 *What it is.*
 The agent wants to run the export against the production database to validate it on real data, and it needs your approval to do so.
-The agent halts and surfaces the approval prompt.
+The agent halts and surfaces the approval prompt[^auto-mode].
 You approve, deny, or "allow always for this pattern".
 Everything else the agent was doing - drafting the button, type-checking the handler - stops too.
 The model is single-stream, so a pending approval blocks all the work.
-The choices the harness offers you are coarse.
-You pay attention to every prompt and slow the agent down, trust allow-list patterns and sometimes auto-approve the wrong thing, or flip to auto mode and let the agent do anything.[^auto-mode]
-The patterns themselves are not very expressive - you can pre-approve `Bash(psql:*)` for a project, but you cannot make it conditional on the database URL pointing to staging rather than production.
-When the agent does ask, the prompt is the bare command - it does not surface what the agent expects to happen, why it wants to do this, or what it would do if you denied.
 
 *What it should be.*
 The agent surfaces the approval to run the export against production on a dedicated approval channel.
@@ -145,24 +138,22 @@ Only the export channel pauses.
 The other channels keep running - the agent continues drafting the button code and refining the export handler while you decide.
 If you approve, the paused channel resumes and the export runs.
 If you deny, the agent updates the planning channel and considers an alternative, like running against a staging snapshot instead.
-The distinction from Aligning's clarifying questions matters - approvals are about authorization, not scope.
-The harness still owns the authorization boundary even when the model is multi-stream.
-What changes is that asking for authorization no longer freezes the work.
 
-[^auto-mode]: Claude Code's permission modes range from approve-every-action to `bypassPermissions` (sometimes called auto mode or YOLO mode), which lets the agent do anything without asking.
-    Auto mode is fast but unsafe - any mistake is committed before you can object.
-    Most experienced users settle somewhere in the middle, with an allow-list of patterns they trust, but the allow-list does not adapt to context.
+[^auto-mode]: I am aware that Claude Code has an auto-mode where the agent has a process to automatically decides which commands are safe to run.
+    However, I think interaction models is useful here, there could be one channel where the model decides whether to approve running the command.
 
 
 #### **Executing**
 
 *What it is.*
-A coding session is full of long-running tool calls - the export running against a large dataset, the test suite, the type checker, the CI run, a database query, a deploy.
-Each takes seconds to minutes, and the agent is blocked while it waits.[^backgrounding]
-You are also blocked.
-Even when the answer is obvious in the first ten seconds of output - the first test fails with a clear error, the first 1000 rows of the export reveal a format issue - the agent does not look until the command exits.
+Execution follows a linear process.
+It implements the frontend logic on displaying the button, then it implements the backend logic retrieving the data, then it runs tests.
+Claude Code may decide to launch agents in parallel to perform this process.
+However there is a tradeoff in parallelization, because there are dependencies between these steps.
 
 *What it should be.*
+The agent works on these these three components in parallel.
+
 The agent reads streaming output as it arrives, not after the command exits.
 If the first test failure shows the bug, the agent kills the suite and investigates without waiting for the rest.
 If the export reveals a format issue early, the agent kills the run, fixes the bug, and starts another - no 90-second wait.
@@ -170,57 +161,36 @@ Tool calls fan out in parallel: the export runs against three dataset sizes at o
 The planning channel shows the running state of every active tool call, so you do not have to ask for status.
 None of this is invoked through a special tool or a special flag. The agent is running many channels, each watching a different stream.[^interrupt-self]
 
-[^backgrounding]: Claude Code has partial workarounds.
-    You can set `run_in_background` on a Bash call so the agent does not block, and use the Monitor tool to stream output lines back as notifications.
-    But these are scaffolding around a single-stream model.
-    The agent has to consciously invoke them, and even with them, the rest of the agent's work is still serial.
-
-[^subagent]: Strictly, the harness could spawn subagents to do other work in parallel.
-    But subagents are wrapped in tool calls, and the parent has to wait for the subagent to return.
-    There is no streaming back to the parent while the subagent works.
-
-[^interrupt-self]: This is one of the harder behaviors to train.
-    The model needs to be able to interrupt one of its own streams when another stream surfaces something more important.
-    This is a form of self-interruption, and it is different from being interrupted by the user.
-
 #### **Compacting**
 
 *What it is.*
-After researching the dashboard code, the CSV utility, the permissions model, and running several export runs against large datasets, the conversation gets long.
-The harness compacts the context.
-In Claude Code, this means summarizing the older parts of the conversation into a shorter form.[^compact-docs]
-You can also run `/compact` manually with an optional focus like `/compact focus on the permissions changes`.
-Compaction is slow.
-The model has to autoregressively decode thousands of tokens of summary before the new context is ready, and a single-stream model cannot do anything else in the meantime.
-Detailed instructions from early in the conversation may be lost - you are advised to put persistent rules in CLAUDE.md so that they survive compaction.
+The inference infrastructure is not wired to generate tokens after a certain context length.
+Models are also not trained to generate tokens after a certain context length.
+Agents need to compact their context before more tokens can be generated. [^million-token-context]
+The agent cannot do anything when it is compacting.
 
 *What it should be.*
-The interaction model continuously decides what to forget.
-There is no separate, batched compaction step.
-The dashboard component that was read fifty turns ago can be dropped because the running button code embodies what was learned from it, the column decision still lives on the planning channel, and the permissions quirk is captured on the memory channel.
-The model does not stop to compact.
-It is already maintaining the state it needs.
+Compacting should be done in parallel.
+As the agent works on the problem, there should be another channel that decides which information is worth storing and which information should be removed from context.
+Infromation removed from context should still be searchable from any channel.
 
-[^compact-docs]: From the Claude Code [docs](https://code.claude.com/docs/en/how-claude-code-works) on how the context window is managed.
-    Auto-compaction also re-attaches recently invoked skills after the summary, keeping the first 5,000 tokens of each within a 25,000 token budget.
-    Auto-compaction halts with an error if a single tool output is so large that context refills immediately after each summary.
+[^million-token-context]: There are models with millions of tokens of context.
+    In my experience with Opus 4.7, I feel that the model simply forgets a lot of things after the 200,000th token.
+    I would rather the model automatically compact at the 200,000th token.
 
 
 #### **Improving**
 
 *What it is.*
-After the export ships, you reflect on what could be improved.
-You decide what to add to CLAUDE.md about the CSV utility, what skills to write for adding future exports, what conventions to formalize.
-Claude Code has [auto memory](https://code.claude.com/docs/en/memory#auto-memory) which saves some learnings into MEMORY.md as you work, but the broader reflection is usually a separate prompt at the end of the session - "what did we learn?" - or it is left to the user.
-Either way, reflection is a discrete step after the work, not something that happens during.
+After you ship your feature, you want to improve your future experience working with the model.
+You write and improve skills that helps to do your work more efficiently.
+For example, when testing the dashboard, the agent should remember to try both light and dark mode and confirm visibility of every text element.
+The agent will need to search their history and correctly surfaces pain points that could have been informed with skills.
 
 *What it should be.*
-Reflection happens continuously on a memory channel that the agent maintains throughout the session.
-When the agent discovers that the CSV utility ignores the dashboard's permissions model, the memory channel captures it immediately - not in a post-session "what did we learn?" pass.
-At the end of the session, the memory channel writes to persistent storage (MEMORY.md, skills files, CLAUDE.md) - notes about the CSV utility's quirks, a skill for adding future exports - without a separate "review and update" prompt.
-You can read the memory channel at any time during the session, just like the planning channel.
-Cross-session memory is then a matter of subscribing future sessions to this storage - it is not a feature of the model, it is a feature of which channels the harness wires up.
-
+Reflection happens continuously in a dedicated channel that the agent maintains throughout the session.
+When the agent founds out that the button text is not visible in dark mode, the reflection channel should note down the issue in parallel.
+When the feature is shipped, the agent will propose to make improvement to AI instructions.
 
 
 ## Implications
@@ -324,6 +294,8 @@ These parts of the harness stay, because they exist for reasons that are not abo
 
 The harness becomes very thin.
 It is a router that wires streams from the real world into the model, and routes the model's outputs back into the world.
+
+If I am building yet another coding tool from scratch, I will be exclusively using interaction models.
 
 
 
