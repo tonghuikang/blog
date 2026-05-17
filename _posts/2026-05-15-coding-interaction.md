@@ -41,7 +41,7 @@ For each phase of the session, I describe what it is today, and what it should b
 
 *What it is.*
 You ask the model something like "add Export to CSV to the dashboard".
-You can send immediately, or refine your statement in full (which dashboard, what it the time limit[^banks]) before sending.
+You can send immediately, or refine your statement in full (which dashboard, what is the time limit[^banks]) before sending.
 You may be dictating through a speech-to-text tool like Wispr Flow, or macOS dictation.[^voice]
 Whatever you type, delete, or rephrase before sending is invisible to the model.
 The model only sees the final message when you hit send, and starts working from there.
@@ -50,10 +50,10 @@ The model only sees the final message when you hit send, and starts working from
 You ask the model something like "add Export to CSV to the dashboard".
 When you complete the first phrase, the agent starts to research your code.
 As you modify and elaborate more, it steers the research realtime.
-By the time you complete your multi-sentence request, the model has already made significant progress in the reasearch.
+By the time you complete your multi-sentence request, the model has already made significant progress in the research.
 The agent can already ask useful follow-up questions for your request.
 
-[^banks]: For some reason all the banks that I use makes it difficult for me to export all my transcation history at once.
+[^banks]: For some reason all the banks I use make it difficult for me to export all my transaction history at once.
 
 [^voice]: Coding tools should ship with dictation (the human's voice in) and text-to-speech (the model's voice out) built in. 
     Today they do not.
@@ -70,20 +70,20 @@ Claude Code writes the instruction up front for the subagent.
 One subagent explores the dashboard component.
 Another subagent explores the data query.
 Another subagent explores the design components.
-However, the main agent writes the instruction up front, waits for the subagent to return, and reads only its summary - it does not see what exactly subagent saw.
+However, the main agent writes the instruction up front, waits for the subagent to return, and reads only its summary - it does not see what exactly the subagent saw.
 Claude Code cannot steer subagents mid-flight.
 Information learnt from one subagent cannot influence the research process of another subagent.
-This slows the overall research process, and likely incomplete because subagent do not talk to each other.
+This slows the overall research process, and is likely incomplete because subagents do not talk to each other.
 
 *What it should be.*
 The agent starts with a general instruction on what to do "add Export to CSV to the dashboard".
-The agent starts immediately starts multiple channels that investigates the different component.
+The agent immediately starts multiple channels that investigate the different components.
 One channel explores the dashboard component.
 You do not waste tokens explaining the situation to the subagent.
-Another channel, with the sample prefix, explores the data query.
-Another channel, with the sample prefix, explores the design components.
+Another channel, with the same prefix, explores the data query.
+Another channel, with the same prefix, explores the design components.
 Information learnt from one channel is immediately shared with another channel.
-With channel informed how the other channels are doing, the research process is faster and more complete.
+With each channel informed of how the other channels are doing, the research process is faster and more complete.
 For example, if it is discovered that we have similar data export functions for chat history, this information helps to inform the design components to use and the data queries to make.
 When the research is done, you also do not waste tokens writing the summary.
 
@@ -93,16 +93,16 @@ When the research is done, you also do not waste tokens writing the summary.
 *What it is.*
 There are design decisions involved in a simple button to export a CSV.
 Do we give a choice to the user on what to export?
-Is exporting instantaneous, or is the user required to check back after and hour or so for their data?
+Is exporting instantaneous, or is the user required to check back after an hour or so for their data?
 These are questions you need to ask the user.
 There is a tradeoff on whether you want to ask the questions early, or whether you want to do your research first before asking the questions.
-There is a tradeoff on whether to even ask the question, because the Claude Code currently do not work in the background when questions needs to be answered.
+There is a tradeoff on whether to even ask the question, because Claude Code currently does not work in the background when questions need to be answered.
 
 *What it should be.*
 The agent should not need to make these tradeoffs.
-The agent could ask question as early as they can while working on the research in the background.
-The agent could retract questions if they have found the answer in the resources (for example, there are data exports that are not instantaneous for data requests of a smaller sizes)
-All responses to the agent will be immediately influence the research.
+The agent could ask questions as early as they can while working on the research in the background.
+The agent could retract questions if they have found the answer in the resources (for example, there are data exports that are not instantaneous for data requests of smaller sizes).
+All responses to the agent will immediately influence the research.
 
 
 #### **Steering**
@@ -111,7 +111,7 @@ All responses to the agent will be immediately influence the research.
 The agent is already working - it has drafted the button, wired up the export handler, and is running a first export to see the output.
 Halfway through, you notice that the button text is not visible in dark mode.
 You type a correction into the chat box.
-Your message is queued until the next tool boundary - it feels like the agent feels like it is stonewalling you.[^interrupt-cot]
+Your message is queued until the next tool boundary - it feels like the agent is stonewalling you.[^interrupt-cot]
 
 *What it should be.*
 You point out that the text is not visible in dark mode.
@@ -139,8 +139,8 @@ The other channels keep running - the agent continues drafting the button code a
 If you approve, the paused channel resumes and the export runs.
 If you deny, the agent updates the planning channel and considers an alternative, like running against a staging snapshot instead.
 
-[^auto-mode]: I am aware that Claude Code has an auto-mode where the agent has a process to automatically decides which commands are safe to run.
-    However, I think interaction models is useful here, there could be one channel where the model decides whether to approve running the command.
+[^auto-mode]: I am aware that Claude Code has an auto-mode where the agent has a process to automatically decide which commands are safe to run.
+    However, I think interaction models are useful here, there could be one channel where the model decides whether to approve running the command.
 
 
 #### **Executing**
@@ -152,7 +152,7 @@ Claude Code may decide to launch agents in parallel to perform this process.
 However there is a tradeoff in parallelization, because there are dependencies between these steps.
 
 *What it should be.*
-The agent works on these these three components in parallel.
+The agent works on these three components in parallel.
 
 The agent reads streaming output as it arrives, not after the command exits.
 If the first test failure shows the bug, the agent kills the suite and investigates without waiting for the rest.
@@ -172,7 +172,7 @@ The agent cannot do anything when it is compacting.
 *What it should be.*
 Compacting should be done in parallel.
 As the agent works on the problem, there should be another channel that decides which information is worth storing and which information should be removed from context.
-Infromation removed from context should still be searchable from any channel.
+Information removed from context should still be searchable from any channel.
 
 [^million-token-context]: There are models with millions of tokens of context.
     In my experience with Opus 4.7, I feel that the model simply forgets a lot of things after the 200,000th token.
@@ -185,17 +185,17 @@ Infromation removed from context should still be searchable from any channel.
 After you ship your feature, you want to improve your future experience working with the model.
 You write and improve skills that helps to do your work more efficiently.
 For example, when testing the dashboard, the agent should remember to try both light and dark mode and confirm visibility of every text element.
-The agent will need to search their history and correctly surfaces pain points that could have been informed with skills.
+The agent will need to search their history and correctly surface pain points that could have been informed with skills.
 
 *What it should be.*
 Reflection happens continuously in a dedicated channel that the agent maintains throughout the session.
-When the agent founds out that the button text is not visible in dark mode, the reflection channel should note down the issue in parallel.
-When the feature is shipped, the agent will propose to make improvement to AI instructions.
+When the agent finds out that the button text is not visible in dark mode, the reflection channel should note down the issue in parallel.
+When the feature is shipped, the agent will propose to make improvements to AI instructions.
 
 
 ## Implications
 
-### Your side of the interaction does not change much
+### The interaction model should be a drop-in replacement
 
 You might be expecting that interaction models require new interfaces - voice, video, gestures, avatars.
 They do not, for the coding case.
