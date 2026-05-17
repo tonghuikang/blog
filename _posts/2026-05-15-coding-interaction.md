@@ -111,24 +111,23 @@ All responses to the agent will immediately influence the research.
 The agent is already working - it has drafted the button, wired up the export handler, and is running a first export to see the output.
 Halfway through, you notice that the button text is not visible in dark mode.
 You type a correction into the chat box.
-Your message is queued until the next tool boundary - it feels like the agent is stonewalling you.[^interrupt-cot]
+Your message is queued until the next tool boundary - it feels like the agent is stonewalling you.
+You can interrupt the agent to get your queries immediately answered, but this discards current agent progress.
 
 *What it should be.*
 You point out that the text is not visible in dark mode.
 The model reads your message immediately and acknowledges your comment.
 The planning channel updates to include the new constraint.
+The implementation channel will work on the next available opportunity.
 You do not have to wait for a turn boundary, and you do not feel stonewalled.
-
-[^interrupt-cot]: When I tried interrupting `gpt-oss-120b` while it was working on math problems, the resulting trace became token inefficient - the interrupted thought was abandoned and the model started a fresh thought from the new user message.
-    An interaction model should be able to absorb a mid-flight interruption and update its current stream without restarting.
 
 
 #### **Approving**
 
 *What it is.*
 The agent wants to run the export against the production database to validate it on real data, and it needs your approval to do so.
-The agent halts and surfaces the approval prompt[^auto-mode].
-You approve, deny, or "allow always for this pattern".
+The agent halts and surfaces the approval prompt.
+You approve or deny[^auto-mode].
 Everything else the agent was doing - drafting the button, type-checking the handler - stops too.
 The model is single-stream, so a pending approval blocks all the work.
 
@@ -137,29 +136,29 @@ The agent surfaces the approval to run the export against production on a dedica
 Only the export channel pauses.
 The other channels keep running - the agent continues drafting the button code and refining the export handler while you decide.
 If you approve, the paused channel resumes and the export runs.
-If you deny, the agent updates the planning channel and considers an alternative, like running against a staging snapshot instead.
 
 [^auto-mode]: I am aware that Claude Code has an auto-mode where the agent has a process to automatically decide which commands are safe to run.
     However, I think interaction models are useful here, there could be one channel where the model decides whether to approve running the command.
 
 
-#### **Executing**
+#### **Testing**
 
 *What it is.*
-Execution follows a linear process.
-It implements the frontend logic on displaying the button, then it implements the backend logic retrieving the data, then it runs tests.
-Claude Code may decide to launch agents in parallel to perform this process.
-However there is a tradeoff in parallelization, because there are dependencies between these steps.
+Testing follows a linear process.
+Your dashboard has hundreds of existing tests that programatically tests each component.
+You need to choose a testing setup - do you stop tests on the first failure, or do you continue to run all the tests?
+If the agent stops tests on the first failure, the agent will not be aware of the other tests that will fail and the agent will need multiple round trips to fix.
+If the agents lets all the tests to run, the agent will not be able to fix the first failure as soon as it can.[^monitor]
 
 *What it should be.*
-The agent works on these three components in parallel.
+The agent starts testing and there is one input channel dedicated for listening for error.
+There is an output channel that surfaces testing issue.
+If there is indeed a failure, the channel working on the code will be informed and it will be expected to investigate and fix the failure.
+Tests can continue to run so that if there are test failures, it will be surfaced to the agent.
+We get both early fixes to failures, and reduced round trips between fixing and testing.
 
-The agent reads streaming output as it arrives, not after the command exits.
-If the first test failure shows the bug, the agent kills the suite and investigates without waiting for the rest.
-If the export reveals a format issue early, the agent kills the run, fixes the bug, and starts another - no 90-second wait.
-Tool calls fan out in parallel: the export runs against three dataset sizes at once, the test suite and the type checker run concurrently, the branch is pushed and CI is watched while a rollback plan is drafted on another channel.
-The planning channel shows the running state of every active tool call, so you do not have to ask for status.
-None of this is invoked through a special tool or a special flag. The agent is running many channels, each watching a different stream.[^interrupt-self]
+[^monitor]: Claude Code has this [monitor tool](https://code.claude.com/docs/en/tools-reference#monitor-tool) where the agent will monitor something in the background.
+
 
 #### **Compacting**
 
@@ -195,7 +194,14 @@ When the feature is shipped, the agent will propose to make improvements to AI i
 
 ## Implications
 
-### The interaction model should be a drop-in replacement
+#### **Evaluation will be much harder**
+
+We will move to a world where we no longer operate with input and output words.
+
+You will look at results.
+
+
+#### **The interaction model should be a drop-in replacement**
 
 You might be expecting that interaction models require new interfaces - voice, video, gestures, avatars.
 They do not, for the coding case.
@@ -212,7 +218,7 @@ The model is running many things at once, and your typing is one of the inputs i
 The textbox is the same.
 What is behind the textbox is very different.
 
-### Humans will prefer the better interface
+#### **Humans will prefer the better interface**
 
 I still prefer Claude Code as my main interface for all my projects.
 
@@ -229,7 +235,7 @@ Going back to a single-stream model will feel like going from a chat app to emai
     There is no middle ground where I can trust some patterns and not others.
     Claude Code lets me allow-list specific bash patterns, file paths, and tool patterns - a much richer surface for declaring what is safe.
 
-### Coding models are already on this trajectory
+#### **Coding models are already on this trajectory**
 
 The same trajectory we saw for reasoning is the one I expect for interaction.
 
@@ -257,7 +263,7 @@ Every coding model will be an interaction model.
 
 
 
-### You will throw away your harnesses
+#### **You will throw away your harnesses**
 
 Claude Code and Codex paper over the model's inability to do more than one thing at a time.
 
@@ -299,7 +305,7 @@ If I am building yet another coding tool from scratch, I will be exclusively usi
 
 
 
-### There will be one coding model size
+#### **There will be one coding model size**
 
 My bet is that the coding model market will collapse to one model size served via API.
 
@@ -343,7 +349,7 @@ The harness no longer needs a `/model` command, only an effort dial.
 
 
 
-### Training interaction models will be hard
+#### **Training interaction models will be hard**
 
 Reasoning models showed up as a step beyond instruct models.
 Interaction models will be a step beyond reasoning models, and the training challenges are non-trivial.
@@ -368,7 +374,7 @@ I wrote about this in the [evaluation section](/2025/05/14/multichannel-predicti
 
 
 
-### Do not bother scaffolding current models into interaction models
+#### **Do not bother scaffolding current models into interaction models**
 
 Some of the behaviors I describe above can be approximated by scaffolding around today's single-stream models.
 You can train the model to emit a planning section that the harness parses out.
@@ -387,7 +393,7 @@ That work was obsolete the moment o1 shipped.
 
 
 
-### The value beyond iterating with humans
+#### **The value beyond iterating with humans**
 
 You might think interaction models matter mostly for humans talking to AI in real time.
 You do not need to be in the loop for interaction models to matter.
@@ -407,7 +413,7 @@ Neither should the model.
 
 
 
-### Think about what optimal interaction looks like
+#### **Think about what optimal interaction looks like**
 
 I have described one shape of the optimal interaction.
 There are many more.
@@ -429,18 +435,13 @@ Model providers and harness builders cannot guess your workflow.
 
 ## Closing
 
-The argument for multichannel models was originally about humans talking to AI.
-Coding is where the interaction surface is widest.
-Logs, files, terminals, browsers, queued user messages, CI services, deploys.
+Coding is the first killer use case for LLMs.
 
-All coding models will be interaction models.[^robotics]
+I think coding will also be the first killer use case for interaction models.
 
-[^robotics]: Coding is the first killer use case.
-    It is not the only one.
-    A general robotics model should also be an interaction model - the robot needs to be reading its sensors, planning its next motion, executing the current motion, and listening to the human all at the same time.
-    The substrate is harder (continuous motor control, real-time constraints) so I do not expect robotics to be first.
-    But the same multichannel argument applies.
+All coding models will be interaction models[^robotics].
 
+[^robotics]: I think the first human-level robotics model will also be interaction models.    
 
 
 ## Footnotes
