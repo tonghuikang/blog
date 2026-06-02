@@ -23,7 +23,8 @@ I made some preparations before the hackathon
 
 #### Autoresearch objective
 
-I only started the autoresearch system halfway through the hackathon. The purpose of the autoresearch system is to figure out a good neural network model that is able to predict actions.
+I only started the autoresearch system halfway through the hackathon.
+The purpose of the autoresearch system is to figure out a good neural network model that is able to predict actions.
 
 The model will need to
 - predict which of the six actions (up, down, left, right, space, click) will be taken
@@ -44,6 +45,10 @@ I set up a system for the agent (Claude Code) to experiment with different model
 
 Each training loop takes between 5 minutes to 30 minutes.
 The free tier of Modal allows you to use 10 GPUs at once.
+
+This is the "autoresearch" graph. The agent started with a model architecture with around a validation loss of 4.5, and eventually found a model architecture with a validation loss of 3.5.
+
+![autoresearch-graph](/assets/autoresearch-graph.png)
 
 The model initialized with a training loss of 12.0 and somewhat [converged](http://localhost:4839/autoresearch/index.html?view=model&model=convnext_h128-b16-1780188860) to a training loss of 2.0.
 The validation loss is 3.5.
