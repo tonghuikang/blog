@@ -18,7 +18,7 @@ This is what I already had
 - Submission pipeline
 
 I made some preparations before the hackathon
-- I made some "modified games". "Modified games" have the same engine logic as the games published by the ARC Foundation, but with slight modifications. For example, for the "original game" [ar25](https://arcprize.org/tasks/ar25), the shapes of the games will be different.
+- I made some "modified games". "Modified games" have the same engine logic as the games published by the ARC Foundation, but with slight modifications. For example, for the "original game" [ar25](https://arcprize.org/tasks/ar25), the shapes of the objects was made different.
 - I generated the ideal gameplay traces on the modified games.
 
 #### Autoresearch objective
@@ -91,7 +91,7 @@ I also have to ensure that my system works with multiple external abstractions -
 I think I will be cleaning up most of the autoresearch code in the main repository.
 
 Learning needs to be intentional.
-The autoresearch system treats research as a black box.
+The autoresearch system treats each training cycle as a black box.
 The agent modifies the architecture, runs the training script, and reports the loss.
 It does not understand why one model architecture is better than the other.
 Optimizing merely for the validation loss may be optimal if you want to produce immediate results, and this is the correct decision in a hackathon.
