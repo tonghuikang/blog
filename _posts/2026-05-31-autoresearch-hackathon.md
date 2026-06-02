@@ -48,11 +48,13 @@ The free tier of Modal allows you to use 10 GPUs at once.
 The model initialized with a training loss of 12.0 and somewhat [converged](http://localhost:4839/autoresearch/index.html?view=model&model=convnext_h128-b16-1780188860) to a training loss of 2.0.
 The validation loss is 3.5.
 
+However, I have no evidence that the trained model is performing better than a model that simply takes random actions.
+
 #### Things I remembered I had to intentionally design
 
 The job of the autoresearch agent is to only figure out the model architecture.
-I decided that I will be the one to transform the input to the output.
-They should do some data analysis on the dataset and learn something.
+I decided that I will be the one to transform the game state to the input (364 x 64 x 64).
+I want the agent assume that the data is fixed, and focus on optimizing the model architecture.
 
 Every model tested should be a standalone file that should not be modified after testing.
 Initially I discovered that the agent modified the model architecture code after testing - this is bad because it will be very difficult to understand what exactly was the model architecture that produced a certain result.
@@ -75,9 +77,10 @@ A simple filesystem that you have one file for one datapoint would not scale.
 This is something I must consider when I work on something similar.
 
 Validation score is a distribution.
-There was a model variant that hit 3.5 validation loss and for a while model variants could not beat the score.
-When the agent decided to rerun the training for the model variant, the validation loss was 3.9 instead.
-There should be a system to validate the frontier scores.
+There was a model variant that hit 3.5 validation loss, and for a while, other model variants could not beat the score.
+When the agent decided to rerun the training for that model variant, the validation loss was 3.9.
+This means that scores on the frontier can be noisy.
+One remedy that I could do is to encourage experiments to be repeated and frontier scores updated.
 
 Validation loss does not really mean anything.
 I used the trained model to play the games that it trained on, and its performance is bad.
