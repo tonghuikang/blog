@@ -53,10 +53,9 @@ The agent started with a model architecture with a validation loss of around 4.5
 
 ![autoresearch-graph](/assets/autoresearch-graph.png)
 
-The model initialized with a training loss of 12.0 and somewhat [converged](https://tonghuikang.github.io/arc3/autoresearch/index.html?view=model&model=convnext_h128-b16-1780188860) to a training loss of 2.0.
-The validation loss is 3.5.
+For the model that achieved a validation loss of 3.5, the model initialized with a training loss of 12.0 and somewhat [converged](https://tonghuikang.github.io/arc3/autoresearch/index.html?view=model&model=convnext_h128-b16-1780188860) to a training loss of 2.0.
 
-However, I have no evidence that the trained model is performing better than a model that simply takes random actions.
+However, when playing even the games that it has trained on, I have no evidence that the trained model is performing better than a model that simply takes random actions.
 
 #### Things I remembered I had to intentionally design
 
