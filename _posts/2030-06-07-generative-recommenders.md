@@ -15,6 +15,11 @@ I assume that you are familiar with the key ideas of a traditional recommendatio
 - Please refer to YouTube playlist.
 
 
+# How is a generative recommender different from traditional recommendation
+
+Traditionally, recommendation system have two separate models for retrieval and ranking.
+
+
 Key ideas of generative recommender
 - Train on the sequence
 - For a user with k interactions, the user is one sequence in the dataset
@@ -22,12 +27,13 @@ Key ideas of generative recommender
 - The idea that training on a sequence trains on many objectives at the same time (cite Jason Wei blog)
 - Inputs are variable length tokens
 - The outputs are tokens
+- Generalizable
 
 What you should avoid in a generative recommender
 - Use of embeddings as input
 - Use of embeddings as output
 - Feature engineering
-- (There is no point "derisking" with a transform module - either you go all-in or do not bother trying)
+- (There is no point "derisking" with a transformer module - either you go all-in or do not bother trying)
 
 First principles
 - A quant with access to numbers and produce the best information
@@ -35,21 +41,33 @@ First principles
 - There is no reason why a generative recommender cannot outperform normal recommenders
 
 
+# Key motivations
+
+One model to rule them all
+- New product surface can reuse the user history and recommender model
+- DLRM cannot do this
+- Easier maintainability (if done correctly)
+
+Infrastructure and tooling for LLMs
+- There are tools that efficiently serves LLMs out of the box and form great benchmarks
+- You can actually see how individual parts of the history affect the final prediction
+
+
 
 # Design decisions
 
 Item representation
 - Pure ID
+    - Not sustainable with many items
 - Semantic ID
     - (please refer to eugeneyan blogpost on the full implementation)
 - Item realtime information
     - Number of likes and upvotes at the time of interaction
 - Author information
-    - Elon Musk tweeting 67 versus me tweeting 67
 - Interaction information
     - Whether you follow the author at the time of impression
 
-You want to be explict if you are not including certain information
+You want to be explict if you are not including certain information.
 
 
 User representation
@@ -90,7 +108,7 @@ Migration
 - What hypothesis are you testing? How do you justify failure?
 - Do you really want to replace both 
     - Feature parity?
-    - No features needed? (It is easier to migrate to a generative recommender than to migrate to a generative recommender)
+    - No features needed? (It is easier to migrate to a generative recommender than to migrate from a generative recommender)
     - Unlike traditional rankers you need to log features (and ideally the features are logged realtime)
 
 
