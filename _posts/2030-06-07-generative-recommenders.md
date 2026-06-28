@@ -102,8 +102,10 @@ Interpretability
 
 ### Item representation
 
-- In the "baseline" implementation, each item is represented with a semantic ID triplet, and nothing else.
-- Consider the alternatives 
+In the "baseline" implementation, each item is represented with a semantic ID triplet, and nothing else.
+
+Design decisions in the item representation
+- Information to include
     - Pure ID
         - Each item has its own ID
         - This is not sustainable in large scale recommendation systems
@@ -140,13 +142,19 @@ The augmented information is only available after retrieving with the semantic I
 
 ### User representation
 - In the "baseline" implementation, each user is represented with item-action pair sequence, and nothing else
-- Consider the alternatives
+
+Decisions
+- Information to include
     - User context information
         - In what context was the user exposed to the item?
         - Examples: device type, entry point, time of day
     - Completeness of information
         - Not all actions by the user involves an item
         - Example includes going to the setting page to turn off notifications
+- Handling excessive user context
+    - We are likely to have users that have hundreds of thousands of interactions with the platform.
+    - We need to decide what information to exclude
+
 
 In the baseline implementation the user is represented a sequence like
 ```
@@ -209,20 +217,28 @@ Decisions
 - What is masked
     - Do you really need to mask user device for example?
 - Metrics that you should look at
-
-Pretraining is the process where you ...
-
-This step is expensive.
-For a model of X million parameters, each with an average sequence length of Y, for Z users, even without counting the quadratic attention term, you need at least XYZ floating point operations.
-
+    - Should you just look at validation loss?
+- How often you should pretrain your model?
+    - Pretraining is expensive.
+        - For a model of X million activated parameters, each with an average sequence length of Y, for Z users, even without counting the quadratic attention term, you need at least XYZ floating point operations.
+            - Note that each entry point of DLRM training is one interaction, whereas each entrypoint of generative recommender model pretraining is one sequence.
+            - In one backward pass for a sequence, you are training the model to predict the whole sequence, which usually contains many interactions.
+    - You might want to pretrain a model every month.
+    - You might want to pretrain a model as you add richer sequences
+        - Maybe your first implementation of the generative recommender is the "baseline" recommender, which is shipped to everyone.
+        - Then you want to add richer sequence information
 
 
 ### Posttraining
 
 You might be doing this every day, or even continuously.
 
-Posttraining
-- What offline metrics do you look at?
+Decisions
+- Should you serve only one post-trained model?
+    - Of course in A/B testing you should serve multiple post-trained models
+    - Should ranking and retrieval use the same post-trained model?
+    - Should different surfaces use the same post-trained model?
+- What offline metrics should you look at?
 
 
 ### Analysis
