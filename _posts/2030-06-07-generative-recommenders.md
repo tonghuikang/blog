@@ -3,17 +3,7 @@ layout: post
 title: Design decisions of a generative recommender
 ---
 
-There was a PRS recently - https://prs2026.splashthat.com/
-
-I made this some time ago https://tonghuikang.github.io/x-algorithm/retrieval.html
-
-Multiple companies are productionizing generative recommenders
-
-
-I assume that you are familiar with the key ideas of a traditional recommendation system.
-- Retrieval and ranking
-- Please refer to YouTube playlist.
-
+(Add introduction here)
 
 # Traditional recommendation systems
 
@@ -171,6 +161,7 @@ With the augmented information, the user is represented with something like
 (installs app)
 ```
 
+
 ### Retrieval
 
 In the baseline representation, the model will predict a set of semantic ID triplet.
@@ -187,6 +178,7 @@ Decisions on semantic ID retrieval
     - You end up with a set of semantic ID triplet with the highest probabilities
 - There are likely other strategies
     - You can validate this by figuring out which strategy maximizes the value function later
+
 
 
 ### Ranking
@@ -213,7 +205,10 @@ In the baseline implementation, training is done from scratch.
 There is no need for the model to be good at English an semantic ID.
 
 Decisions
-- Do you really need your model to be good at math or human language?
+- Model architecture
+- Initialization weights
+    - Maybe just start from random weights
+    - Do you really need your model to be good at math or human language?
 - What is masked
     - Do you really need to mask user device for example?
 - Metrics that you should look at
@@ -229,6 +224,7 @@ Decisions
         - Then you want to add richer sequence information
 
 
+
 ### Posttraining
 
 You might be doing this every day, or even continuously.
@@ -241,40 +237,73 @@ Decisions
 - What offline metrics should you look at?
 
 
+
 ### Analysis
 
-- This is more interpretable than DLRM
-- "Prompt engineering"
-- You can read the logprobs
+What do you want to analyze when you have your LLM
+
+These are some analysis that you could do
+
+- Attention weights
+    - What tokens were used to predict the action token?
 - What-if analysis
-    - If the user had upvoted a content, would that our prediction whether the user likes the content (assuming that the user also experience and react exactly similar after the perturbation)
+    - If the user had upvoted a content, would that our prediction whether the user likes the content
+    - (assuming that the user also experience and react exactly similar after the perturbation)
     - (You can also observe how the all the logprobs would have independently change)
     - (You can do this analysis in traditional recommender system)
 
 
+
 ### Migration
 
-- Milestones. What do you measure?
-- How do you justify your investment?
-- What hypothesis are you testing? How do you justify failure?
-- Do you really want to replace both 
-    - Feature parity?
-    - No features needed? (It is easier to migrate to a generative recommender than to migrate from a generative recommender)
-    - Unlike traditional rankers you need to log features (and ideally the features are logged realtime)
-- (There is no point "derisking" with a transformer module - either you go all-in or do not bother trying)
+If you product uses the traditional recommendation system, you do not just migrate to the generative recommender in one shot.
+
+You will need to start with the end in mind.
+
+How would the eventual state look like?
+You will need to make most of the design decisions early.
+
+You need to justify your headcount and the compute expenditure.
+You need to propose milestone that you promise to hit.
+
+Possible milestones
+- Semantic IDs
+    - Reasonable clustering
+- For the ranking model
+    - Match action AUC in a similar setting as DLRM
+    - As you increase more data, you can achieve better action AUC
+- For the retrieval model
+    - Match recall@K
+
+How would the end state look like?
+You do not want to migrate halfway and you will need to maintain both systems.
+Will your company still even be around when you finish your migration?
+
 
 
 ### Iteration
 
-- Shipping is not the end
-- You want a hill-climbable system
-- You need to be able to iterate
-- Good luck with changing semantic ID
-    - Maybe we can freeze the first two IDs, and tune the third and fourth
-    - It is ok to have items map to multiple semantic IDs
-    - Productionization of semantic ID is out of scope
-    - LLMs do not change tokenizers
-- Do you want to throw out the entire codebase on every iterations?
-    - Do you want to juggle abstractions
-    - Only AI needs to understand the code
+Congratulations in advice on your migration to generative models.
 
+This is still not the end, it is always likely there is a room for improvement.
+
+You want to design a system that can be easily iterated on.
+
+These are components that could be iterated on
+- Semantic ID
+- Model architecture
+- Sequence modelling (item and user presentation)
+- Post-training
+- Value function
+
+Let's say your entire system is built on semantic ID.
+Then you find out that half the level one IDs are effectively useless because they map to spammy content.
+If you want to replace the semantic ID you need to replace the entire system.
+You need to pretrain a model in parallel, you need to serve models in parallel.
+Your A/B test will involve all the surfaces.
+If you do not design your system to easily change and test any component, you will be stuck with those components.
+
+
+# Conclusion
+
+I hope this is a comprehensive list of the design decisions when building a generative recommender.
