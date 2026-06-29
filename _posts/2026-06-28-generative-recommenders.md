@@ -6,13 +6,13 @@ title: Design decisions of a generative recommender
 Traditionally, recommendation systems retrieve and rank.
 Generative models can help recommendation systems to retrieve and rank much better.
 
-By now, there is plenty of literature of generative recommenders, and there are companies already productionizing generative recommenders [PRS].
+By now, there is plenty of literature of generative recommenders, and there are companies already productionizing generative recommenders [^PRS].
 
-^[PRS]: I attended the [2026 Netflix Workshop on Personalization, Recommendation and Search](https://prs2026.splashthat.com/) (PRS), where LinkedIn, Pinterest and Netflix presented their generative recommendation system setup.
+[^PRS]: I attended the [2026 Netflix Workshop on Personalization, Recommendation and Search](https://prs2026.splashthat.com/) (PRS), where LinkedIn, Pinterest and Netflix presented their generative recommendation system setup.
 
-To understand literature on generative recommenders, you should be familiar with the design decisions of generative recommenders [recsys-papers]. I write the key design decisions in this blog post.
+To understand literature on generative recommenders, you should be familiar with the design decisions of generative recommenders [^recsys-papers]. I write the key design decisions in this blog post.
 
-^[recsys-papers]: Similarly, to understand papers in recommendation systems, you also need to understand the standard design of a recommendation system.
+[^recsys-papers]: Similarly, to understand papers in recommendation systems, you also need to understand the standard design of a recommendation system.
     You need to understand whether a paper is trying to improve the retrieval part or the ranking part of the recommendation system, or neither.
     Otherwise, you will just be very confused.
 
