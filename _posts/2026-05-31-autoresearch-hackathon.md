@@ -43,6 +43,24 @@ The validation data is the ideal gameplay actions on the original games.
 
 I set up a system for the agent (Claude Code) to experiment with different model architectures that minimize the validation loss.
 
+
+#### Disclaimer
+
+(added August 2026)
+
+I do not believe that curve-fitting a model on (history, actions) dataset is on the critical path to solving ARC-AGI-3.
+
+Curve-fitting on (history, actions) has helped to build a decent model to play Go.
+However, ARC-AGI-3 involves unseen games where the rules are not known during training.
+
+I am curious if the same curve fitting can train a better-than-random model to play ARC-AGI-3.
+
+These are some questions I want to see their answers
+- can AI curve-fit a neural network architecture to a dataset of (history, actions)?
+- can the slightly trained model do better than random at playing simple games?
+- if you just ask AI to curve-fit a dataset, what could go wrong?
+
+
 #### Performance
 
 Each training loop takes between 5 and 30 minutes.
