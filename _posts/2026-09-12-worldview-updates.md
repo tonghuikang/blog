@@ -83,8 +83,9 @@ While anything now feels possible, there are some things we know are impossible.
 We still live under the same laws of physics. [^reading]
 
 [^reading]: I tweeted this sentence almost two years [ago](https://x.com/ExampleTestcase/status/1868824426634268933).
-    
+    I was expressing hope that AI could be performing much better, given that humans, despite their very inefficient brains and chain of thought, have been accomplishing a lot more.
     It reads really differently now.
+    The same laws of physics are what prevent AI from destroying humanity.
 
 
 I do hope to figure this out, at least for myself.
