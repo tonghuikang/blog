@@ -61,18 +61,12 @@ This is what the labs worry about. [^disconnect]
     I do strongly agree that someone should think really hard about this problem, similar to how we think about terrorism.
     However, I do not have the means to influence the trajectory, as I currently do not work for a lab.
 
-
-The most conceivable way for this to happen is that someone engineers a virus that wipes out humanity.
+The most conceivable way for this to happen is that someone engineers a virus that wipes out humanity [^other-ways].
 
 Covid-19 killed 7 million people.
 If there were a virus more infectious than Covid-19, with a longer incubation period and a higher mortality rate, it could kill a lot more people.
 
-This is similar to the threat of terrorism. [^surveillance]
-
-[^surveillance]: I do not think the threat of terrorism justifies mass surveillance.
-    There are some things that should be controlled, however.
-    Typical people should not be given access to advanced equipment that could create viruses, for example.
-
+[^other-ways]: There is a much better exposition on [LessWrong](https://www.lesswrong.com/posts/LAPa2jxoq3n63GzTr/some-ways-ai-could-kill-us-all)
 
 
 ## Conclusion
