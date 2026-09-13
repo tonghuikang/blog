@@ -8,7 +8,7 @@ We now [^millennium] can see that it is a matter of time before AI can do any wo
 [^millennium]: This is written shortly after AI solved some Millennium Problems.
     I have been confident that AI will improve, but I am still surprised that it has improved this quickly.
 
-It is also a matter of time before AI can do any work that humans can do.
+It is also a matter of time before AI can do any work that humans can do outside of a computer.
 
 There are three things I worry about currently.
 
@@ -24,11 +24,12 @@ I find it really hard to think of examples that will stand the test of time.
 
 Here are some examples I could think of that might still be true in 10 years.
 
-- You still probably cannot sue model providers for the faults in arbitrary model outputs.
+- You probably still cannot sue model providers for the faults in arbitrary model outputs.
     There might still be humans who are responsible for understanding work done by superintelligent AI, and making decisions on how to allocate resources.
 - Airplanes already have autopilot.
     The pilot might just need to press a few buttons to fly a plane from one location to another.
     However, we still need two pilots to fly every plane, and we seem likely to continue requiring this.
+    Similarly, humans might still need to sign off [^sin-eater] on plans that involve a lot of risk or resources.
 
 Given that you might not earn an income in 10 years, there might be some things that you want to give up.
 
@@ -36,6 +37,7 @@ This may include buying a house [^housing-prices], starting a family, or traveli
 
 [^housing-prices]: I am not sure if the world has priced in the potential drop in housing prices.
 
+[^sin-eater]: There is this concept of a "sin-eater" that I first learnt from (this prof??)
 
 
 ## Sense of purpose
@@ -47,7 +49,8 @@ Then, what is the purpose in life?
 
 Do you really need to continue to create a positive impact on the world? [^purpose]
 
-[^purpose]: If you have done something that you are proud of, I imagine that you could be less worried about your legacy.
+[^purpose]: If you have already done something that you are really proud of,
+    I imagine that you could be less worried about your legacy.
 
 
 
@@ -55,7 +58,7 @@ Do you really need to continue to create a positive impact on the world? [^purpo
 
 Money and a sense of purpose do not matter if humanity ends.
 
-This is what the labs worry about. [^disconnect]
+This is what the labs [^disconnect] worry about.
 
 [^disconnect]: One thing I had to realize is that the anxiety I experience might not fully overlap with that of lab employees.
     I do strongly agree that someone should think really hard about this problem, similar to how we think about terrorism.
@@ -66,7 +69,7 @@ The most conceivable way for this to happen is that someone engineers a virus th
 Covid-19 killed 7 million people.
 If there were a virus more infectious than Covid-19, with a longer incubation period and a higher mortality rate, it could kill a lot more people.
 
-[^other-ways]: There is a much better exposition on [LessWrong](https://www.lesswrong.com/posts/LAPa2jxoq3n63GzTr/some-ways-ai-could-kill-us-all)
+[^other-ways]: There is a much better exposition on [LessWrong](https://www.lesswrong.com/posts/LAPa2jxoq3n63GzTr/some-ways-ai-could-kill-us-all).
 
 
 ## Conclusion
